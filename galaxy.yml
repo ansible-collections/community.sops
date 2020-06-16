@@ -1,0 +1,12 @@
+namespace: community
+name: sops
+version: 0.1.0
+readme: README.md
+authors:
+  - Edoardo Tenani
+description: null
+license_file: COPYING
+tags: null
+repository: https://github.com/ansible-collections/community.sops
+homepage: https://github.com/ansible-collections/community.sops
+issues: https://github.com/ansible-collections/community.sops/issues
