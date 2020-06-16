@@ -10,8 +10,7 @@ jobs:
       - name: Check out code
         uses: actions/checkout@v1
         with:
-          # FIXME ansible_collections/NAMESPACE/COLLECTION
-          path: ansible_collections/community/grafana
+          path: ansible_collections/community/sops
 
       - name: Set up Python 3.6
         uses: actions/setup-python@v1
@@ -30,8 +29,7 @@ jobs:
       - name: Check out code
         uses: actions/checkout@v1
         with:
-          # FIXME ansible_collections/NAMESPACE/COLLECTION        
-          path: ansible_collections/community/grafana
+          path: ansible_collections/community/sops
 
       - name: Set up Python 3.6
         uses: actions/setup-python@v1
@@ -63,8 +61,7 @@ jobs:
       - name: Check out code
         uses: actions/checkout@v1
         with:
-          # FIXME ansible_collections/NAMESPACE/COLLECTION        
-          path: ansible_collections/community/grafana
+          path: ansible_collections/community/sops
 
       - name: Install ansible-base (devel)
         run: pip install https://github.com/ansible/ansible/archive/devel.tar.gz --disable-pip-version-check
@@ -74,7 +71,6 @@ jobs:
         
       - name: Generate coverage report.
         run: ansible-test coverage xml -v --requirements --group-by command --group-by version
-        working-directory: ./ansible_collections/community/kubernetes
 
       - uses: codecov/codecov-action@v1
         with:
