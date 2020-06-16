@@ -53,7 +53,6 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        python_version: ["3.6"]
         docker_container:
           - ubuntu1604
           - ubuntu1804
@@ -74,8 +73,8 @@ jobs:
       - name: Install ansible-base (devel)
         run: pip install https://github.com/ansible/ansible/archive/devel.tar.gz --disable-pip-version-check
 
-      - name: Run integration tests on Python ${{ matrix.python_version }}
-        run: ansible-test integration --docker ${{ matrix.docker_container }} -v --color --retry-on-error --python ${{ matrix.python_version }} --continue-on-error --diff --coverage
+      - name: Run integration tests in ${{ matrix.docker_container }} Docker container
+        run: ansible-test integration --docker ${{ matrix.docker_container }} -v --color --retry-on-error --continue-on-error --diff --coverage
 
       - name: Generate coverage report.
         run: ansible-test coverage xml -v --requirements --group-by command --group-by version
