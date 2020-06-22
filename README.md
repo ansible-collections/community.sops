@@ -28,6 +28,7 @@ See [Ansible Using collections](https://docs.ansible.com/ansible/latest/user_gui
 
 <!--Describe how the community can contribute to your collection. At a minimum, include how and where users can create issues to report problems or request features for this collection.  List contribution requirements, including preferred workflows and necessary testing, so you can benefit from community PRs. If you are following general Ansible contributor guidelines, you can link to - [Ansible Community Guide](https://docs.ansible.com/ansible/latest/community/index.html). -->
 
+See [CONTRIBUTING.md](./CONTRIBUTING.md)
 
 ## Release notes
 <!--Add a link to a changelog.md file or an external docsite to cover this information. -->
