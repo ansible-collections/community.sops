@@ -6,7 +6,8 @@ authors:
   - Edoardo Tenani
 description: null
 license_file: COPYING
-tags: null
+tags:
+  - sops
 repository: https://github.com/ansible-collections/community.sops
 homepage: https://github.com/ansible-collections/community.sops
 issues: https://github.com/ansible-collections/community.sops/issues

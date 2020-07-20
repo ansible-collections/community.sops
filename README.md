@@ -31,7 +31,8 @@ See [Ansible Using collections](https://docs.ansible.com/ansible/latest/user_gui
 See [CONTRIBUTING.md](./CONTRIBUTING.md)
 
 ## Release notes
-<!--Add a link to a changelog.md file or an external docsite to cover this information. -->
+
+See [CHANGELOG.rst](https://github.com/ansible-collections/community.sops/blob/main/CHANGELOG.rst).
 
 ## Roadmap
 
