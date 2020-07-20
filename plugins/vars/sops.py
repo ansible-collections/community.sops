@@ -110,4 +110,3 @@ class VarsModule(BaseVarsPlugin):
                     raise AnsibleParserError(to_native(e))
 
         return data
-
