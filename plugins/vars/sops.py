@@ -55,6 +55,7 @@ DOCUMENTATION = '''
 
 
 FOUND = {}
+DECRYPTED = {}
 DEFAULT_VALID_EXTENSIONS = [".sops.yaml", ".sops.yml", ".sops.json"]
 
 
@@ -101,7 +102,11 @@ class VarsModule(BaseVarsPlugin):
                                 self._display.warning("Found %s that is not a directory, skipping: %s" % (subdir, opath))
 
                     for found in found_files:
-                        file_content = Sops.decrypt(found, display=display)
+                        if cache and found in DECRYPTED:
+                            file_content = DECRYPTED[found]
+                        else:
+                            file_content = Sops.decrypt(found, display=display)
+                            DECRYPTED[found] = file_content
                         new_data = loader.load(file_content)
                         if new_data:  # ignore empty files
                             data = combine_vars(data, new_data)
