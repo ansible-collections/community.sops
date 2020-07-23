@@ -38,7 +38,6 @@ DOCUMENTATION = '''
     vars: sops_vars
     author: Edoardo Tenani (@endorama) <e.tenani@arduino.cc>
     short_description: Loading sops-encrypted vars files
-    version_added: "2.10"
     description:
         - Load encrypted YAML files into corresponding groups/hosts in group_vars/ and host_vars/ directories.
         - Files are encrypted prior to reading, making this plugin an effective companion to host_group_vars plugin.
