@@ -22,6 +22,7 @@ from __future__ import (absolute_import, division, print_function)
 __metaclass__ = type
 
 import os
+from ansible import constants as C
 from ansible.errors import AnsibleParserError
 from ansible.module_utils._text import to_bytes, to_native, to_text
 from ansible.plugins.vars import BaseVarsPlugin
@@ -51,6 +52,7 @@ DOCUMENTATION = '''
           - 'This affects vars_files, include_vars, inventory and vars plugins among others.'
         type: list
 '''
+
 
 def find_vars_files(self, path, name, extensions=None, allow_dir=True):
     """
@@ -84,12 +86,13 @@ def find_vars_files(self, path, name, extensions=None, allow_dir=True):
             else:
                 found.append(full_path)
             break
-    
-    if allow_dir and (not '' in extensions):
+
+    if allow_dir and ('' not in extensions):
         if self.path_exists(b_path) and self.is_directory(b_path):
             found.extend(_get_dir_vars_files(self, to_text(b_path), extensions))
 
     return found
+
 
 def _get_dir_vars_files(self, path, extensions):
     display.vvvv("Checking directory %s" % path)
@@ -108,6 +111,7 @@ def _get_dir_vars_files(self, path, extensions):
                 found.append(full_spath)
 
     return found
+
 
 FOUND = {}
 DECRYPTED = {}
