@@ -55,7 +55,6 @@ DOCUMENTATION = '''
 FOUND = {}
 DECRYPTED = {}
 DEFAULT_VALID_EXTENSIONS = [".sops.yaml", ".sops.yml", ".sops.json"]
-DEFAULT_VALID_EXTENSIONS_TUPLE = tuple(DEFAULT_VALID_EXTENSIONS)
 
 
 class VarsModule(BaseVarsPlugin):
@@ -94,7 +93,8 @@ class VarsModule(BaseVarsPlugin):
                             if os.path.isdir(b_opath):
                                 self._display.debug("\tprocessing dir %s" % opath)
                                 found_files = loader.find_vars_files(opath, entity.name)
-                                found_files = [file_path for file_path in found_files if file_path.endswith(DEFAULT_VALID_EXTENSIONS_TUPLE)]
+                                found_files = [file_path for file_path in found_files
+                                               if any(file_path.endswith(extension) for extension in DEFAULT_VALID_EXTENSIONS)]
                                 FOUND[key] = found_files
                             else:
                                 self._display.warning("Found %s that is not a directory, skipping: %s" % (subdir, opath))
