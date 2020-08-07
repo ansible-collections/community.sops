@@ -53,66 +53,6 @@ DOCUMENTATION = '''
         type: list
 '''
 
-
-def find_vars_files(self, path, name, extensions=None, allow_dir=True):
-    """
-    Find vars files in a given path with specified name. This will find
-    files in a dir named <name>/ or a file called <name> ending in known
-    extensions.
-    """
-
-    b_path = to_bytes(os.path.join(path, name))
-    found = []
-
-    if extensions is None:
-        # Look for file with no extension first to find dir before file
-        extensions = [''] + C.YAML_FILENAME_EXTENSIONS
-    # add valid extensions to name
-    for ext in extensions:
-
-        if '.' in ext:
-            full_path = b_path + to_bytes(ext)
-        elif ext:
-            full_path = b'.'.join([b_path, to_bytes(ext)])
-        else:
-            full_path = b_path
-
-        if self.path_exists(full_path):
-            if self.is_directory(full_path):
-                if allow_dir:
-                    found.extend(_get_dir_vars_files(self, to_text(full_path), extensions))
-                else:
-                    continue
-            else:
-                found.append(full_path)
-            break
-
-    if allow_dir and ('' not in extensions):
-        if self.path_exists(b_path) and self.is_directory(b_path):
-            found.extend(_get_dir_vars_files(self, to_text(b_path), extensions))
-
-    return found
-
-
-def _get_dir_vars_files(self, path, extensions):
-    display.vvvv("Checking directory %s" % path)
-    found = []
-    for spath in sorted(self.list_directory(path)):
-        display.vvvv("spath: %s" % spath)
-        if not spath.startswith(u'.') and not spath.endswith(u'~'):  # skip hidden and backups
-
-            ext = os.path.splitext(spath)[-1]
-            full_spath = os.path.join(path, spath)
-
-            if self.is_directory(full_spath) and not ext:  # recursive search if dir
-                found.extend(self._get_dir_vars_files(full_spath, extensions))
-            elif self.is_file(full_spath) and (not ext or to_text(full_spath).endswith(tuple(extensions))):
-                # only consider files with valid extensions or no extension
-                found.append(full_spath)
-
-    return found
-
-
 FOUND = {}
 DECRYPTED = {}
 DEFAULT_VALID_EXTENSIONS = [".sops.yaml", ".sops.yml", ".sops.json"]
@@ -153,7 +93,9 @@ class VarsModule(BaseVarsPlugin):
                         if os.path.exists(b_opath):
                             if os.path.isdir(b_opath):
                                 self._display.debug("\tprocessing dir %s" % opath)
-                                found_files = find_vars_files(loader, opath, entity.name, extensions=DEFAULT_VALID_EXTENSIONS, allow_dir=True)
+                                found_files = loader.find_vars_files(opath, entity.name)
+                                found_files = [file_path for file_path in found_files
+                                    if any(file_path.endswith(extension) for extension in DEFAULT_VALID_EXTENSIONS)]
                                 FOUND[key] = found_files
                             else:
                                 self._display.warning("Found %s that is not a directory, skipping: %s" % (subdir, opath))
