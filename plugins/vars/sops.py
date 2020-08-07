@@ -22,7 +22,6 @@ from __future__ import (absolute_import, division, print_function)
 __metaclass__ = type
 
 import os
-from ansible import constants as C
 from ansible.errors import AnsibleParserError
 from ansible.module_utils._text import to_bytes, to_native, to_text
 from ansible.plugins.vars import BaseVarsPlugin
