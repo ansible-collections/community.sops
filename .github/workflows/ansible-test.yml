@@ -38,6 +38,7 @@ jobs:
       # Explicity specify the version of Python we want to test
       - name: Run sanity tests
         run: ansible-test sanity --docker -v --color
+        working-directory: ./ansible_collections/community/sops
 
 #  units:
 #    runs-on: ubuntu-latest
@@ -101,9 +102,11 @@ jobs:
 
       - name: Run integration tests in ${{ matrix.docker_container }} Docker container
         run: ansible-test integration --docker ${{ matrix.docker_container }} -v --color --retry-on-error --continue-on-error --diff --coverage
+        working-directory: ./ansible_collections/community/sops
 
       - name: Generate coverage report.
         run: ansible-test coverage xml -v --requirements --group-by command --group-by version
+        working-directory: ./ansible_collections/community/sops
 
       - uses: codecov/codecov-action@v1
         with:
