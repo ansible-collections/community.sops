@@ -99,7 +99,7 @@ class VarsModule(BaseVarsPlugin):
                                 # See:
                                 # - https://github.com/ansible-collections/community.sops/pull/6
                                 found_files = [file_path for file_path in loader.find_vars_files(opath, entity.name)
-                                               if any(file_path.endswith(extension) for extension in DEFAULT_VALID_EXTENSIONS)]
+                                               if any(to_text(file_path).endswith(extension) for extension in DEFAULT_VALID_EXTENSIONS)]
                                 FOUND[key] = found_files
                             else:
                                 self._display.warning("Found %s that is not a directory, skipping: %s" % (subdir, opath))
