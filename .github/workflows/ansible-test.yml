@@ -81,8 +81,6 @@ jobs:
           - 2.7
           - 3.7
           - 3.8
-        exclude:
-          - python: 3.8  # blocked by ansible/ansible#70155
         docker_container:
           - ubuntu1604
           - ubuntu1804
@@ -105,9 +103,11 @@ jobs:
 
       - name: Run integration tests in ${{ matrix.docker_container }} Docker container
         run: ansible-test integration --docker ${{ matrix.docker_container }} -v --color --retry-on-error --continue-on-error --diff --coverage
+        working-directory: /home/runner/work/community.sops/ansible_collections/community/sops
 
       - name: Generate coverage report.
         run: ansible-test coverage xml -v --requirements --group-by command --group-by version
+        working-directory: /home/runner/work/community.sops/ansible_collections/community/sops
 
       - uses: codecov/codecov-action@v1
         with:
