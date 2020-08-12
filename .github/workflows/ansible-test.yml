@@ -17,8 +17,6 @@ jobs:
           - 2.7
           - 3.7
           - 3.8
-        exclude:
-          - python: 3.8  # blocked by ansible/ansible#70155
     runs-on: ubuntu-latest
     steps:
 
@@ -39,7 +37,7 @@ jobs:
       # The docker container has all the pinned dependencies that are required.
       # Explicity specify the version of Python we want to test
       - name: Run sanity tests
-        run: ansible-test sanity --docker -v --color --python ${{ matrix.python }}
+        run: ansible-test sanity --docker -v --color
 
 #  units:
 #    runs-on: ubuntu-latest
