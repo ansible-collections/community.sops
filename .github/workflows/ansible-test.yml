@@ -93,7 +93,7 @@ jobs:
         working-directory: ./ansible_collections/community/sops
 
       - name: Generate coverage report.
-        run: ansible-test coverage xml -v --requirements --group-by command --group-by version
+        run: ansible-test coverage xml -v --venv --group-by command --group-by version
         working-directory: ./ansible_collections/community/sops
 
       - uses: codecov/codecov-action@v1
