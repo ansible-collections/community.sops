@@ -93,7 +93,13 @@ class VarsModule(BaseVarsPlugin):
                         if os.path.exists(b_opath):
                             if os.path.isdir(b_opath):
                                 self._display.debug("\tprocessing dir %s" % opath)
-                                found_files = loader.find_vars_files(opath, entity.name, extensions=DEFAULT_VALID_EXTENSIONS)
+                                # NOTE: iterating without extension allow retriving files recursively
+                                # A filter is then applied by iterating on all results and filtering by
+                                # extension.
+                                # See:
+                                # - https://github.com/ansible-collections/community.sops/pull/6
+                                found_files = [file_path for file_path in loader.find_vars_files(opath, entity.name)
+                                               if any(file_path.endswith(extension) for extension in DEFAULT_VALID_EXTENSIONS)]
                                 FOUND[key] = found_files
                             else:
                                 self._display.warning("Found %s that is not a directory, skipping: %s" % (subdir, opath))
