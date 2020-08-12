@@ -21,11 +21,11 @@ jobs:
         with:
           path: ansible_collections/community/sops
 
-      - name: Uninstall existing Ansible
-        run: sudo apt-get remove ansible -y
+      - name: Uninstall any existing ansible
+        run: sudo apt-get remove ansible ansible-base -y
 
       - name: Install ansible-base (${{ matrix.ansible }})
-        run: pip install https://github.com/ansible/ansible/archive/${{ matrix.ansible }}.tar.gz --disable-pip-version-check
+        run: sudo pip install https://github.com/ansible/ansible/archive/${{ matrix.ansible }}.tar.gz --disable-pip-version-check
 
       # run ansible-test sanity inside of Docker.
       # The docker container has all the pinned dependencies that are required.
@@ -82,11 +82,11 @@ jobs:
         with:
           path: ansible_collections/community/sops
 
-      - name: Uninstall existing Ansible
-        run: sudo apt-get remove ansible -y
+      - name: Uninstall any existing ansible
+        run: sudo apt-get remove ansible ansible-base -y
 
       - name: Install ansible-base (${{ matrix.ansible }})
-        run: pip install https://github.com/ansible/ansible/archive/${{ matrix.ansible }}.tar.gz --disable-pip-version-check
+        run: sudo pip install https://github.com/ansible/ansible/archive/${{ matrix.ansible }}.tar.gz --disable-pip-version-check
 
       - name: Run integration tests in ${{ matrix.docker_container }} Docker container
         run: ansible-test integration --docker ${{ matrix.docker_container }} -v --color --retry-on-error --continue-on-error --diff --coverage
