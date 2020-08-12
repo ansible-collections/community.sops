@@ -4,7 +4,7 @@ on:
 
 jobs:
   sanity:
-    name: Sanity (Ⓐ${{ matrix.ansible }}+py${{ matrix.python }})
+    name: Sanity (Ⓐ${{ matrix.ansible }})
     strategy:
       matrix:
         ansible:
@@ -20,11 +20,6 @@ jobs:
         uses: actions/checkout@v2
         with:
           path: ansible_collections/community/sops
-
-      - name: Set up Python (${{ matrix.python }})
-        uses: actions/setup-python@v2
-        with:
-          python-version: ${{ matrix.python }}
 
       - name: Install ansible-base (${{ matrix.ansible }})
         run: pip install https://github.com/ansible/ansible/archive/${{ matrix.ansible }}.tar.gz --disable-pip-version-check
@@ -83,11 +78,6 @@ jobs:
         uses: actions/checkout@v2
         with:
           path: ansible_collections/community/sops
-
-      - name: Set up Python (${{ matrix.python }})
-        uses: actions/setup-python@v2
-        with:
-          python-version: ${{ matrix.python }}
 
       - name: Install ansible-base (${{ matrix.ansible }})
         run: pip install https://github.com/ansible/ansible/archive/${{ matrix.ansible }}.tar.gz --disable-pip-version-check
