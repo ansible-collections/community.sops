@@ -83,7 +83,7 @@ jobs:
           path: ansible_collections/community/sops
 
       - name: Uninstall any existing ansible
-        run: sudo apt-get remove ansible ansible-base -y
+        run: sudo apt-get remove ansible -y
 
       - name: Install ansible-base (${{ matrix.ansible }})
         run: sudo pip install https://github.com/ansible/ansible/archive/${{ matrix.ansible }}.tar.gz --disable-pip-version-check
