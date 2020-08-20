@@ -89,8 +89,8 @@ jobs:
       - name: Uninstall any existing ansible
         run: sudo apt-get remove ansible -y
 
-      - name: Install coverage==4.5.4
-        run: sudo pip install coverage --disable-pip-version-check
+      - name: Install coverage
+        run: sudo pip install coverage==4.5.4 --disable-pip-version-check
 
       - name: Install ansible-base (${{ matrix.ansible }})
         run: sudo pip install https://github.com/ansible/ansible/archive/${{ matrix.ansible }}.tar.gz --disable-pip-version-check
