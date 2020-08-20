@@ -11,6 +11,8 @@ The `community.sops` collection allows integrating [`mozilla/sops`](https://gith
 <!-- List the versions of Ansible the collection has been tested with. Must match what is in galaxy.yml. -->
 
 - `devel`
+- latest 2.9 release
+- latest 2.10 release
 
 ## External requirements
 

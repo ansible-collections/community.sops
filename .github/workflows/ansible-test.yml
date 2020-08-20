@@ -29,7 +29,6 @@ jobs:
 
       # run ansible-test sanity inside of Docker.
       # The docker container has all the pinned dependencies that are required.
-      # Explicity specify the version of Python we want to test
       - name: Run sanity tests
         run: ansible-test sanity --docker -v --color
         working-directory: ./ansible_collections/community/sops
