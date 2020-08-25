@@ -71,7 +71,7 @@ class Sops():
         # sops logs always to stderr, as stdout is used for
         # file content
         if err and display:
-            display.vvvv(err)
+            display.vvvv(to_text(err, errors='surrogate_or_strict'))
 
         if exit_code > 0:
             raise SopsError(encrypted_file, exit_code, err)
