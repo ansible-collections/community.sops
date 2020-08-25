@@ -4,24 +4,34 @@ on:
 
 jobs:
   sanity:
+    name: Sanity (Ⓐ${{ matrix.ansible }})
+    strategy:
+      matrix:
+        ansible:
+          # It's important that Sanity is tested against all stable-X.Y branches
+          # Testing against `devel` may fail as new tests are added.
+          - stable-2.9
+          - stable-2.10
+          - devel
     runs-on: ubuntu-latest
     steps:
 
       - name: Check out code
-        uses: actions/checkout@v1
+        uses: actions/checkout@v2
         with:
           path: ansible_collections/community/sops
 
-      - name: Set up Python 3.6
-        uses: actions/setup-python@v1
-        with:
-          python-version: 3.6
+      - name: Uninstall any existing ansible
+        run: sudo apt-get remove ansible -y
 
-      - name: Install ansible-base (devel)
-        run: pip install https://github.com/ansible/ansible/archive/devel.tar.gz --disable-pip-version-check
+      - name: Install ansible-base (${{ matrix.ansible }})
+        run: sudo pip install https://github.com/ansible/ansible/archive/${{ matrix.ansible }}.tar.gz --disable-pip-version-check
 
+      # run ansible-test sanity inside of Docker.
+      # The docker container has all the pinned dependencies that are required.
       - name: Run sanity tests
-        run: ansible-test sanity --docker -v --color --python 3.6
+        run: ansible-test sanity --docker -v --color
+        working-directory: ./ansible_collections/community/sops
 
 #  units:
 #    runs-on: ubuntu-latest
@@ -53,6 +63,12 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
+        ansible:
+          # It's important that Sanity is tested against all stable-X.Y branches
+          # Testing against `devel` may fail as new tests are added.
+          - stable-2.9
+          - stable-2.10
+          - devel
         docker_container:
           - ubuntu1604
           - ubuntu1804
@@ -61,7 +77,7 @@ jobs:
     steps:
 
       - name: Check out code
-        uses: actions/checkout@v1
+        uses: actions/checkout@v2
         with:
           path: ansible_collections/community/sops
 
@@ -70,14 +86,22 @@ jobs:
         with:
           python-version: 3.6
 
-      - name: Install ansible-base (devel)
-        run: pip install https://github.com/ansible/ansible/archive/devel.tar.gz --disable-pip-version-check
+      - name: Uninstall any existing ansible
+        run: sudo apt-get remove ansible -y
+
+      - name: Install coverage
+        run: sudo pip install coverage==4.5.4 --disable-pip-version-check
+
+      - name: Install ansible-base (${{ matrix.ansible }})
+        run: sudo pip install https://github.com/ansible/ansible/archive/${{ matrix.ansible }}.tar.gz --disable-pip-version-check
 
       - name: Run integration tests in ${{ matrix.docker_container }} Docker container
         run: ansible-test integration --docker ${{ matrix.docker_container }} -v --color --retry-on-error --continue-on-error --diff --coverage
+        working-directory: ./ansible_collections/community/sops
 
       - name: Generate coverage report.
         run: ansible-test coverage xml -v --requirements --group-by command --group-by version
+        working-directory: ./ansible_collections/community/sops
 
       - uses: codecov/codecov-action@v1
         with:

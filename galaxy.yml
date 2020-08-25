@@ -4,9 +4,14 @@ version: 0.1.0
 readme: README.md
 authors:
   - Edoardo Tenani
-description: null
+description: "Support usage of mozilla/sops from your Ansible playbooks"
 license_file: COPYING
-tags: null
+tags:
+  - sops
+  - encryption
+  - decryption
+  - secret
+  - vault
 repository: https://github.com/ansible-collections/community.sops
 homepage: https://github.com/ansible-collections/community.sops
 issues: https://github.com/ansible-collections/community.sops/issues
