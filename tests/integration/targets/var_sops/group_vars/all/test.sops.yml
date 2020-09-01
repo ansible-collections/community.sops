@@ -1,13 +1,12 @@
-# Use another variable name here!!!
-foo: ENC[AES256_GCM,data:a25L,iv:X8ILHZr+YiyLWa90Y+cwoMD1nVuel7JyTs0A5+oiOOo=,tag:GbBtp+Yqx1KEjdyztqS4EQ==,type:str]
+bar: ENC[AES256_GCM,data:UGteX9JKWhU=,iv:hgH8BeRf2W4gY4FSyXR/VKR879piGW2MSKJIppFgIJo=,tag:2XKpN3jGGEBBXiJPHi93ew==,type:str]
 sops:
     kms: []
     gcp_kms: []
     azure_kv: []
-    lastmodified: '2020-02-20T10:44:32Z'
-    mac: ENC[AES256_GCM,data:BAwQqD9sHgHkmlxPQLKq28Xy48qPp1B/+GDLEsIxir6WNhZgw8OgjVF1u/wCAad6qHkmN02Bwenr+aay6uKfCuOEsTRSvZ7v80yAU+h0wL3zJ/KMkRsE3QP3CWxcLQxInt+YaBjR+Q0IUjDXKm3u6ZomixZe5F5pwWr36ErV6Y0=,iv:e/iiyXQiCh8C2w/bc8mr/Psv+ehmqEMqEC1/bbGFHpY=,tag:NSDo2HISIBJhYvsqrU0mSA==,type:str]
+    lastmodified: '2020-09-01T16:17:15Z'
+    mac: ENC[AES256_GCM,data:jw/wSpkqwN1Nun1VGLecyJy/yZLtyB57kmoODRhK9/c7nZU8pgTfcATfysyUq0YXWGvpy3mxvlGhaMrHu0DzNCGlsic6OXWDJBPVX3xYeeiUw5KmLxbYPpIXXLYfyu/mWDrToY2o1rpGzJqT7SuZwfFIEX1gZMFnATdROXwVKBU=,iv:ZrgM8BoaLHh4knvJlTqsycOdHNt2oqiFCl/81fr9zP0=,tag:UfhMIr1ByFQhY9B9GpYAmQ==,type:str]
     pgp:
-      - created_at: '2020-02-20T10:44:32Z'
+    -   created_at: '2020-02-20T10:44:32Z'
         enc: |-
             -----BEGIN PGP MESSAGE-----
 
