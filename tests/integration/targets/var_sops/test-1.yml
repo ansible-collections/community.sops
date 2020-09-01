@@ -7,5 +7,4 @@
         msg: '{{ foo }}'
     - name: Make sure group_vars/all/test.sops.yaml was found
       debug:
-         # Use another variable name here!!!
         msg: '{{ bar }}'
