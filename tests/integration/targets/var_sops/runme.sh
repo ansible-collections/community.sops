@@ -8,4 +8,4 @@ if [ "$(which sops)" == "" ]; then
     exit
 fi
 
-ANSIBLE_VARS_ENABLED=host_group_vars,community.sops.sops ansible-playbook test-1.yml -vvvv "$@"
+ANSIBLE_VARS_ENABLED=host_group_vars,community.sops.sops ansible-playbook test-1.yml -v "$@"
