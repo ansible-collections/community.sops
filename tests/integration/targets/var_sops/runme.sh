@@ -2,7 +2,7 @@
 set -eux
 
 # Don't run this on Ansible 2.9
-if [ ansible-version | grep -F 'ansible 2.9.' ]; then
+if (ansible --version | grep '^ansible 2\.9\.'); then
     # Ansible 2.9 doesn't know about var plugins
     exit
 fi
