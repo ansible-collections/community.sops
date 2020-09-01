@@ -32,9 +32,72 @@ This collection provides:
 
 ## Using this collection
 
-<!--Include some quick examples that cover the most common use cases for your collection content. -->
+### lookup plugin
 
-See [Ansible Using collections](https://docs.ansible.com/ansible/latest/user_guide/collections_using.html) for more details.
+The lookup plugin can be accessed with the `community.sops.sops` key.
+
+Examples:
+
+```
+tasks:
+  - name: Output secrets to screen (BAD IDEA!)
+    debug:
+        msg: "Content: {{ lookup('community.sops.sops', '/path/to/sops-encrypted-file.enc.yaml') }}"
+
+  - name: Add SSH private key
+    copy:
+        content: "{{ lookup('community.sops.sops', user + '-id_rsa') }}"
+        dest: /home/{{ user }}/.ssh/id_rsa
+        owner: "{{ user }}"
+        group: "{{ user }}"
+        mode: 0600
+    no_log: true  # avoid content to be written to log
+```
+
+See [Lookup Plugins](https://docs.ansible.com/ansible/latest/plugins/lookup.html) for more details on lookup plugins
+
+
+### vars plugin
+
+Vars plugins only work in ansible >= 2.10 and require explicit enabling.  One
+way to enable the plugin is by adding the following to the default section of
+your `ansible.cfg`:
+
+```
+vars_plugins_enabled = host_group_vars,community.sops.sops
+```
+
+See [VARIABLE_PLUGINS_ENABLED](https://docs.ansible.com/ansible/devel/reference_appendices/config.html#variable-plugins-enabled) for more details.
+
+After the plugin is enabled, correctly named group and host vars files will be
+transparently decrypted with sops.
+
+The files must end with one of these extensions:
+
+* `.sops.yaml`
+* `.sops.yml`
+* `.sops.json`
+
+Here is an example file structure
+
+```
+├── inventory/
+│   ├── group_vars/
+│   │   └── all.sops.yml
+│   ├── host_vars/
+│   │   └── server1.sops.yml
+│   └── hosts
+├── playbooks/
+│   └── setup-server.yml
+└── ansible.cfg
+```
+
+You could execute the playbook in this example with the following command. The
+sops vars files would be decrypted and used.
+
+``` console
+$ ansible-playbook playbooks/setup-server.yml -i inventory/hosts
+```
 
 ## Contributing to this collection
 
