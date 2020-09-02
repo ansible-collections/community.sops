@@ -15,6 +15,7 @@
 
 - name: import sops test GPG key
   command: gpg --import /tmp/sops_functional_tests_key.asc
+  ignore_errors: yes
 
 - set_fact:
     sops_installed: yes
