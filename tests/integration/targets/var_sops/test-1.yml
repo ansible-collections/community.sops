@@ -1,0 +1,10 @@
+---
+- hosts: localhost
+  gather_facts: false
+  tasks:
+    - name: Make sure group_vars/all.sops.yaml was found
+      debug:
+        msg: '{{ foo }}'
+    - name: Make sure group_vars/all/test.sops.yaml was found
+      debug:
+        msg: '{{ bar }}'
