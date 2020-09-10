@@ -50,13 +50,13 @@ EXAMPLES = """
 tasks:
   - name: Output secrets to screen (BAD IDEA!)
     debug:
-        msg: "Content: {{ lookup('sops', item) }}"
+        msg: "Content: {{ lookup('community.sops.sops', item) }}"
     loop:
         - sops-encrypted-file.enc.yaml
 
   - name: Add SSH private key
     copy:
-        content: "{{ lookup('sops', user + '-id_rsa') }}"
+        content: "{{ lookup('community.sops.sops', user + '-id_rsa') }}"
         dest: /home/{{ user }}/.ssh/id_rsa
         owner: "{{ user }}"
         group: "{{ user }}"
