@@ -21,15 +21,6 @@
 from __future__ import (absolute_import, division, print_function)
 __metaclass__ = type
 
-from ansible.errors import AnsibleLookupError
-from ansible.plugins.lookup import LookupBase
-from ansible.module_utils._text import to_native
-from ansible_collections.community.sops.plugins.module_utils.sops import Sops, SopsError
-
-from ansible.utils.display import Display
-display = Display()
-
-
 DOCUMENTATION = """
     lookup: sops
     author: Edoardo Tenani (@endorama) <e.tenani@arduino.cc>
@@ -67,7 +58,17 @@ tasks:
 RETURN = """
     _raw:
         description: decrypted file content
+        type: list
+        elements: str
 """
+
+from ansible.errors import AnsibleLookupError
+from ansible.plugins.lookup import LookupBase
+from ansible.module_utils._text import to_native
+from ansible_collections.community.sops.plugins.module_utils.sops import Sops, SopsError
+
+from ansible.utils.display import Display
+display = Display()
 
 
 class LookupModule(LookupBase):
