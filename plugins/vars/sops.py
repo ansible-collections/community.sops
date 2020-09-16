@@ -21,21 +21,8 @@
 from __future__ import (absolute_import, division, print_function)
 __metaclass__ = type
 
-import os
-from ansible.errors import AnsibleParserError
-from ansible.module_utils._text import to_bytes, to_native, to_text
-from ansible.plugins.vars import BaseVarsPlugin
-from ansible.inventory.host import Host
-from ansible.inventory.group import Group
-from ansible.utils.vars import combine_vars
-from ansible_collections.community.sops.plugins.module_utils.sops import Sops, SopsError
-
-from ansible.utils.display import Display
-display = Display()
-
-
 DOCUMENTATION = '''
-    vars: sops_vars
+    vars: sops
     author: Edoardo Tenani (@endorama) <e.tenani@arduino.cc>
     short_description: Loading sops-encrypted vars files
     description:
@@ -51,6 +38,18 @@ DOCUMENTATION = '''
           - 'This affects vars_files, include_vars, inventory and vars plugins among others.'
         type: list
 '''
+
+import os
+from ansible.errors import AnsibleParserError
+from ansible.module_utils._text import to_bytes, to_native, to_text
+from ansible.plugins.vars import BaseVarsPlugin
+from ansible.inventory.host import Host
+from ansible.inventory.group import Group
+from ansible.utils.vars import combine_vars
+from ansible_collections.community.sops.plugins.module_utils.sops import Sops, SopsError
+
+from ansible.utils.display import Display
+display = Display()
 
 
 FOUND = {}
