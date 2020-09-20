@@ -1,0 +1,87 @@
+---
+- when: sops_installed
+  block:
+    - name: Test load_vars with missing file
+      community.sops.load_vars:
+        file: non-existent.sops.yaml
+      ignore_errors: yes
+      register: load_vars_missing_file
+
+    - assert:
+        that:
+          - "load_vars_missing_file is failed"
+          - |
+            "Could not find or access 'non-existent.sops.yaml'\n" in load_vars_missing_file.message
+
+    - name: Test load_vars with non-sops file
+      community.sops.load_vars:
+        file: wrong.yaml
+      ignore_errors: yes
+      register: load_vars_wrong_file
+
+    - assert:
+        that:
+          - "load_vars_wrong_file is failed"
+          - "'sops metadata not found' in load_vars_wrong_file.message"
+
+    - name: Test load_vars with simple file into variable
+      community.sops.load_vars:
+        file: simple.sops.yaml
+        name: dest_variable
+      register: load_vars_simple
+
+    - assert:
+        that:
+          - "load_vars_simple is success"
+          - "load_vars_simple.ansible_facts == {'dest_variable': {'foo': 'bar'}}"
+          - dest_variable.foo == 'bar'
+          - foo is undefined
+
+    - name: Test load_vars with simple file into global namespace
+      community.sops.load_vars:
+        file: simple.sops.yaml
+      register: load_vars_simple_global
+
+    - assert:
+        that:
+          - "load_vars_simple_global is success"
+          - "load_vars_simple_global.ansible_facts == {'foo': 'bar'}"
+          - foo == 'bar'
+
+    - name: Test load_vars with proper vars file imported statically
+      community.sops.load_vars:
+        file: proper-vars.sops.yaml
+        static: true
+      register: load_vars_vars_static
+
+    - assert:
+        that:
+          - "load_vars_vars_static is success"
+          - test1 == '{' ~ '{ bar }' ~ '}'
+          - test2 == '{' ~ '{ to_be_defined_later }' ~ '}'
+          - bar == 'baz'
+
+    - name: Test load_vars with proper vars file imported dynamically
+      community.sops.load_vars:
+        file: proper-vars-2.sops.yaml
+        static: false
+      # MUST NOT register the result, since it breaks variable registration.
+      # This also does not work for include_vars.
+      # (https://github.com/ansible/ansible/issues/71831)
+
+    - set_fact:
+        to_be_defined_later: something_defined_later
+
+    - assert:
+        that:
+          - test1_2 == 'baz'
+          - test2_2 == 'something_defined_later'
+          - bar_2 == 'baz'
+
+    - name: Redefine to_be_defined_later
+      set_fact:
+        to_be_defined_later: something_defined_even_later
+
+    - assert:
+        that:
+          - test2_2 == 'something_defined_even_later'

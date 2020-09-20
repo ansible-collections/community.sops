@@ -99,6 +99,29 @@ sops vars files would be decrypted and used.
 $ ansible-playbook playbooks/setup-server.yml -i inventory/hosts
 ```
 
+### load_vars action plugin
+
+The `load_vars` action plugin can be used similarly to Ansible's `include_vars`, except that it right now only supports single files.
+
+Examples:
+
+```
+tasks:
+  - name: Load variables from file and store them in a variable
+    community.sops.load_vars:
+        file: path/to/sops-encrypted-file.sops.yaml
+        name: variable_to_store_contents_in
+
+  - name: Load variables from file as proper variables into global namespace
+    community.sops.load_vars:
+        file: path/to/sops-encrypted-file-with-jinja2-expressions.sops.yaml
+        # The following allows to use Jinja2 expressions in the encrypted file!
+        # They are evaluated when the corresponding variable is used. This allows
+        # expressions to reference other variables defined in the same file, and
+        # also variables/facts only defined later.
+        static: false
+```
+
 ## Contributing to this collection
 
 <!--Describe how the community can contribute to your collection. At a minimum, include how and where users can create issues to report problems or request features for this collection.  List contribution requirements, including preferred workflows and necessary testing, so you can benefit from community PRs. If you are following general Ansible contributor guidelines, you can link to - [Ansible Community Guide](https://docs.ansible.com/ansible/latest/community/index.html). -->
