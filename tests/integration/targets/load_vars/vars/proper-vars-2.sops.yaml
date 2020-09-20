@@ -9,7 +9,7 @@ sops:
     lastmodified: '2020-09-20T20:29:19Z'
     mac: ENC[AES256_GCM,data:GMDaz9qxuB9oVJsVrQrUuK8nb9IorwdUFvkHPeanysGWFIvPDylSXK3VLTTVJLFvcSWWaAfLrWXxEE+pPXSEO6z9jB0WQaTEdLQz9rWRYP7KHL6v+Eyid9OYd8xhqAZOJnFO/jesJhvmTAAM3u8dFqqnXw+5tfyTduIs7iPdOoQ=,iv:bF2ukC11B6Oo8MnYWUlWhGxFZ8JJEyeDZSkRi4PY3Tc=,tag:0GRYGtwjwIT9wogdXm2npA==,type:str]
     pgp:
-    -   created_at: '2020-09-20T20:29:09Z'
+      - created_at: '2020-09-20T20:29:09Z'
         enc: |-
             -----BEGIN PGP MESSAGE-----
 
