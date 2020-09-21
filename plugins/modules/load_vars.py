@@ -12,6 +12,7 @@ DOCUMENTATION = r'''
 author: Felix Fontein (@felixfontein)
 module: load_vars
 short_description: Load sops-encrypted variables from files, dynamically within a task
+version_added: '0.1.0'
 description:
   - Loads sops-encrypted YAML/JSON variables dynamically from a file during task runtime.
   - To assign included variables to a different host than C(inventory_hostname),
