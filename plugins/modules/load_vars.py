@@ -36,8 +36,8 @@ options:
         neither during loading nor during usage.
       - Please note that C(false) is not officially supported by Ansible and is achieved by hacks. We try to make sure
         that it works for all supported versions of Ansible.
-      - "NOTE: If set to C(false), DO NOT register the result of the task! This breaks the functionality somehow.
-         (Same happens for M(ansible.builtin.include_vars).)"
+      - "NOTE: If set to C(false), DO NOT register the result of the task, or use this task for a loop!
+         This breaks the functionality somehow."
     type: bool
     default: true
 seealso:
