@@ -15,10 +15,11 @@ if [ "$(which sops)" == "" ]; then
     exit
 fi
 
-for TEST in $(find -maxdepth 1 -type d -name 'test-*' | sort); do
-    cd "${TEST}"
-    ANSIBLE_VARS_ENABLED=host_group_vars,community.sops.sops ansible-playbook playbook.yml -v "$@" 2>&1 | tee out
-    RESULT=${PIPESTATUS[0]}
-    ./validate.sh ${RESULT} out
-    cd -
+for TEST in $(find . -maxdepth 1 -type d -name 'test-*' | sort); do
+    (
+        cd "${TEST}"
+        ANSIBLE_VARS_ENABLED=host_group_vars,community.sops.sops ansible-playbook playbook.yml -v "$@" 2>&1 | tee out
+        RESULT=${PIPESTATUS[0]}
+        ./validate.sh "${RESULT}" out
+    )
 done
