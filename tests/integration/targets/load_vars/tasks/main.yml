@@ -1,6 +1,28 @@
 ---
 - when: sops_installed
   block:
+    - name: Test load_vars with missing option
+      community.sops.load_vars:
+      ignore_errors: yes
+      register: load_vars_missing_option
+
+    - assert:
+        that:
+          - load_vars_missing_option is failed
+          - '"Option file must be specified" in load_vars_missing_option.message'
+
+    - name: Test load_vars with wrong type for option
+      community.sops.load_vars:
+        file:
+          a: b
+      ignore_errors: yes
+      register: load_vars_wrong_type
+
+    - assert:
+        that:
+          - load_vars_wrong_type is failed
+          - '"is not a string and conversion is not allowed" in load_vars_wrong_type.message'
+
     - name: Test load_vars with missing file
       community.sops.load_vars:
         file: non-existent.sops.yaml
@@ -9,7 +31,7 @@
 
     - assert:
         that:
-          - "load_vars_missing_file is failed"
+          - load_vars_missing_file is failed
           - |
             "Could not find or access 'non-existent.sops.yaml'\n" in load_vars_missing_file.message
 
@@ -21,7 +43,7 @@
 
     - assert:
         that:
-          - "load_vars_wrong_file is failed"
+          - load_vars_wrong_file is failed
           - "'sops metadata not found' in load_vars_wrong_file.message"
 
     - name: Test load_vars with simple file into variable
@@ -32,10 +54,20 @@
 
     - assert:
         that:
-          - "load_vars_simple is success"
+          - load_vars_simple is success
           - "load_vars_simple.ansible_facts == {'dest_variable': {'foo': 'bar'}}"
           - dest_variable.foo == 'bar'
           - foo is undefined
+
+    - name: Test load_vars with empty file
+      community.sops.load_vars:
+        file: empty.sops.json
+      register: load_vars_empty
+
+    - assert:
+        that:
+          - load_vars_empty is success
+          - load_vars_empty.ansible_facts | length == 0
 
     - name: Test load_vars with simple file into global namespace
       community.sops.load_vars:
@@ -44,7 +76,7 @@
 
     - assert:
         that:
-          - "load_vars_simple_global is success"
+          - load_vars_simple_global is success
           - "load_vars_simple_global.ansible_facts == {'foo': 'bar'}"
           - foo == 'bar'
 
@@ -56,7 +88,7 @@
 
     - assert:
         that:
-          - "load_vars_vars_static is success"
+          - load_vars_vars_static is success
           - test1 == '{' ~ '{ bar }' ~ '}'
           - test2 == '{' ~ '{ to_be_defined_later }' ~ '}'
           - bar == 'baz'

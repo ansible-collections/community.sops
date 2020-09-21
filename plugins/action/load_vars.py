@@ -29,6 +29,7 @@ class ActionModule(ActionBase):
         if not data:
             data = dict()
         if not isinstance(data, dict):
+            # Should not happen with sops-encrypted files
             raise Exception('{0} must be stored as a dictionary/hash'.format(to_native(filename)))
         return data
 
