@@ -22,7 +22,7 @@ from __future__ import (absolute_import, division, print_function)
 __metaclass__ = type
 
 DOCUMENTATION = '''
-    vars: sops
+    name: sops
     author: Edoardo Tenani (@endorama) <e.tenani@arduino.cc>
     short_description: Loading sops-encrypted vars files
     version_added: '0.1.0'
