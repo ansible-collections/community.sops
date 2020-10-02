@@ -6,6 +6,56 @@
         src: ".sops.yaml"
         dest: "{{ output_dir }}/.sops.yaml"
 
+    # Broken file overwrite
+
+    - name: Place broken file
+      copy:
+        dest: "{{ output_dir }}/broken"
+        content: I'm not sops encrypted
+
+    - name: Cannot decode existing file (overwrite, check mode)
+      community.sops.sops_encrypt:
+        path: "{{ output_dir }}/broken"
+        content_text: Test
+      ignore_errors: yes
+      register: result_cannot_decode_check
+      check_mode: true
+
+    - name: Cannot decode existing file (overwrite)
+      community.sops.sops_encrypt:
+        path: "{{ output_dir }}/broken"
+        content_text: Test
+      ignore_errors: yes
+      register: result_cannot_decode
+
+    - name: Cannot decode existing file (force, check mode)
+      community.sops.sops_encrypt:
+        path: "{{ output_dir }}/broken"
+        content_text: Test
+        force: true
+      register: result_cannot_decode_force_check
+      check_mode: true
+
+    - name: Cannot decode existing file (force)
+      community.sops.sops_encrypt:
+        path: "{{ output_dir }}/broken"
+        content_text: Test
+        force: true
+      register: result_cannot_decode_force
+
+    - set_fact:
+        value: "{{ lookup('community.sops.sops', output_dir ~ '/broken', rstrip=False) }}"
+
+    - assert:
+        that:
+          - result_cannot_decode_check is failed
+          - result_cannot_decode is failed
+          - result_cannot_decode_force_check is changed
+          - result_cannot_decode_force is changed
+          - value == 'Test'
+
+    # Text content
+
     - name: Create text file (check mode)
       community.sops.sops_encrypt:
         path: "{{ output_dir }}/test"
@@ -18,6 +68,9 @@
         path: "{{ output_dir }}/test"
         content_text: This is a text.
       register: result
+
+    - set_fact:
+        value_1: "{{ lookup('community.sops.sops', output_dir ~ '/test', rstrip=False) }}"
 
     - name: Create text file (idempotency, check mode)
       community.sops.sops_encrypt:
@@ -32,9 +85,37 @@
         content_text: This is a text.
       register: result_idempotent
 
+    - name: Create text file (change, check mode)
+      community.sops.sops_encrypt:
+        path: "{{ output_dir }}/test"
+        content_text: |+
+          This is another text!
+
+          it has two newlines at the end.
+
+      check_mode: true
+      register: result_change_check
+
+    - name: Create text file (change)
+      community.sops.sops_encrypt:
+        path: "{{ output_dir }}/test"
+        content_text: |+
+          This is another text!
+
+          it has two newlines at the end.
+
+      register: result_change
+
+    - set_fact:
+        value_2: "{{ lookup('community.sops.sops', output_dir ~ '/test', rstrip=false) }}"
+
     - assert:
         that:
           - result_check is changed
           - result is changed
+          - value_1 == 'This is a text.'
           - result_idempotent_check is not changed
           - result_idempotent is not changed
+          - result_change_check is changed
+          - result_change is changed
+          - value_2 == 'This is another text!\n\nit has two newlines at the end.\n\n'
