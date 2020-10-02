@@ -119,3 +119,65 @@
           - result_change_check is changed
           - result_change is changed
           - value_2 == 'This is another text!\n\nit has two newlines at the end.\n\n'
+
+    # Binary content
+
+    - set_fact:
+        binary_value_1_b64: 'AQIDAAQ='
+        binary_value_2_b64: 'AQIDAAQgCg=='
+
+    - name: Create binary file (check mode)
+      community.sops.sops_encrypt:
+        path: "{{ output_dir }}/test"
+        content_binary: "{{ binary_value_1_b64 }}"
+      check_mode: true
+      register: result_check
+
+    - name: Create binary file
+      community.sops.sops_encrypt:
+        path: "{{ output_dir }}/test"
+        content_binary: "{{ binary_value_1_b64 }}"
+      register: result
+
+    - set_fact:
+        value_1: "{{ lookup('community.sops.sops', output_dir ~ '/test', base64=true, rstrip=False) }}"
+
+    - name: Create binary file (idempotency, check mode)
+      community.sops.sops_encrypt:
+        path: "{{ output_dir }}/test"
+        content_binary: "{{ binary_value_1_b64 }}"
+      check_mode: true
+      register: result_idempotent_check
+
+    - name: Create binary file (idempotency)
+      community.sops.sops_encrypt:
+        path: "{{ output_dir }}/test"
+        content_binary: "{{ binary_value_1_b64 }}"
+      register: result_idempotent
+
+    - name: Create binary file (change, check mode)
+      community.sops.sops_encrypt:
+        path: "{{ output_dir }}/test"
+        content_binary: "{{ binary_value_2_b64 }}"
+      check_mode: true
+      register: result_change_check
+
+    - name: Create binary file (change)
+      community.sops.sops_encrypt:
+        path: "{{ output_dir }}/test"
+        content_binary: "{{ binary_value_2_b64 }}"
+      register: result_change
+
+    - set_fact:
+        value_2: "{{ lookup('community.sops.sops', output_dir ~ '/test', base64=true, rstrip=false) }}"
+
+    - assert:
+        that:
+          - result_check is changed
+          - result is changed
+          - value_1 == binary_value_1_b64
+          - result_idempotent_check is not changed
+          - result_idempotent is not changed
+          - result_change_check is changed
+          - result_change is changed
+          - value_2 == binary_value_2_b64
