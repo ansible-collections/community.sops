@@ -6,6 +6,17 @@
         src: ".sops.yaml"
         dest: "{{ output_dir }}/.sops.yaml"
 
+    - name: Define test objects
+      set_fact:
+        text_value_1: This is a text.
+        text_value_2: |+
+          This is another text!
+
+          it has two newlines at the end.
+
+        binary_value_1_b64: 'AQIDAAQ='
+        binary_value_2_b64: 'AQIDAAQgCg=='
+
     # Broken file overwrite
 
     - name: Place broken file
@@ -59,14 +70,14 @@
     - name: Create text file (check mode)
       community.sops.sops_encrypt:
         path: "{{ output_dir }}/test"
-        content_text: This is a text.
+        content_text: "{{ text_value_1 }}"
       check_mode: true
       register: result_check
 
     - name: Create text file
       community.sops.sops_encrypt:
         path: "{{ output_dir }}/test"
-        content_text: This is a text.
+        content_text: "{{ text_value_1 }}"
       register: result
 
     - set_fact:
@@ -75,35 +86,27 @@
     - name: Create text file (idempotency, check mode)
       community.sops.sops_encrypt:
         path: "{{ output_dir }}/test"
-        content_text: This is a text.
+        content_text: "{{ text_value_1 }}"
       check_mode: true
       register: result_idempotent_check
 
     - name: Create text file (idempotency)
       community.sops.sops_encrypt:
         path: "{{ output_dir }}/test"
-        content_text: This is a text.
+        content_text: "{{ text_value_1 }}"
       register: result_idempotent
 
     - name: Create text file (change, check mode)
       community.sops.sops_encrypt:
         path: "{{ output_dir }}/test"
-        content_text: |+
-          This is another text!
-
-          it has two newlines at the end.
-
+        content_text: "{{ text_value_2 }}"
       check_mode: true
       register: result_change_check
 
     - name: Create text file (change)
       community.sops.sops_encrypt:
         path: "{{ output_dir }}/test"
-        content_text: |+
-          This is another text!
-
-          it has two newlines at the end.
-
+        content_text: "{{ text_value_2 }}"
       register: result_change
 
     - set_fact:
@@ -113,18 +116,14 @@
         that:
           - result_check is changed
           - result is changed
-          - value_1 == 'This is a text.'
+          - value_1 == text_value_1
           - result_idempotent_check is not changed
           - result_idempotent is not changed
           - result_change_check is changed
           - result_change is changed
-          - value_2 == 'This is another text!\n\nit has two newlines at the end.\n\n'
+          - value_2 == text_value_2
 
     # Binary content
-
-    - set_fact:
-        binary_value_1_b64: 'AQIDAAQ='
-        binary_value_2_b64: 'AQIDAAQgCg=='
 
     - name: Create binary file (check mode)
       community.sops.sops_encrypt:
