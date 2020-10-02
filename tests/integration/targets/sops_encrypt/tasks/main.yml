@@ -16,6 +16,18 @@
 
         binary_value_1_b64: 'AQIDAAQ='
         binary_value_2_b64: 'AQIDAAQgCg=='
+        json_value_1:
+          key1: value1
+          key2:
+            - value2.1
+            - value2.2
+        json_value_2:
+          key1: value1
+          key3:
+            - value3.1
+            - value3.2
+            - value3.3
+            - value3.4
 
     # Broken file overwrite
 
@@ -69,48 +81,48 @@
 
     - name: Create text file (check mode)
       community.sops.sops_encrypt:
-        path: "{{ output_dir }}/test"
+        path: "{{ output_dir }}/test_text"
         content_text: "{{ text_value_1 }}"
       check_mode: true
       register: result_check
 
     - name: Create text file
       community.sops.sops_encrypt:
-        path: "{{ output_dir }}/test"
+        path: "{{ output_dir }}/test_text"
         content_text: "{{ text_value_1 }}"
       register: result
 
     - set_fact:
-        value_1: "{{ lookup('community.sops.sops', output_dir ~ '/test', rstrip=False) }}"
+        value_1: "{{ lookup('community.sops.sops', output_dir ~ '/test_text', rstrip=False) }}"
 
     - name: Create text file (idempotency, check mode)
       community.sops.sops_encrypt:
-        path: "{{ output_dir }}/test"
+        path: "{{ output_dir }}/test_text"
         content_text: "{{ text_value_1 }}"
       check_mode: true
       register: result_idempotent_check
 
     - name: Create text file (idempotency)
       community.sops.sops_encrypt:
-        path: "{{ output_dir }}/test"
+        path: "{{ output_dir }}/test_text"
         content_text: "{{ text_value_1 }}"
       register: result_idempotent
 
     - name: Create text file (change, check mode)
       community.sops.sops_encrypt:
-        path: "{{ output_dir }}/test"
+        path: "{{ output_dir }}/test_text"
         content_text: "{{ text_value_2 }}"
       check_mode: true
       register: result_change_check
 
     - name: Create text file (change)
       community.sops.sops_encrypt:
-        path: "{{ output_dir }}/test"
+        path: "{{ output_dir }}/test_text"
         content_text: "{{ text_value_2 }}"
       register: result_change
 
     - set_fact:
-        value_2: "{{ lookup('community.sops.sops', output_dir ~ '/test', rstrip=false) }}"
+        value_2: "{{ lookup('community.sops.sops', output_dir ~ '/test_text', rstrip=false) }}"
 
     - assert:
         that:
@@ -127,48 +139,48 @@
 
     - name: Create binary file (check mode)
       community.sops.sops_encrypt:
-        path: "{{ output_dir }}/test"
+        path: "{{ output_dir }}/test_binary"
         content_binary: "{{ binary_value_1_b64 }}"
       check_mode: true
       register: result_check
 
     - name: Create binary file
       community.sops.sops_encrypt:
-        path: "{{ output_dir }}/test"
+        path: "{{ output_dir }}/test_binary"
         content_binary: "{{ binary_value_1_b64 }}"
       register: result
 
     - set_fact:
-        value_1: "{{ lookup('community.sops.sops', output_dir ~ '/test', base64=true, rstrip=False) }}"
+        value_1: "{{ lookup('community.sops.sops', output_dir ~ '/test_binary', base64=true, rstrip=False) }}"
 
     - name: Create binary file (idempotency, check mode)
       community.sops.sops_encrypt:
-        path: "{{ output_dir }}/test"
+        path: "{{ output_dir }}/test_binary"
         content_binary: "{{ binary_value_1_b64 }}"
       check_mode: true
       register: result_idempotent_check
 
     - name: Create binary file (idempotency)
       community.sops.sops_encrypt:
-        path: "{{ output_dir }}/test"
+        path: "{{ output_dir }}/test_binary"
         content_binary: "{{ binary_value_1_b64 }}"
       register: result_idempotent
 
     - name: Create binary file (change, check mode)
       community.sops.sops_encrypt:
-        path: "{{ output_dir }}/test"
+        path: "{{ output_dir }}/test_binary"
         content_binary: "{{ binary_value_2_b64 }}"
       check_mode: true
       register: result_change_check
 
     - name: Create binary file (change)
       community.sops.sops_encrypt:
-        path: "{{ output_dir }}/test"
+        path: "{{ output_dir }}/test_binary"
         content_binary: "{{ binary_value_2_b64 }}"
       register: result_change
 
     - set_fact:
-        value_2: "{{ lookup('community.sops.sops', output_dir ~ '/test', base64=true, rstrip=false) }}"
+        value_2: "{{ lookup('community.sops.sops', output_dir ~ '/test_binary', base64=true, rstrip=false) }}"
 
     - assert:
         that:
@@ -180,3 +192,127 @@
           - result_change_check is changed
           - result_change is changed
           - value_2 == binary_value_2_b64
+
+    # JSON content
+
+    - name: Create JSON file (check mode)
+      community.sops.sops_encrypt:
+        path: "{{ output_dir }}/test_json"
+        content_json: "{{ json_value_1 }}"
+      check_mode: true
+      register: result_check
+
+    - name: Create JSON file
+      community.sops.sops_encrypt:
+        path: "{{ output_dir }}/test_json"
+        content_json: "{{ json_value_1 }}"
+      register: result
+
+    - set_fact:
+        value_1_raw: "{{ lookup('community.sops.sops', output_dir ~ '/test_json', base64=true) }}"
+        value_1: "{{ lookup('community.sops.sops', output_dir ~ '/test_json') | from_json }}"
+
+    - name: Create JSON file (idempotency, check mode)
+      community.sops.sops_encrypt:
+        path: "{{ output_dir }}/test_json"
+        content_json: "{{ json_value_1 }}"
+      check_mode: true
+      register: result_idempotent_check
+
+    - name: Create JSON file (idempotency)
+      community.sops.sops_encrypt:
+        path: "{{ output_dir }}/test_json"
+        content_json: "{{ json_value_1 }}"
+      register: result_idempotent
+
+    - name: Create JSON file (change, check mode)
+      community.sops.sops_encrypt:
+        path: "{{ output_dir }}/test_json"
+        content_json: "{{ json_value_2 }}"
+      check_mode: true
+      register: result_change_check
+
+    - name: Create JSON file (change)
+      community.sops.sops_encrypt:
+        path: "{{ output_dir }}/test_json"
+        content_json: "{{ json_value_2 }}"
+      register: result_change
+
+    - set_fact:
+        value_2: "{{ lookup('community.sops.sops', output_dir ~ '/test_json') | from_json }}"
+
+    - assert:
+        that:
+          - result_check is changed
+          - result is changed
+          - (value_1_raw | b64decode).startswith('{')
+          - value_1 == json_value_1
+          - result_idempotent_check is not changed
+          - result_idempotent is not changed
+          - result_change_check is changed
+          - result_change is changed
+          - value_2 == json_value_2
+
+    # YAML content
+
+    - name: Create YAML file (check mode)
+      community.sops.sops_encrypt:
+        path: "{{ output_dir }}/test_yaml"
+        content_yaml: "{{ json_value_1 }}"
+      check_mode: true
+      register: result_check
+
+    - name: Create YAML file
+      community.sops.sops_encrypt:
+        path: "{{ output_dir }}/test_yaml"
+        content_yaml: "{{ json_value_1 }}"
+      register: result
+
+    - set_fact:
+        value_1_raw: "{{ lookup('community.sops.sops', output_dir ~ '/test_yaml', base64=true) }}"
+        value_1: "{{ lookup('community.sops.sops', output_dir ~ '/test_yaml') | from_yaml }}"
+
+    - name: Create YAML file (idempotency, check mode)
+      community.sops.sops_encrypt:
+        path: "{{ output_dir }}/test_yaml"
+        content_yaml: "{{ json_value_1 }}"
+      check_mode: true
+      register: result_idempotent_check
+
+    - name: Create YAML file (idempotency)
+      community.sops.sops_encrypt:
+        path: "{{ output_dir }}/test_yaml"
+        content_yaml: "{{ json_value_1 }}"
+      register: result_idempotent
+
+    - name: Create YAML file (change, check mode)
+      community.sops.sops_encrypt:
+        path: "{{ output_dir }}/test_yaml"
+        content_yaml: "{{ json_value_2 }}"
+      check_mode: true
+      register: result_change_check
+
+    - name: Create YAML file (change)
+      community.sops.sops_encrypt:
+        path: "{{ output_dir }}/test_yaml"
+        content_yaml: "{{ json_value_2 }}"
+      register: result_change
+
+    - set_fact:
+        value_2: "{{ lookup('community.sops.sops', output_dir ~ '/test_yaml') | from_yaml }}"
+
+    - debug: var=value_1_raw
+    - debug: var=value_1
+    - debug: var=value_2
+
+    - assert:
+        that:
+          - result_check is changed
+          - result is changed
+          - not (value_1_raw | b64decode).startswith('{')
+          - value_1 == json_value_1
+          - result_idempotent_check is not changed
+          - result_idempotent is not changed
+          - result_change_check is changed
+          - result_change is changed
+          - value_2 == json_value_2

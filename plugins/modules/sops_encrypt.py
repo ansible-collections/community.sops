@@ -112,22 +112,22 @@ def compare_encoded_content(module, binary_data, content):
     if module.params['content_yaml'] is not None:
         # Compare YAML
         try:
-            return yaml.loads(content) == module.params['content_yaml']
+            return yaml.safe_load(content) == module.params['content_yaml']
         except Exception as dummy:
             # Treat parsing errors as content not equal
             return False
     module.fail_json(msg='Internal error: unknown content type')
 
 
-def get_encoded_content(module, binary_data):
+def get_encoded_type_content(module, binary_data):
     if module.params['content_text'] is not None:
-        return module.params['content_text'].encode('utf-8')
+        return 'binary', module.params['content_text'].encode('utf-8')
     if module.params['content_binary'] is not None:
-        return binary_data
+        return 'binary', binary_data
     if module.params['content_json'] is not None:
-        return json.dumps(module.params['content_json']).encode('utf-8')
+        return 'json', json.dumps(module.params['content_json']).encode('utf-8')
     if module.params['content_yaml'] is not None:
-        return yaml.safe_dump(module.params['content_yaml']).encode('utf-8')
+        return 'yaml', yaml.safe_dump(module.params['content_yaml']).encode('utf-8')
     module.fail_json(msg='Internal error: unknown content type')
 
 
@@ -179,7 +179,11 @@ def main():
                 changed = True
 
         if changed and not module.check_mode:
-            data = Sops.encrypt(data=get_encoded_content(module, binary_data), cwd=directory)
+            input_type, input_data = get_encoded_type_content(module, binary_data)
+            output_type = None
+            if path.endswith('.json'):
+                output_type = 'json'
+            data = Sops.encrypt(data=input_data, cwd=directory, input_type=input_type, output_type=output_type)
             write_file(module, data)
     except SopsError as e:
         module.fail_json(msg=to_text(e))
