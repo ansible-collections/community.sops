@@ -57,16 +57,17 @@ class Sops():
     ''' Utility class to perform sops CLI actions '''
 
     @staticmethod
-    def decrypt(encrypted_file, display=None, rstrip=True):
+    def decrypt(encrypted_file, display=None, decode_output=True, rstrip=True):
         # Run sops directly, python module is deprecated
         command = ["sops", "--decrypt", encrypted_file]
         process = Popen(command, stdout=PIPE, stderr=PIPE)
         (output, err) = process.communicate()
         exit_code = process.returncode
 
-        # output is binary, we want UTF-8 string
-        output = to_text(output, errors='surrogate_or_strict')
-        # the process output is the decrypted secret; be cautious
+        if decode_output:
+            # output is binary, we want UTF-8 string
+            output = to_text(output, errors='surrogate_or_strict')
+            # the process output is the decrypted secret; be cautious
 
         # sops logs always to stderr, as stdout is used for
         # file content
