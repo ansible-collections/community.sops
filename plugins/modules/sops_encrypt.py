@@ -82,9 +82,8 @@ import json
 import os
 import traceback
 
-from ansible.module_utils.basic import AnsibleModule
-from ansible.module_utils.six.moves.urllib.parse import urlencode
-from ansible.module_utils._text import to_native, to_text
+from ansible.module_utils.basic import AnsibleModule, missing_required_lib
+from ansible.module_utils._text import to_text
 
 from ansible_collections.community.sops.plugins.module_utils.sops import Sops, SopsError, write_file
 
@@ -106,13 +105,15 @@ def compare_encoded_content(module, binary_data, content):
         # Compare JSON
         try:
             return json.loads(content) == module.params['content_json']
-        except:
+        except Exception as dummy:
+            # Treat parsing errors as content not equal
             return False
     if module.params['content_yaml'] is not None:
         # Compare YAML
         try:
             return yaml.loads(content) == module.params['content_yaml']
-        except:
+        except Exception as dummy:
+            # Treat parsing errors as content not equal
             return False
     module.fail_json(msg='Internal error: unknown content type')
 
