@@ -46,3 +46,13 @@
           - with_rstrip == 'This file has three newlines at the end.'
           - without_rstrip == 'This file has three newlines at the end.\n\n\n'
           - default_rstrip == 'This file has three newlines at the end.'
+
+    - name: Test binary
+      set_fact:
+        binary_with_rstrip: "{{ lookup('community.sops.sops', 'binary.sops', rstrip=true, base64=true) }}"
+        binary_without_rstrip: "{{ lookup('community.sops.sops', 'binary.sops', rstrip=false, base64=true) }}"
+
+    - assert:
+        that:
+          - binary_with_rstrip == 'AQIDAAQ='
+          - binary_without_rstrip == 'AQIDAAQgCg=='
