@@ -34,3 +34,15 @@
         that:
           - "sops_lookup_simple is success"
           - "sops_success == 'foo: bar'"
+
+    - name: Test rstrip
+      set_fact:
+        with_rstrip: "{{ lookup('community.sops.sops', 'rstrip.sops', rstrip=true) }}"
+        without_rstrip: "{{ lookup('community.sops.sops', 'rstrip.sops', rstrip=false) }}"
+        default_rstrip: "{{ lookup('community.sops.sops', 'rstrip.sops') }}"
+
+    - assert:
+        that:
+          - with_rstrip == 'This file has three newlines at the end.'
+          - without_rstrip == 'This file has three newlines at the end.\n\n\n'
+          - default_rstrip == 'This file has three newlines at the end.'

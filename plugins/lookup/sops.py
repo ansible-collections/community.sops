@@ -31,8 +31,12 @@ DOCUMENTATION = """
         - This lookup requires the C(sops) executable to be available in the controller PATH.
     options:
         _terms:
-            description: path(s) of files to read
-            required: True
+            description: Path(s) of files to read.
+            required: true
+        rstrip:
+            description: Whether to remove trailing newlines and spaces.
+            type: bool
+            default: true
     notes:
         - This lookup does not understand 'globbing' - use the fileglob lookup instead.
 """
@@ -74,6 +78,9 @@ display = Display()
 class LookupModule(LookupBase):
 
     def run(self, terms, variables=None, **kwargs):
+        self.set_options(direct=kwargs)
+        rstrip = self.get_option('rstrip')
+
         ret = []
 
         for term in terms:
@@ -85,10 +92,10 @@ class LookupModule(LookupBase):
                 raise AnsibleLookupError("could not locate file in lookup: %s" % to_native(term))
 
             try:
-                output = Sops.decrypt(lookupfile, display=display)
+                output = Sops.decrypt(lookupfile, display=display, rstrip=rstrip)
             except SopsError as e:
                 raise AnsibleLookupError(to_native(e))
 
-            ret.append(output.rstrip())
+            ret.append(output)
 
         return ret
