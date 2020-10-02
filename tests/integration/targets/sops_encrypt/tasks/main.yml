@@ -1,0 +1,40 @@
+---
+- when: sops_installed
+  block:
+    - name: Place .sops.yaml
+      copy:
+        src: ".sops.yaml"
+        dest: "{{ output_dir }}/.sops.yaml"
+
+    - name: Create text file (check mode)
+      community.sops.sops_encrypt:
+        path: "{{ output_dir }}/test"
+        content_text: This is a text.
+      check_mode: true
+      register: result_check
+
+    - name: Create text file
+      community.sops.sops_encrypt:
+        path: "{{ output_dir }}/test"
+        content_text: This is a text.
+      register: result
+
+    - name: Create text file (idempotency, check mode)
+      community.sops.sops_encrypt:
+        path: "{{ output_dir }}/test"
+        content_text: This is a text.
+      check_mode: true
+      register: result_idempotent_check
+
+    - name: Create text file (idempotency)
+      community.sops.sops_encrypt:
+        path: "{{ output_dir }}/test"
+        content_text: This is a text.
+      register: result_idempotent
+
+    - assert:
+        that:
+          - result_check is changed
+          - result is changed
+          - result_idempotent_check is not changed
+          - result_idempotent is not changed
