@@ -53,7 +53,7 @@ options:
 extends_documentation_fragment:
 - ansible.builtin.files
 seealso:
-- ref: ansible_collections.community.sops.sops_lookup
+- ref: community.sops.sops lookup <ansible_collections.community.sops.sops_lookup>
   description: The sops lookup can be used decrypt sops-encrypted files.
 '''
 
