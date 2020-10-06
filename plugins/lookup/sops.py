@@ -31,8 +31,18 @@ DOCUMENTATION = """
         - This lookup requires the C(sops) executable to be available in the controller PATH.
     options:
         _terms:
-            description: path(s) of files to read
-            required: True
+            description: Path(s) of files to read.
+            required: true
+        rstrip:
+            description: Whether to remove trailing newlines and spaces.
+            type: bool
+            default: true
+        base64:
+            description:
+                - Base64-encodes the parsed result.
+                - Use this if you want to store binary data in Ansible variables.
+            type: bool
+            default: false
     notes:
         - This lookup does not understand 'globbing' - use the fileglob lookup instead.
 """
@@ -62,6 +72,8 @@ RETURN = """
         elements: str
 """
 
+import base64
+
 from ansible.errors import AnsibleLookupError
 from ansible.plugins.lookup import LookupBase
 from ansible.module_utils._text import to_native
@@ -74,6 +86,10 @@ display = Display()
 class LookupModule(LookupBase):
 
     def run(self, terms, variables=None, **kwargs):
+        self.set_options(direct=kwargs)
+        rstrip = self.get_option('rstrip')
+        use_base64 = self.get_option('base64')
+
         ret = []
 
         for term in terms:
@@ -85,10 +101,13 @@ class LookupModule(LookupBase):
                 raise AnsibleLookupError("could not locate file in lookup: %s" % to_native(term))
 
             try:
-                output = Sops.decrypt(lookupfile, display=display)
+                output = Sops.decrypt(lookupfile, display=display, rstrip=rstrip, decode_output=not use_base64)
             except SopsError as e:
                 raise AnsibleLookupError(to_native(e))
 
-            ret.append(output.rstrip())
+            if use_base64:
+                output = to_native(base64.b64encode(output))
+
+            ret.append(output)
 
         return ret
