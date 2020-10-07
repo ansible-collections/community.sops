@@ -92,11 +92,12 @@ class Sops():
     @staticmethod
     def encrypt(data, display=None, cwd=None, input_type=None, output_type=None):
         # Run sops directly, python module is deprecated
-        command = ["sops", "--encrypt", "/dev/stdin"]
+        command = ["sops"]
         if input_type is not None:
             command.extend(["--input-type", input_type])
         if output_type is not None:
             command.extend(["--output-type", output_type])
+        command.extend(["--encrypt", "/dev/stdin"])
         process = Popen(command, stdin=PIPE, stdout=PIPE, stderr=PIPE, cwd=cwd)
         (output, err) = process.communicate(input=data)
         exit_code = process.returncode
