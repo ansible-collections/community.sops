@@ -23,6 +23,18 @@
           - load_vars_wrong_type is failed
           - '"is not a string and conversion is not allowed" in load_vars_wrong_type.message'
 
+    - name: Test load_vars with wrong choice value
+      community.sops.load_vars:
+        file: a
+        expressions: invalid value
+      ignore_errors: yes
+      register: load_vars_invalid_value
+
+    - assert:
+        that:
+          - load_vars_invalid_value is failed
+          - '"\"expressions\" must be one of " in load_vars_invalid_value.message'
+
     - name: Test load_vars with missing file
       community.sops.load_vars:
         file: non-existent.sops.yaml
@@ -111,7 +123,8 @@
           - load_vars_expr_evaluated_now is success
           - test1_2 == 'baz'
           - test2_2 == 'something_defined_before'
-          - bar_2 == 'baz'
+          - test3_2[0] == 'baz'
+          - test4_2.test_4_2_1 == 'bazbaz'
 
     - name: Test load_vars with expressions evaluated now (again)
       community.sops.load_vars:
