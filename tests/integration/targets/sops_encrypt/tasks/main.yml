@@ -223,8 +223,8 @@
       register: result
 
     - set_fact:
-        value_1_raw: "{{ lookup('community.sops.sops', output_dir ~ '/test_json', base64=true) }}"
-        value_1: "{{ lookup('community.sops.sops', output_dir ~ '/test_json') | from_json }}"
+        value_1_raw: "{{ lookup('community.sops.sops', output_dir ~ '/test_json', base64=true, output_type='json') }}"
+        value_1: "{{ lookup('community.sops.sops', output_dir ~ '/test_json', output_type='json') | from_json }}"
 
     - name: Create JSON file (idempotency, check mode)
       community.sops.sops_encrypt:
@@ -253,7 +253,7 @@
       register: result_change
 
     - set_fact:
-        value_2: "{{ lookup('community.sops.sops', output_dir ~ '/test_json') | from_json }}"
+        value_2: "{{ lookup('community.sops.sops', output_dir ~ '/test_json', output_type='json') | from_json }}"
 
     - name: Place broken JSON file
       copy:
@@ -295,8 +295,8 @@
       register: result
 
     - set_fact:
-        value_1_raw: "{{ lookup('community.sops.sops', output_dir ~ '/test_yaml', base64=true) }}"
-        value_1: "{{ lookup('community.sops.sops', output_dir ~ '/test_yaml') | from_yaml }}"
+        value_1_raw: "{{ lookup('community.sops.sops', output_dir ~ '/test_yaml', base64=true, output_type='yaml') }}"
+        value_1: "{{ lookup('community.sops.sops', output_dir ~ '/test_yaml', output_type='yaml') | from_yaml }}"
 
     - name: Create YAML file (idempotency, check mode)
       community.sops.sops_encrypt:
@@ -325,7 +325,7 @@
       register: result_change
 
     - set_fact:
-        value_2: "{{ lookup('community.sops.sops', output_dir ~ '/test_yaml') | from_yaml }}"
+        value_2: "{{ lookup('community.sops.sops', output_dir ~ '/test_yaml', output_type='yaml') | from_yaml }}"
 
     - name: Place broken YAML file
       copy:
@@ -373,4 +373,5 @@
         that:
           - result_idem is not changed
           - value_1.data == text_value_1
-          - value_2.startswith('{')
+          - '"data" in value_2'
+          - value_2.data.startswith('ENC[')
