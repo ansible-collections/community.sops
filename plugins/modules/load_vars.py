@@ -33,7 +33,9 @@ options:
       - This option controls how Jinja2 expressions in values in the loaded file are handled.
       - If set to C(ignore), expressions will not be evaluted, but treated as regular strings.
       - If set to C(evaluate-now), expressions will be evaluated on execution of this module, i.e. now.
-      - Unfortunately, there is no way for non-core modules to handle expressions "unsafe", i.e. evaluate them only on use. This can only achieved by M(ansible.builtin.include_vars), which unfortunately cannot handle sops-encrypted files.
+      - Unfortunately, there is no way for non-core modules to handle expressions "unsafe",
+        i.e. evaluate them only on use. This can only achieved by M(ansible.builtin.include_vars),
+        which unfortunately cannot handle sops-encrypted files.
     type: str
     default: ignore
     choices:

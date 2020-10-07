@@ -61,7 +61,7 @@ class ActionModule(ActionBase):
         if isinstance(value, Sequence):
             return [self._evaluate(v) for v in value]
         if isinstance(value, Mapping):
-            return {k: self._evaluate(v) for k, v in iteritems(value)}
+            return dict((k, self._evaluate(v)) for k, v in iteritems(value))
         return value
 
     def run(self, tmp=None, task_vars=None):
