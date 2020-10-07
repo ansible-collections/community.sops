@@ -1,0 +1,2 @@
+tests/integration/targets/lookup_sops/files/hidden-binary.yaml yamllint:error
+tests/integration/targets/lookup_sops/files/hidden-json.yaml yamllint:error
