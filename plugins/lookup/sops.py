@@ -43,6 +43,30 @@ DOCUMENTATION = """
                 - Use this if you want to store binary data in Ansible variables.
             type: bool
             default: false
+        input_type:
+            description:
+                - Tell sops how to interpret the encrypted file.
+                - By default, sops will chose the input type from the file extension.
+                  If it detects the wrong type for a file, this could result in decryption
+                  failing.
+            type: str
+            choices:
+                - binary
+                - json
+                - yaml
+                - dotenv
+        output_type:
+            description:
+                - Tell sops how to interpret the decrypted file.
+                - By default, sops will chose the output type from the file extension.
+                  If it detects the wrong type for a file, this could result in decryption
+                  failing.
+            type: str
+            choices:
+                - binary
+                - json
+                - yaml
+                - dotenv
     notes:
         - This lookup does not understand 'globbing' - use the fileglob lookup instead.
 """
@@ -63,6 +87,11 @@ tasks:
         group: "{{ user }}"
         mode: 0600
     no_log: true  # avoid content to be written to log
+
+  - name: The file file.json is a YAML file, which contains the encryption of binary data
+    debug:
+        msg: "Content: {{ lookup('community.sops.sops', 'file.json', input_type='yaml', output_type='binary') }}"
+
 """
 
 RETURN = """
@@ -89,6 +118,8 @@ class LookupModule(LookupBase):
         self.set_options(direct=kwargs)
         rstrip = self.get_option('rstrip')
         use_base64 = self.get_option('base64')
+        input_type = self.get_option('input_type')
+        output_type = self.get_option('output_type')
 
         ret = []
 
@@ -101,7 +132,9 @@ class LookupModule(LookupBase):
                 raise AnsibleLookupError("could not locate file in lookup: %s" % to_native(term))
 
             try:
-                output = Sops.decrypt(lookupfile, display=display, rstrip=rstrip, decode_output=not use_base64)
+                output = Sops.decrypt(
+                    lookupfile, display=display, rstrip=rstrip, decode_output=not use_base64,
+                    input_type=input_type, output_type=output_type)
             except SopsError as e:
                 raise AnsibleLookupError(to_native(e))
 

@@ -56,3 +56,53 @@
         that:
           - binary_with_rstrip == 'AQIDAAQ='
           - binary_without_rstrip == 'AQIDAAQgCg=='
+
+    - name: Test hidden binary
+      set_fact:
+        hidden_binary: "{{ lookup('community.sops.sops', 'hidden-binary', output_type='binary') }}"
+        hidden_binary__json: "{{ lookup('community.sops.sops', 'hidden-binary.json', output_type='binary') }}"
+        hidden_binary__yaml: "{{ lookup('community.sops.sops', 'hidden-binary.yaml', output_type='binary') }}"
+        hidden_binary_yaml: "{{ lookup('community.sops.sops', 'hidden-binary-yaml', input_type='yaml', output_type='binary') }}"
+        hidden_binary_yaml__json: "{{ lookup('community.sops.sops', 'hidden-binary-yaml.json', input_type='yaml', output_type='binary') }}"
+        hidden_binary_yaml__yaml: "{{ lookup('community.sops.sops', 'hidden-binary-yaml.yaml', input_type='yaml', output_type='binary') }}"
+        hidden_json: "{{ lookup('community.sops.sops', 'hidden-json', input_type='json', output_type='json') }}"
+        hidden_json__json: "{{ lookup('community.sops.sops', 'hidden-json.json', input_type='json', output_type='json') }}"
+        hidden_json__yaml: "{{ lookup('community.sops.sops', 'hidden-json.yaml', input_type='json', output_type='json') }}"
+        hidden_yaml: "{{ lookup('community.sops.sops', 'hidden-yaml', input_type='yaml', output_type='yaml') }}"
+        hidden_yaml__json: "{{ lookup('community.sops.sops', 'hidden-yaml.json', input_type='yaml', output_type='yaml') }}"
+        hidden_yaml__yaml: "{{ lookup('community.sops.sops', 'hidden-yaml.yaml', input_type='yaml', output_type='yaml') }}"
+        hidden_json__as_yaml: "{{ lookup('community.sops.sops', 'hidden-json', input_type='json', output_type='yaml') }}"
+        hidden_json__json__as_yaml: "{{ lookup('community.sops.sops', 'hidden-json.json', input_type='json', output_type='yaml') }}"
+        hidden_json__yaml__as_yaml: "{{ lookup('community.sops.sops', 'hidden-json.yaml', input_type='json', output_type='yaml') }}"
+        hidden_yaml__as_json: "{{ lookup('community.sops.sops', 'hidden-yaml', input_type='yaml', output_type='json') }}"
+        hidden_yaml__json__as_json: "{{ lookup('community.sops.sops', 'hidden-yaml.json', input_type='yaml', output_type='json') }}"
+        hidden_yaml__yaml__as_json: "{{ lookup('community.sops.sops', 'hidden-yaml.yaml', input_type='yaml', output_type='json') }}"
+
+    - assert:
+        that:
+          - hidden_binary == test_str_abcd
+          - hidden_binary__json == test_str_abcd
+          - hidden_binary__yaml == test_str_abcd
+          - hidden_binary_yaml == test_str_binary_data
+          - hidden_binary_yaml__json == test_str_binary_data
+          - hidden_binary_yaml__yaml == test_str_binary_data
+          - hidden_json == test_dict
+          - hidden_json__json == test_dict
+          - hidden_json__yaml == test_dict
+          - hidden_yaml == test_dict_yaml
+          - hidden_yaml__json == test_dict_yaml
+          - hidden_yaml__yaml == test_dict_yaml
+          - hidden_json__as_yaml == test_dict_yaml
+          - hidden_json__json__as_yaml == test_dict_yaml
+          - hidden_json__yaml__as_yaml == test_dict_yaml
+          - hidden_yaml__as_json == test_dict
+          - hidden_yaml__json__as_json == test_dict
+          - hidden_yaml__yaml__as_json == test_dict
+      vars:
+        test_dict:
+          a: b
+          c: d
+        test_dict_yaml:
+          "a: b\nc: d"
+        test_str_binary_data: This is binary data.
+        test_str_abcd: a is b, and c is d

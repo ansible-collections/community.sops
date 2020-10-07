@@ -57,9 +57,14 @@ class Sops():
     ''' Utility class to perform sops CLI actions '''
 
     @staticmethod
-    def decrypt(encrypted_file, display=None, decode_output=True, rstrip=True):
+    def decrypt(encrypted_file, display=None, decode_output=True, rstrip=True, input_type=None, output_type=None):
         # Run sops directly, python module is deprecated
-        command = ["sops", "--decrypt", encrypted_file]
+        command = ["sops"]
+        if input_type is not None:
+            command.extend(["--input-type", input_type])
+        if output_type is not None:
+            command.extend(["--output-type", output_type])
+        command.extend(["--decrypt", encrypted_file])
         process = Popen(command, stdout=PIPE, stderr=PIPE)
         (output, err) = process.communicate()
         exit_code = process.returncode
