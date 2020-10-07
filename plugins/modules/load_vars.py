@@ -28,18 +28,17 @@ options:
       - The name of a variable into which assign the included vars.
       - If omitted (C(null)) they will be made top level vars.
     type: str
-  static:
+  expressions:
     description:
-      - If set to C(false), the contents of the file will be loaded as real variables. This means that Jinja2 expressions
-        will be interpreted on usage of the variables.
-      - If set to the default value C(true), all strings will be interpreted as strings and will not be templated,
-        neither during loading nor during usage.
-      - Please note that C(false) is not officially supported by Ansible and is achieved by hacks. We try to make sure
-        that it works for all supported versions of Ansible.
-      - "NOTE: If set to C(false), DO NOT register the result of the task, or use this task for a loop!
-         This breaks the functionality somehow."
-    type: bool
-    default: true
+      - This option controls how Jinja2 expressions in values in the loaded file are handled.
+      - If set to C(ignore), expressions will not be evaluted, but treated as regular strings.
+      - If set to C(evaluate-now), expressions will be evaluated on execution of this module, i.e. now.
+      - Unfortunately, there is no way for non-core modules to handle expressions "unsafe", i.e. evaluate them only on use. This can only achieved by M(ansible.builtin.include_vars), which unfortunately cannot handle sops-encrypted files.
+    type: str
+    default: ignore
+    choices:
+        - ignore
+        - evaluate-now
 seealso:
 - module: ansible.builtin.set_fact
 - module: ansible.builtin.include_vars
@@ -52,13 +51,13 @@ EXAMPLES = r'''
   community.sops.load_vars:
     file: stuff.sops.yaml
     name: stuff
-    static: false  # interpret Jinja2 expressions in stuf.sops.yaml on usage of the vars!
+    expressions: evaluate-now  # interpret Jinja2 expressions in stuf.sops.yaml on load-time!
 
 - name: Conditionally decide to load in variables into 'plans' when x is 0, otherwise do not.
   community.sops.load_vars:
     file: contingency_plan.sops.yaml
     name: plans
-    static: true  # do not interpret possible Jinja2 expressions
+    expressions: ignore  # do not interpret possible Jinja2 expressions
   when: x == 0
 
 - name: Load variables into the global namespace

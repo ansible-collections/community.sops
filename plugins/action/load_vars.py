@@ -8,6 +8,7 @@ from os import path, walk
 import re
 
 from ansible.module_utils.common.validation import check_type_bool, check_type_str
+from ansible.module_utils.common._collections_compat import Sequence, Mapping
 from ansible.module_utils.six import iteritems, string_types
 from ansible.module_utils._text import to_native, to_text
 from ansible.plugins.action import ActionBase
@@ -20,7 +21,7 @@ display = Display()
 
 class ActionModule(ActionBase):
 
-    _VALID_ARGS = frozenset(['file', 'name', 'static'])
+    _VALID_ARGS = frozenset(['file', 'name', 'expressions'])
 
     def _load(self, filename):
         output = Sops.decrypt(filename, display=display)
@@ -53,6 +54,16 @@ class ActionModule(ActionBase):
             msg += " is of type %s and we were unable to convert to %s: %s" % (type(value), type_name, to_native(e))
             raise Exception(msg)
 
+    def _evaluate(self, value):
+        if isinstance(value, string_types):
+            # must come *before* Sequence, as strings are also instances of Sequence
+            return self._templar.template(value)
+        if isinstance(value, Sequence):
+            return [self._evaluate(v) for v in value]
+        if isinstance(value, Mapping):
+            return {k: self._evaluate(v) for k, v in iteritems(value)}
+        return value
+
     def run(self, tmp=None, task_vars=None):
         """ Load yml files recursively from a directory.
         """
@@ -65,7 +76,9 @@ class ActionModule(ActionBase):
             name = self._get_option('name', 'str', accept_none=True)
             if name is not None:
                 name = to_text(name)
-            static = self._get_option('static', 'bool', default=True)
+            expressions = self._get_option('expressions', 'str', default='ignore')
+            if expressions not in ('ignore', 'evaluate-now'):
+                raise Exception('"expressions" must be one of "ignore" and "evaluate-now"')
         except Exception as e:
             result['failed'] = True
             result['message'] = to_text(e)
@@ -88,12 +101,11 @@ class ActionModule(ActionBase):
             value = dict()
             value[name] = data
 
+        if expressions == 'evaluate-now':
+            value = self._evaluate(value)
+
         result['ansible_included_var_files'] = files
         result['ansible_facts'] = value
         result['_ansible_no_log'] = True
-
-        if not static:
-            # HACK! This tricks the strategy plugin into properly storing the result as variables, and not as (evaluated) facts
-            self._task.action = 'include_vars'
 
         return result
