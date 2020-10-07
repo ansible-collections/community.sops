@@ -5,6 +5,11 @@
 The `community.sops` collection allows integrating [`mozilla/sops`](https://github.com/mozilla/sops) in Ansible.
 
 `mozilla/sops` is a tool for encryption and decryption of files using secure keys (GPG, KMS). It can be leveraged in Ansible to provide an easy to use and flexible to manage way to manage ecrypted secrets' files.
+
+**Sops version compatibility**
+|`community.sops` version|`mozilla/sops` version|
+|---|---|
+|`main`|`3.6.1+`|
  
 ## Tested with Ansible
 
