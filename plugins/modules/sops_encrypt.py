@@ -97,6 +97,18 @@ except ImportError:
     yaml = None
 
 
+def get_data_type(module):
+    if module.params['content_text'] is not None:
+        return 'binary'
+    if module.params['content_binary'] is not None:
+        return 'binary'
+    if module.params['content_json'] is not None:
+        return 'json'
+    if module.params['content_yaml'] is not None:
+        return 'yaml'
+    module.fail_json(msg='Internal error: unknown content type')
+
+
 def compare_encoded_content(module, binary_data, content):
     if module.params['content_text'] is not None:
         return content == module.params['content_text'].encode('utf-8')
@@ -174,7 +186,7 @@ def main():
             changed = True
         else:
             # Change detection: check if encrypted data equals new data
-            decrypted_content = Sops.decrypt(path, decode_output=False, rstrip=False)
+            decrypted_content = Sops.decrypt(path, decode_output=False, output_type=get_data_type(module), rstrip=False)
             if not compare_encoded_content(module, binary_data, decrypted_content):
                 changed = True
 

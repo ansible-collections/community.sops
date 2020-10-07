@@ -29,6 +29,20 @@
             - value3.3
             - value3.4
 
+    # Invalid Base64
+
+    - name: Create binary file
+      community.sops.sops_encrypt:
+        path: "{{ output_dir }}/test_bad_base64"
+        content_binary: This is not Base64
+      ignore_errors: true
+      register: result_not_base64
+
+    - assert:
+        that:
+          - result_not_base64 is failed
+          - '"Cannot decode Base64 encoded data" in result_not_base64.msg'
+
     # Broken file overwrite
 
     - name: Place broken file
@@ -241,6 +255,17 @@
     - set_fact:
         value_2: "{{ lookup('community.sops.sops', output_dir ~ '/test_json') | from_json }}"
 
+    - name: Place broken JSON file
+      copy:
+        src: "broken-json-yaml"
+        dest: "{{ output_dir }}/test_json_broken"
+
+    - name: Update broken JSON file
+      community.sops.sops_encrypt:
+        path: "{{ output_dir }}/test_json_broken"
+        content_json: "{{ json_value_1 }}"
+      register: result_broken_change
+
     - assert:
         that:
           - result_check is changed
@@ -252,6 +277,7 @@
           - result_change_check is changed
           - result_change is changed
           - value_2 == json_value_2
+          - result_broken_change is changed
 
     # YAML content
 
@@ -301,9 +327,16 @@
     - set_fact:
         value_2: "{{ lookup('community.sops.sops', output_dir ~ '/test_yaml') | from_yaml }}"
 
-    - debug: var=value_1_raw
-    - debug: var=value_1
-    - debug: var=value_2
+    - name: Place broken YAML file
+      copy:
+        src: "broken-json-yaml"
+        dest: "{{ output_dir }}/test_yaml_broken"
+
+    - name: Update broken YAML file
+      community.sops.sops_encrypt:
+        path: "{{ output_dir }}/test_yaml_broken"
+        content_json: "{{ json_value_1 }}"
+      register: result_broken_change
 
     - assert:
         that:
@@ -316,3 +349,28 @@
           - result_change_check is changed
           - result_change is changed
           - value_2 == json_value_2
+          - result_broken_change is changed
+
+    # Output type JSON
+
+    - name: Create text file with output type JSON
+      community.sops.sops_encrypt:
+        path: "{{ output_dir }}/test_output_type.json"
+        content_text: "{{ text_value_1 }}"
+      register: result
+
+    - set_fact:
+        value_1: "{{ lookup('community.sops.sops', output_dir ~ '/test_output_type.json', rstrip=False) | from_json }}"
+        value_2: "{{ lookup('ansible.builtin.file', output_dir ~ '/test_output_type.json', rstrip=False) }}"
+
+    - name: Create text file with output type JSON (idempotency)
+      community.sops.sops_encrypt:
+        path: "{{ output_dir }}/test_output_type.json"
+        content_text: "{{ text_value_1 }}"
+      register: result_idem
+
+    - assert:
+        that:
+          - result_idem is not changed
+          - value_1.data == text_value_1
+          - value_2.startswith('{')
