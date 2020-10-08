@@ -126,7 +126,7 @@ tasks:
         file: path/to/sops-encrypted-file-with-jinja2-expressions.sops.yaml
         # The following allows to use Jinja2 expressions in the encrypted file!
         # They are evaluated right now, i.e. not later like when loaded with include_vars.
-        expressions: evaluate-now
+        expressions: evaluate-on-load
 ```
 
 ### encrypt_sops module

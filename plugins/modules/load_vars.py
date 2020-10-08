@@ -32,7 +32,8 @@ options:
     description:
       - This option controls how Jinja2 expressions in values in the loaded file are handled.
       - If set to C(ignore), expressions will not be evaluted, but treated as regular strings.
-      - If set to C(evaluate-now), expressions will be evaluated on execution of this module, i.e. now.
+      - If set to C(evaluate-on-load), expressions will be evaluated on execution of this module,
+        i.e. when the file is loaded.
       - Unfortunately, there is no way for non-core modules to handle expressions "unsafe",
         i.e. evaluate them only on use. This can only achieved by M(ansible.builtin.include_vars),
         which unfortunately cannot handle sops-encrypted files.
@@ -40,7 +41,7 @@ options:
     default: ignore
     choices:
         - ignore
-        - evaluate-now
+        - evaluate-on-load
 seealso:
 - module: ansible.builtin.set_fact
 - module: ansible.builtin.include_vars
@@ -53,7 +54,7 @@ EXAMPLES = r'''
   community.sops.load_vars:
     file: stuff.sops.yaml
     name: stuff
-    expressions: evaluate-now  # interpret Jinja2 expressions in stuf.sops.yaml on load-time!
+    expressions: evaluate-on-load  # interpret Jinja2 expressions in stuf.sops.yaml on load-time!
 
 - name: Conditionally decide to load in variables into 'plans' when x is 0, otherwise do not.
   community.sops.load_vars:

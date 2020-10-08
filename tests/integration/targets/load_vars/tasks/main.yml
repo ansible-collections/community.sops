@@ -112,7 +112,7 @@
     - name: Test load_vars with expressions evaluated now
       community.sops.load_vars:
         file: proper-vars-2.sops.yaml
-        expressions: evaluate-now
+        expressions: evaluate-on-load
       register: load_vars_expr_evaluated_now
 
     - set_fact:
@@ -129,7 +129,7 @@
     - name: Test load_vars with expressions evaluated now (again)
       community.sops.load_vars:
         file: proper-vars-2.sops.yaml
-        expressions: evaluate-now
+        expressions: evaluate-on-load
       register: load_vars_expr_evaluated_now_2
 
     - assert:

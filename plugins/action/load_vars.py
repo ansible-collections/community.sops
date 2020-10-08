@@ -77,8 +77,8 @@ class ActionModule(ActionBase):
             if name is not None:
                 name = to_text(name)
             expressions = self._get_option('expressions', 'str', default='ignore')
-            if expressions not in ('ignore', 'evaluate-now'):
-                raise Exception('"expressions" must be one of "ignore" and "evaluate-now"')
+            if expressions not in ('ignore', 'evaluate-on-load'):
+                raise Exception('"expressions" must be one of "ignore" and "evaluate-on-load"')
         except Exception as e:
             result['failed'] = True
             result['message'] = to_text(e)
@@ -101,7 +101,7 @@ class ActionModule(ActionBase):
             value = dict()
             value[name] = data
 
-        if expressions == 'evaluate-now':
+        if expressions == 'evaluate-on-load':
             value = self._evaluate(value)
 
         result['ansible_included_var_files'] = files
