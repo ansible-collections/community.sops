@@ -7,9 +7,13 @@ The `community.sops` collection allows integrating [`mozilla/sops`](https://gith
 `mozilla/sops` is a tool for encryption and decryption of files using secure keys (GPG, KMS). It can be leveraged in Ansible to provide an easy to use and flexible to manage way to manage ecrypted secrets' files.
 
 **Sops version compatibility**
+
+The following table shows which versions of sops were tested with which versions of the collection. Older (or newer) versions of sops can still work fine, it just means that we did not test them. In some cases, it could be that a minimal required version of sops is explicitly documented for a specific feature. Right now, that is not the case.
+
 |`community.sops` version|`mozilla/sops` version|
 |---|---|
-|`main`|`3.6.1+`|
+|0.1.0|`3.6.1+`|
+|`main` branch|`3.6.1+`|
  
 ## Tested with Ansible
 
