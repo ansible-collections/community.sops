@@ -44,12 +44,14 @@ SOPS_ERROR_CODES = {
 class SopsError(Exception):
     ''' Extend Exception class with sops specific informations '''
 
-    def __init__(self, filename, exit_code, message):
+    def __init__(self, filename, exit_code, message, decryption=True):
         if exit_code in SOPS_ERROR_CODES:
             exception_name = SOPS_ERROR_CODES[exit_code]
-            message = "error with file %s: %s exited with code %d: %s" % (filename, exception_name, exit_code, to_native(message))
+            message = "error with file %s: %s exited with code %d: %s" % (
+                filename, exception_name, exit_code, to_native(message))
         else:
-            message = "could not decrypt file %s; Unknown sops error code: %s" % (filename, to_native(exit_code))
+            message = "could not %s file %s; Unknown sops error code: %s; message: %s" % (
+                'decrypt' if decryption else 'encrypt', filename, exit_code, to_native(message))
         super(SopsError, self).__init__(message)
 
 
@@ -80,9 +82,32 @@ class Sops():
             display.vvvv(to_text(err, errors='surrogate_or_strict'))
 
         if exit_code > 0:
-            raise SopsError(encrypted_file, exit_code, err)
+            raise SopsError(encrypted_file, exit_code, err, decryption=True)
 
         if rstrip:
             output = output.rstrip()
+
+        return output
+
+    @staticmethod
+    def encrypt(data, display=None, cwd=None, input_type=None, output_type=None):
+        # Run sops directly, python module is deprecated
+        command = ["sops"]
+        if input_type is not None:
+            command.extend(["--input-type", input_type])
+        if output_type is not None:
+            command.extend(["--output-type", output_type])
+        command.extend(["--encrypt", "/dev/stdin"])
+        process = Popen(command, stdin=PIPE, stdout=PIPE, stderr=PIPE, cwd=cwd)
+        (output, err) = process.communicate(input=data)
+        exit_code = process.returncode
+
+        # sops logs always to stderr, as stdout is used for
+        # file content
+        if err and display:
+            display.vvvv(to_text(err, errors='surrogate_or_strict'))
+
+        if exit_code > 0:
+            raise SopsError('to stdout', exit_code, err, decryption=False)
 
         return output

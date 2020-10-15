@@ -131,6 +131,45 @@ tasks:
         static: false
 ```
 
+### encrypt_sops module
+
+The `encrypt_sops` module can be used to create and update sops encrypted files. It assumes that sops is configured via environment variables or a `.sops.yaml` file.
+
+Examples:
+
+```
+tasks:
+  - name: Store secret text sops encrypted
+    community.sops.encrypt_sops:
+        path: path/to/sops-encrypted-file.sops
+        content_text: This is some secret text.
+
+  - name: Store secret binary data sops encrypted
+    community.sops.encrypt_sops:
+        path: path/to/sops-encrypted-file.sops
+        content_binary: "{{ some_secret_binary_data | b64encode }}"
+
+  - name: Store secret JSON data
+    community.sops.encrypt_sops:
+        path: path/to/sops-encrypted-file.sops.json
+        content_json:
+            key1: value1
+            key2:
+                - value2
+                - key3: value3
+                  key4: value5
+
+  - name: Store secret YAML data
+    community.sops.encrypt_sops:
+        path: path/to/sops-encrypted-file.sops.yaml
+        content_yaml:
+            key1: value1
+            key2:
+                - value2
+                - key3: value3
+                  key4: value5
+```
+
 ## Contributing to this collection
 
 <!--Describe how the community can contribute to your collection. At a minimum, include how and where users can create issues to report problems or request features for this collection.  List contribution requirements, including preferred workflows and necessary testing, so you can benefit from community PRs. If you are following general Ansible contributor guidelines, you can link to - [Ansible Community Guide](https://docs.ansible.com/ansible/latest/community/index.html). -->
