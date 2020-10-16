@@ -23,6 +23,18 @@
           - load_vars_wrong_type is failed
           - '"is not a string and conversion is not allowed" in load_vars_wrong_type.message'
 
+    - name: Test load_vars with wrong choice value
+      community.sops.load_vars:
+        file: a
+        expressions: invalid value
+      ignore_errors: yes
+      register: load_vars_invalid_value
+
+    - assert:
+        that:
+          - load_vars_invalid_value is failed
+          - '"\"expressions\" must be one of " in load_vars_invalid_value.message'
+
     - name: Test load_vars with missing file
       community.sops.load_vars:
         file: non-existent.sops.yaml
@@ -80,40 +92,47 @@
           - "load_vars_simple_global.ansible_facts == {'foo': 'bar'}"
           - foo == 'bar'
 
-    - name: Test load_vars with proper vars file imported statically
+    - name: Test load_vars with expressions ignored
       community.sops.load_vars:
         file: proper-vars.sops.yaml
-        static: true
-      register: load_vars_vars_static
+        expressions: ignore
+      register: load_vars_expr_ignore
 
     - assert:
         that:
-          - load_vars_vars_static is success
+          - load_vars_expr_ignore is success
           - test1 == '{' ~ '{ bar }' ~ '}'
-          - test2 == '{' ~ '{ to_be_defined_later }' ~ '}'
+          - test2 == '{' ~ '{ this_will_not_get_evaluated }' ~ '}'
           - bar == 'baz'
 
-    - name: Test load_vars with proper vars file imported dynamically
+    - set_fact:
+        to_be_defined_earlier: something_defined_before
+        bar_2: baz
+
+    - name: Test load_vars with expressions evaluated now
       community.sops.load_vars:
         file: proper-vars-2.sops.yaml
-        static: false
-      # MUST NOT register the result, since it breaks variable registration.
-      # This also does not work for include_vars.
-      # (https://github.com/ansible/ansible/issues/71831)
+        expressions: evaluate-on-load
+      register: load_vars_expr_evaluated_now
 
     - set_fact:
-        to_be_defined_later: something_defined_later
+        to_be_defined_earlier: something_else
 
     - assert:
         that:
+          - load_vars_expr_evaluated_now is success
           - test1_2 == 'baz'
-          - test2_2 == 'something_defined_later'
-          - bar_2 == 'baz'
+          - test2_2 == 'something_defined_before'
+          - test3_2[0] == 'baz'
+          - test4_2.test_4_2_1 == 'bazbaz'
 
-    - name: Redefine to_be_defined_later
-      set_fact:
-        to_be_defined_later: something_defined_even_later
+    - name: Test load_vars with expressions evaluated now (again)
+      community.sops.load_vars:
+        file: proper-vars-2.sops.yaml
+        expressions: evaluate-on-load
+      register: load_vars_expr_evaluated_now_2
 
     - assert:
         that:
-          - test2_2 == 'something_defined_even_later'
+          - load_vars_expr_evaluated_now_2 is success
+          - test2_2 == 'something_else'

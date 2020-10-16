@@ -110,7 +110,7 @@ $ ansible-playbook playbooks/setup-server.yml -i inventory/hosts
 
 ### load_vars action plugin
 
-The `load_vars` action plugin can be used similarly to Ansible's `include_vars`, except that it right now only supports single files.
+The `load_vars` action plugin can be used similarly to Ansible's `include_vars`, except that it right now only supports single files. Also, it does not allow to load proper variables (i.e. "unsafe" Jinja2 expressions which evaluate on usage), but only facts. It does allow to evaluate expressions on load-time though.
 
 Examples:
 
@@ -121,14 +121,12 @@ tasks:
         file: path/to/sops-encrypted-file.sops.yaml
         name: variable_to_store_contents_in
 
-  - name: Load variables from file as proper variables into global namespace
+  - name: Load variables from file into global namespace, and evaluate Jinja2 expressions
     community.sops.load_vars:
         file: path/to/sops-encrypted-file-with-jinja2-expressions.sops.yaml
         # The following allows to use Jinja2 expressions in the encrypted file!
-        # They are evaluated when the corresponding variable is used. This allows
-        # expressions to reference other variables defined in the same file, and
-        # also variables/facts only defined later.
-        static: false
+        # They are evaluated right now, i.e. not later like when loaded with include_vars.
+        expressions: evaluate-on-load
 ```
 
 ### encrypt_sops module

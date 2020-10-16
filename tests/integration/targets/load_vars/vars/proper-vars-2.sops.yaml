@@ -1,13 +1,17 @@
 test1_2: ENC[AES256_GCM,data:iNGUgLK6RdJZQWA=,iv:FEx7YO17wTadHLcppnpElb5G5UIukfcHDatUkPzZ0rU=,tag:bKx9qwKiirzi7/lR0EQTEA==,type:str]
-test2_2: ENC[AES256_GCM,data:XuVX1GgPjLYmrQE4f3dcH59K5w2WAsXyhQ==,iv:JAAtajqwAjwG/LwEFISGnrO0fe+KKULFX5AhvL8/Hws=,tag:xOVpiXcMXe3PiCF4d/YZsQ==,type:str]
-bar_2: ENC[AES256_GCM,data:Uvwe,iv:uzyjGdPSki4QpGtwGKaqht7yPESNHojNq7vY3TGiqvc=,tag:FwG+9yFIkFWf/SItQ+NIZg==,type:str]
+test2_2: ENC[AES256_GCM,data:4rFASWUQQLqJgLnL3KAYIWpBoMGz38pTt4+w,iv:42avbhH4HzHhsCNdiPvZbowKbaWx76c+OYD8iZMELyk=,tag:9GSsbCYDQHX698S68cZe+g==,type:str]
+test3_2:
+- ENC[AES256_GCM,data:nna0AD3fT6ySb7o=,iv:oX4yr3haXMCKvPNvbuzbnY1VeJQtT6svyij5IxkM8U4=,tag:T5C0b67m4Gu5OMFQLua7cw==,type:str]
+- ENC[AES256_GCM,data:iFsZo/M=,iv:Rt0S7vSQqT9eBt74/xLkUeRu91jLaroPs1oU707dqZ0=,tag:PHE2U6vUjOwc+vuERU5M8A==,type:int]
+test4_2:
+    test_4_2_1: ENC[AES256_GCM,data:PdqR2Sj2YI9YgWxrHd+iLszygZnzLA==,iv:rzY3GH7WH1E56vDirZ820R3oP7GTqjh1h/p0blTOBts=,tag:IDYNvBfTm2iklZVAI5Y4dw==,type:str]
 sops:
     kms: []
     gcp_kms: []
     azure_kv: []
     hc_vault: []
-    lastmodified: '2020-09-20T20:29:19Z'
-    mac: ENC[AES256_GCM,data:GMDaz9qxuB9oVJsVrQrUuK8nb9IorwdUFvkHPeanysGWFIvPDylSXK3VLTTVJLFvcSWWaAfLrWXxEE+pPXSEO6z9jB0WQaTEdLQz9rWRYP7KHL6v+Eyid9OYd8xhqAZOJnFO/jesJhvmTAAM3u8dFqqnXw+5tfyTduIs7iPdOoQ=,iv:bF2ukC11B6Oo8MnYWUlWhGxFZ8JJEyeDZSkRi4PY3Tc=,tag:0GRYGtwjwIT9wogdXm2npA==,type:str]
+    lastmodified: '2020-10-07T19:09:46Z'
+    mac: ENC[AES256_GCM,data:ukYXQmbbOnausOseL6dcmBxZrPE5oHRirIebO8IUorFlas3NTUVFJCPJgJBA6cUa8KhFJDzfv2O+49y5h8j4Xu4w+3EuR42YukATVNbqLR1zQCO3N9fythqWWbxeiTlCXIK+Q+7FhC+UrY0FhFIKDc2iQOWdFYDSeBYg9vx1Spg=,iv:ksQOlDfvr4x25s+bbZywsRqVhvfbe2l81tBKzYVUBwI=,tag:mUD6aR6VbtCSF42dZwwnqg==,type:str]
     pgp:
       - created_at: '2020-09-20T20:29:09Z'
         enc: |-
