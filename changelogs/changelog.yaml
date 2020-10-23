@@ -1,0 +1,30 @@
+ancestor: null
+releases:
+  0.1.0:
+    changes:
+      release_summary: 'First release of the `community.sops` collection!
+
+        This release includes multiple plugins: an `action` plugin, a `lookup` plugin
+        and a `vars` plugin.
+
+'
+    fragments:
+    - 0.1.0.yml
+    modules:
+    - description: Load sops-encrypted variables from files, dynamically within a
+        task
+      name: load_vars
+      namespace: ''
+    - description: Encrypt data with sops
+      name: sops_encrypt
+      namespace: ''
+    plugins:
+      lookup:
+      - description: Read sops encrypted file contents
+        name: sops
+        namespace: null
+      vars:
+      - description: Loading sops-encrypted vars files
+        name: sops
+        namespace: null
+    release_date: '2020-10-23'

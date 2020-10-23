@@ -1,3 +1,0 @@
-release_summary: |
-  First release of the `community.sops` collection!
-  This release includes multiple plugins: an `action` plugin, a `lookup` plugin and a `vars` plugin.
