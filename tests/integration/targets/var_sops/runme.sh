@@ -21,8 +21,13 @@ for TEST in $(find . -maxdepth 1 -type d -name 'test-*' | sort); do
         if [ -x "setup.sh" ]; then
             ./setup.sh
         fi
-        ANSIBLE_VARS_ENABLED=host_group_vars,community.sops.sops ansible-playbook playbook.yml -v "$@" 2>&1 | tee out
-        RESULT=${PIPESTATUS[0]}
+        if [ -x "run.sh" ]; then
+            ANSIBLE_VARS_ENABLED=host_group_vars,community.sops.sops ./run.sh "$@" 2>&1 | tee out
+            RESULT=${PIPESTATUS[0]}
+        else
+            ANSIBLE_VARS_ENABLED=host_group_vars,community.sops.sops ansible-playbook playbook.yml -v "$@" 2>&1 | tee out
+            RESULT=${PIPESTATUS[0]}
+        fi
         ./validate.sh "${RESULT}" out
     )
 done
