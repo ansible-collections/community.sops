@@ -69,7 +69,7 @@ See [Lookup Plugins](https://docs.ansible.com/ansible/latest/plugins/lookup.html
 ### vars plugin
 
 Vars plugins only work in ansible >= 2.10 and require explicit enabling.  One
-way to enable the plugin is by adding the following to the default section of
+way to enable the plugin is by adding the following to the `default` section of
 your `ansible.cfg`:
 
 ```
@@ -94,7 +94,9 @@ Here is an example file structure
 │   ├── group_vars/
 │   │   └── all.sops.yml
 │   ├── host_vars/
-│   │   └── server1.sops.yml
+│   │   ├── server1.sops.yml
+│   │   └── server2/
+│   │       └── data.sops.yml
 │   └── hosts
 ├── playbooks/
 │   └── setup-server.yml
@@ -106,6 +108,26 @@ sops vars files would be decrypted and used.
 
 ``` console
 $ ansible-playbook playbooks/setup-server.yml -i inventory/hosts
+```
+
+#### Determine when to load variables
+
+Ansible 2.10 allows to determine [when vars plugins load the data](https://docs.ansible.com/ansible/latest/plugins/vars.html#using-vars-plugins).
+
+To run the sops vars plugin right after importing inventory, you can add the following to `ansible.cfg`:
+
+```
+[community.sops]
+vars_stage = inventory
+```
+
+#### Caching variable files
+
+By default, the sops vars plugin caches decrypted files to avoid having to decrypt them every task. If this is not wanted, it can be explicitly disabled in `ansible.cfg`:
+
+```
+[community.sops]
+vars_cache = false
 ```
 
 ### load_vars action plugin

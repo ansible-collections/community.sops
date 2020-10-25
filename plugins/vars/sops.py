@@ -38,6 +38,29 @@ DOCUMENTATION = '''
           - "Check all of these extensions when looking for 'variable' files which should be YAML or JSON or vaulted versions of these."
           - 'This affects vars_files, include_vars, inventory and vars plugins among others.'
         type: list
+      stage:
+        version_added: 0.2.0
+        ini:
+          - key: vars_stage
+            section: community.sops
+        env:
+          - name: ANSIBLE_VARS_SOPS_PLUGIN_STAGE
+      cache:
+        description:
+          - Whether to cache decrypted files or not.
+          - If the cache is disabled, the files will be decrypted for almost every task. This is very slow!
+          - Only disable caching if you modify the variable files during a playbook run and want the updated
+            result to be available from the next task on.
+        type: bool
+        default: true
+        version_added: 0.2.0
+        ini:
+          - key: vars_cache
+            section: community.sops
+        env:
+          - name: ANSIBLE_VARS_SOPS_PLUGIN_CACHE
+    extends_documentation_fragment:
+        - ansible.builtin.vars_plugin_staging
 '''
 
 import os
@@ -60,13 +83,16 @@ DEFAULT_VALID_EXTENSIONS = [".sops.yaml", ".sops.yml", ".sops.json"]
 
 class VarsModule(BaseVarsPlugin):
 
-    def get_vars(self, loader, path, entities, cache=True):
+    def get_vars(self, loader, path, entities, cache=None):
         ''' parses the inventory file '''
 
         if not isinstance(entities, list):
             entities = [entities]
 
         super(VarsModule, self).get_vars(loader, path, entities)
+
+        if cache is None:
+            cache = self.get_option('cache')
 
         data = {}
         for entity in entities:
