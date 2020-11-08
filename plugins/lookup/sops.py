@@ -67,6 +67,12 @@ DOCUMENTATION = """
                 - json
                 - yaml
                 - dotenv
+        empty_on_not_exist:
+            description:
+                - When set to C(true), will not raise an error when a file cannot be found,
+                  but return an empty string insead.
+            type: bool
+            default: false
     notes:
         - This lookup does not understand 'globbing' - use the fileglob lookup instead.
 """
@@ -120,15 +126,19 @@ class LookupModule(LookupBase):
         use_base64 = self.get_option('base64')
         input_type = self.get_option('input_type')
         output_type = self.get_option('output_type')
+        empty_on_not_exist = self.get_option('empty_on_not_exist')
 
         ret = []
 
         for term in terms:
             display.debug("Sops lookup term: %s" % term)
-            lookupfile = self.find_file_in_search_path(variables, 'files', term)
+            lookupfile = self.find_file_in_search_path(variables, 'files', term, ignore_missing=empty_on_not_exist)
             display.vvvv(u"Sops lookup using %s as file" % lookupfile)
 
             if not lookupfile:
+                if empty_on_not_exist:
+                    ret.append('')
+                    continue
                 raise AnsibleLookupError("could not locate file in lookup: %s" % to_native(term))
 
             try:
