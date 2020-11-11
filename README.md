@@ -14,7 +14,7 @@ The following table shows which versions of sops were tested with which versions
 |---|---|
 |0.1.0|`3.6.1+`|
 |`main` branch|`3.6.1+`|
- 
+
 ## Tested with Ansible
 
 <!-- List the versions of Ansible the collection has been tested with. Must match what is in galaxy.yml. -->
@@ -106,7 +106,7 @@ Here is an example file structure
 You could execute the playbook in this example with the following command. The
 sops vars files would be decrypted and used.
 
-``` console
+```console
 $ ansible-playbook playbooks/setup-server.yml -i inventory/hosts
 ```
 
