@@ -23,6 +23,8 @@ The following table shows which versions of sops were tested with which versions
 - latest 2.9 release
 - latest 2.10 release
 
+We minimally require Ansible 2.9.10. The vars plugin requires ansible-base 2.10 or later.
+
 ## External requirements
 
 <!-- List any external resources the collection depends on, for example minimum versions of an OS, libraries, or utilities. Do not list other Ansible collections here. -->
