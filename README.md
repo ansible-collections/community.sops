@@ -210,7 +210,6 @@ Ansible Collections are required to adhere to [Semantic Versioning](https://semv
 
 - add a role providing sops installation (with version pinning)
 - a full test suite
-- testing on multiple Ansible versions
 
 ## More information
 
