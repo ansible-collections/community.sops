@@ -2,10 +2,10 @@
 - hosts: localhost
   gather_facts: false
   tasks:
-    - name: Make sure group_vars/all.sops.yaml was not loaded
+    - name: Make sure group_vars/all.sops.yaml was loaded
       assert:
         that:
-          - foo is not defined
+          - foo is defined
           - bar is not defined
     - name: Replace group_vars/all.sops.yaml
       copy:
@@ -14,5 +14,5 @@
     - name: Make sure that updated group_vars/all.sops.yaml was not loaded
       assert:
         that:
-          - foo is not defined
+          - foo is defined
           - bar is not defined
