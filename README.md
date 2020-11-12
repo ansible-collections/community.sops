@@ -130,6 +130,8 @@ By default, the sops vars plugin caches decrypted files to avoid having to decry
 vars_cache = false
 ```
 
+Please note that when using vars plugin staging, this setting only has effect if the variables are not only loaded during the `inventory` stage. See the documentation of the `community.sops.sops` vars plugin for more details.
+
 ### load_vars action plugin
 
 The `load_vars` action plugin can be used similarly to Ansible's `include_vars`, except that it right now only supports single files. Also, it does not allow to load proper variables (i.e. "unsafe" Jinja2 expressions which evaluate on usage), but only facts. It does allow to evaluate expressions on load-time though.

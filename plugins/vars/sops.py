@@ -51,6 +51,9 @@ DOCUMENTATION = '''
           - If the cache is disabled, the files will be decrypted for almost every task. This is very slow!
           - Only disable caching if you modify the variable files during a playbook run and want the updated
             result to be available from the next task on.
+          - "Note that setting I(stage) to C(inventory) has the same effect as setting I(cache) to C(true):
+             the variables will be loaded only once (during inventory loading) and the vars plugin will not
+             be called for every task."
         type: bool
         default: true
         version_added: 0.2.0
