@@ -10,7 +10,7 @@ Please [search in the issue list](https://github.com/ansible-collections/communi
 
 ## 🏗 To contribute
 
-1. Fork this repo
+1. Fork this repo (when checking it out, see [here](https://docs.ansible.com/ansible/latest/dev_guide/developing_collections.html#contributing-to-collections) for how to place the checkout correctly)
 1. Create a feature branch
 1. Commit and push your code. To make the process faster, please ensure:
 
@@ -19,6 +19,7 @@ Please [search in the issue list](https://github.com/ansible-collections/communi
 
 Further resources:
 
+- [Ansible Developer guide: developing collections](https://docs.ansible.com/ansible/latest/dev_guide/developing_collections.html)
 - [Ansible Developer guide](https://docs.ansible.com/ansible/latest/dev_guide/index.html)
 
 This repository adheres to the [Ansible Community code of conduct](https://docs.ansible.com/ansible/latest/community/code_of_conduct.html)

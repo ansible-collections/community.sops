@@ -14,7 +14,7 @@ The following table shows which versions of sops were tested with which versions
 |---|---|
 |0.1.0|`3.6.1+`|
 |`main` branch|`3.6.1+`|
- 
+
 ## Tested with Ansible
 
 <!-- List the versions of Ansible the collection has been tested with. Must match what is in galaxy.yml. -->
@@ -106,7 +106,7 @@ Here is an example file structure
 You could execute the playbook in this example with the following command. The
 sops vars files would be decrypted and used.
 
-``` console
+```console
 $ ansible-playbook playbooks/setup-server.yml -i inventory/hosts
 ```
 
@@ -192,6 +192,35 @@ tasks:
                   key4: value5
 ```
 
+## Troubleshooting
+
+### Spurious failures during encryption and decryption with gpg
+
+Sops calls `gpg` with `--use-agent`. When running multiple of these in parallel, for example when loading variables or looking up files for various hosts at once, some of these can randomly fail with messages such as
+```
+Failed to get the data key required to decrypt the SOPS file.
+
+Group 0: FAILED
+  D13xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx: FAILED
+    - | could not decrypt data key with PGP key:
+      | golang.org/x/crypto/openpgp error: Reading PGP message
+      | failed: openpgp: incorrect key; GPG binary error: exit
+      | status 2
+
+  828xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx: FAILED
+    - | could not decrypt data key with PGP key:
+      | golang.org/x/crypto/openpgp error: Reading PGP message
+      | failed: openpgp: incorrect key; GPG binary error: exit
+      | status 2
+
+Recovery failed because no master key was able to decrypt the file. In
+order for SOPS to recover the file, at least one key has to be successful,
+but none were.
+```
+This is a limitation of gpg-agent which can be fixed by adding `auto-expand-secmem` to `~/.gnupg/gpg-agent.conf` ([reference on option](https://www.gnupg.org/documentation/manuals/gnupg/Agent-Options.html#index-ssh_002dfingerprint_002ddigest), [reference on config file](https://www.gnupg.org/documentation/manuals/gnupg/Agent-Configuration.html)).
+
+(See https://github.com/ansible-collections/community.sops/issues/34 and https://dev.gnupg.org/T4146 for more details.)
+
 ## Contributing to this collection
 
 <!--Describe how the community can contribute to your collection. At a minimum, include how and where users can create issues to report problems or request features for this collection.  List contribution requirements, including preferred workflows and necessary testing, so you can benefit from community PRs. If you are following general Ansible contributor guidelines, you can link to - [Ansible Community Guide](https://docs.ansible.com/ansible/latest/community/index.html). -->
@@ -212,7 +241,6 @@ Ansible Collections are required to adhere to [Semantic Versioning](https://semv
 
 - add a role providing sops installation (with version pinning)
 - a full test suite
-- testing on multiple Ansible versions
 
 ## More information
 
