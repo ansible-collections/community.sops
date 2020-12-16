@@ -5,6 +5,21 @@ Community Sops Release Notes
 .. contents:: Topics
 
 
+v0.2.0
+======
+
+Release Summary
+---------------
+
+This release adds features for the lookup and vars plugins.
+
+Minor Changes
+-------------
+
+- sops lookup plugin - add ``empty_on_not_exist`` option which allows to return an empty string instead of an error when the file does not exist (https://github.com/ansible-collections/community.sops/pull/33).
+- sops vars plugin - add option to control caching (https://github.com/ansible-collections/community.sops/pull/32).
+- sops vars plugin - add option to determine when vars are loaded (https://github.com/ansible-collections/community.sops/pull/32).
+
 v0.1.0
 ======
 

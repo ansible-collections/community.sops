@@ -1,3 +1,0 @@
-minor_changes:
-- "sops vars plugin - add option to determine when vars are loaded (https://github.com/ansible-collections/community.sops/pull/32)."
-- "sops vars plugin - add option to control caching (https://github.com/ansible-collections/community.sops/pull/32)."

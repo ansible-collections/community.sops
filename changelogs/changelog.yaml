@@ -7,7 +7,7 @@ releases:
         This release includes multiple plugins: an `action` plugin, a `lookup` plugin
         and a `vars` plugin.
 
-'
+        '
     fragments:
     - 0.1.0.yml
     modules:
@@ -28,3 +28,16 @@ releases:
         name: sops
         namespace: null
     release_date: '2020-10-23'
+  0.2.0:
+    changes:
+      minor_changes:
+      - sops lookup plugin - add ``empty_on_not_exist`` option which allows to return
+        an empty string instead of an error when the file does not exist (https://github.com/ansible-collections/community.sops/pull/33).
+      - sops vars plugin - add option to control caching (https://github.com/ansible-collections/community.sops/pull/32).
+      - sops vars plugin - add option to determine when vars are loaded (https://github.com/ansible-collections/community.sops/pull/32).
+      release_summary: This release adds features for the lookup and vars plugins.
+    fragments:
+    - 0.2.0.yml
+    - 32-vars-stage.yml
+    - 33-lookup-empty_on_not_exist.yml
+    release_date: '2020-12-16'

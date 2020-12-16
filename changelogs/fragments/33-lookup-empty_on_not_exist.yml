@@ -1,2 +1,0 @@
-minor_changes:
-- "sops lookup plugin - add ``empty_on_not_exist`` option which allows to return an empty string instead of an error when the file does not exist (https://github.com/ansible-collections/community.sops/pull/33)."
