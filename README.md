@@ -52,11 +52,11 @@ Examples:
 ```
 tasks:
   - name: Output secrets to screen (BAD IDEA!)
-    debug:
+    ansible.builtin.debug:
         msg: "Content: {{ lookup('community.sops.sops', '/path/to/sops-encrypted-file.enc.yaml') }}"
 
   - name: Add SSH private key
-    copy:
+    ansible.builtin.copy:
         content: "{{ lookup('community.sops.sops', user + '-id_rsa') }}"
         dest: /home/{{ user }}/.ssh/id_rsa
         owner: "{{ user }}"
