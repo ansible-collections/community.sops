@@ -20,8 +20,8 @@ The following table shows which versions of sops were tested with which versions
 <!-- List the versions of Ansible the collection has been tested with. Must match what is in galaxy.yml. -->
 
 - `devel`
-- latest 2.9 release
-- latest 2.10 release
+- latest Ansible 2.9 release
+- latest ansible-base 2.10 release
 
 We minimally require Ansible 2.9.10. The vars plugin requires ansible-base 2.10 or later.
 
