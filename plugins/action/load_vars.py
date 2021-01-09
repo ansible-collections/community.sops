@@ -56,7 +56,6 @@ class ActionModule(ActionModuleBase):
                 expressions=dict(type='str', default='ignore', choices=['ignore', 'evaluate-on-load']),
             ),
         )
-        argument_spec = get_privatekey_argument_spec()
         argument_spec.argument_spec.update(get_sops_argument_spec())
         return argument_spec, {}
 
@@ -81,8 +80,8 @@ class ActionModule(ActionModuleBase):
         if expressions == 'evaluate-on-load':
             value = self._evaluate(value)
 
-        result['ansible_included_var_files'] = files
-        result['ansible_facts'] = value
-        result['_ansible_no_log'] = True
-
-        module.exit_json(**result)
+        module.exit_json(
+            ansible_included_var_files=files,
+            ansible_facts=value,
+            _ansible_no_log=True,
+        )

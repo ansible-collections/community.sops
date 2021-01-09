@@ -6,6 +6,7 @@ __metaclass__ = type
 
 
 import abc
+import os
 
 from ansible.module_utils import six
 from ansible.module_utils._text import to_text, to_native
@@ -207,6 +208,7 @@ def get_sops_argument_spec(add_encrypt_specific=False):
     argument_spec = {
         'sops_binary': {
             'type': 'path',
+            'default': 'sops',
         },
         'aws_profile': {
             'type': 'str',
