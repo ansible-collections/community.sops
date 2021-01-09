@@ -13,8 +13,8 @@ options:
     sops_binary:
         description:
             - Path to the sops binary.
+            - By default uses C(sops).
         type: path
-        default: sops
         version_added: 0.3.0
     aws_profile:
         description:

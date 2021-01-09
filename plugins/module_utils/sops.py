@@ -208,7 +208,6 @@ def get_sops_argument_spec(add_encrypt_specific=False):
     argument_spec = {
         'sops_binary': {
             'type': 'path',
-            'default': 'sops',
         },
         'aws_profile': {
             'type': 'str',
