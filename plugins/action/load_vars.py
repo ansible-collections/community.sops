@@ -24,7 +24,11 @@ class ActionModule(ActionBase):
     _VALID_ARGS = frozenset(['file', 'name', 'expressions'])
 
     def _load(self, filename):
-        output = Sops.decrypt(filename, display=display)
+        def get_option_value(argument_name):
+            # TODO
+            return None
+
+        output = Sops.decrypt(filename, display=display, get_option_value=get_option_value)
 
         data = self._loader.load(output, file_name=filename, show_content=False)
         if not data:
