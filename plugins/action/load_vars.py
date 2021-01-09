@@ -14,19 +14,18 @@ from ansible.module_utils._text import to_native, to_text
 from ansible.plugins.action import ActionBase
 from ansible.utils.display import Display
 
-from ansible_collections.community.sops.plugins.module_utils.sops import Sops, SopsError
+from ansible_collections.community.sops.plugins.module_utils.sops import Sops, SopsError, get_sops_argument_spec
+
+from ansible_collections.community.sops.plugins.plugin_utils.action_module import ActionModuleBase, ArgumentSpec
 
 display = Display()
 
 
-class ActionModule(ActionBase):
+class ActionModule(ActionModuleBase):
 
-    _VALID_ARGS = frozenset(['file', 'name', 'expressions'])
-
-    def _load(self, filename):
+    def _load(self, filename, module):
         def get_option_value(argument_name):
-            # TODO
-            return None
+            return module.params.get(argument_name)
 
         output = Sops.decrypt(filename, display=display, get_option_value=get_option_value)
 
@@ -38,26 +37,6 @@ class ActionModule(ActionBase):
             raise Exception('{0} must be stored as a dictionary/hash'.format(to_native(filename)))
         return data
 
-    def _get_option(self, name, type_name, default=None, accept_none=False):
-        value = self._task.args.get(name)
-        if value is None:
-            if accept_none:
-                return value
-            elif default is not None:
-                value = default
-            else:
-                raise Exception("Option %s must be specified" % name)
-        checkers = {
-            'str': lambda v: check_type_str(v, allow_conversion=False),
-            'bool': check_type_bool,
-        }
-        try:
-            return checkers[type_name](value)
-        except TypeError as e:
-            msg = "Value for option %s" % name
-            msg += " is of type %s and we were unable to convert to %s: %s" % (type(value), type_name, to_native(e))
-            raise Exception(msg)
-
     def _evaluate(self, value):
         if isinstance(value, string_types):
             # must come *before* Sequence, as strings are also instances of Sequence
@@ -68,43 +47,37 @@ class ActionModule(ActionBase):
             return dict((k, self._evaluate(v)) for k, v in iteritems(value))
         return value
 
-    def run(self, tmp=None, task_vars=None):
-        """ Load yml files recursively from a directory.
-        """
-        del tmp  # tmp no longer has any effect
+    @staticmethod
+    def setup_module():
+        argument_spec = ArgumentSpec(
+            argument_spec=dict(
+                file=dict(type='path'),
+                name=dict(type='str'),
+                expressions=dict(type='str', default='ignore', choices=['ignore', 'evaluate-on-load']),
+            ),
+        )
+        argument_spec = get_privatekey_argument_spec()
+        argument_spec.argument_spec.update(get_sops_argument_spec())
+        return argument_spec, {}
 
-        result = super(ActionModule, self).run(task_vars=task_vars)
-
-        try:
-            file = to_text(self._get_option('file', 'str'))
-            name = self._get_option('name', 'str', accept_none=True)
-            if name is not None:
-                name = to_text(name)
-            expressions = self._get_option('expressions', 'str', default='ignore')
-            if expressions not in ('ignore', 'evaluate-on-load'):
-                raise Exception('"expressions" must be one of "ignore" and "evaluate-on-load"')
-        except Exception as e:
-            result['failed'] = True
-            result['message'] = to_text(e)
-            return result
-
+    def run_module(self, module):
         data = dict()
         files = []
         try:
-            filename = self._find_needle('vars', file)
-            data.update(self._load(filename))
+            filename = self._find_needle('vars', module.params['file'])
+            data.update(self._load(filename, module.params))
             files.append(filename)
         except Exception as e:
-            result['failed'] = True
-            result['message'] = to_native(e)
-            return result
+            module.fail_json(msg=to_native(e))
 
+        name = module.params['name']
         if name is None:
             value = data
         else:
             value = dict()
             value[name] = data
 
+        expressions = module.params['expressions']
         if expressions == 'evaluate-on-load':
             value = self._evaluate(value)
 
@@ -112,4 +85,4 @@ class ActionModule(ActionBase):
         result['ansible_facts'] = value
         result['_ansible_no_log'] = True
 
-        return result
+        module.exit_json(**result)

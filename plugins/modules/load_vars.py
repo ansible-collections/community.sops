@@ -42,8 +42,8 @@ options:
     choices:
         - ignore
         - evaluate-on-load
-#extends_documentation_fragment:
-#  - community.sops.sops
+extends_documentation_fragment:
+  - community.sops.sops
 seealso:
   - module: ansible.builtin.set_fact
   - module: ansible.builtin.include_vars
