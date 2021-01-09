@@ -14,6 +14,7 @@ options:
         description:
             - Path to the sops binary.
         type: path
+        default: sops
     aws_profile:
         description:
             - The AWS profile to use for requests to AWS.
