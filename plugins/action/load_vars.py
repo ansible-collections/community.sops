@@ -51,7 +51,7 @@ class ActionModule(ActionModuleBase):
     def setup_module():
         argument_spec = ArgumentSpec(
             argument_spec=dict(
-                file=dict(type='path'),
+                file=dict(type='path', required=True),
                 name=dict(type='str'),
                 expressions=dict(type='str', default='ignore', choices=['ignore', 'evaluate-on-load']),
             ),
@@ -64,7 +64,7 @@ class ActionModule(ActionModuleBase):
         files = []
         try:
             filename = self._find_needle('vars', module.params['file'])
-            data.update(self._load(filename, module.params))
+            data.update(self._load(filename, module))
             files.append(filename)
         except Exception as e:
             module.fail_json(msg=to_native(e))
