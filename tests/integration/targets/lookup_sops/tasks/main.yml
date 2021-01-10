@@ -116,3 +116,15 @@
           "a: b\nc: d"
         test_str_binary_data: This is binary data.
         test_str_abcd: a is b, and c is d
+
+    - name: Test fake sops binary
+      set_fact:
+        fake_sops_output: "{{ lookup('community.sops.sops', 'simple.sops.yaml', sops_binary=role_path ~ '/files/fake-sops.sh', enable_local_keyservice=True, aws_access_key_id='xxx') }}"
+        fake_sops_output_2: "{{ lookup('community.sops.sops', 'simple.sops.yaml', sops_binary=role_path ~ '/files/fake-sops-val.sh', config_path='/path/to/asdf', aws_secret_access_key='yyy') }}"
+        fake_sops_output_3: "{{ lookup('community.sops.sops', 'simple.sops.yaml', sops_binary=role_path ~ '/files/fake-sops-rep.sh', keyservice=['a', 'b'], aws_session_token='zzz') }}"
+
+    - assert:
+        that:
+          - fake_sops_output == 'fake sops output'
+          - fake_sops_output_2 == 'fake sops output 2'
+          - fake_sops_output_3 == 'fake sops output 3'

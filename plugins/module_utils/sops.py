@@ -48,14 +48,14 @@ SOPS_ERROR_CODES = {
 
 def _create_single_arg(argument_name):
     def f(value, arguments, env):
-        arguments.extends([argument_name, to_native(value)])
+        arguments.extend([argument_name, to_native(value)])
 
     return f
 
 
 def _create_comma_separated(argument_name):
     def f(value, arguments, env):
-        arguments.extends([argument_name, ','.join(value)])
+        arguments.extend([argument_name, ','.join([to_native(v) for v in value])])
 
     return f
 
@@ -63,7 +63,7 @@ def _create_comma_separated(argument_name):
 def _create_repeated(argument_name):
     def f(value, arguments, env):
         for v in value:
-            arguments.extends([argument_name, v])
+            arguments.extend([argument_name, to_native(v)])
 
     return f
 
