@@ -192,7 +192,10 @@ def main():
             changed = True
         else:
             # Change detection: check if encrypted data equals new data
-            decrypted_content = Sops.decrypt(path, decode_output=False, output_type=get_data_type(module), rstrip=False, get_option_value=get_option_value, module=module)
+            decrypted_content = Sops.decrypt(
+                path, decode_output=False, output_type=get_data_type(module), rstrip=False,
+                get_option_value=get_option_value, module=module,
+            )
             if not compare_encoded_content(module, binary_data, decrypted_content):
                 changed = True
 
@@ -201,7 +204,10 @@ def main():
             output_type = None
             if path.endswith('.json'):
                 output_type = 'json'
-            data = Sops.encrypt(data=input_data, cwd=directory, input_type=input_type, output_type=output_type, get_option_value=get_option_value, module=module)
+            data = Sops.encrypt(
+                data=input_data, cwd=directory, input_type=input_type, output_type=output_type,
+                get_option_value=get_option_value, module=module,
+            )
             write_file(module, data)
     except SopsError as e:
         module.fail_json(msg=to_text(e))
