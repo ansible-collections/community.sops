@@ -11,7 +11,7 @@ import os
 from ansible.module_utils import six
 from ansible.module_utils._text import to_text, to_native
 
-# Since this is used both by plugins and modules, we cannot simply use AnsibleModule.run_command()
+# Since this is used both by plugins and modules, we need subprocess in case the `module` parameter is not used
 from subprocess import Popen, PIPE
 
 
@@ -143,7 +143,7 @@ class Sops():
         return cmd
 
     @staticmethod
-    def decrypt(encrypted_file, display=None, decode_output=True, rstrip=True, input_type=None, output_type=None, get_option_value=None):
+    def decrypt(encrypted_file, display=None, decode_output=True, rstrip=True, input_type=None, output_type=None, get_option_value=None, module=None):
         # Run sops directly, python module is deprecated
         command = [Sops.get_sops_binary(get_option_value)]
         env = os.environ.copy()
@@ -154,9 +154,12 @@ class Sops():
             command.extend(["--output-type", output_type])
         command.extend(["--decrypt", encrypted_file])
 
-        process = Popen(command, stdout=PIPE, stderr=PIPE, env=env)
-        (output, err) = process.communicate()
-        exit_code = process.returncode
+        if module:
+            exit_code, output, err = module.run_command(command, environ_update=env, encoding=None)
+        else:
+            process = Popen(command, stdout=PIPE, stderr=PIPE, env=env)
+            (output, err) = process.communicate()
+            exit_code = process.returncode
 
         if decode_output:
             # output is binary, we want UTF-8 string
@@ -177,7 +180,7 @@ class Sops():
         return output
 
     @staticmethod
-    def encrypt(data, display=None, cwd=None, input_type=None, output_type=None, get_option_value=None):
+    def encrypt(data, display=None, cwd=None, input_type=None, output_type=None, get_option_value=None, module=None):
         # Run sops directly, python module is deprecated
         command = [Sops.get_sops_binary(get_option_value)]
         env = os.environ.copy()
@@ -189,9 +192,12 @@ class Sops():
             command.extend(["--output-type", output_type])
         command.extend(["--encrypt", "/dev/stdin"])
 
-        process = Popen(command, stdin=PIPE, stdout=PIPE, stderr=PIPE, cwd=cwd, env=env)
-        (output, err) = process.communicate(input=data)
-        exit_code = process.returncode
+        if module:
+            exit_code, output, err = module.run_command(command, data=data, binary_data=True, cwd=cwd, environ_update=env, encoding=None)
+        else:
+            process = Popen(command, stdin=PIPE, stdout=PIPE, stderr=PIPE, cwd=cwd, env=env)
+            (output, err) = process.communicate(input=data)
+            exit_code = process.returncode
 
         # sops logs always to stderr, as stdout is used for
         # file content
