@@ -5,13 +5,29 @@ Community Sops Release Notes
 .. contents:: Topics
 
 
+v1.0.2
+======
+
+Release Summary
+---------------
+
+Fix of 1.0.1 release which had no changelog entry.
+
+v1.0.1
+======
+
+Release Summary
+---------------
+
+Re-release of 1.0.0 to counteract error during release.
+
 v1.0.0
 ======
 
 Release Summary
 ---------------
 
-First stable release. This release is expected to be included in Ansible 3.0.0.
+First stable release. This release is expected to be included in Ansible 2.11.
 
 Minor Changes
 -------------
