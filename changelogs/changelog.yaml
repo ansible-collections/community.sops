@@ -58,3 +58,7 @@ releases:
     - 1.0.0.yml
     - 47-sops-options.yml
     release_date: '2021-01-14'
+  1.0.1:
+    changes:
+      release_summary: Re-release of 1.0.0 to counteract error during release.
+    release_date: '2021-01-14'
