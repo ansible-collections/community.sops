@@ -244,6 +244,10 @@ Ansible Collections are required to adhere to [Semantic Versioning](https://semv
 - add a role providing sops installation (with version pinning)
 - a full test suite
 
+## Code of Conduct
+
+This repository adheres to the [Ansible Community code of conduct](https://docs.ansible.com/ansible/latest/community/code_of_conduct.html)
+
 ## More information
 
 <!-- List out where the user can find additional information, such as working group meeting times, slack/IRC channels, or documentation for the product this collection automates. At a minimum, link to: -->
@@ -251,7 +255,6 @@ Ansible Collections are required to adhere to [Semantic Versioning](https://semv
 - [Ansible Collection overview](https://github.com/ansible-collections/overview)
 - [Ansible User guide](https://docs.ansible.com/ansible/latest/user_guide/index.html)
 - [Ansible Developer guide](https://docs.ansible.com/ansible/latest/dev_guide/index.html)
-- [Ansible Community code of conduct](https://docs.ansible.com/ansible/latest/community/code_of_conduct.html)
 
 ## Licensing
 
