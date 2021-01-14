@@ -22,7 +22,7 @@ from __future__ import (absolute_import, division, print_function)
 __metaclass__ = type
 
 DOCUMENTATION = """
-    lookup: sops
+    name: sops
     author: Edoardo Tenani (@endorama) <e.tenani@arduino.cc>
     short_description: Read sops encrypted file contents
     version_added: '0.1.0'
