@@ -51,10 +51,12 @@ options:
       - Exactly one of I(content_text), I(content_binary), I(content_json) and I(content_yaml) must be specified.
     type: dict
 extends_documentation_fragment:
-- ansible.builtin.files
+  - ansible.builtin.files
+  - community.sops.sops
+  - community.sops.sops.encrypt_specific
 seealso:
-- ref: community.sops.sops lookup <ansible_collections.community.sops.sops_lookup>
-  description: The sops lookup can be used decrypt sops-encrypted files.
+  - ref: community.sops.sops lookup <ansible_collections.community.sops.sops_lookup>
+    description: The sops lookup can be used decrypt sops-encrypted files.
 '''
 
 EXAMPLES = r'''
@@ -86,7 +88,7 @@ from ansible.module_utils.basic import AnsibleModule, missing_required_lib
 from ansible.module_utils._text import to_text
 
 from ansible_collections.community.sops.plugins.module_utils.io import write_file
-from ansible_collections.community.sops.plugins.module_utils.sops import Sops, SopsError
+from ansible_collections.community.sops.plugins.module_utils.sops import Sops, SopsError, get_sops_argument_spec
 
 try:
     import yaml
@@ -152,6 +154,7 @@ def main():
         content_json=dict(type='dict', no_log=True),
         content_yaml=dict(type='dict', no_log=True),
     )
+    argument_spec.update(get_sops_argument_spec(add_encrypt_specific=True))
     module = AnsibleModule(
         argument_spec=argument_spec,
         mutually_exclusive=[
@@ -180,13 +183,19 @@ def main():
     directory = os.path.dirname(path) or None
     changed = False
 
+    def get_option_value(argument_name):
+        return module.params.get(argument_name)
+
     try:
         if module.params['force'] or not os.path.exists(path):
             # Simply encrypt
             changed = True
         else:
             # Change detection: check if encrypted data equals new data
-            decrypted_content = Sops.decrypt(path, decode_output=False, output_type=get_data_type(module), rstrip=False)
+            decrypted_content = Sops.decrypt(
+                path, decode_output=False, output_type=get_data_type(module), rstrip=False,
+                get_option_value=get_option_value, module=module,
+            )
             if not compare_encoded_content(module, binary_data, decrypted_content):
                 changed = True
 
@@ -195,7 +204,10 @@ def main():
             output_type = None
             if path.endswith('.json'):
                 output_type = 'json'
-            data = Sops.encrypt(data=input_data, cwd=directory, input_type=input_type, output_type=output_type)
+            data = Sops.encrypt(
+                data=input_data, cwd=directory, input_type=input_type, output_type=output_type,
+                get_option_value=get_option_value, module=module,
+            )
             write_file(module, data)
     except SopsError as e:
         module.fail_json(msg=to_text(e))

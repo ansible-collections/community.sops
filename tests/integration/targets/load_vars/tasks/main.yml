@@ -9,19 +9,7 @@
     - assert:
         that:
           - load_vars_missing_option is failed
-          - '"Option file must be specified" in load_vars_missing_option.message'
-
-    - name: Test load_vars with wrong type for option
-      community.sops.load_vars:
-        file:
-          a: b
-      ignore_errors: yes
-      register: load_vars_wrong_type
-
-    - assert:
-        that:
-          - load_vars_wrong_type is failed
-          - '"is not a string and conversion is not allowed" in load_vars_wrong_type.message'
+          - '"missing required arguments: file" in load_vars_missing_option.msg'
 
     - name: Test load_vars with wrong choice value
       community.sops.load_vars:
@@ -33,7 +21,7 @@
     - assert:
         that:
           - load_vars_invalid_value is failed
-          - '"\"expressions\" must be one of " in load_vars_invalid_value.message'
+          - '"value of expressions must be one of: ignore, evaluate-on-load, got: invalid value" in load_vars_invalid_value.msg'
 
     - name: Test load_vars with missing file
       community.sops.load_vars:
@@ -45,7 +33,7 @@
         that:
           - load_vars_missing_file is failed
           - |
-            "Could not find or access 'non-existent.sops.yaml'\n" in load_vars_missing_file.message
+            "Could not find or access 'non-existent.sops.yaml'\n" in load_vars_missing_file.msg
 
     - name: Test load_vars with non-sops file
       community.sops.load_vars:
@@ -56,7 +44,7 @@
     - assert:
         that:
           - load_vars_wrong_file is failed
-          - "'sops metadata not found' in load_vars_wrong_file.message"
+          - "'sops metadata not found' in load_vars_wrong_file.msg"
 
     - name: Test load_vars with simple file into variable
       community.sops.load_vars:

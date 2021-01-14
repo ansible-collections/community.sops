@@ -73,6 +73,9 @@ DOCUMENTATION = """
                   but return an empty string insead.
             type: bool
             default: false
+    extends_documentation_fragment:
+        - community.sops.sops
+        - community.sops.sops.ansible_variables
     notes:
         - This lookup does not understand 'globbing' - use the fileglob lookup instead.
 """
@@ -130,6 +133,9 @@ class LookupModule(LookupBase):
 
         ret = []
 
+        def get_option_value(argument_name):
+            return self.get_option(argument_name)
+
         for term in terms:
             display.debug("Sops lookup term: %s" % term)
             lookupfile = self.find_file_in_search_path(variables, 'files', term, ignore_missing=empty_on_not_exist)
@@ -144,7 +150,7 @@ class LookupModule(LookupBase):
             try:
                 output = Sops.decrypt(
                     lookupfile, display=display, rstrip=rstrip, decode_output=not use_base64,
-                    input_type=input_type, output_type=output_type)
+                    input_type=input_type, output_type=output_type, get_option_value=get_option_value)
             except SopsError as e:
                 raise AnsibleLookupError(to_native(e))
 

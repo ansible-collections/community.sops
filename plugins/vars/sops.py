@@ -64,6 +64,8 @@ DOCUMENTATION = '''
           - name: ANSIBLE_VARS_SOPS_PLUGIN_CACHE
     extends_documentation_fragment:
         - ansible.builtin.vars_plugin_staging
+        - community.sops.sops
+        - community.sops.sops.ansible_variables
 '''
 
 import os
@@ -93,6 +95,9 @@ class VarsModule(BaseVarsPlugin):
             entities = [entities]
 
         super(VarsModule, self).get_vars(loader, path, entities)
+
+        def get_option_value(argument_name):
+            return self.get_option(argument_name)
 
         if cache is None:
             cache = self.get_option('cache')
@@ -138,7 +143,7 @@ class VarsModule(BaseVarsPlugin):
                         if cache and found in DECRYPTED:
                             file_content = DECRYPTED[found]
                         else:
-                            file_content = Sops.decrypt(found, display=display)
+                            file_content = Sops.decrypt(found, display=display, get_option_value=get_option_value)
                             DECRYPTED[found] = file_content
                         new_data = loader.load(file_content)
                         if new_data:  # ignore empty files

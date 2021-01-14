@@ -5,8 +5,13 @@ from __future__ import absolute_import, division, print_function
 __metaclass__ = type
 
 
+import abc
+import os
+
+from ansible.module_utils import six
 from ansible.module_utils._text import to_text, to_native
 
+# Since this is used both by plugins and modules, we need subprocess in case the `module` parameter is not used
 from subprocess import Popen, PIPE
 
 
@@ -41,6 +46,69 @@ SOPS_ERROR_CODES = {
 }
 
 
+def _create_single_arg(argument_name):
+    def f(value, arguments, env):
+        arguments.extend([argument_name, to_native(value)])
+
+    return f
+
+
+def _create_comma_separated(argument_name):
+    def f(value, arguments, env):
+        arguments.extend([argument_name, ','.join([to_native(v) for v in value])])
+
+    return f
+
+
+def _create_repeated(argument_name):
+    def f(value, arguments, env):
+        for v in value:
+            arguments.extend([argument_name, to_native(v)])
+
+    return f
+
+
+def _create_boolean(argument_name):
+    def f(value, arguments, env):
+        if value:
+            arguments.append(argument_name)
+
+    return f
+
+
+def _create_env_variable(argument_name):
+    def f(value, arguments, env):
+        env[argument_name] = value
+
+    return f
+
+
+GENERAL_OPTIONS = {
+    'aws_profile': _create_single_arg('--aws-profile'),
+    'aws_access_key_id': _create_env_variable('AWS_ACCESS_KEY_ID'),
+    'aws_secret_access_key': _create_env_variable('AWS_SECRET_ACCESS_KEY'),
+    'aws_session_token': _create_env_variable('AWS_SESSION_TOKEN'),
+    'config_path': _create_single_arg('--config'),
+    'enable_local_keyservice': _create_boolean('--enable-local-keyservice'),
+    'keyservice': _create_repeated('--keyservice'),
+}
+
+
+ENCRYPT_OPTIONS = {
+    'kms': _create_comma_separated('--kms'),
+    'gcp_kms': _create_comma_separated('--gcp-kms'),
+    'azure_kv': _create_comma_separated('--azure-kv'),
+    'hc_vault_transit': _create_comma_separated('--hc-vault-transit'),
+    'pgp': _create_comma_separated('--pgp'),
+    'unencrypted_suffix': _create_single_arg('--unencrypted-suffix'),
+    'encrypted_suffix': _create_single_arg('--encrypted-suffix'),
+    'unencrypted_regex': _create_single_arg('--unencrypted-regex'),
+    'encrypted_regex': _create_single_arg('--encrypted-regex'),
+    'encryption_context': _create_comma_separated('--encryption-context'),
+    'shamir_secret_sharing_threshold': _create_single_arg('--shamir-secret-sharing-threshold'),
+}
+
+
 class SopsError(Exception):
     ''' Extend Exception class with sops specific informations '''
 
@@ -59,17 +127,39 @@ class Sops():
     ''' Utility class to perform sops CLI actions '''
 
     @staticmethod
-    def decrypt(encrypted_file, display=None, decode_output=True, rstrip=True, input_type=None, output_type=None):
+    def _add_options(command, env, get_option_value, options):
+        if get_option_value is None:
+            return
+        for option, f in options.items():
+            v = get_option_value(option)
+            if v is not None:
+                f(v, command, env)
+
+    @staticmethod
+    def get_sops_binary(get_option_value):
+        cmd = get_option_value('sops_binary') if get_option_value else None
+        if cmd is None:
+            cmd = 'sops'
+        return cmd
+
+    @staticmethod
+    def decrypt(encrypted_file, display=None, decode_output=True, rstrip=True, input_type=None, output_type=None, get_option_value=None, module=None):
         # Run sops directly, python module is deprecated
-        command = ["sops"]
+        command = [Sops.get_sops_binary(get_option_value)]
+        env = os.environ.copy()
+        Sops._add_options(command, env, get_option_value, GENERAL_OPTIONS)
         if input_type is not None:
             command.extend(["--input-type", input_type])
         if output_type is not None:
             command.extend(["--output-type", output_type])
         command.extend(["--decrypt", encrypted_file])
-        process = Popen(command, stdout=PIPE, stderr=PIPE)
-        (output, err) = process.communicate()
-        exit_code = process.returncode
+
+        if module:
+            exit_code, output, err = module.run_command(command, environ_update=env, encoding=None)
+        else:
+            process = Popen(command, stdout=PIPE, stderr=PIPE, env=env)
+            (output, err) = process.communicate()
+            exit_code = process.returncode
 
         if decode_output:
             # output is binary, we want UTF-8 string
@@ -90,17 +180,24 @@ class Sops():
         return output
 
     @staticmethod
-    def encrypt(data, display=None, cwd=None, input_type=None, output_type=None):
+    def encrypt(data, display=None, cwd=None, input_type=None, output_type=None, get_option_value=None, module=None):
         # Run sops directly, python module is deprecated
-        command = ["sops"]
+        command = [Sops.get_sops_binary(get_option_value)]
+        env = os.environ.copy()
+        Sops._add_options(command, env, get_option_value, GENERAL_OPTIONS)
+        Sops._add_options(command, env, get_option_value, ENCRYPT_OPTIONS)
         if input_type is not None:
             command.extend(["--input-type", input_type])
         if output_type is not None:
             command.extend(["--output-type", output_type])
         command.extend(["--encrypt", "/dev/stdin"])
-        process = Popen(command, stdin=PIPE, stdout=PIPE, stderr=PIPE, cwd=cwd)
-        (output, err) = process.communicate(input=data)
-        exit_code = process.returncode
+
+        if module:
+            exit_code, output, err = module.run_command(command, data=data, binary_data=True, cwd=cwd, environ_update=env, encoding=None)
+        else:
+            process = Popen(command, stdin=PIPE, stdout=PIPE, stderr=PIPE, cwd=cwd, env=env)
+            (output, err) = process.communicate(input=data)
+            exit_code = process.returncode
 
         # sops logs always to stderr, as stdout is used for
         # file content
@@ -111,3 +208,77 @@ class Sops():
             raise SopsError('to stdout', exit_code, err, decryption=False)
 
         return output
+
+
+def get_sops_argument_spec(add_encrypt_specific=False):
+    argument_spec = {
+        'sops_binary': {
+            'type': 'path',
+        },
+        'aws_profile': {
+            'type': 'str',
+        },
+        'aws_access_key_id': {
+            'type': 'str',
+        },
+        'aws_secret_access_key': {
+            'type': 'str',
+        },
+        'aws_session_token': {
+            'type': 'str',
+        },
+        'config_path': {
+            'type': 'path',
+        },
+        'enable_local_keyservice': {
+            'type': 'bool',
+            'default': False,
+        },
+        'keyservice': {
+            'type': 'list',
+            'elements': 'str',
+        },
+    }
+    if add_encrypt_specific:
+        argument_spec.update({
+            'kms': {
+                'type': 'list',
+                'elements': 'str',
+            },
+            'gcp_kms': {
+                'type': 'list',
+                'elements': 'str',
+            },
+            'azure_kv': {
+                'type': 'list',
+                'elements': 'str',
+            },
+            'hc_vault_transit': {
+                'type': 'list',
+                'elements': 'str',
+            },
+            'pgp': {
+                'type': 'list',
+                'elements': 'str',
+            },
+            'unencrypted_suffix': {
+                'type': 'str',
+            },
+            'encrypted_suffix': {
+                'type': 'str',
+            },
+            'unencrypted_regex': {
+                'type': 'str',
+            },
+            'encrypted_regex': {
+                'type': 'str',
+            },
+            'encryption_context': {
+                'type': 'list',
+                'elements': 'str',
+            },
+            'shamir_secret_sharing_threshold': {
+                'type': 'int',
+            },
+        })
+    return argument_spec

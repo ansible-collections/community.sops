@@ -42,11 +42,13 @@ options:
     choices:
         - ignore
         - evaluate-on-load
+extends_documentation_fragment:
+  - community.sops.sops
 seealso:
-- module: ansible.builtin.set_fact
-- module: ansible.builtin.include_vars
-- ref: playbooks_delegation
-  description: More information related to task delegation.
+  - module: ansible.builtin.set_fact
+  - module: ansible.builtin.include_vars
+  - ref: playbooks_delegation
+    description: More information related to task delegation.
 '''
 
 EXAMPLES = r'''
