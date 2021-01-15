@@ -7,7 +7,7 @@ releases:
         This release includes multiple plugins: an `action` plugin, a `lookup` plugin
         and a `vars` plugin.
 
-'
+        '
     fragments:
     - 0.1.0.yml
     modules:
@@ -57,4 +57,14 @@ releases:
     fragments:
     - 1.0.0.yml
     - 47-sops-options.yml
+    release_date: '2021-01-14'
+  1.0.1:
+    changes:
+      release_summary: Re-release of 1.0.0 to counteract error during release.
+    release_date: '2021-01-14'
+  1.0.2:
+    changes:
+      release_summary: Fix of 1.0.1 release which had no changelog entry.
+    fragments:
+    - 1.0.2.yml
     release_date: '2021-01-14'
