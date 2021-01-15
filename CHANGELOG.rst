@@ -27,7 +27,7 @@ v1.0.0
 Release Summary
 ---------------
 
-First stable release. This release is expected to be included in Ansible 2.11.
+First stable release. This release is expected to be included in Ansible 3.0.0.
 
 Minor Changes
 -------------

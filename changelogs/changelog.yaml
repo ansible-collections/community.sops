@@ -53,7 +53,7 @@ releases:
         ``unencrypted_regex``, ``encrypted_regex``, ``encryption_context``, and ``shamir_secret_sharing_threshold``
         to sops (https://github.com/ansible-collections/community.sops/pull/47).
       release_summary: First stable release. This release is expected to be included
-        in Ansible 2.11.
+        in Ansible 3.0.0.
     fragments:
     - 1.0.0.yml
     - 47-sops-options.yml
