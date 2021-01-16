@@ -13,6 +13,7 @@ The following table shows which versions of sops were tested with which versions
 |`community.sops` version|`mozilla/sops` version|
 |---|---|
 |0.1.0|`3.6.1+`|
+|1.0.2|`3.6.1+`|
 |`main` branch|`3.6.1+`|
 
 ## Tested with Ansible
