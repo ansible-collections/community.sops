@@ -69,29 +69,29 @@ options:
     ANSIBLE_VARIABLES = r'''
 options:
     sops_binary:
-        var:
-            - sops_binary
+        vars:
+            - name: sops_binary
     aws_profile:
-        var:
-            - sops_aws_profile
+        vars:
+            - name: sops_aws_profile
     aws_access_key_id:
-        var:
-            - sops_aws_access_key_id
+        vars:
+            - name: sops_aws_access_key_id
     aws_secret_access_key:
-        var:
-            - sops_aws_secret_access_key
+        vars:
+            - name: sops_aws_secret_access_key
     aws_session_token:
-        var:
-            - sops_session_token
+        vars:
+            - name: sops_session_token
     config_path:
-        var:
-            - sops_config_path
+        vars:
+            - name: sops_config_path
     enable_local_keyservice:
-        var:
-            - sops_enable_local_keyservice
+        vars:
+            - name: sops_enable_local_keyservice
     keyservice:
-        var:
-            - sops_keyservice
+        vars:
+            - name: sops_keyservice
 '''
 
     ENCRYPT_SPECIFIC = r'''
