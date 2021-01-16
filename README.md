@@ -38,8 +38,10 @@ collection.
 
 This collection provides:
 
-- a `lookup` plugin that allows looking up a sops-encrypted file content
-- a `vars` plugin that allows loading Ansible vars from a sops-encrypted file
+- a [lookup plugin](https://docs.ansible.com/ansible/latest/user_guide/playbooks_lookups.html#playbooks-lookups) `sops` that allows looking up a sops-encrypted file content;
+- a [vars plugin](https://docs.ansible.com/ansible/latest/plugins/vars.html) `sops` that allows loading Ansible vars from sops-encrypted files for hosts and groups;
+- an [action plugin](https://docs.ansible.com/ansible/latest/plugins/action.html) `load_vars` that allows loading Ansible vars from a sops-encrypted file dynamically during a playbook or role;
+- a [module](https://docs.ansible.com/ansible/latest/user_guide/basic_concepts.html#modules) `encrypt_sops` which allows to encrypt data with sops.
 
 ## Using this collection
 
