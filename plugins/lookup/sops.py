@@ -124,7 +124,7 @@ display = Display()
 class LookupModule(LookupBase):
 
     def run(self, terms, variables=None, **kwargs):
-        self.set_options(direct=kwargs)
+        self.set_options(var_options=variables, direct=kwargs)
         rstrip = self.get_option('rstrip')
         use_base64 = self.get_option('base64')
         input_type = self.get_option('input_type')
