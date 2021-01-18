@@ -1,8 +1,11 @@
 name: CI
 on:
-# Run CI against all pushes (direct commits) and Pull Requests
-- push
-- pull_request
+  # Run CI against all pushes (direct commits, also merged PRs), Pull Requests
+  push:
+  pull_request:
+  # Run CI once per day (at 06:00 UTC)
+  schedule:
+    - cron: '0 6 * * *'
 
 jobs:
   sanity:
@@ -23,11 +26,15 @@ jobs:
         with:
           path: ansible_collections/community/sops
 
-      - name: Uninstall any existing ansible
-        run: sudo apt-get remove ansible -y
+      - name: Set up Python
+        uses: actions/setup-python@v2
+        with:
+          # it is just required to run that once as "ansible-test sanity" in the docker image
+          # will run on all python versions it supports.
+          python-version: 3.8
 
       - name: Install ansible-base (${{ matrix.ansible }})
-        run: sudo pip install https://github.com/ansible/ansible/archive/${{ matrix.ansible }}.tar.gz --disable-pip-version-check
+        run: pip install https://github.com/ansible/ansible/archive/${{ matrix.ansible }}.tar.gz --disable-pip-version-check
 
       # run ansible-test sanity inside of Docker.
       # The docker container has all the pinned dependencies that are required.
@@ -43,10 +50,10 @@ jobs:
 #        with:
 #          path: ansible_collections/community/sops
 #
-#      - name: Set up Python 3.6
+#      - name: Set up Python 3.8
 #        uses: actions/setup-python@v1
 #        with:
-#          python-version: 3.6
+#          python-version: 3.8
 #
 #      - name: Install ansible-base (devel)
 #        run: pip install https://github.com/ansible/ansible/archive/devel.tar.gz --disable-pip-version-check
@@ -83,19 +90,13 @@ jobs:
         with:
           path: ansible_collections/community/sops
 
-      - name: Set up Python 3.6
+      - name: Set up Python 3.8
         uses: actions/setup-python@v1
         with:
-          python-version: 3.6
-
-      - name: Uninstall any existing ansible
-        run: sudo apt-get remove ansible -y
-
-      - name: Install coverage
-        run: sudo pip install coverage==4.5.4 --disable-pip-version-check
+          python-version: 3.8
 
       - name: Install ansible-base (${{ matrix.ansible }})
-        run: sudo pip install https://github.com/ansible/ansible/archive/${{ matrix.ansible }}.tar.gz --disable-pip-version-check
+        run: pip install https://github.com/ansible/ansible/archive/${{ matrix.ansible }}.tar.gz --disable-pip-version-check
 
       - name: Run integration tests in ${{ matrix.docker_container }} Docker container
         run: ansible-test integration --docker ${{ matrix.docker_container }} -v --color --retry-on-error --continue-on-error --diff --coverage
