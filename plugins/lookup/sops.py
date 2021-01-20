@@ -70,7 +70,7 @@ DOCUMENTATION = """
         empty_on_not_exist:
             description:
                 - When set to C(true), will not raise an error when a file cannot be found,
-                  but return an empty string insead.
+                  but return an empty string instead.
             type: bool
             default: false
     extends_documentation_fragment:
@@ -105,7 +105,7 @@ tasks:
 
 RETURN = """
     _raw:
-        description: decrypted file content
+        description: Decrypted file content.
         type: list
         elements: str
 """
