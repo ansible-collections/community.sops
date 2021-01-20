@@ -31,11 +31,11 @@ options:
   expressions:
     description:
       - This option controls how Jinja2 expressions in values in the loaded file are handled.
-      - If set to C(ignore), expressions will not be evaluted, but treated as regular strings.
+      - If set to C(ignore), expressions will not be evaluated, but treated as regular strings.
       - If set to C(evaluate-on-load), expressions will be evaluated on execution of this module,
-        i.e. when the file is loaded.
+        in other words, when the file is loaded.
       - Unfortunately, there is no way for non-core modules to handle expressions "unsafe",
-        i.e. evaluate them only on use. This can only achieved by M(ansible.builtin.include_vars),
+        in other words, evaluate them only on use. This can only achieved by M(ansible.builtin.include_vars),
         which unfortunately cannot handle sops-encrypted files.
     type: str
     default: ignore
@@ -52,13 +52,13 @@ seealso:
 '''
 
 EXAMPLES = r'''
-- name: Include variables of stuff.sops.yaml into the 'stuff' variable.
+- name: Include variables of stuff.sops.yaml into the 'stuff' variable
   community.sops.load_vars:
     file: stuff.sops.yaml
     name: stuff
     expressions: evaluate-on-load  # interpret Jinja2 expressions in stuf.sops.yaml on load-time!
 
-- name: Conditionally decide to load in variables into 'plans' when x is 0, otherwise do not.
+- name: Conditionally decide to load in variables into 'plans' when x is 0, otherwise do not
   community.sops.load_vars:
     file: contingency_plan.sops.yaml
     name: plans
@@ -72,7 +72,7 @@ EXAMPLES = r'''
 
 RETURN = r'''
 ansible_facts:
-  description: Variables that were included and their values
+  description: Variables that were included and their values.
   returned: success
   type: dict
   sample: {'variable': 'value'}

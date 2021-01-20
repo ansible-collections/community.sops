@@ -57,10 +57,12 @@ extends_documentation_fragment:
 seealso:
   - ref: community.sops.sops lookup <ansible_collections.community.sops.sops_lookup>
     description: The sops lookup can be used decrypt sops-encrypted files.
+notes:
+  - Supports C(check_mode).
 '''
 
 EXAMPLES = r'''
-- name: Encrypt a secret text.
+- name: Encrypt a secret text
   community.sops.sops_encrypt:
     path: text-data.sops
     content_text: This is a secret text.
@@ -120,14 +122,14 @@ def compare_encoded_content(module, binary_data, content):
         # Compare JSON
         try:
             return json.loads(content) == module.params['content_json']
-        except Exception as dummy:
+        except Exception:
             # Treat parsing errors as content not equal
             return False
     if module.params['content_yaml'] is not None:
         # Compare YAML
         try:
             return yaml.safe_load(content) == module.params['content_yaml']
-        except Exception as dummy:
+        except Exception:
             # Treat parsing errors as content not equal
             return False
     module.fail_json(msg='Internal error: unknown content type')
