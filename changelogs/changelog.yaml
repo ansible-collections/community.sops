@@ -7,7 +7,7 @@ releases:
         This release includes multiple plugins: an `action` plugin, a `lookup` plugin
         and a `vars` plugin.
 
-        '
+'
     fragments:
     - 0.1.0.yml
     modules:
@@ -68,3 +68,15 @@ releases:
     fragments:
     - 1.0.2.yml
     release_date: '2021-01-14'
+  1.0.3:
+    changes:
+      bugfixes:
+      - sops lookup plugins - fix wrong format of Ansible variables so that these
+        are actually used (https://github.com/ansible-collections/community.sops/pull/51).
+      - sops vars plugins - remove non-working Ansible variables (https://github.com/ansible-collections/community.sops/pull/51).
+      release_summary: This release include some fixes to Ansible docs and required
+        changes for inclusion in Ansible.
+    fragments:
+    - 1.0.3.yml
+    - 51-fix-vars-arguments.yml
+    release_date: '2021-01-22'

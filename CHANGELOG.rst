@@ -5,6 +5,20 @@ Community Sops Release Notes
 .. contents:: Topics
 
 
+v1.0.3
+======
+
+Release Summary
+---------------
+
+This release include some fixes to Ansible docs and required changes for inclusion in Ansible.
+
+Bugfixes
+--------
+
+- sops lookup plugins - fix wrong format of Ansible variables so that these are actually used (https://github.com/ansible-collections/community.sops/pull/51).
+- sops vars plugins - remove non-working Ansible variables (https://github.com/ansible-collections/community.sops/pull/51).
+
 v1.0.2
 ======
 

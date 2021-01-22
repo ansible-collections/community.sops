@@ -1,3 +1,0 @@
-bugfixes:
-- "sops lookup plugins - fix wrong format of Ansible variables so that these are actually used (https://github.com/ansible-collections/community.sops/pull/51)."
-- "sops vars plugins - remove non-working Ansible variables (https://github.com/ansible-collections/community.sops/pull/51)."
