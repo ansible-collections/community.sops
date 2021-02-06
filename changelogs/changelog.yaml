@@ -7,7 +7,7 @@ releases:
         This release includes multiple plugins: an `action` plugin, a `lookup` plugin
         and a `vars` plugin.
 
-'
+        '
     fragments:
     - 0.1.0.yml
     modules:
@@ -80,3 +80,14 @@ releases:
     - 1.0.3.yml
     - 51-fix-vars-arguments.yml
     release_date: '2021-01-22'
+  1.0.4:
+    changes:
+      release_summary: This is a security release, fixing a potential information
+        leak in the ``sops_encrypt`` module.
+      security_fixes:
+      - sops_encrypt - mark the ``aws_secret_access_key`` and ``aws_session_token``
+        parameters as ``no_log`` to avoid leakage of secrets (https://github.com/ansible-collections/community.sops/pull/54).
+    fragments:
+    - 1.0.4.yml
+    - 54-no_log-fixes.yml
+    release_date: '2021-02-06'

@@ -5,6 +5,19 @@ Community Sops Release Notes
 .. contents:: Topics
 
 
+v1.0.4
+======
+
+Release Summary
+---------------
+
+This is a security release, fixing a potential information leak in the ``sops_encrypt`` module.
+
+Security Fixes
+--------------
+
+- sops_encrypt - mark the ``aws_secret_access_key`` and ``aws_session_token`` parameters as ``no_log`` to avoid leakage of secrets (https://github.com/ansible-collections/community.sops/pull/54).
+
 v1.0.3
 ======
 

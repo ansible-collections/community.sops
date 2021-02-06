@@ -1,1 +1,0 @@
-release_summary: This is a security release, fixing a potential information leak in the ``sops_encrypt`` module.
