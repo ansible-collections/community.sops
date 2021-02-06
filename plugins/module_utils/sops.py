@@ -223,9 +223,11 @@ def get_sops_argument_spec(add_encrypt_specific=False):
         },
         'aws_secret_access_key': {
             'type': 'str',
+            'no_log': True,
         },
         'aws_session_token': {
             'type': 'str',
+            'no_log': True,
         },
         'config_path': {
             'type': 'path',
@@ -279,6 +281,7 @@ def get_sops_argument_spec(add_encrypt_specific=False):
             },
             'shamir_secret_sharing_threshold': {
                 'type': 'int',
+                'no_log': False,
             },
         })
     return argument_spec
