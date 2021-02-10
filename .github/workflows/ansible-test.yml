@@ -79,7 +79,6 @@ jobs:
           - stable-2.10
           - devel
         docker_container:
-          - ubuntu1604
           - ubuntu1804
           - ubuntu2004
         exclude:
