@@ -79,9 +79,12 @@ jobs:
           - stable-2.10
           - devel
         docker_container:
+          - ubuntu1604
           - ubuntu1804
           - ubuntu2004
         exclude:
+          - ansible: devel
+            docker_container: ubuntu1604
           # ubuntu2004 is only available with ansible-core 2.11+ / devel
           - ansible: stable-2.9
             docker_container: ubuntu2004
