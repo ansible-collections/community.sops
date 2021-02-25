@@ -206,6 +206,8 @@ def main():
             output_type = None
             if path.endswith('.json'):
                 output_type = 'json'
+            elif path.endswith('.yaml'):
+                output_type = 'yaml'
             data = Sops.encrypt(
                 data=input_data, cwd=directory, input_type=input_type, output_type=output_type,
                 get_option_value=get_option_value, module=module,

@@ -1,0 +1,2 @@
+bugfixes:
+  - sops_encrypt - Use output type ``yaml`` when path ends with ``.yaml``
