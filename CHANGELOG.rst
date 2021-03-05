@@ -107,15 +107,15 @@ New Plugins
 Lookup
 ~~~~~~
 
-- sops - Read sops encrypted file contents
+- community.sops.sops - Read sops encrypted file contents
 
 Vars
 ~~~~
 
-- sops - Loading sops-encrypted vars files
+- community.sops.sops - Loading sops-encrypted vars files
 
 New Modules
 -----------
 
-- load_vars - Load sops-encrypted variables from files, dynamically within a task
-- sops_encrypt - Encrypt data with sops
+- community.sops.load_vars - Load sops-encrypted variables from files, dynamically within a task
+- community.sops.sops_encrypt - Encrypt data with sops
