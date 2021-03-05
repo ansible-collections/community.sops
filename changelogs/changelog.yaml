@@ -7,7 +7,7 @@ releases:
         This release includes multiple plugins: an `action` plugin, a `lookup` plugin
         and a `vars` plugin.
 
-        '
+'
     fragments:
     - 0.1.0.yml
     modules:
@@ -91,3 +91,15 @@ releases:
     - 1.0.4.yml
     - 54-no_log-fixes.yml
     release_date: '2021-02-06'
+  1.0.5:
+    changes:
+      bugfixes:
+      - sops_encrypt - use output type ``yaml`` when path ends with ``.yaml`` (https://github.com/ansible-collections/community.sops/pull/56).
+      release_summary: 'This release fixes a bug that prevented correct YAML file
+        to be created when the output was ending in `.yaml`.
+
+'
+    fragments:
+    - 1.0.5.yml
+    - 56-sops_encrypt-yaml-output.yaml
+    release_date: '2021-03-05'

@@ -5,6 +5,20 @@ Community Sops Release Notes
 .. contents:: Topics
 
 
+v1.0.5
+======
+
+Release Summary
+---------------
+
+This release fixes a bug that prevented correct YAML file to be created when the output was ending in `.yaml`.
+
+
+Bugfixes
+--------
+
+- sops_encrypt - use output type ``yaml`` when path ends with ``.yaml`` (https://github.com/ansible-collections/community.sops/pull/56).
+
 v1.0.4
 ======
 
