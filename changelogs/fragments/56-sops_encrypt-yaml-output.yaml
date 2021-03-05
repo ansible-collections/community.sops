@@ -1,0 +1,2 @@
+bugfixes:
+  - sops_encrypt - use output type ``yaml`` when path ends with ``.yaml`` (https://github.com/ansible-collections/community.sops/pull/56).
