@@ -27,3 +27,4 @@ sections:
   - Known Issues
 title: Community Sops
 trivial_section_name: trivial
+use_fqcn: true
