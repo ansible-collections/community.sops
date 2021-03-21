@@ -5,6 +5,20 @@ Community Sops Release Notes
 .. contents:: Topics
 
 
+v1.0.6
+======
+
+Release Summary
+---------------
+
+This release makes the collection compatible to the latest beta release of ansible-core 2.11.
+
+Bugfixes
+--------
+
+- action_module plugin helper - make compatible with latest changes in ansible-core 2.11.0b3 (https://github.com/ansible-collections/community.sops/pull/58).
+- community.sops.load_vars - make compatible with latest changes in ansible-core 2.11.0b3 (https://github.com/ansible-collections/community.sops/pull/58).
+
 v1.0.5
 ======
 
