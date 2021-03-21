@@ -1,6 +1,6 @@
 namespace: community
 name: sops
-version: 1.0.5
+version: 1.0.6
 readme: README.md
 authors:
   - Edoardo Tenani
