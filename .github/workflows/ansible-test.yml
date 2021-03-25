@@ -82,6 +82,10 @@ jobs:
           - ubuntu1604
           - ubuntu1804
           - ubuntu2004
+        sops_version:
+          - 3.5.0
+          - 3.6.0
+          - 3.7.0
         exclude:
           - ansible: devel
             docker_container: ubuntu1604
@@ -90,14 +94,17 @@ jobs:
             docker_container: ubuntu2004
           - ansible: stable-2.10
             docker_container: ubuntu2004
-    #container:
-    #  image: python:${{ matrix.python_version }}-alpine
     steps:
 
       - name: Check out code
         uses: actions/checkout@v2
         with:
           path: ansible_collections/community/sops
+
+      - name: Adjust vars files so that sops ${{ matrix.sops_version }} is used
+        run: |
+          echo 'sops_version: ${{ matrix.sops_version }}' > tests/integration/targets/setup_sops/vars/main.yml
+        working-directory: ./ansible_collections/community/sops
 
       - name: Set up Python 3.8
         uses: actions/setup-python@v1
