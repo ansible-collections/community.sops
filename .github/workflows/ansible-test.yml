@@ -17,6 +17,7 @@ jobs:
           # Testing against `devel` may fail as new tests are added.
           - stable-2.9
           - stable-2.10
+          - stable-2.11
           - devel
     runs-on: ubuntu-latest
     steps:
@@ -77,6 +78,7 @@ jobs:
           # Testing against `devel` may fail as new tests are added.
           - stable-2.9
           - stable-2.10
+          - stable-2.11
           - devel
         docker_container:
           - ubuntu1604
@@ -88,6 +90,8 @@ jobs:
           - 3.7.0
         exclude:
           - ansible: devel
+            docker_container: ubuntu1604
+          - ansible: stable-2.11
             docker_container: ubuntu1604
           # ubuntu2004 is only available with ansible-core 2.11+ / devel
           - ansible: stable-2.9
