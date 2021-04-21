@@ -90,7 +90,8 @@ tasks:
 
   - name: Add SSH private key
     ansible.builtin.copy:
-        content: "{{ lookup('community.sops.sops', user + '-id_rsa') }}"
+        # Note that rstrip=false is necessary for some SSH versions to be able to use the key
+        content: "{{ lookup('community.sops.sops', user + '-id_rsa', rstrip=false) }}"
         dest: /home/{{ user }}/.ssh/id_rsa
         owner: "{{ user }}"
         group: "{{ user }}"
