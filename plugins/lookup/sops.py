@@ -81,25 +81,25 @@ DOCUMENTATION = """
 """
 
 EXAMPLES = """
-tasks:
-  - name: Output secrets to screen (BAD IDEA!)
-    ansible.builtin.debug:
-        msg: "Content: {{ lookup('community.sops.sops', item) }}"
-    loop:
-        - sops-encrypted-file.enc.yaml
+- name: Output secrets to screen (BAD IDEA!)
+  ansible.builtin.debug:
+    msg: "Content: {{ lookup('community.sops.sops', item) }}"
+  loop:
+    - sops-encrypted-file.enc.yaml
 
-  - name: Add SSH private key
-    ansible.builtin.copy:
-        content: "{{ lookup('community.sops.sops', user + '-id_rsa') }}"
-        dest: /home/{{ user }}/.ssh/id_rsa
-        owner: "{{ user }}"
-        group: "{{ user }}"
-        mode: 0600
-    no_log: true  # avoid content to be written to log
+- name: Add SSH private key
+  ansible.builtin.copy:
+    # Note that rstrip=false is necessary for some SSH versions to be able to use the key
+    content: "{{ lookup('community.sops.sops', user + '-id_rsa', rstrip=false) }}"
+    dest: /home/{{ user }}/.ssh/id_rsa
+    owner: "{{ user }}"
+    group: "{{ user }}"
+    mode: 0600
+  no_log: true  # avoid content to be written to log
 
-  - name: The file file.json is a YAML file, which contains the encryption of binary data
-    ansible.builtin.debug:
-        msg: "Content: {{ lookup('community.sops.sops', 'file.json', input_type='yaml', output_type='binary') }}"
+- name: The file file.json is a YAML file, which contains the encryption of binary data
+  ansible.builtin.debug:
+    msg: "Content: {{ lookup('community.sops.sops', 'file.json', input_type='yaml', output_type='binary') }}"
 
 """
 
