@@ -38,7 +38,7 @@ This collection provides:
 - a [lookup plugin](https://docs.ansible.com/ansible/latest/user_guide/playbooks_lookups.html#playbooks-lookups) `sops` that allows looking up a sops-encrypted file content;
 - a [vars plugin](https://docs.ansible.com/ansible/latest/plugins/vars.html) `sops` that allows loading Ansible vars from sops-encrypted files for hosts and groups;
 - an [action plugin](https://docs.ansible.com/ansible/latest/plugins/action.html) `load_vars` that allows loading Ansible vars from a sops-encrypted file dynamically during a playbook or role;
-- a [module](https://docs.ansible.com/ansible/latest/user_guide/basic_concepts.html#modules) `encrypt_sops` which allows to encrypt data with sops.
+- a [module](https://docs.ansible.com/ansible/latest/user_guide/basic_concepts.html#modules) `sops_encrypt` which allows to encrypt data with sops.
 
 ## Using this collection
 
@@ -154,26 +154,26 @@ tasks:
         expressions: evaluate-on-load
 ```
 
-### encrypt_sops module
+### sops_encrypt module
 
-The `encrypt_sops` module can be used to create and update sops encrypted files. It assumes that sops is configured via environment variables or a `.sops.yaml` file.
+The `sops_encrypt` module can be used to create and update sops encrypted files. It assumes that sops is configured via environment variables or a `.sops.yaml` file.
 
 Examples:
 
 ```
 tasks:
   - name: Store secret text sops encrypted
-    community.sops.encrypt_sops:
+    community.sops.sops_encrypt:
         path: path/to/sops-encrypted-file.sops
         content_text: This is some secret text.
 
   - name: Store secret binary data sops encrypted
-    community.sops.encrypt_sops:
+    community.sops.sops_encrypt:
         path: path/to/sops-encrypted-file.sops
         content_binary: "{{ some_secret_binary_data | b64encode }}"
 
   - name: Store secret JSON data
-    community.sops.encrypt_sops:
+    community.sops.sops_encrypt:
         path: path/to/sops-encrypted-file.sops.json
         content_json:
             key1: value1
@@ -183,7 +183,7 @@ tasks:
                   key4: value5
 
   - name: Store secret YAML data
-    community.sops.encrypt_sops:
+    community.sops.sops_encrypt:
         path: path/to/sops-encrypted-file.sops.yaml
         content_yaml:
             key1: value1
