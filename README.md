@@ -1,7 +1,9 @@
 # Community Sops Collection
+
 [![CI](https://github.com/ansible-collections/community.sops/workflows/CI/badge.svg?event=push)](https://github.com/ansible-collections/community.sops/actions) [![Codecov](https://img.shields.io/codecov/c/github/ansible-collections/community.sops)](https://codecov.io/gh/ansible-collections/community.sops)
 
 <!-- Describe the collection and why a user would want to use it. What does the collection do? -->
+
 The `community.sops` collection allows integrating [`mozilla/sops`](https://github.com/mozilla/sops) in Ansible.
 
 `mozilla/sops` is a tool for encryption and decryption of files using secure keys (GPG, KMS). It can be leveraged in Ansible to provide an easy to use and flexible to manage way to manage ecrypted secrets' files.
@@ -10,11 +12,11 @@ The `community.sops` collection allows integrating [`mozilla/sops`](https://gith
 
 The following table shows which versions of sops were tested with which versions of the collection. Older (or newer) versions of sops can still work fine, it just means that we did not test them. In some cases, it could be that a minimal required version of sops is explicitly documented for a specific feature. Right now, that is not the case.
 
-|`community.sops` version|`mozilla/sops` version|
-|---|---|
-|0.1.0|`3.5.0+`|
-|1.0.6|`3.5.0+`|
-|`main` branch|`3.5.0`, `3.6.0`, `3.7.0`|
+| `community.sops` version | `mozilla/sops` version    |
+| ------------------------ | ------------------------- |
+| 0.1.0                    | `3.5.0+`                  |
+| 1.0.6                    | `3.5.0+`                  |
+| `main` branch            | `3.5.0`, `3.6.0`, `3.7.0` |
 
 ## Tested with Ansible
 
@@ -66,10 +68,9 @@ tasks:
 
 See [Lookup Plugins](https://docs.ansible.com/ansible/latest/plugins/lookup.html) for more details on lookup plugins
 
-
 ### vars plugin
 
-Vars plugins only work in ansible >= 2.10 and require explicit enabling.  One
+Vars plugins only work in ansible >= 2.10 and require explicit enabling. One
 way to enable the plugin is by adding the following to the `default` section of
 your `ansible.cfg`:
 
@@ -84,9 +85,9 @@ transparently decrypted with sops.
 
 The files must end with one of these extensions:
 
-* `.sops.yaml`
-* `.sops.yml`
-* `.sops.json`
+- `.sops.yaml`
+- `.sops.yml`
+- `.sops.json`
 
 Here is an example file structure
 
@@ -193,11 +194,25 @@ tasks:
                   key4: value5
 ```
 
+### inventory plugin
+
+In case you want to store secret keys like ansible_host, ansible_user, and others in your inventory you can use the inventory plugin.
+To use it add the following to your `ansible.cfg`.
+
+```ini
+[inventory]
+enable_plugins = community.sops.sops
+```
+
+create and inventory file with the extension `.sops.yaml` e.g.: `production.sops.yaml`.
+To test if it worked you can run `ansible-inventory -i production.sops.yaml`
+
 ## Troubleshooting
 
 ### Spurious failures during encryption and decryption with gpg
 
 Sops calls `gpg` with `--use-agent`. When running multiple of these in parallel, for example when loading variables or looking up files for various hosts at once, some of these can randomly fail with messages such as
+
 ```
 Failed to get the data key required to decrypt the SOPS file.
 
@@ -218,6 +233,7 @@ Recovery failed because no master key was able to decrypt the file. In
 order for SOPS to recover the file, at least one key has to be successful,
 but none were.
 ```
+
 This is a limitation of gpg-agent which can be fixed by adding `auto-expand-secmem` to `~/.gnupg/gpg-agent.conf` ([reference on option](https://www.gnupg.org/documentation/manuals/gnupg/Agent-Options.html#index-ssh_002dfingerprint_002ddigest), [reference on config file](https://www.gnupg.org/documentation/manuals/gnupg/Agent-Configuration.html)).
 
 (See https://github.com/ansible-collections/community.sops/issues/34 and https://dev.gnupg.org/T4146 for more details.)
