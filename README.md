@@ -204,7 +204,7 @@ To use it add the following to your `ansible.cfg`.
 enable_plugins = community.sops.sops
 ```
 
-create and inventory file with the extension `.sops.yaml` e.g.: `production.sops.yaml`.
+Encrypt an inventory file with sops with the extension `.sops.yaml`, for example encrypt `production.yaml` to `production.sops.yaml`.
 To test if it worked you can run `ansible-inventory -i production.sops.yaml`
 
 ## Troubleshooting

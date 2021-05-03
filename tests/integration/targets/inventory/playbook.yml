@@ -1,7 +1,7 @@
 - hosts: localhost
   tasks:
     - name: "test option: --list --export"
-      shell: ansible-inventory --list --export --inventory inventory.sops.yml
+      command: ansible-inventory --list --export --inventory inventory.sops.yml
       register: result
 
     - assert:
@@ -10,7 +10,7 @@
             - '"my-host.com" in result.stdout'
 
     - name: "test option: --host encrypted_host"
-      shell: ansible-inventory --inventory inventory.sops.yml --host encrypted_host
+      command: ansible-inventory --inventory inventory.sops.yml --host encrypted_host
       register: result
 
     - assert:
