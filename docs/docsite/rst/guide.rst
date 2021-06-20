@@ -206,6 +206,122 @@ The ``empty_on_not_exist=true`` flag is needed to avoid the lookup to fail when 
     PLAY RECAP *******************************************************************************************************
     localhost                  : ok=2    changed=0    unreachable=0    failed=0    skipped=1    rescued=0    ignored=0
 
+Working with encrypted data from other sources
+----------------------------------------------
+
+You can use the ``community.sops.decrypt`` Jinja2 filter plugin to decrypt arbitrary data. This can be data read earlier from a file, returned from an action, or obtained through some other means.
+
+For example, assume that you want to decrypt a file retrieved from a HTTPS server with the `ansible.builtin.uri module <ansible_collections.ansible.builtin.uri_module>`_. To use the ``community.sops.sops`` lookup, you have to write it to a file first. With the filter, you can directly decrypt it:
+
+.. code-block:: yaml+jinja
+
+    ---
+    - name: Decrypt file fetched from URL
+      hosts: localhost
+      gather_facts: false
+      tasks:
+        - name: Fetch file from URL
+          ansible.builtin.uri:
+            url: https://raw.githubusercontent.com/mozilla/sops/master/functional-tests/res/comments.enc.yaml
+            return_content: yes
+          register: encrypted_content
+
+        - name: Show encrypted data
+          debug:
+            msg: "{{ encrypted_content.content | ansible.builtin.from_yaml }}"
+
+        - name: Decrypt data and decode decrypted YAML
+          set_fact:
+            decrypted_data: "{{ encrypted_content.content | community.sops.decrypt | ansible.builtin.from_yaml }}"
+
+        - name: Show decrypted data
+          debug:
+            msg: "{{ decrypted_data }}"
+
+The output will be:
+
+.. code-block:: ansible-output
+
+    PLAY [Decrypt file fetched from URL] *****************************************************************************
+
+    TASK [Fetch file from URL] ***************************************************************************************
+    ok: [localhost]
+
+    TASK [Show encrypted data] ***************************************************************************************
+    ok: [localhost] => {
+        "msg": {
+            "dolor": "ENC[AES256_GCM,data:IgvT,iv:wtPNYbDTARFE810PH6ldOLzCDcAjkB/dzPsZjpgHcko=,tag:zwE8P+AwO1hrHkgF6pTbZw==,type:str]",
+            "lorem": "ENC[AES256_GCM,data:PhmSdTs=,iv:J5ugEWq6RfyNx+5zDXvcTdoQ18YYZkqesDED7LNzou4=,tag:0Qrom6J6aUnZMZzGz5XCxw==,type:str]",
+            "sops": {
+                "age": [],
+                "azure_kv": [],
+                "gcp_kms": [],
+                "hc_vault": [],
+                "kms": [],
+                "lastmodified": "2020-10-07T15:49:13Z",
+                "mac": "ENC[AES256_GCM,data:2dhyKdHYSynjXPwYrn9356wA7vRKw+T5qwBenI2vZrgthpQBOCQG4M6f7eeH3VLTxB4mN4CAchb25dsNRoGr6A38VruaSSAhPco3Rh4AlvKSvXuhgRnzZvNxE/bnHX1D4K5cdTb4FsJg/Ue1l7UcWrlrv1s3H3SwLHP/nf+suD0=,iv:6xBYURjjaQzlUOKOrs2NWOChiNFZVAGPJZQZ59MwX3o=,tag:uXD5VYme+c8eHcCc5TD2YA==,type:str]",
+                "pgp": [
+                    {
+                        "created_at": "2019-08-29T21:52:32Z",
+                        "enc": "-----BEGIN PGP MESSAGE-----\n\nhQEMAyUpShfNkFB/AQgAlvpTj0NYqF4mQyIeM7wX2SHLb4U07/flpqDpp2W/30Pz\nAHA7sYrgP0l8BrjT2kwtgCN0cdfoIHJudezrNjANp2P5TbP2b9kYYNxpehzB9PFj\nFixnCS7Zp8WIt1yXr1TX+ANZoXLopVcRbMaQ5OdH7CN1pNQtMR+R3FR3X/IqKxiU\nDo1YLaooRJICUC8LJw2Tb4K+lYnTSqd/HalLGym++ivFvdDB1Ya1GhT1FswXidXK\nIRjsOVbxV0q5VeNOR0zxsheOvuHyCje16c7NXJtATJVWtTFABJB8u7CY5HhZSgq+\nrXJHyLHqVLzJ8E4WqHQkMNUlVcrqAz7glZ6xbAhfI9JeAYk5SuBOQOQ4yvASqH4K\nb0N3+/abluBY7YPqKuRZBiEtmcYlZ+zIHuOTP1rD/7L5VY8CwE5U8SFlEqwM7nQJ\n6/vtl6qngOFjwt34WrhZzUfLPB/wRV/m1Qv2kr0RNA==\n=Ykiw\n-----END PGP MESSAGE-----\n",
+                        "fp": "FBC7B9E2A4F9289AC0C1D4843D16CEE4A27381B4"
+                    }
+                ],
+                "unencrypted_suffix": "_unencrypted",
+                "version": "3.6.1"
+            }
+        }
+    }
+
+    TASK [Decrypt data] **********************************************************************************************
+    ok: [localhost]
+
+    TASK [Show decrypted data] ***************************************************************************************
+    ok: [localhost] => {
+        "msg": {
+            "dolor": "sit",
+            "lorem": "ipsum"
+        }
+    }
+
+    PLAY RECAP *******************************************************************************************************
+    localhost                  : ok=4    changed=0    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0
+
+Please note that if you put a Jinja2 expression in a variable, it will be evaluated **every time it is used**. Decrypting data takes a certain amount of time. If you need to use an expression multiple times, it is better to store its evaluated form as a fact with `ansible.bulitin.set_fact <ansible_collections.ansible.builtin.set_fact_module>`_ first. This can be important if decrypted data should be passed to a role
+
+.. code-block:: yaml+jinja
+
+    ---
+    - name: Decrypt file fetched from URL
+      hosts: localhost
+      gather_facts: false
+      tasks:
+        - name: Fetch file from URL
+          ansible.builtin.uri:
+            url: https://raw.githubusercontent.com/mozilla/sops/master/functional-tests/res/comments.enc.yaml
+            return_content: yes
+          register: encrypted_content
+
+        # BAD: every time the role uses decrypted_data, the data will be decrypted!
+
+        - name: Call role with decrypted data
+          include_role:
+            name: myrole
+          vars:
+            role_parameter: "{{ encrypted_content.content | community.sops.decrypt | ansible.builtin.from_yaml }}"
+
+        # GOOD: the data is decrypted once before the role is called,
+
+        - name: Store decrypted data as fact
+          set_fact:
+            decrypted_data: "{{ encrypted_content.content | community.sops.decrypt | ansible.builtin.from_yaml }}"
+
+        - name: Call role with decrypted data
+          include_role:
+            name: myrole
+          vars:
+            role_parameter: "{{ decrypted_data }}"
+
 Working with encrypted variables
 --------------------------------
 
