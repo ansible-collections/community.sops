@@ -50,7 +50,7 @@ The lookup plugin can be accessed with the `community.sops.sops` key.
 
 Examples:
 
-```
+```yaml
 tasks:
   - name: Output secrets to screen (BAD IDEA!)
     ansible.builtin.debug:
@@ -66,8 +66,7 @@ tasks:
     no_log: true  # avoid content to be written to log
 ```
 
-See [Lookup Plugins](https://docs.ansible.com/ansible/latest/plugins/lookup.html) for more details on lookup plugins
-
+See [Lookup Plugins](https://docs.ansible.com/ansible/latest/plugins/lookup.html) for more details on lookup plugins.
 
 ### vars plugin
 
@@ -75,7 +74,7 @@ Vars plugins only work in ansible >= 2.10 and require explicit enabling.  One
 way to enable the plugin is by adding the following to the `default` section of
 your `ansible.cfg`:
 
-```
+```ini
 vars_plugins_enabled = host_group_vars,community.sops.sops
 ```
 
@@ -119,7 +118,7 @@ Ansible 2.10 allows to determine [when vars plugins load the data](https://docs.
 
 To run the sops vars plugin right after importing inventory, you can add the following to `ansible.cfg`:
 
-```
+```ini
 [community.sops]
 vars_stage = inventory
 ```
@@ -128,7 +127,7 @@ vars_stage = inventory
 
 By default, the sops vars plugin caches decrypted files to avoid having to decrypt them every task. If this is not wanted, it can be explicitly disabled in `ansible.cfg`:
 
-```
+```ini
 [community.sops]
 vars_cache = false
 ```
@@ -141,7 +140,7 @@ The `load_vars` action plugin can be used similarly to Ansible's `include_vars`,
 
 Examples:
 
-```
+```yaml
 tasks:
   - name: Load variables from file and store them in a variable
     community.sops.load_vars:
@@ -162,7 +161,7 @@ The `sops_encrypt` module can be used to create and update sops encrypted files.
 
 Examples:
 
-```
+```yaml
 tasks:
   - name: Store secret text sops encrypted
     community.sops.sops_encrypt:
