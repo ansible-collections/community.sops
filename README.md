@@ -68,6 +68,45 @@ tasks:
 
 See [Lookup Plugins](https://docs.ansible.com/ansible/latest/plugins/lookup.html) for more details on lookup plugins.
 
+### filter plugin
+
+The filter plugin can be used in Jinja2 expressions by the name `community.sops.decrypt`. It can decrypt sops-encrypted data coming from other sources than files.
+
+Example:
+
+```yaml
+tasks:
+  - name: Load sops encrypted data
+    ansible.builtin.set_fact:
+      encrypted_data: "{{ lookup('file', '/path/to/sops-encrypted-file.enc.yaml') }}"
+
+  - name: Output secrets to screen (BAD IDEA!)
+    ansible.builtin.debug:
+      msg: "Content: {{ encrypted_data | community.sops.decrypt(output_type='yaml') }}"
+```
+
+See [Filter Plugins](https://docs.ansible.com/ansible/latest/user_guide/playbooks_filters.html) for more details on filters.
+
+Please note that if you put a Jinja2 expression in a variable, it will be evaluated **every time it is used**. Decrypting data takes a certain amount of time. If you need to use an expression multiple times, it is better to store its evaluated form as a fact with `ansible.bulitin.set_fact` first:
+
+```yaml
+tasks:
+  - name: Decrypt data
+    ansible.builtin.set_fact:
+      decrypted_data: "{{ encrypted_data | community.sops.decrypt }}"
+    run_once: true  # if encrypted_data is identical on all hosts
+
+  - name: Output decrypted secrets multiple times (BAD IDEA!)
+    ansible.builtin.debug:
+      msg: "Decrypted data: {{ decrypted_data}}"
+    loop:
+      - foo
+      - bar
+      - baz
+```
+
+If you would use `{{ encrypted_data | community.sops.decrypt }}` instead of `{{ decrypted_data }}` in the debug task, the data would be decrypted three times for every host this is executed for. With the `ansible.builtin.set_fact` and `run_once: true`, it is evaluated only once.
+
 ### vars plugin
 
 Vars plugins only work in ansible >= 2.10 and require explicit enabling.  One
