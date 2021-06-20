@@ -24,10 +24,10 @@ def decrypt_filter(data, input_type='yaml', output_type='yaml', sops_binary='sop
     # Check parameters
     if input_type not in _VALID_TYPES:
         raise AnsibleFilterError('input_type must be one of {expected}; got "{value}"'.format(
-            expected=', '.join(sorted(_VALID_TYPES)), got=input_type))
+            expected=', '.join(sorted(_VALID_TYPES)), value=input_type))
     if output_type not in _VALID_TYPES:
         raise AnsibleFilterError('output_type must be one of {expected}; got "{value}"'.format(
-            expected=', '.join(sorted(_VALID_TYPES)), got=output_type))
+            expected=', '.join(sorted(_VALID_TYPES)), value=output_type))
 
     # Create option value querier
     def get_option_value(argument_name):
