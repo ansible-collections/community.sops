@@ -105,7 +105,7 @@ tasks:
       - baz
 ```
 
-If you would use `{{ encrypted_data | community.sops.decrypt }}` instead of `{{ decrypted_data }}` in the debug task, the data would be decrypted three times for every host this is executed for. With the `ansible.builtin.set_fact` and `run_once: true`, it is evaluated only once.
+By using `{{ encrypted_data | community.sops.decrypt }}` instead of `{{ decrypted_data }}` in the debug task, the data would be decrypted three times for every host this is executed for. With the `ansible.builtin.set_fact` and `run_once: true`, it is evaluated only once.
 
 ### vars plugin
 
