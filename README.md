@@ -91,14 +91,16 @@ Please note that if you put a Jinja2 expression in a variable, it will be evalua
 
 ```yaml
 tasks:
-  - name: Decrypt data
+  - name: Decrypt data once
     ansible.builtin.set_fact:
       decrypted_data: "{{ encrypted_data | community.sops.decrypt }}"
     run_once: true  # if encrypted_data is identical on all hosts
 
-  - name: Output decrypted secrets multiple times (BAD IDEA!)
-    ansible.builtin.debug:
-      msg: "Decrypted data: {{ decrypted_data}}"
+  - name: Use decrypted secrets multiple times
+    ansible.builtin.openssl_privatekey:
+      path: "/path/to/private_{{ item }}.pem"
+      passphrase: "{{ decrypted_data }}"
+      cipher: auto
     loop:
       - foo
       - bar
