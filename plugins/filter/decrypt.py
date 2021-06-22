@@ -47,7 +47,7 @@ def decrypt_filter(data, input_type='yaml', output_type='yaml', sops_binary='sop
             return enable_local_keyservice
         if argument_name == 'keyservice':
             return keyservice
-        return None
+        raise AssertionError('internal error: should not be reached')
 
     # Decode
     data = to_bytes(data)
