@@ -1,0 +1,129 @@
+---
+- when: sops_installed
+  block:
+    - name: Test bad parameter detection (1/2)
+      set_fact:
+        sops_bad_input_type: "{{ 'this-is-not: a sops file' | community.sops.decrypt(input_type='foo') }}"
+      ignore_errors: yes
+      register: sops_bad_input_type
+
+    - name: Test bad parameter detection (2/2)
+      set_fact:
+        sops_bad_output_type: "{{ 'this-is-not: a sops file' | community.sops.decrypt(output_type=23) }}"
+      ignore_errors: yes
+      register: sops_bad_output_type
+
+    - assert:
+        that:
+          - "sops_bad_input_type is failed"
+          - "'input_type must be one of' in sops_bad_input_type.msg"
+          - "'; got \"foo\"' in sops_bad_input_type.msg"
+          - "sops_bad_output_type is failed"
+          - "'output_type must be one of' in sops_bad_output_type.msg"
+          - "'; got \"23\"' in sops_bad_output_type.msg"
+
+    - name: Test decrypt of non-sops file
+      set_fact:
+        sops_wrong_file: "{{ 'this-is-not: a sops file' | community.sops.decrypt }}"
+      ignore_errors: yes
+      register: sops_filter_wrong_file
+
+    - assert:
+        that:
+          - "sops_filter_wrong_file is failed"
+          - "'sops metadata not found' in sops_filter_wrong_file.msg"
+
+    - name: Test simple filter
+      set_fact:
+        sops_success: "{{ lookup('file', 'simple.sops.yaml') | community.sops.decrypt }}"
+      ignore_errors: yes
+      register: sops_filter_simple
+
+    - assert:
+        that:
+          - "sops_filter_simple is success"
+          - "sops_success == 'foo: bar'"
+
+    - name: Test rstrip
+      set_fact:
+        with_rstrip: "{{ lookup('file', 'rstrip.sops') | community.sops.decrypt(rstrip=true, output_type='binary') }}"
+        without_rstrip: "{{ lookup('file', 'rstrip.sops') | community.sops.decrypt(rstrip=false, output_type='binary') }}"
+        default_rstrip: "{{ lookup('file', 'rstrip.sops') | community.sops.decrypt(output_type='binary') }}"
+
+    - assert:
+        that:
+          - with_rstrip == 'This file has three newlines at the end.'
+          - without_rstrip == 'This file has three newlines at the end.\n\n\n'
+          - default_rstrip == 'This file has three newlines at the end.'
+
+    - name: Test binary
+      set_fact:
+        binary_with_rstrip: "{{ lookup('file', 'binary.sops') | community.sops.decrypt(rstrip=true, decode_output=false, output_type='binary') | b64encode }}"
+        binary_without_rstrip: "{{ lookup('file', 'binary.sops') | community.sops.decrypt(rstrip=false, decode_output=false, output_type='binary') | b64encode }}"
+
+    - assert:
+        that:
+          - binary_with_rstrip == 'AQIDAAQ='
+          - binary_without_rstrip == 'AQIDAAQgCg=='
+
+    - name: Test hidden binary
+      set_fact:
+        hidden_binary: "{{ lookup('file', 'hidden-binary') | community.sops.decrypt(output_type='binary') }}"
+        hidden_binary__json: "{{ lookup('file', 'hidden-binary.json') | community.sops.decrypt(output_type='binary') }}"
+        hidden_binary__yaml: "{{ lookup('file', 'hidden-binary.yaml') | community.sops.decrypt(output_type='binary') }}"
+        hidden_binary_yaml: "{{ lookup('file', 'hidden-binary-yaml') | community.sops.decrypt(input_type='yaml', output_type='binary') }}"
+        hidden_binary_yaml__json: "{{ lookup('file', 'hidden-binary-yaml.json') | community.sops.decrypt(input_type='yaml', output_type='binary') }}"
+        hidden_binary_yaml__yaml: "{{ lookup('file', 'hidden-binary-yaml.yaml') | community.sops.decrypt(input_type='yaml', output_type='binary') }}"
+        hidden_json: "{{ lookup('file', 'hidden-json') | community.sops.decrypt(input_type='json', output_type='json') }}"
+        hidden_json__json: "{{ lookup('file', 'hidden-json.json') | community.sops.decrypt(input_type='json', output_type='json') }}"
+        hidden_json__yaml: "{{ lookup('file', 'hidden-json.yaml') | community.sops.decrypt(input_type='json', output_type='json') }}"
+        hidden_yaml: "{{ lookup('file', 'hidden-yaml') | community.sops.decrypt(input_type='yaml', output_type='yaml') }}"
+        hidden_yaml__json: "{{ lookup('file', 'hidden-yaml.json') | community.sops.decrypt(input_type='yaml', output_type='yaml') }}"
+        hidden_yaml__yaml: "{{ lookup('file', 'hidden-yaml.yaml') | community.sops.decrypt(input_type='yaml', output_type='yaml') }}"
+        hidden_json__as_yaml: "{{ lookup('file', 'hidden-json') | community.sops.decrypt(input_type='json', output_type='yaml') }}"
+        hidden_json__json__as_yaml: "{{ lookup('file', 'hidden-json.json') | community.sops.decrypt(input_type='json', output_type='yaml') }}"
+        hidden_json__yaml__as_yaml: "{{ lookup('file', 'hidden-json.yaml') | community.sops.decrypt(input_type='json', output_type='yaml') }}"
+        hidden_yaml__as_json: "{{ lookup('file', 'hidden-yaml') | community.sops.decrypt(input_type='yaml', output_type='json') }}"
+        hidden_yaml__json__as_json: "{{ lookup('file', 'hidden-yaml.json') | community.sops.decrypt(input_type='yaml', output_type='json') }}"
+        hidden_yaml__yaml__as_json: "{{ lookup('file', 'hidden-yaml.yaml') | community.sops.decrypt(input_type='yaml', output_type='json') }}"
+
+    - assert:
+        that:
+          - hidden_binary == test_str_abcd
+          - hidden_binary__json == test_str_abcd
+          - hidden_binary__yaml == test_str_abcd
+          - hidden_binary_yaml == test_str_binary_data
+          - hidden_binary_yaml__json == test_str_binary_data
+          - hidden_binary_yaml__yaml == test_str_binary_data
+          - hidden_json == test_dict
+          - hidden_json__json == test_dict
+          - hidden_json__yaml == test_dict
+          - hidden_yaml == test_dict_yaml
+          - hidden_yaml__json == test_dict_yaml
+          - hidden_yaml__yaml == test_dict_yaml
+          - hidden_json__as_yaml == test_dict_yaml
+          - hidden_json__json__as_yaml == test_dict_yaml
+          - hidden_json__yaml__as_yaml == test_dict_yaml
+          - hidden_yaml__as_json == test_dict
+          - hidden_yaml__json__as_json == test_dict
+          - hidden_yaml__yaml__as_json == test_dict
+      vars:
+        test_dict:
+          a: b
+          c: d
+        test_dict_yaml:
+          "a: b\nc: d"
+        test_str_binary_data: This is binary data.
+        test_str_abcd: a is b, and c is d
+
+    - name: Test fake sops binary
+      set_fact:
+        fake_sops_output: "{{ lookup('file', 'simple.sops.yaml') | community.sops.decrypt(sops_binary=role_path ~ '/files/fake-sops.sh', enable_local_keyservice=True, aws_access_key_id='xxx') }}"
+        fake_sops_output_2: "{{ lookup('file', 'simple.sops.yaml') | community.sops.decrypt(sops_binary=role_path ~ '/files/fake-sops-val.sh', config_path='/path/to/asdf', aws_secret_access_key='yyy') }}"
+        fake_sops_output_3: "{{ lookup('file', 'simple.sops.yaml') | community.sops.decrypt(sops_binary=role_path ~ '/files/fake-sops-rep.sh', keyservice=['a', 'b'], aws_session_token='zzz') }}"
+
+    - assert:
+        that:
+          - fake_sops_output == 'fake sops output'
+          - fake_sops_output_2 == 'fake sops output 2'
+          - fake_sops_output_3 == 'fake sops output 3'

@@ -143,7 +143,8 @@ class Sops():
         return cmd
 
     @staticmethod
-    def decrypt(encrypted_file, display=None, decode_output=True, rstrip=True, input_type=None, output_type=None, get_option_value=None, module=None):
+    def decrypt(encrypted_file, content=None,
+                display=None, decode_output=True, rstrip=True, input_type=None, output_type=None, get_option_value=None, module=None):
         # Run sops directly, python module is deprecated
         command = [Sops.get_sops_binary(get_option_value)]
         env = os.environ.copy()
@@ -152,13 +153,15 @@ class Sops():
             command.extend(["--input-type", input_type])
         if output_type is not None:
             command.extend(["--output-type", output_type])
+        if content is not None:
+            encrypted_file = '/dev/stdin'
         command.extend(["--decrypt", encrypted_file])
 
         if module:
-            exit_code, output, err = module.run_command(command, environ_update=env, encoding=None)
+            exit_code, output, err = module.run_command(command, environ_update=env, encoding=None, data=content, binary_data=True)
         else:
-            process = Popen(command, stdout=PIPE, stderr=PIPE, env=env)
-            (output, err) = process.communicate()
+            process = Popen(command, stdin=None if content is None else PIPE, stdout=PIPE, stderr=PIPE, env=env)
+            (output, err) = process.communicate(input=content)
             exit_code = process.returncode
 
         if decode_output:

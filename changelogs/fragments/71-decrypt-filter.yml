@@ -1,0 +1,3 @@
+add plugin.filter:
+  - name: decrypt
+    description: Decrypt sops-encrypted data
