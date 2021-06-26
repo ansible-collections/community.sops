@@ -10,7 +10,7 @@ import re
 from ansible.module_utils.common.validation import check_type_bool, check_type_str
 from ansible.module_utils.common._collections_compat import Sequence, Mapping
 from ansible.module_utils.six import iteritems, string_types
-from ansible.module_utils._text import to_native, to_text
+from ansible.module_utils.common.text.converters import to_native, to_text
 from ansible.plugins.action import ActionBase
 from ansible.utils.display import Display
 

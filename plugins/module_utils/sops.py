@@ -9,7 +9,7 @@ import abc
 import os
 
 from ansible.module_utils import six
-from ansible.module_utils._text import to_text, to_native
+from ansible.module_utils.common.text.converters import to_text, to_native
 
 # Since this is used both by plugins and modules, we need subprocess in case the `module` parameter is not used
 from subprocess import Popen, PIPE
