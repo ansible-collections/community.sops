@@ -7,7 +7,7 @@ from __future__ import absolute_import, division, print_function
 __metaclass__ = type
 
 from ansible.errors import AnsibleError, AnsibleFilterError
-from ansible.module_utils._text import to_bytes, to_native
+from ansible.module_utils.common.text.converters import to_bytes, to_native
 from ansible.utils.display import Display
 
 from ansible_collections.community.sops.plugins.module_utils.sops import Sops, SopsError

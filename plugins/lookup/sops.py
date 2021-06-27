@@ -114,7 +114,7 @@ import base64
 
 from ansible.errors import AnsibleLookupError
 from ansible.plugins.lookup import LookupBase
-from ansible.module_utils._text import to_native
+from ansible.module_utils.common.text.converters import to_native
 from ansible_collections.community.sops.plugins.module_utils.sops import Sops, SopsError
 
 from ansible.utils.display import Display
