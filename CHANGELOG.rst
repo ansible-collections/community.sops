@@ -5,6 +5,27 @@ Community Sops Release Notes
 .. contents:: Topics
 
 
+v1.1.0
+======
+
+Release Summary
+---------------
+
+A minor release for inclusion in Ansible 4.2.0.
+
+Minor Changes
+-------------
+
+- Avoid internal ansible-core module_utils in favor of equivalent public API available since at least Ansible 2.9 (https://github.com/ansible-collections/community.sops/pull/73).
+
+New Plugins
+-----------
+
+Filter
+~~~~~~
+
+- community.sops.decrypt - Decrypt sops-encrypted data
+
 v1.0.6
 ======
 

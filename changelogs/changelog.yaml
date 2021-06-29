@@ -115,3 +115,19 @@ releases:
     - 1.0.6.yml
     - 58-actionmodule-plugin-utils-ansible-core-2.11.yml
     release_date: '2021-03-21'
+  1.1.0:
+    changes:
+      minor_changes:
+      - Avoid internal ansible-core module_utils in favor of equivalent public API
+        available since at least Ansible 2.9 (https://github.com/ansible-collections/community.sops/pull/73).
+      release_summary: A minor release for inclusion in Ansible 4.2.0.
+    fragments:
+    - 1.1.0.yml
+    - 71-decrypt-filter.yml
+    - ansible-core-_text.yml
+    plugins:
+      filter:
+      - description: Decrypt sops-encrypted data
+        name: decrypt
+        namespace: null
+    release_date: '2021-06-29'
