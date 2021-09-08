@@ -4,7 +4,7 @@
     - name: Place .sops.yaml
       copy:
         src: ".sops.yaml"
-        dest: "{{ output_dir }}/.sops.yaml"
+        dest: "{{ remote_tmp_dir }}/.sops.yaml"
 
     - name: Define test objects
       set_fact:
@@ -33,7 +33,7 @@
 
     - name: Create binary file
       community.sops.sops_encrypt:
-        path: "{{ output_dir }}/test_bad_base64"
+        path: "{{ remote_tmp_dir }}/test_bad_base64"
         content_binary: This is not Base64
       ignore_errors: true
       register: result_not_base64
@@ -47,12 +47,12 @@
 
     - name: Place broken file
       copy:
-        dest: "{{ output_dir }}/broken"
+        dest: "{{ remote_tmp_dir }}/broken"
         content: I'm not sops encrypted
 
     - name: Cannot decode existing file (overwrite, check mode)
       community.sops.sops_encrypt:
-        path: "{{ output_dir }}/broken"
+        path: "{{ remote_tmp_dir }}/broken"
         content_text: Test
       ignore_errors: yes
       register: result_cannot_decode_check
@@ -60,14 +60,14 @@
 
     - name: Cannot decode existing file (overwrite)
       community.sops.sops_encrypt:
-        path: "{{ output_dir }}/broken"
+        path: "{{ remote_tmp_dir }}/broken"
         content_text: Test
       ignore_errors: yes
       register: result_cannot_decode
 
     - name: Cannot decode existing file (force, check mode)
       community.sops.sops_encrypt:
-        path: "{{ output_dir }}/broken"
+        path: "{{ remote_tmp_dir }}/broken"
         content_text: Test
         force: true
       register: result_cannot_decode_force_check
@@ -75,13 +75,16 @@
 
     - name: Cannot decode existing file (force)
       community.sops.sops_encrypt:
-        path: "{{ output_dir }}/broken"
+        path: "{{ remote_tmp_dir }}/broken"
         content_text: Test
         force: true
       register: result_cannot_decode_force
 
+    - slurp:
+        src: "{{ remote_tmp_dir ~ '/broken' }}"
+      register: slurp
     - set_fact:
-        value: "{{ lookup('community.sops.sops', output_dir ~ '/broken', rstrip=False) }}"
+        value: "{{ slurp.content | b64decode | community.sops.decrypt(rstrip=False, output_type='binary') }}"
 
     - assert:
         that:
@@ -95,48 +98,54 @@
 
     - name: Create text file (check mode)
       community.sops.sops_encrypt:
-        path: "{{ output_dir }}/test_text"
+        path: "{{ remote_tmp_dir }}/test_text"
         content_text: "{{ text_value_1 }}"
       check_mode: true
       register: result_check
 
     - name: Create text file
       community.sops.sops_encrypt:
-        path: "{{ output_dir }}/test_text"
+        path: "{{ remote_tmp_dir }}/test_text"
         content_text: "{{ text_value_1 }}"
       register: result
 
+    - slurp:
+        src: "{{ remote_tmp_dir ~ '/test_text' }}"
+      register: slurp
     - set_fact:
-        value_1: "{{ lookup('community.sops.sops', output_dir ~ '/test_text', rstrip=False) }}"
+        value_1: "{{ slurp.content | b64decode | community.sops.decrypt(rstrip=False, output_type='binary') }}"
 
     - name: Create text file (idempotency, check mode)
       community.sops.sops_encrypt:
-        path: "{{ output_dir }}/test_text"
+        path: "{{ remote_tmp_dir }}/test_text"
         content_text: "{{ text_value_1 }}"
       check_mode: true
       register: result_idempotent_check
 
     - name: Create text file (idempotency)
       community.sops.sops_encrypt:
-        path: "{{ output_dir }}/test_text"
+        path: "{{ remote_tmp_dir }}/test_text"
         content_text: "{{ text_value_1 }}"
       register: result_idempotent
 
     - name: Create text file (change, check mode)
       community.sops.sops_encrypt:
-        path: "{{ output_dir }}/test_text"
+        path: "{{ remote_tmp_dir }}/test_text"
         content_text: "{{ text_value_2 }}"
       check_mode: true
       register: result_change_check
 
     - name: Create text file (change)
       community.sops.sops_encrypt:
-        path: "{{ output_dir }}/test_text"
+        path: "{{ remote_tmp_dir }}/test_text"
         content_text: "{{ text_value_2 }}"
       register: result_change
 
+    - slurp:
+        src: "{{ remote_tmp_dir ~ '/test_text' }}"
+      register: slurp
     - set_fact:
-        value_2: "{{ lookup('community.sops.sops', output_dir ~ '/test_text', rstrip=false) }}"
+        value_2: "{{ slurp.content | b64decode | community.sops.decrypt(rstrip=false, output_type='binary') }}"
 
     - assert:
         that:
@@ -153,48 +162,54 @@
 
     - name: Create binary file (check mode)
       community.sops.sops_encrypt:
-        path: "{{ output_dir }}/test_binary"
+        path: "{{ remote_tmp_dir }}/test_binary"
         content_binary: "{{ binary_value_1_b64 }}"
       check_mode: true
       register: result_check
 
     - name: Create binary file
       community.sops.sops_encrypt:
-        path: "{{ output_dir }}/test_binary"
+        path: "{{ remote_tmp_dir }}/test_binary"
         content_binary: "{{ binary_value_1_b64 }}"
       register: result
 
+    - slurp:
+        src: "{{ remote_tmp_dir ~ '/test_binary' }}"
+      register: slurp
     - set_fact:
-        value_1: "{{ lookup('community.sops.sops', output_dir ~ '/test_binary', base64=true, rstrip=False) }}"
+        value_1: "{{ slurp.content | b64decode | community.sops.decrypt(rstrip=False, output_type='binary') | b64encode }}"
 
     - name: Create binary file (idempotency, check mode)
       community.sops.sops_encrypt:
-        path: "{{ output_dir }}/test_binary"
+        path: "{{ remote_tmp_dir }}/test_binary"
         content_binary: "{{ binary_value_1_b64 }}"
       check_mode: true
       register: result_idempotent_check
 
     - name: Create binary file (idempotency)
       community.sops.sops_encrypt:
-        path: "{{ output_dir }}/test_binary"
+        path: "{{ remote_tmp_dir }}/test_binary"
         content_binary: "{{ binary_value_1_b64 }}"
       register: result_idempotent
 
     - name: Create binary file (change, check mode)
       community.sops.sops_encrypt:
-        path: "{{ output_dir }}/test_binary"
+        path: "{{ remote_tmp_dir }}/test_binary"
         content_binary: "{{ binary_value_2_b64 }}"
       check_mode: true
       register: result_change_check
 
     - name: Create binary file (change)
       community.sops.sops_encrypt:
-        path: "{{ output_dir }}/test_binary"
+        path: "{{ remote_tmp_dir }}/test_binary"
         content_binary: "{{ binary_value_2_b64 }}"
       register: result_change
 
+    - slurp:
+        src: "{{ remote_tmp_dir ~ '/test_binary' }}"
+      register: slurp
     - set_fact:
-        value_2: "{{ lookup('community.sops.sops', output_dir ~ '/test_binary', base64=true, rstrip=false) }}"
+        value_2: "{{ slurp.content | b64decode | community.sops.decrypt(rstrip=false, output_type='binary') | b64encode }}"
 
     - assert:
         that:
@@ -211,58 +226,64 @@
 
     - name: Create JSON file (check mode)
       community.sops.sops_encrypt:
-        path: "{{ output_dir }}/test_json"
+        path: "{{ remote_tmp_dir }}/test_json"
         content_json: "{{ json_value_1 }}"
       check_mode: true
       register: result_check
 
     - name: Create JSON file
       community.sops.sops_encrypt:
-        path: "{{ output_dir }}/test_json"
+        path: "{{ remote_tmp_dir }}/test_json"
         content_json: "{{ json_value_1 }}"
       register: result
 
+    - slurp:
+        src: "{{ remote_tmp_dir ~ '/test_json' }}"
+      register: slurp
     - set_fact:
-        value_1_raw: "{{ lookup('community.sops.sops', output_dir ~ '/test_json', base64=true, output_type='json') }}"
-        value_1: "{{ lookup('community.sops.sops', output_dir ~ '/test_json', output_type='json') | from_json }}"
+        value_1_raw: "{{ slurp.content | b64decode | community.sops.decrypt(output_type='json') | b64encode }}"
+        value_1: "{{ slurp.content | b64decode | community.sops.decrypt(output_type='json') | from_json }}"
 
     - name: Create JSON file (idempotency, check mode)
       community.sops.sops_encrypt:
-        path: "{{ output_dir }}/test_json"
+        path: "{{ remote_tmp_dir }}/test_json"
         content_json: "{{ json_value_1 }}"
       check_mode: true
       register: result_idempotent_check
 
     - name: Create JSON file (idempotency)
       community.sops.sops_encrypt:
-        path: "{{ output_dir }}/test_json"
+        path: "{{ remote_tmp_dir }}/test_json"
         content_json: "{{ json_value_1 }}"
       register: result_idempotent
 
     - name: Create JSON file (change, check mode)
       community.sops.sops_encrypt:
-        path: "{{ output_dir }}/test_json"
+        path: "{{ remote_tmp_dir }}/test_json"
         content_json: "{{ json_value_2 }}"
       check_mode: true
       register: result_change_check
 
     - name: Create JSON file (change)
       community.sops.sops_encrypt:
-        path: "{{ output_dir }}/test_json"
+        path: "{{ remote_tmp_dir }}/test_json"
         content_json: "{{ json_value_2 }}"
       register: result_change
 
+    - slurp:
+        src: "{{ remote_tmp_dir ~ '/test_json' }}"
+      register: slurp
     - set_fact:
-        value_2: "{{ lookup('community.sops.sops', output_dir ~ '/test_json', output_type='json') | from_json }}"
+        value_2: "{{ slurp.content | b64decode | community.sops.decrypt(output_type='json') | from_json }}"
 
     - name: Place broken JSON file
       copy:
         src: "broken-json-yaml"
-        dest: "{{ output_dir }}/test_json_broken"
+        dest: "{{ remote_tmp_dir }}/test_json_broken"
 
     - name: Update broken JSON file
       community.sops.sops_encrypt:
-        path: "{{ output_dir }}/test_json_broken"
+        path: "{{ remote_tmp_dir }}/test_json_broken"
         content_json: "{{ json_value_1 }}"
       register: result_broken_change
 
@@ -283,58 +304,64 @@
 
     - name: Create YAML file (check mode)
       community.sops.sops_encrypt:
-        path: "{{ output_dir }}/test_yaml"
+        path: "{{ remote_tmp_dir }}/test_yaml"
         content_yaml: "{{ json_value_1 }}"
       check_mode: true
       register: result_check
 
     - name: Create YAML file
       community.sops.sops_encrypt:
-        path: "{{ output_dir }}/test_yaml"
+        path: "{{ remote_tmp_dir }}/test_yaml"
         content_yaml: "{{ json_value_1 }}"
       register: result
 
+    - slurp:
+        src: "{{ remote_tmp_dir ~ '/test_yaml' }}"
+      register: slurp
     - set_fact:
-        value_1_raw: "{{ lookup('community.sops.sops', output_dir ~ '/test_yaml', base64=true, output_type='yaml') }}"
-        value_1: "{{ lookup('community.sops.sops', output_dir ~ '/test_yaml', output_type='yaml') | from_yaml }}"
+        value_1_raw: "{{ slurp.content | b64decode | community.sops.decrypt(output_type='yaml') | b64encode }}"
+        value_1: "{{ slurp.content | b64decode | community.sops.decrypt(output_type='yaml') | from_yaml }}"
 
     - name: Create YAML file (idempotency, check mode)
       community.sops.sops_encrypt:
-        path: "{{ output_dir }}/test_yaml"
+        path: "{{ remote_tmp_dir }}/test_yaml"
         content_yaml: "{{ json_value_1 }}"
       check_mode: true
       register: result_idempotent_check
 
     - name: Create YAML file (idempotency)
       community.sops.sops_encrypt:
-        path: "{{ output_dir }}/test_yaml"
+        path: "{{ remote_tmp_dir }}/test_yaml"
         content_yaml: "{{ json_value_1 }}"
       register: result_idempotent
 
     - name: Create YAML file (change, check mode)
       community.sops.sops_encrypt:
-        path: "{{ output_dir }}/test_yaml"
+        path: "{{ remote_tmp_dir }}/test_yaml"
         content_yaml: "{{ json_value_2 }}"
       check_mode: true
       register: result_change_check
 
     - name: Create YAML file (change)
       community.sops.sops_encrypt:
-        path: "{{ output_dir }}/test_yaml"
+        path: "{{ remote_tmp_dir }}/test_yaml"
         content_yaml: "{{ json_value_2 }}"
       register: result_change
 
+    - slurp:
+        src: "{{ remote_tmp_dir ~ '/test_yaml' }}"
+      register: slurp
     - set_fact:
-        value_2: "{{ lookup('community.sops.sops', output_dir ~ '/test_yaml', output_type='yaml') | from_yaml }}"
+        value_2: "{{ slurp.content | b64decode | community.sops.decrypt(output_type='yaml') | from_yaml }}"
 
     - name: Place broken YAML file
       copy:
         src: "broken-json-yaml"
-        dest: "{{ output_dir }}/test_yaml_broken"
+        dest: "{{ remote_tmp_dir }}/test_yaml_broken"
 
     - name: Update broken YAML file
       community.sops.sops_encrypt:
-        path: "{{ output_dir }}/test_yaml_broken"
+        path: "{{ remote_tmp_dir }}/test_yaml_broken"
         content_json: "{{ json_value_1 }}"
       register: result_broken_change
 
@@ -355,17 +382,20 @@
 
     - name: Create text file with output type JSON
       community.sops.sops_encrypt:
-        path: "{{ output_dir }}/test_output_type.json"
+        path: "{{ remote_tmp_dir }}/test_output_type.json"
         content_text: "{{ text_value_1 }}"
       register: result
 
+    - slurp:
+        src: "{{ remote_tmp_dir ~ '/test_output_type.json' }}"
+      register: slurp
     - set_fact:
-        value_1: "{{ lookup('community.sops.sops', output_dir ~ '/test_output_type.json', rstrip=False) | from_json }}"
-        value_2: "{{ lookup('ansible.builtin.file', output_dir ~ '/test_output_type.json', rstrip=False) }}"
+        value_1: "{{ slurp.content | b64decode | community.sops.decrypt(rstrip=False, output_type='json') | from_json }}"
+        value_2: "{{ slurp.content | b64decode }}"
 
     - name: Create text file with output type JSON (idempotency)
       community.sops.sops_encrypt:
-        path: "{{ output_dir }}/test_output_type.json"
+        path: "{{ remote_tmp_dir }}/test_output_type.json"
         content_text: "{{ text_value_1 }}"
       register: result_idem
 
