@@ -3,5 +3,9 @@
 - set_fact:
     sops_installed: no
 
-- include: ubuntu.yml
-  when: ansible_distribution == 'Ubuntu'
+- include_tasks: install.yml
+
+- include_tasks:
+    file: install.yml
+    apply:
+      delegate_to: localhost
