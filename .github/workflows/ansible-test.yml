@@ -34,7 +34,7 @@ jobs:
           # will run on all python versions it supports.
           python-version: 3.8
 
-      - name: Install ansible-base (${{ matrix.ansible }})
+      - name: Install ansible-core (${{ matrix.ansible }})
         run: pip install https://github.com/ansible/ansible/archive/${{ matrix.ansible }}.tar.gz --disable-pip-version-check
 
       # run ansible-test sanity inside of Docker.
@@ -56,7 +56,7 @@ jobs:
 #        with:
 #          python-version: 3.8
 #
-#      - name: Install ansible-base (devel)
+#      - name: Install ansible-core (devel)
 #        run: pip install https://github.com/ansible/ansible/archive/devel.tar.gz --disable-pip-version-check
 #
 #      - name: Run unit tests
@@ -115,7 +115,7 @@ jobs:
         with:
           python-version: 3.8
 
-      - name: Install ansible-base (${{ matrix.ansible }})
+      - name: Install ansible-core (${{ matrix.ansible }})
         run: pip install https://github.com/ansible/ansible/archive/${{ matrix.ansible }}.tar.gz --disable-pip-version-check
 
       - name: Run integration tests in ${{ matrix.docker_container }} Docker container
