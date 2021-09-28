@@ -16,11 +16,11 @@ The following table shows which versions of sops were tested with which versions
 |---|---|
 |0.1.0|`3.5.0+`|
 |1.0.6|`3.5.0+`|
-|`main` branch|`3.5.0`, `3.6.0`, `3.7.0`|
+|`main` branch|`3.5.0`, `3.6.0`, `3.7.1`|
 
 ## Tested with Ansible
 
-Tested with the current Ansible 2.9, ansible-base 2.10 and ansible-core 2.11 releases and the current development version of ansible-core. Ansible versions before 2.9.10 are not supported.
+Tested with the current Ansible 2.9, ansible-base 2.10, ansible-core 2.11 and ansible-core 2.12 releases and the current development version of ansible-core. Ansible versions before 2.9.10 are not supported.
 
 The vars plugin requires ansible-base 2.10 or later.
 

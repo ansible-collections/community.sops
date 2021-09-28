@@ -18,6 +18,7 @@ jobs:
           - stable-2.9
           - stable-2.10
           - stable-2.11
+          - stable-2.12
           - devel
     runs-on: ubuntu-latest
     steps:
@@ -43,61 +44,41 @@ jobs:
         run: ansible-test sanity --docker -v --color
         working-directory: ./ansible_collections/community/sops
 
-#  units:
-#    runs-on: ubuntu-latest
-#    steps:
-#      - name: Check out code
-#        uses: actions/checkout@v1
-#        with:
-#          path: ansible_collections/community/sops
-#
-#      - name: Set up Python 3.8
-#        uses: actions/setup-python@v1
-#        with:
-#          python-version: 3.8
-#
-#      - name: Install ansible-core (devel)
-#        run: pip install https://github.com/ansible/ansible/archive/devel.tar.gz --disable-pip-version-check
-#
-#      - name: Run unit tests
-#        run: ansible-test units --docker -v --color --python 3.6 --coverage
-#
-#      - name: Generate coverage report.
-#        run: ansible-test coverage xml -v --requirements --group-by command --group-by version
-#
-#      - uses: codecov/codecov-action@v1
-#        with:
-#          fail_ci_if_error: false
-
   integration:
     runs-on: ubuntu-latest
     strategy:
       matrix:
         ansible:
-          # It's important that Sanity is tested against all stable-X.Y branches
-          # Testing against `devel` may fail as new tests are added.
-          - stable-2.9
-          - stable-2.10
           - stable-2.11
+          - stable-2.12
           - devel
         docker_container:
-          - ubuntu1604
           - ubuntu1804
           - ubuntu2004
         sops_version:
           - 3.5.0
           - 3.6.0
-          - 3.7.0
+          - 3.7.1
         exclude:
           - ansible: devel
             docker_container: ubuntu1604
           - ansible: stable-2.11
             docker_container: ubuntu1604
-          # ubuntu2004 is only available with ansible-core 2.11+ / devel
+        include:
+          # 2.9
           - ansible: stable-2.9
-            docker_container: ubuntu2004
+            docker_container: ubuntu1604
+            sops_version: 3.5.0
+          - ansible: stable-2.9
+            docker_container: ubuntu1604
+            sops_version: 3.6.0
+          - ansible: stable-2.9
+            docker_container: ubuntu1804
+            sops_version: 3.7.1
+          # 2.10
           - ansible: stable-2.10
-            docker_container: ubuntu2004
+            docker_container: ubuntu1804
+            sops_version: 3.7.1
     steps:
 
       - name: Check out code
