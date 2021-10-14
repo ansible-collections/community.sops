@@ -10,7 +10,7 @@ fi
 # Install sops
 ANSIBLE_ROLES_PATH=.. ansible-playbook setup.yml
 
-if [ "$(which sops)" == "" ]; then
+if [ "$(command -v sops)" == "" ]; then
     # sops was not installed
     exit
 fi
