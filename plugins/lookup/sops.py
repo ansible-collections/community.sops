@@ -76,6 +76,8 @@ DOCUMENTATION = """
     extends_documentation_fragment:
         - community.sops.sops
         - community.sops.sops.ansible_variables
+        - community.sops.sops.ansible_env
+        - community.sops.sops.ansible_ini
     notes:
         - This lookup does not understand 'globbing' - use the fileglob lookup instead.
 """
