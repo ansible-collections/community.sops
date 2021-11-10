@@ -65,6 +65,8 @@ DOCUMENTATION = '''
     extends_documentation_fragment:
         - ansible.builtin.vars_plugin_staging
         - community.sops.sops
+        - community.sops.sops.ansible_env
+        - community.sops.sops.ansible_ini
 '''
 
 import os

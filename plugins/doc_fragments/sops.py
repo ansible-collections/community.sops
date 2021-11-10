@@ -83,6 +83,8 @@ options:
     aws_session_token:
         vars:
             - name: sops_session_token
+            - name: sops_aws_session_token
+              version_added: 1.2.0
     config_path:
         vars:
             - name: sops_config_path
@@ -92,6 +94,84 @@ options:
     keyservice:
         vars:
             - name: sops_keyservice
+'''
+
+    ANSIBLE_ENV = r'''
+options:
+    sops_binary:
+        env:
+            - name: ANSIBLE_SOPS_BINARY
+              version_added: 1.2.0
+    aws_profile:
+        env:
+            - name: ANSIBLE_SOPS_AWS_PROFILE
+              version_added: 1.2.0
+    aws_access_key_id:
+        env:
+            - name: ANSIBLE_SOPS_AWS_ACCESS_KEY_ID
+              version_added: 1.2.0
+    aws_secret_access_key:
+        env:
+            - name: ANSIBLE_SOPS_AWS_SECRET_ACCESS_KEY
+              version_added: 1.2.0
+    aws_session_token:
+        env:
+            - name: ANSIBLE_SOPS_AWS_SESSION_TOKEN
+              version_added: 1.2.0
+    config_path:
+        env:
+            - name: ANSIBLE_SOPS_CONFIG_PATH
+              version_added: 1.2.0
+    enable_local_keyservice:
+        env:
+            - name: ANSIBLE_SOPS_ENABLE_LOCAL_KEYSERVICE
+              version_added: 1.2.0
+    keyservice:
+        env:
+            - name: ANSIBLE_SOPS_KEYSERVICE
+              version_added: 1.2.0
+'''
+
+    ANSIBLE_INI = r'''
+options:
+    sops_binary:
+        ini:
+            - section: community.sops
+              key: binary
+              version_added: 1.2.0
+    aws_profile:
+        ini:
+            - section: community.sops
+              key: aws_profile
+              version_added: 1.2.0
+    aws_access_key_id:
+        ini:
+            - section: community.sops
+              key: aws_access_key_id
+              version_added: 1.2.0
+    # We do not provide an INI key for
+    #     aws_secret_access_key
+    # to make sure that secrets cannot be provided in ansible.ini. Use environment variables or another mechanism for that.
+    aws_session_token:
+        ini:
+            - section: community.sops
+              key: aws_session_token
+              version_added: 1.2.0
+    config_path:
+        ini:
+            - section: community.sops
+              key: config_path
+              version_added: 1.2.0
+    enable_local_keyservice:
+        ini:
+            - section: community.sops
+              key: enable_local_keyservice
+              version_added: 1.2.0
+    keyservice:
+        ini:
+            - section: community.sops
+              key: keyservice
+              version_added: 1.2.0
 '''
 
     ENCRYPT_SPECIFIC = r'''
