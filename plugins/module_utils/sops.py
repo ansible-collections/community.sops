@@ -174,7 +174,7 @@ class Sops():
         if err and display:
             display.vvvv(to_text(err, errors='surrogate_or_strict'))
 
-        if exit_code > 0:
+        if exit_code != 0:
             raise SopsError(encrypted_file, exit_code, err, decryption=True)
 
         if rstrip:
@@ -207,7 +207,7 @@ class Sops():
         if err and display:
             display.vvvv(to_text(err, errors='surrogate_or_strict'))
 
-        if exit_code > 0:
+        if exit_code != 0:
             raise SopsError('to stdout', exit_code, err, decryption=False)
 
         return output
