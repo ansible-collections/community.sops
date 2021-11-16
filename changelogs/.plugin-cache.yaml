@@ -33,4 +33,4 @@ plugins:
       description: Loading sops-encrypted vars files
       name: sops
       version_added: 0.1.0
-version: 1.1.0
+version: 1.2.0
