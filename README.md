@@ -112,7 +112,7 @@ By using `{{ encrypted_data | community.sops.decrypt }}` instead of `{{ decrypte
 ### vars plugin
 
 Vars plugins only work in ansible >= 2.10 and require explicit enabling.  One
-way to enable the plugin is by adding the following to the `default` section of
+way to enable the plugin is by adding the following to the `defaults` section of
 your `ansible.cfg`:
 
 ```ini

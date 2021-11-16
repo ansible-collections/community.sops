@@ -331,7 +331,7 @@ To use the vars plugin, you need to enable it in your Ansible config file (``ans
 
 .. code-block:: ini
 
-    [default]
+    [defaults]
     vars_plugins_enabled = host_group_vars,community.sops.sops
 
 See :ref:`VARIABLE_PLUGINS_ENABLED <VARIABLE_PLUGINS_ENABLED>` for more details on enabling vars plugins. Then you can put files with the following extensions into the ``group_vars`` and ``host_vars`` directories:
