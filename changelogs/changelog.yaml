@@ -131,3 +131,22 @@ releases:
         name: decrypt
         namespace: null
     release_date: '2021-06-29'
+  1.2.0:
+    changes:
+      bugfixes:
+      - Fix error handling in calls of the ``sops`` binary when negative errors are
+        returned (https://github.com/ansible-collections/community.sops/issues/82,
+        https://github.com/ansible-collections/community.sops/pull/83).
+      minor_changes:
+      - sops lookup and vars plugin - allow to configure almost all generic options
+        by ansible.cfg entries and environment variables (https://github.com/ansible-collections/community.sops/pull/81).
+      release_summary: 'Collection release for inclusion in Ansible 4.9.0 and 5.1.0.
+
+
+        This release contains a change allowing to configure generic plugin options with ansible.cfg
+        keys and env variables.'
+    fragments:
+    - 1.2.0.yml
+    - 81-plugin-options.yml
+    - 83-fix-error-handling.yml
+    release_date: '2021-11-16'

@@ -5,6 +5,26 @@ Community Sops Release Notes
 .. contents:: Topics
 
 
+v1.2.0
+======
+
+Release Summary
+---------------
+
+Collection release for inclusion in Ansible 4.9.0 and 5.1.0.
+
+This release contains a change allowing to configure generic plugin options with ansible.cfg keys and env variables.
+
+Minor Changes
+-------------
+
+- sops lookup and vars plugin - allow to configure almost all generic options by ansible.cfg entries and environment variables (https://github.com/ansible-collections/community.sops/pull/81).
+
+Bugfixes
+--------
+
+- Fix error handling in calls of the ``sops`` binary when negative errors are returned (https://github.com/ansible-collections/community.sops/issues/82, https://github.com/ansible-collections/community.sops/pull/83).
+
 v1.1.0
 ======
 

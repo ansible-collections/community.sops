@@ -1,2 +1,0 @@
-minor_changes:
-- "sops lookup and vars plugin - allow to configure almost all generic options by ansible.cfg entries and environment variables (https://github.com/ansible-collections/community.sops/pull/81)."
