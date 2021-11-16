@@ -1,0 +1,4 @@
+release_summary: |-
+  Collection release for inclusion in Ansible 4.9.0 and 5.1.0.
+
+  This release contains multiple updates to the collection CI infrastructure and a change allowing to configure generic plugin options with ansible.cfg keys and env variables.
