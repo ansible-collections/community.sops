@@ -41,8 +41,16 @@ jobs:
       # run ansible-test sanity inside of Docker.
       # The docker container has all the pinned dependencies that are required.
       - name: Run sanity tests
-        run: ansible-test sanity --docker -v --color
+        run: ansible-test sanity --docker -v --color --coverage
         working-directory: ./ansible_collections/community/sops
+
+      - name: Generate coverage report.
+        run: ansible-test coverage xml -v --requirements --group-by command --group-by version
+        working-directory: ./ansible_collections/community/sops
+
+      - uses: codecov/codecov-action@v2
+        with:
+          fail_ci_if_error: false
 
   integration:
     runs-on: ubuntu-latest
