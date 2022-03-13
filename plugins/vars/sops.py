@@ -38,6 +38,7 @@ DOCUMENTATION = '''
           - "Check all of these extensions when looking for 'variable' files which should be YAML or JSON or vaulted versions of these."
           - 'This affects vars_files, include_vars, inventory and vars plugins among others.'
         type: list
+        elements: string
       stage:
         version_added: 0.2.0
         ini:
