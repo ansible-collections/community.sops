@@ -143,10 +143,16 @@ releases:
       release_summary: 'Collection release for inclusion in Ansible 4.9.0 and 5.1.0.
 
 
-        This release contains a change allowing to configure generic plugin options with ansible.cfg
-        keys and env variables.'
+        This release contains a change allowing to configure generic plugin options
+        with ansible.cfg keys and env variables.'
     fragments:
     - 1.2.0.yml
     - 81-plugin-options.yml
     - 83-fix-error-handling.yml
     release_date: '2021-11-16'
+  1.2.1:
+    changes:
+      release_summary: Maintenance release with updated documentation.
+    fragments:
+    - 1.2.1.yml
+    release_date: '2022-03-22'

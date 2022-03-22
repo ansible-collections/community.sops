@@ -5,6 +5,14 @@ Community Sops Release Notes
 .. contents:: Topics
 
 
+v1.2.1
+======
+
+Release Summary
+---------------
+
+Maintenance release with updated documentation.
+
 v1.2.0
 ======
 
