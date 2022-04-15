@@ -4,5 +4,10 @@
 # SPDX-License-Identifier: GPL-3.0-or-later
 
 version: 1
-dependencies:
-  system: meta/ee-bindep.txt
+dependencies: {}
+build_arg_defaults:
+  EE_COMMUNITY_SOPS_BINARY_VERSION: 3.7.2
+additional_build_steps:
+  append:
+    # bindep does not allow installation from URLs
+    - RUN dnf install https://github.com/mozilla/sops/releases/download/v${EE_COMMUNITY_SOPS_BINARY_VERSION}/sops-${EE_COMMUNITY_SOPS_BINARY_VERSION}-1.x86_64.rpm
