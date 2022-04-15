@@ -1,0 +1,47 @@
+---
+# Copyright (c) Ansible Project
+# GNU General Public License v3.0+ (see LICENSES/GPL-3.0-or-later.txt or https://www.gnu.org/licenses/gpl-3.0.txt)
+# SPDX-License-Identifier: GPL-3.0-or-later
+
+- name: Test lookup with missing file
+  set_fact:
+    sops_file_does_not_exists: "{{ lookup('community.sops.sops', 'file-does-not-exists.sops.yml') }}"
+  ignore_errors: yes
+  register: sops_lookup_missing_file
+
+- assert:
+    that:
+      - "sops_lookup_missing_file is failed"
+      - "'could not locate file in lookup: file-does-not-exists.sops.yml' in sops_lookup_missing_file.msg"
+
+- name: Test lookup with missing file with empty_on_not_exist
+  set_fact:
+    sops_file_does_not_exists_empty: "{{ lookup('community.sops.sops', 'file-does-not-exists.sops.yml', empty_on_not_exist=true) }}"
+  register: sops_lookup_missing_file_empty_on_not_exist
+
+- assert:
+    that:
+      - "sops_lookup_missing_file_empty_on_not_exist is success"
+      - "sops_file_does_not_exists_empty == ''"
+
+- name: Test lookup of non-sops file
+  set_fact:
+    sops_wrong_file: "{{ lookup('community.sops.sops', 'wrong.yaml') }}"
+  ignore_errors: yes
+  register: sops_lookup_wrong_file
+
+- assert:
+    that:
+      - "sops_lookup_wrong_file is failed"
+      - "'sops metadata not found' in sops_lookup_wrong_file.msg"
+
+- name: Test simple lookup
+  set_fact:
+    sops_success: "{{ lookup('community.sops.sops', 'simple.sops.yaml') }}"
+  ignore_errors: yes
+  register: sops_lookup_simple
+
+- assert:
+    that:
+      - "sops_lookup_simple is success"
+      - "sops_success == 'foo: bar'"

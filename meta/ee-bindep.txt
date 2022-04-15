@@ -1,0 +1,2 @@
+https://github.com/mozilla/sops/releases/download/v3.7.2/sops-3.7.2-1.x86_64.rpm [platform:rpm]
+https://github.com/mozilla/sops/releases/download/v3.7.2/sops_3.7.2_amd64.deb [platform:dpkg]
