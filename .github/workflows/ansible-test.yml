@@ -61,11 +61,11 @@ jobs:
     strategy:
       matrix:
         ansible:
-          - stable-2.13
           - devel
         docker_container:
           - ubuntu1804
           - ubuntu2004
+          - ubuntu2204
         sops_version:
           - 3.5.0
           - 3.6.0
@@ -95,6 +95,10 @@ jobs:
           - ansible: stable-2.12
             docker_container: ubuntu2004
             sops_version: 3.7.0
+          # 2.13
+          - ansible: stable-2.13
+            docker_container: ubuntu2004
+            sops_version: 3.7.3
     steps:
 
       - name: Check out code
