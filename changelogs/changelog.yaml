@@ -156,3 +156,12 @@ releases:
     fragments:
     - 1.2.1.yml
     release_date: '2022-03-22'
+  1.2.2:
+    changes:
+      bugfixes:
+      - Include ``simplified_bsd.txt`` license file for the ``sops`` module utils.
+      release_summary: Maintenance release.
+    fragments:
+    - 1.2.2.yml
+    - simplified-bsd-license.yml
+    release_date: '2022-06-02'

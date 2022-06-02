@@ -6,6 +6,11 @@ plugins:
   callback: {}
   cliconf: {}
   connection: {}
+  filter:
+    decrypt:
+      description: Decrypt sops encrypted data
+      name: decrypt
+      version_added: 1.1.0
   httpapi: {}
   inventory: {}
   lookup:
@@ -28,9 +33,10 @@ plugins:
   netconf: {}
   shell: {}
   strategy: {}
+  test: {}
   vars:
     sops:
       description: Loading sops-encrypted vars files
       name: sops
       version_added: 0.1.0
-version: 1.2.1
+version: 1.2.2

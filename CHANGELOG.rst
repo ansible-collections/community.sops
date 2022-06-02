@@ -5,6 +5,19 @@ Community Sops Release Notes
 .. contents:: Topics
 
 
+v1.2.2
+======
+
+Release Summary
+---------------
+
+Maintenance release.
+
+Bugfixes
+--------
+
+- Include ``simplified_bsd.txt`` license file for the ``sops`` module utils.
+
 v1.2.1
 ======
 
