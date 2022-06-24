@@ -63,18 +63,12 @@ jobs:
         ansible:
           - devel
         docker_container:
-          - ubuntu1804
           - ubuntu2004
           - ubuntu2204
         sops_version:
           - 3.5.0
           - 3.6.0
           - 3.7.3
-        exclude:
-          - ansible: devel
-            docker_container: ubuntu1604
-          - ansible: stable-2.11
-            docker_container: ubuntu1604
         include:
           # 2.9
           - ansible: stable-2.9
