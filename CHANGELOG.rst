@@ -5,6 +5,14 @@ Community Sops Release Notes
 .. contents:: Topics
 
 
+v1.2.3
+======
+
+Release Summary
+---------------
+
+Fix formatting bug in documentation. No code changes.
+
 v1.2.2
 ======
 
