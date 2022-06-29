@@ -336,9 +336,9 @@ To use the vars plugin, you need to enable it in your Ansible config file (``ans
 
 See :ref:`VARIABLE_PLUGINS_ENABLED <VARIABLE_PLUGINS_ENABLED>` for more details on enabling vars plugins. Then you can put files with the following extensions into the ``group_vars`` and ``host_vars`` directories:
 
-- `.sops.yaml`
-- `.sops.yml`
-- `.sops.json`
+- ``.sops.yaml``
+- ``.sops.yml``
+- ``.sops.json``
 
 The vars plugin will decrypt them and you can use their unencrypted content transparently.
 
