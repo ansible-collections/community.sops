@@ -1,4 +1,8 @@
 #!/bin/sh
+# Copyright (c) Ansible Project
+# GNU General Public License v3.0+ (see LICENSES/GPL-3.0-or-later.txt or https://www.gnu.org/licenses/gpl-3.0.txt)
+# SPDX-License-Identifier: GPL-3.0-or-later
+
 if [ "$1" != "--keyservice" ] || [ "$2" != "a" ] || [ "$3" != "--keyservice" ] || [ "$4" != "b" ] || [ "$5" != "--decrypt" ] || [ "$(basename "$6")" != "simple.sops.yaml" ] || [ "$7" != "" ]; then
     echo "Command (fake-sops-rep): $*" > /dev/stderr
     exit 1
