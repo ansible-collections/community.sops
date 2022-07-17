@@ -5,7 +5,10 @@ readme: README.md
 authors:
   - Edoardo Tenani
 description: "Support usage of mozilla/sops from your Ansible playbooks"
-license_file: COPYING
+license:
+  - GPL-3.0-or-later
+  - BSD-2-Clause
+#license_file: COPYING
 tags:
   - sops
   - encryption
