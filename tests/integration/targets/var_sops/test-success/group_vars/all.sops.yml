@@ -1,3 +1,8 @@
+---
+# Copyright (c) Ansible Project
+# GNU General Public License v3.0+ (see LICENSES/GPL-3.0-or-later.txt or https://www.gnu.org/licenses/gpl-3.0.txt)
+# SPDX-License-Identifier: GPL-3.0-or-later
+
 foo: ENC[AES256_GCM,data:a25L,iv:X8ILHZr+YiyLWa90Y+cwoMD1nVuel7JyTs0A5+oiOOo=,tag:GbBtp+Yqx1KEjdyztqS4EQ==,type:str]
 sops:
     kms: []
