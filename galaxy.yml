@@ -1,3 +1,8 @@
+---
+# Copyright (c) Ansible Project
+# GNU General Public License v3.0+ (see LICENSES/GPL-3.0-or-later.txt or https://www.gnu.org/licenses/gpl-3.0.txt)
+# SPDX-License-Identifier: GPL-3.0-or-later
+
 namespace: community
 name: sops
 version: 1.2.3
@@ -5,7 +10,10 @@ readme: README.md
 authors:
   - Edoardo Tenani
 description: "Support usage of mozilla/sops from your Ansible playbooks"
-license_file: COPYING
+license:
+  - GPL-3.0-or-later
+  - BSD-2-Clause
+#license_file: COPYING
 tags:
   - sops
   - encryption

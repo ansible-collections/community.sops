@@ -1,3 +1,8 @@
+---
+# Copyright (c) Ansible Project
+# GNU General Public License v3.0+ (see LICENSES/GPL-3.0-or-later.txt or https://www.gnu.org/licenses/gpl-3.0.txt)
+# SPDX-License-Identifier: GPL-3.0-or-later
+
 test1_2: ENC[AES256_GCM,data:iNGUgLK6RdJZQWA=,iv:FEx7YO17wTadHLcppnpElb5G5UIukfcHDatUkPzZ0rU=,tag:bKx9qwKiirzi7/lR0EQTEA==,type:str]
 test2_2: ENC[AES256_GCM,data:4rFASWUQQLqJgLnL3KAYIWpBoMGz38pTt4+w,iv:42avbhH4HzHhsCNdiPvZbowKbaWx76c+OYD8iZMELyk=,tag:9GSsbCYDQHX698S68cZe+g==,type:str]
 test3_2:
