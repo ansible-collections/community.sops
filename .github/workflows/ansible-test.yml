@@ -89,5 +89,5 @@ jobs:
           docker-image: ${{ matrix.docker_container }}
           # Adjust vars files so that sops ${{ matrix.sops_version }} is used
           pre-test-cmd: >-
-            echo 'sops_version: ${{ matrix.sops_version }}' > tests/integration/targets/setup_sops/vars/main.yml ;
+            echo 'sops_version: ${{ matrix.sops_version }}' > tests/integration/targets/setup_sops/vars/main.yml
           testing-type: integration
