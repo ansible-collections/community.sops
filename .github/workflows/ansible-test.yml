@@ -3,6 +3,9 @@
 # GNU General Public License v3.0+ (see LICENSES/GPL-3.0-or-later.txt or https://www.gnu.org/licenses/gpl-3.0.txt)
 # SPDX-License-Identifier: GPL-3.0-or-later
 
+# For the comprehensive list of the inputs supported by the ansible-community/ansible-test-gh-action GitHub Action, see
+# https://github.com/marketplace/actions/ansible-test
+
 name: CI
 on:
   # Run CI against all pushes (direct commits, also merged PRs), Pull Requests
@@ -31,35 +34,11 @@ jobs:
           - devel
     runs-on: ubuntu-latest
     steps:
-
-      - name: Check out code
-        uses: actions/checkout@v3
+      - name: Perform sanity testing
+        uses: ansible-community/ansible-test-gh-action@release/v1
         with:
-          path: ansible_collections/community/sops
-
-      - name: Set up Python
-        uses: actions/setup-python@v3
-        with:
-          # it is just required to run that once as "ansible-test sanity" in the docker image
-          # will run on all python versions it supports.
-          python-version: '3.10'
-
-      - name: Install ansible-core (${{ matrix.ansible }})
-        run: pip install https://github.com/ansible/ansible/archive/${{ matrix.ansible }}.tar.gz --disable-pip-version-check
-
-      # run ansible-test sanity inside of Docker.
-      # The docker container has all the pinned dependencies that are required.
-      - name: Run sanity tests
-        run: ansible-test sanity --docker -v --color --coverage
-        working-directory: ./ansible_collections/community/sops
-
-      - name: Generate coverage report.
-        run: ansible-test coverage xml -v --requirements --group-by command --group-by version
-        working-directory: ./ansible_collections/community/sops
-
-      - uses: codecov/codecov-action@v3
-        with:
-          fail_ci_if_error: false
+          ansible-core-version: ${{ matrix.ansible }}
+          testing-type: sanity
 
   integration:
     runs-on: ubuntu-latest
@@ -99,33 +78,16 @@ jobs:
             docker_container: ubuntu2004
             sops_version: 3.7.3
     steps:
-
-      - name: Check out code
-        uses: actions/checkout@v3
+      - name: >-
+          Perform integration testing against
+          Ansible version ${{ matrix.ansible }}
+          under ${{ matrix.docker_container }}
+          with sops ${{ matrix.sops_version }}
+        uses: ansible-community/ansible-test-gh-action@release/v1
         with:
-          path: ansible_collections/community/sops
-
-      - name: Adjust vars files so that sops ${{ matrix.sops_version }} is used
-        run: |
-          echo 'sops_version: ${{ matrix.sops_version }}' > tests/integration/targets/setup_sops/vars/main.yml
-        working-directory: ./ansible_collections/community/sops
-
-      - name: Set up Python 3.8
-        uses: actions/setup-python@v1
-        with:
-          python-version: '3.10'
-
-      - name: Install ansible-core (${{ matrix.ansible }})
-        run: pip install https://github.com/ansible/ansible/archive/${{ matrix.ansible }}.tar.gz --disable-pip-version-check
-
-      - name: Run integration tests in ${{ matrix.docker_container }} Docker container
-        run: ansible-test integration --docker ${{ matrix.docker_container }} -v --color --retry-on-error --continue-on-error --diff --coverage
-        working-directory: ./ansible_collections/community/sops
-
-      - name: Generate coverage report.
-        run: ansible-test coverage xml -v --requirements --group-by command --group-by version
-        working-directory: ./ansible_collections/community/sops
-
-      - uses: codecov/codecov-action@v3
-        with:
-          fail_ci_if_error: false
+          ansible-core-version: ${{ matrix.ansible }}
+          docker-image: ${{ matrix.docker_container }}
+          # Adjust vars files so that sops ${{ matrix.sops_version }} is used
+          pre-test-cmd: >-
+            echo 'sops_version: ${{ matrix.sops_version }}' > tests/integration/targets/setup_sops/vars/main.yml ;
+          testing-type: integration
