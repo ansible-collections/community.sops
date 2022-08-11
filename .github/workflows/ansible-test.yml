@@ -39,7 +39,6 @@ jobs:
         with:
           ansible-core-version: ${{ matrix.ansible }}
           testing-type: sanity
-          collection-root: ''
 
   integration:
     runs-on: ubuntu-latest
@@ -92,4 +91,3 @@ jobs:
           pre-test-cmd: >-
             echo 'sops_version: ${{ matrix.sops_version }}' > tests/integration/targets/setup_sops/vars/main.yml
           testing-type: integration
-          collection-root: ''
