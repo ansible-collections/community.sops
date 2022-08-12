@@ -95,6 +95,7 @@ from ansible_collections.community.sops.plugins.module_utils.sops import Sops, S
 
 try:
     import yaml
+    YAML_IMP_ERR = None
     HAS_YAML = True
 except ImportError:
     YAML_IMP_ERR = traceback.format_exc()
