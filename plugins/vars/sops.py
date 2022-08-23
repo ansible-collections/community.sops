@@ -49,6 +49,15 @@ DOCUMENTATION = '''
             section: community.sops
         env:
           - name: ANSIBLE_VARS_SOPS_PLUGIN_CACHE
+      _disable_vars_plugin_temporarily:
+        description:
+          - Temporarily disable this plugin.
+          - Useful if ansible-inventory is supposed to be run without decrypting secrets (in AWX for instance).
+        type: bool
+        default: false
+        version_added: 1.3.0
+        env:
+          - name: SOPS_ANSIBLE_AWX_DISABLE_VARS_PLUGIN_TEMPORARILY
     extends_documentation_fragment:
         - ansible.builtin.vars_plugin_staging
         - community.sops.sops
@@ -89,6 +98,9 @@ class VarsModule(BaseVarsPlugin):
 
         if cache is None:
             cache = self.get_option('cache')
+
+        if self.get_option('_disable_vars_plugin_temporarily'):
+            return {}
 
         data = {}
         for entity in entities:
