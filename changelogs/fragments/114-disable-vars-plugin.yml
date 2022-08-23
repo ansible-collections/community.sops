@@ -1,2 +1,0 @@
-minor_changes:
-  - "sops vars plugin - added a configuration option to temporarily disable the vars plugin (https://github.com/ansible-collections/community.sops/pull/114)."

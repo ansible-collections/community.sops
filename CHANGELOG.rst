@@ -5,6 +5,20 @@ Community Sops Release Notes
 .. contents:: Topics
 
 
+v1.3.0
+======
+
+Release Summary
+---------------
+
+Feature release.
+
+Minor Changes
+-------------
+
+- All software licenses are now in the ``LICENSES/`` directory of the collection root, and the collection repository conforms to the `REUSE specification <https://reuse.software/spec/>`__ except for the changelog fragments (https://github.com/ansible-collections/community.crypto/sops/108, https://github.com/ansible-collections/community.sops/pull/113).
+- sops vars plugin - added a configuration option to temporarily disable the vars plugin (https://github.com/ansible-collections/community.sops/pull/114).
+
 v1.2.3
 ======
 
