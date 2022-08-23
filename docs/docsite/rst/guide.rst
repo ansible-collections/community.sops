@@ -228,7 +228,7 @@ For example, assume that you want to decrypt a file retrieved from a HTTPS serve
         - name: Fetch file from URL
           ansible.builtin.uri:
             url: https://raw.githubusercontent.com/mozilla/sops/master/functional-tests/res/comments.enc.yaml
-            return_content: yes
+            return_content: true
           register: encrypted_content
 
         - name: Show encrypted data
@@ -304,7 +304,7 @@ Please note that if you put a Jinja2 expression in a variable, it will be evalua
         - name: Fetch file from URL
           ansible.builtin.uri:
             url: https://raw.githubusercontent.com/mozilla/sops/master/functional-tests/res/comments.enc.yaml
-            return_content: yes
+            return_content: true
           register: encrypted_content
 
         # BAD: every time the role uses decrypted_data, the data will be decrypted!
