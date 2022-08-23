@@ -18,7 +18,7 @@ version_added: '0.1.0'
 description:
   - Loads sops-encrypted YAML/JSON variables dynamically from a file during task runtime.
   - To assign included variables to a different host than C(inventory_hostname),
-    use C(delegate_to) and set C(delegate_facts=yes).
+    use C(delegate_to) and set C(delegate_facts=true).
 options:
   file:
     description:

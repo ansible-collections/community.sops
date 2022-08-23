@@ -75,7 +75,7 @@ EXAMPLES = '''
     - name: Fetch file from URL
       ansible.builtin.uri:
         url: https://raw.githubusercontent.com/mozilla/sops/master/functional-tests/res/comments.enc.yaml
-        return_content: yes
+        return_content: true
       register: encrypted_content
 
     - name: Show encrypted data
