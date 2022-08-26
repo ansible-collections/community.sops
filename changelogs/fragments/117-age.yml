@@ -1,0 +1,2 @@
+minor_changes:
+  - "sops_encrypt - allow to specify age recipients (https://github.com/ansible-collections/community.sops/issues/116, https://github.com/ansible-collections/community.sops/pull/117)."

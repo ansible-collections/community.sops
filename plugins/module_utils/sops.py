@@ -96,6 +96,7 @@ GENERAL_OPTIONS = {
 
 
 ENCRYPT_OPTIONS = {
+    'age': _create_comma_separated('--age'),
     'kms': _create_comma_separated('--kms'),
     'gcp_kms': _create_comma_separated('--gcp-kms'),
     'azure_kv': _create_comma_separated('--azure-kv'),
@@ -247,6 +248,10 @@ def get_sops_argument_spec(add_encrypt_specific=False):
     }
     if add_encrypt_specific:
         argument_spec.update({
+            'age': {
+                'type': 'list',
+                'elements': 'str',
+            },
             'kms': {
                 'type': 'list',
                 'elements': 'str',

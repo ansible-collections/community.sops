@@ -177,6 +177,13 @@ options:
 
     ENCRYPT_SPECIFIC = r'''
 options:
+    age:
+        description:
+            - Age fingerprints to use.
+            - This corresponds to the sops C(--age) option.
+        type: list
+        elements: str
+        version_added: 1.4.0
     kms:
         description:
             - List of KMS ARNs to use.
