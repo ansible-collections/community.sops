@@ -3,7 +3,17 @@
 # GNU General Public License v3.0+ (see LICENSES/GPL-3.0-or-later.txt or https://www.gnu.org/licenses/gpl-3.0.txt)
 # SPDX-License-Identifier: GPL-3.0-or-later
 
-- when: sops_installed and age_installed
+- name: Get sops version
+  command: sops --version
+  when: sops_installed
+  register: installed_sops_version
+
+- name: Determine whether sops, age, and sops with age are supported
+  set_fact:
+    supports_sops_and_age: >-
+      {{ sops_installed and age_installed and (installed_sops_version.stdout | regex_search('sops (\d+\.\d+\.\d+)', '\1') | first) is version('3.7.0', '>=') }}
+
+- when: supports_sops_and_age
   block:
     - name: Create local temporary directory
       tempfile:
