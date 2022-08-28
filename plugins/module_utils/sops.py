@@ -85,6 +85,8 @@ def _create_env_variable(argument_name):
 
 
 GENERAL_OPTIONS = {
+    'age_key': _create_env_variable('SOPS_AGE_KEY'),
+    'age_keyfile': _create_env_variable('SOPS_AGE_KEY_FILE'),
     'aws_profile': _create_single_arg('--aws-profile'),
     'aws_access_key_id': _create_env_variable('AWS_ACCESS_KEY_ID'),
     'aws_secret_access_key': _create_env_variable('AWS_SECRET_ACCESS_KEY'),
@@ -218,6 +220,13 @@ class Sops():
 def get_sops_argument_spec(add_encrypt_specific=False):
     argument_spec = {
         'sops_binary': {
+            'type': 'path',
+        },
+        'age_key': {
+            'type': 'str',
+            'no_log': True,
+        },
+        'age_keyfile': {
             'type': 'path',
         },
         'aws_profile': {

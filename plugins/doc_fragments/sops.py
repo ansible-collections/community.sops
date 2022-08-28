@@ -17,6 +17,21 @@ options:
             - By default uses C(sops).
         type: path
         version_added: 1.0.0
+    age_key:
+        description:
+            - One or more age private keys that can be used to decrypt encrypted files.
+            - Will be set as the C(SOPS_AGE_KEY) environment variable when calling sops.
+        type: str
+        version_added: 1.4.0
+    age_keyfile:
+        description:
+            - The file containing the age private keys that sops can use to decrypt
+              encrypted files.
+            - Will be set as the C(SOPS_AGE_KEY_FILE) environment variable when calling sops.
+            - By default, sops looks for C(sops/age/keys.txt) inside your user configuration
+              directory.
+        type: path
+        version_added: 1.4.0
     aws_profile:
         description:
             - The AWS profile to use for requests to AWS.
@@ -72,6 +87,12 @@ options:
     sops_binary:
         vars:
             - name: sops_binary
+    age_key:
+        vars:
+            - name: sops_age_key
+    age_keyfile:
+        vars:
+            - name: sops_age_keyfile
     aws_profile:
         vars:
             - name: sops_aws_profile
@@ -103,6 +124,12 @@ options:
         env:
             - name: ANSIBLE_SOPS_BINARY
               version_added: 1.2.0
+    age_key:
+        env:
+            - name: ANSIBLE_SOPS_AGE_KEY
+    age_keyfile:
+        env:
+            - name: ANSIBLE_SOPS_AGE_KEYFILE
     aws_profile:
         env:
             - name: ANSIBLE_SOPS_AWS_PROFILE
@@ -140,6 +167,13 @@ options:
             - section: community.sops
               key: binary
               version_added: 1.2.0
+    # We do not provide an INI key for
+    #     age_key
+    # to make sure that secrets cannot be provided in ansible.ini. Use environment variables or another mechanism for that.
+    age_keyfile:
+        ini:
+            - section: community.sops
+              key: age_keyfile
     aws_profile:
         ini:
             - section: community.sops
