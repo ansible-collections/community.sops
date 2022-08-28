@@ -3,12 +3,22 @@
 # GNU General Public License v3.0+ (see LICENSES/GPL-3.0-or-later.txt or https://www.gnu.org/licenses/gpl-3.0.txt)
 # SPDX-License-Identifier: GPL-3.0-or-later
 
-- set_fact:
-    sops_installed: no
-
-- include_tasks: install.yml
+- setup:
+    gather_subset:
+      - '!all'
+      - '!min'
+      - distribution
+      - distribution_major_version
+      - distribution_version
+      - os_family
+  delegate_to: localhost
+  delegate_facts: true
 
 - include_tasks:
     file: install.yml
     apply:
       delegate_to: localhost
+      vars:
+        hostname_override: localhost
+
+- include_tasks: install.yml
