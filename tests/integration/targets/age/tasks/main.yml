@@ -1,0 +1,87 @@
+---
+# Copyright (c) Ansible Project
+# GNU General Public License v3.0+ (see LICENSES/GPL-3.0-or-later.txt or https://www.gnu.org/licenses/gpl-3.0.txt)
+# SPDX-License-Identifier: GPL-3.0-or-later
+
+- name: Get sops version
+  command: sops --version
+  when: sops_installed
+  register: installed_sops_version
+
+- name: Determine whether sops, age, and sops with age are supported
+  set_fact:
+    supports_sops_and_age: >-
+      {{ sops_installed and age_installed and (installed_sops_version.stdout | regex_search('sops (\d+\.\d+\.\d+)', '\1') | first) is version('3.7.0', '>=') }}
+
+- when: supports_sops_and_age
+  block:
+    - name: Create local temporary directory
+      tempfile:
+        state: directory
+        suffix: .test
+      delegate_to: localhost
+      register: local_tmp_dir
+
+    - name: Record local temporary directory
+      set_fact:
+        local_tmp_dir: "{{ local_tmp_dir.path }}"
+
+    - name: Create age keys
+      command: age-keygen --output {{ local_tmp_dir }}/{{ item }}
+      delegate_to: localhost
+      loop:
+        - identity_1
+        - identity_2
+        - identity_3
+        - identity_4
+
+    - vars:
+        identity_files:
+          - name: identities_all
+            id_files:
+              - identity_1
+              - identity_2
+              - identity_3
+              - identity_4
+          - name: identities_1_2_3
+            id_files:
+              - identity_1
+              - identity_2
+              - identity_3
+          - name: identities_4
+            id_files:
+              - identity_4
+      block:
+        - name: Create local identity files
+          copy:
+            dest: '{{ local_tmp_dir }}/{{ item.name }}'
+            content: |
+              {% for id_file in item.id_files %}
+              {{   lookup('file', local_tmp_dir ~ '/' ~ id_file) }}
+              {% endfor %}
+          delegate_to: localhost
+          loop: '{{ identity_files }}'
+
+        - name: Create remote identity files
+          copy:
+            dest: '{{ remote_tmp_dir }}/{{ item.name }}'
+            content: |
+              {% for id_file in item.id_files %}
+              {{   lookup('file', local_tmp_dir ~ '/' ~ id_file) }}
+              {% endfor %}
+          loop: '{{ identity_files }}'
+
+    - name: Read identity public keys
+      set_fact:
+        identity_1: "{{ lookup('file', local_tmp_dir ~ '/identity_1') | regex_search('public key: ([a-zA-Z0-9]+)', '\\1') | first }}"
+        identity_2: "{{ lookup('file', local_tmp_dir ~ '/identity_2') | regex_search('public key: ([a-zA-Z0-9]+)', '\\1') | first }}"
+        identity_3: "{{ lookup('file', local_tmp_dir ~ '/identity_3') | regex_search('public key: ([a-zA-Z0-9]+)', '\\1') | first }}"
+        identity_4: "{{ lookup('file', local_tmp_dir ~ '/identity_4') | regex_search('public key: ([a-zA-Z0-9]+)', '\\1') | first }}"
+
+    - include_tasks: test.yml
+  always:
+    - name: Delete temporary directory
+      file:
+        path: '{{ local_tmp_dir }}'
+        state: absent
+      delegate_to: localhost

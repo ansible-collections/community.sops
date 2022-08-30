@@ -1,0 +1,122 @@
+---
+# Copyright (c) Ansible Project
+# GNU General Public License v3.0+ (see LICENSES/GPL-3.0-or-later.txt or https://www.gnu.org/licenses/gpl-3.0.txt)
+# SPDX-License-Identifier: GPL-3.0-or-later
+
+- name: Create encrypted files
+  sops_encrypt:
+    path: '{{ remote_tmp_dir }}/{{ item.name }}.sops.yaml'
+    age: '{{ item.identities }}'
+    age_keyfile: '{{ remote_tmp_dir }}/identities_all'
+    content_yaml: '{{ item.data }}'
+  loop: '{{ data }}'
+  vars:
+    data:
+      - name: enc-1
+        identities:
+          - '{{ identity_1 }}'
+          - '{{ identity_2 }}'
+          - '{{ identity_3 }}'
+          - '{{ identity_4 }}'
+        data:
+          foo: bar
+          baz: this is a secret
+          bam: true
+          int: 3
+      - name: enc-2
+        identities:
+          - '{{ identity_1 }}'
+          - '{{ identity_2 }}'
+          - '{{ identity_4 }}'
+        data:
+          foo: 19
+          bar: this is another secret
+      - name: enc-3
+        identities:
+          - '{{ identity_4 }}'
+        data:
+          foo: 23
+
+- name: Copy encrypted files to localhost
+  fetch:
+    src: '{{ remote_tmp_dir }}/{{ item }}.sops.yaml'
+    dest: '{{ local_tmp_dir }}/'
+    flat: true
+  loop:
+    - enc-1
+    - enc-2
+    - enc-3
+
+- name: Decrypt some data
+  set_fact:
+    decrypt_1: "{{ lookup('community.sops.sops', local_tmp_dir ~ '/enc-1.sops.yaml', age_keyfile=local_tmp_dir ~ '/identities_all') | from_yaml }}"
+    decrypt_1_1: "{{ lookup('community.sops.sops', local_tmp_dir ~ '/enc-1.sops.yaml', age_keyfile=local_tmp_dir ~ '/identity_1') | from_yaml }}"
+    decrypt_1_2: "{{ lookup('community.sops.sops', local_tmp_dir ~ '/enc-1.sops.yaml', age_keyfile=local_tmp_dir ~ '/identity_2') | from_yaml }}"
+    decrypt_1_3: "{{ lookup('community.sops.sops', local_tmp_dir ~ '/enc-1.sops.yaml', age_keyfile=local_tmp_dir ~ '/identity_3') | from_yaml }}"
+    decrypt_1_4: "{{ lookup('community.sops.sops', local_tmp_dir ~ '/enc-1.sops.yaml', age_keyfile=local_tmp_dir ~ '/identity_4') | from_yaml }}"
+    decrypt_1_1_2_3: "{{ lookup('community.sops.sops', local_tmp_dir ~ '/enc-1.sops.yaml', age_keyfile=local_tmp_dir ~ '/identities_1_2_3') | from_yaml }}"
+    decrypt_1b: "{{ lookup('community.sops.sops', local_tmp_dir ~ '/enc-1.sops.yaml', age_key=lookup('file', local_tmp_dir ~ '/identities_all')) | from_yaml }}"
+    decrypt_1_1b: "{{ lookup('community.sops.sops', local_tmp_dir ~ '/enc-1.sops.yaml', age_key=lookup('file', local_tmp_dir ~ '/identity_1')) | from_yaml }}"
+    decrypt_1_2b: "{{ lookup('community.sops.sops', local_tmp_dir ~ '/enc-1.sops.yaml', age_key=lookup('file', local_tmp_dir ~ '/identity_2')) | from_yaml }}"
+    decrypt_1_3b: "{{ lookup('community.sops.sops', local_tmp_dir ~ '/enc-1.sops.yaml', age_key=lookup('file', local_tmp_dir ~ '/identity_3')) | from_yaml }}"
+    decrypt_1_4b: "{{ lookup('community.sops.sops', local_tmp_dir ~ '/enc-1.sops.yaml', age_key=lookup('file', local_tmp_dir ~ '/identity_4')) | from_yaml }}"
+    decrypt_1_1_2_3b: "{{ lookup('community.sops.sops', local_tmp_dir ~ '/enc-1.sops.yaml', age_key=lookup('file', local_tmp_dir ~ '/identities_1_2_3')) | from_yaml }}"
+    decrypt_2: "{{ lookup('community.sops.sops', local_tmp_dir ~ '/enc-2.sops.yaml', age_keyfile=local_tmp_dir ~ '/identities_all') | from_yaml }}"
+    decrypt_2_1: "{{ lookup('community.sops.sops', local_tmp_dir ~ '/enc-2.sops.yaml', age_keyfile=local_tmp_dir ~ '/identity_1') | from_yaml }}"
+    decrypt_2_2: "{{ lookup('community.sops.sops', local_tmp_dir ~ '/enc-2.sops.yaml', age_keyfile=local_tmp_dir ~ '/identity_2') | from_yaml }}"
+    decrypt_2_4: "{{ lookup('community.sops.sops', local_tmp_dir ~ '/enc-2.sops.yaml', age_keyfile=local_tmp_dir ~ '/identity_4') | from_yaml }}"
+    decrypt_2_1_2_3: "{{ lookup('community.sops.sops', local_tmp_dir ~ '/enc-2.sops.yaml', age_keyfile=local_tmp_dir ~ '/identities_1_2_3') | from_yaml }}"
+    decrypt_3: "{{ lookup('community.sops.sops', local_tmp_dir ~ '/enc-3.sops.yaml', age_keyfile=local_tmp_dir ~ '/identities_all') | from_yaml }}"
+    decrypt_3_4: "{{ lookup('community.sops.sops', local_tmp_dir ~ '/enc-3.sops.yaml', age_keyfile=local_tmp_dir ~ '/identity_4') | from_yaml }}"
+
+- name: Validate decryption
+  assert:
+    that:
+      - decrypt_1.foo == 'bar'
+      - decrypt_1.baz == 'this is a secret'
+      - decrypt_1.bam == true
+      - decrypt_1.int == 3
+      - decrypt_1 == decrypt_1_1
+      - decrypt_1 == decrypt_1_2
+      - decrypt_1 == decrypt_1_3
+      - decrypt_1 == decrypt_1_4
+      - decrypt_1 == decrypt_1_1_2_3
+      - decrypt_1 == decrypt_1b
+      - decrypt_1 == decrypt_1_1b
+      - decrypt_1 == decrypt_1_2b
+      - decrypt_1 == decrypt_1_3b
+      - decrypt_1 == decrypt_1_4b
+      - decrypt_1 == decrypt_1_1_2_3b
+      - decrypt_2.foo == 19
+      - decrypt_2.bar == 'this is another secret'
+      - decrypt_2.bam is undefined
+      - decrypt_2.int is undefined
+      - decrypt_2 == decrypt_2_1
+      - decrypt_2 == decrypt_2_2
+      - decrypt_2 == decrypt_2_4
+      - decrypt_2 == decrypt_2_1_2_3
+      - decrypt_3.foo == 23
+      - decrypt_3.bar is undefined
+      - decrypt_3.bam is undefined
+      - decrypt_3.int is undefined
+      - decrypt_3 == decrypt_3_4
+
+- name: Failed encryption 1
+  debug:
+    msg: "{{ lookup('community.sops.sops', local_tmp_dir ~ '/enc-2.sops.yaml', age_keyfile=local_tmp_dir ~ '/identity_3') | from_yaml }}"
+  ignore_errors: true
+  register: failure_1
+
+- name: Failed encryption 2
+  debug:
+    msg: "{{ lookup('community.sops.sops', local_tmp_dir ~ '/enc-3.sops.yaml', age_keyfile=local_tmp_dir ~ '/identity_1') | from_yaml }}"
+  ignore_errors: true
+  register: failure_2
+
+- name: Validate failed decryption
+  assert:
+    that:
+      - failure_1 is failed
+      - "'CouldNotRetrieveKey' in failure_1.msg"
+      - failure_2 is failed
+      - "'CouldNotRetrieveKey' in failure_2.msg"
