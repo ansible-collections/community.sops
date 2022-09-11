@@ -186,3 +186,15 @@ releases:
     - 108-licenses.yml
     - 114-disable-vars-plugin.yml
     release_date: '2022-08-23'
+  1.4.0:
+    changes:
+      minor_changes:
+      - Allow to specify age keys as ``age_key``, or age keyfiles as ``age_keyfile``
+        (https://github.com/ansible-collections/community.sops/issues/116, https://github.com/ansible-collections/community.sops/pull/117).
+      - sops_encrypt - allow to specify age recipients (https://github.com/ansible-collections/community.sops/issues/116,
+        https://github.com/ansible-collections/community.sops/pull/117).
+      release_summary: Feature release.
+    fragments:
+    - 1.4.0.yml
+    - 117-age.yml
+    release_date: '2022-09-11'
