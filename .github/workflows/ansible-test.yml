@@ -153,11 +153,12 @@ jobs:
           integration-continue-on-error: 'false'
           integration-diff: 'false'
           integration-retry-on-error: 'true'
-          # NOTE: we're installing with git to work around Galaxy being a huge PITA (https://github.com/ansible/galaxy/issues/2429)
+          # Adjust vars files so that sops ${{ matrix.sops_version }} is used
           pre-test-cmd: |-
             echo 'override_sops_version: ${{ matrix.sops_version }}' > tests/integration/integration_config.yml
             echo 'github_token: ${{ secrets.GITHUB_TOKEN }}' >> tests/integration/integration_config.yml
-            git clone --depth=1 --single-branch https://github.com/ansible-collections/community.general.git ../../community/general
+          test-deps: >-
+            git+https://github.com/ansible-collections/community.general.git,${{ matrix.ansible == 'stable-2.9' && 'stable-4' || 'main' }}
           testing-type: integration
           target-python-version: ${{ matrix.python_version }}
           target: gha/main/
@@ -184,7 +185,7 @@ jobs:
           - ''
         target:
           - gha/install/
-        pre-test-cmd:
+        test-deps:
           - ''
         github_latest_detection:
           - ''
@@ -219,9 +220,7 @@ jobs:
             python_version: '3.12'
             target: gha/install/3/
             github_latest_detection: auto
-            # NOTE: we're installing with git to work around Galaxy being a huge PITA (https://github.com/ansible/galaxy/issues/2429)
-            pre-test-cmd: |-
-              git clone --depth=1 --single-branch https://github.com/ansible-collections/community.general.git ../../community/general
+            test-deps: git+https://github.com/ansible-collections/community.general.git,main
           - ansible: devel
             docker_container: quay.io/ansible-community/test-image:debian-bookworm
             python_version: '3.11'
@@ -252,9 +251,7 @@ jobs:
           #   python_version: ''
           #   target: gha/install/3/
           #   github_latest_detection: auto
-          #   # NOTE: we're installing with git to work around Galaxy being a huge PITA (https://github.com/ansible/galaxy/issues/2429)
-          #   pre-test-cmd: |-
-          #     git clone --depth=1 --single-branch https://github.com/ansible-collections/community.general.git ../../community/general
+          #   test-deps: git+https://github.com/ansible-collections/community.general.git,main
     steps:
       - name: >-
           Perform sops installation integration testing against
@@ -274,5 +271,6 @@ jobs:
             echo 'github_latest_detection: ${{ matrix.github_latest_detection || 'auto' }}' >> tests/integration/integration_config.yml
             ${{ matrix.pre-test-cmd || 'echo' }}
           testing-type: integration
+          test-deps: ${{ matrix.test-deps }}
           target-python-version: ${{ matrix.python_version }}
           target: ${{ matrix.target }}
