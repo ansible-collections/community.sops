@@ -31,6 +31,7 @@ jobs:
           - stable-2.11
           - stable-2.12
           - stable-2.13
+          - stable-2.14
           - devel
     runs-on: ubuntu-latest
     steps:
@@ -79,6 +80,10 @@ jobs:
           # 2.13
           - ansible: stable-2.13
             docker_container: ubuntu2004
+            sops_version: 3.7.3
+          # 2.14
+          - ansible: stable-2.14
+            docker_container: ubuntu2204
             sops_version: 3.7.3
           # devel
           # - ansible: devel
