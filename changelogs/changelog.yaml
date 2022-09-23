@@ -198,3 +198,13 @@ releases:
     - 1.4.0.yml
     - 117-age.yml
     release_date: '2022-09-11'
+  1.4.1:
+    changes:
+      bugfixes:
+      - load_vars - ensure compatibility with newer versions of ansible-core (https://github.com/ansible-collections/community.sops/pull/121).
+      release_summary: Maintenance release to improve compatibility with future ansible-core
+        releases.
+    fragments:
+    - 1.4.1.yml
+    - 121-action-module-compat.yml
+    release_date: '2022-09-23'

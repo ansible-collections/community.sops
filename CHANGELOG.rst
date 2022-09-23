@@ -5,6 +5,19 @@ Community Sops Release Notes
 .. contents:: Topics
 
 
+v1.4.1
+======
+
+Release Summary
+---------------
+
+Maintenance release to improve compatibility with future ansible-core releases.
+
+Bugfixes
+--------
+
+- load_vars - ensure compatibility with newer versions of ansible-core (https://github.com/ansible-collections/community.sops/pull/121).
+
 v1.4.0
 ======
 
