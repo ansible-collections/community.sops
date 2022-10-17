@@ -403,7 +403,7 @@ Running it produces:
     PLAY RECAP *******************************************************************************************************
     localhost                  : ok=3    changed=0    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0
 
-If you cange the variable loading task to:
+If you change the variable loading task to:
 
 .. code-block:: yaml+jinja
 
