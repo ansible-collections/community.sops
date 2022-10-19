@@ -104,11 +104,11 @@ jobs:
           # devel
           # - ansible: devel
           #   docker_container: alpine3  -- so far only alpine3 edge supports sops
-          #   sops_version: system
+          #   sops_version: latest
           - ansible: devel
             docker_container: quay.io/ansible-community/test-image:archlinux
             python_version: '3.10'
-            sops_version: system
+            sops_version: latest
     steps:
       - name: >-
           Perform integration testing against
@@ -122,7 +122,8 @@ jobs:
           # Adjust vars files so that sops ${{ matrix.sops_version }} is used
           # NOTE: we're installing with git to work around Galaxy being a huge PITA (https://github.com/ansible/galaxy/issues/2429)
           pre-test-cmd: |-
-            echo 'sops_version: ${{ matrix.sops_version }}' > tests/integration/targets/setup_sops/vars/main.yml
+            echo 'sops_version: ${{ matrix.sops_version }}' > tests/integration/integration_config.yml
             git clone --depth=1 --single-branch https://github.com/ansible-collections/community.general.git ../../community/general
           testing-type: integration
           target-python-version: ${{ matrix.python_version }}
+          target: gha/main/
