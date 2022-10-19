@@ -1,0 +1,5 @@
+add object.playbook:
+  - name: install
+    description: Installs sops on all remote hosts
+  - name: install_localhost
+    description: Installs sops on localhost

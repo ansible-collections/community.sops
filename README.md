@@ -57,8 +57,34 @@ This collection provides:
 - a [vars plugin](https://docs.ansible.com/ansible/latest/plugins/vars.html) `sops` that allows loading Ansible vars from sops-encrypted files for hosts and groups;
 - an [action plugin](https://docs.ansible.com/ansible/latest/plugins/action.html) `load_vars` that allows loading Ansible vars from a sops-encrypted file dynamically during a playbook or role;
 - a [module](https://docs.ansible.com/ansible/latest/user_guide/basic_concepts.html#modules) `sops_encrypt` which allows to encrypt data with sops.
+- a [role](https://docs.ansible.com/ansible/latest/user_guide/playbooks_reuse_roles.html) `install` which allows to install sops.
+- two [playbooks](https://docs.ansible.com/ansible/latest/user_guide/playbooks_intro.html) `install` and `install_localhost` which allow to install sops.
 
 ## Using this collection
+
+### Installing sops
+
+To install sops, you can use the ``community.sops.install`` role. The role also installs [GNU Privacy Guard (GPG)](https://en.wikipedia.org/wiki/GNU_Privacy_Guard) and [Age](https://github.com/FiloSottile/age) (if available in the system packages repositories).
+
+Examples:
+
+```yaml
+tasks:
+  # To use the sops_encrypt module on a remote host, you need to install sops on it:
+  - name: Install sops on remote hosts
+    ansible.builtin.include_role:
+      name: community.sops.install
+    vars:
+      sops_version: 2.7.0  # per default installs the latest version
+
+  # To use the lookup plugin, filter plugin, vars plugin, or the load_vars action,
+  # you need sops installed on localhost:
+  - name: Install sops on localhost
+    ansible.builtin.include_role:
+      name: community.sops.install
+    vars:
+      sops_install_on_localhost: true
+```
 
 ### lookup plugin
 
