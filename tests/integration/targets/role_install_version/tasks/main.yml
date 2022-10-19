@@ -1,0 +1,38 @@
+---
+# Copyright (c) Ansible Project
+# GNU General Public License v3.0+ (see LICENSES/GPL-3.0-or-later.txt or https://www.gnu.org/licenses/gpl-3.0.txt)
+# SPDX-License-Identifier: GPL-3.0-or-later
+
+- name: Install sops 3.7.3
+  include_role:
+    name: community.sops.install
+  vars:
+    sops_version: 3.7.3
+
+- name: Figure out sops version
+  command:
+    cmd: sops --version
+  register: output
+
+- name: Check sops version
+  assert:
+    that:
+      - >-
+        'sops 3.7.3' in output.stdout
+
+- name: Install sops 3.7.0
+  include_role:
+    name: community.sops.install
+  vars:
+    sops_version: 3.7.0
+
+- name: Figure out sops version
+  command:
+    cmd: sops --version
+  register: output
+
+- name: Check sops version
+  assert:
+    that:
+      - >-
+        'sops 3.7.0' in output.stdout

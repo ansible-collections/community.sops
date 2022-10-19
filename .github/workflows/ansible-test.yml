@@ -102,12 +102,17 @@ jobs:
             docker_container: ubuntu2204
             sops_version: 3.7.3
           # devel
-          # - ansible: devel
-          #   docker_container: alpine3  -- so far only alpine3 edge supports sops
-          #   sops_version: latest
           - ansible: devel
             docker_container: quay.io/ansible-community/test-image:archlinux
             python_version: '3.10'
+            sops_version: latest
+          - ansible: devel
+            docker_container: quay.io/ansible-community/test-image:debian-bullseye
+            python_version: '3.9'
+            sops_version: latest
+          - ansible: devel
+            docker_container: quay.io/ansible-community/test-image:centos-stream8
+            python_version: '3.8'
             sops_version: latest
     steps:
       - name: >-
@@ -127,3 +132,84 @@ jobs:
           testing-type: integration
           target-python-version: ${{ matrix.python_version }}
           target: gha/main/
+
+  integration-install:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        ansible:
+          - devel
+        docker_container:
+          - ''
+        python_version:
+          - ''
+        target:
+          - gha/install/
+        pre-test-cmd:
+          - ''
+        exclude:
+          - docker_container: ''
+        include:
+          # Install specific sops
+          - ansible: devel
+            docker_container: ubuntu2204
+            python_version: ''
+            target: gha/install/1/
+          # Install on localhost vs. remote host
+          - ansible: devel
+            docker_container: centos7
+            python_version: ''
+            target: gha/install/2/
+          # Install latest sops
+          - ansible: devel
+            docker_container: quay.io/ansible-community/test-image:archlinux
+            python_version: '3.10'
+            target: gha/install/3/
+            # NOTE: we're installing with git to work around Galaxy being a huge PITA (https://github.com/ansible/galaxy/issues/2429)
+            pre-test-cmd: |-
+              git clone --depth=1 --single-branch https://github.com/ansible-collections/community.general.git ../../community/general
+          - ansible: devel
+            docker_container: quay.io/ansible-community/test-image:centos-stream8
+            python_version: '3.8'
+            target: gha/install/3/
+          - ansible: devel
+            docker_container: quay.io/ansible-community/test-image:debian-bullseye
+            python_version: '3.9'
+            target: gha/install/3/
+          - ansible: devel
+            docker_container: fedora36
+            python_version: ''
+            target: gha/install/3/
+          - ansible: devel
+            docker_container: centos7
+            python_version: ''
+            target: gha/install/3/
+          - ansible: devel
+            docker_container: ubuntu2004
+            python_version: ''
+            target: gha/install/3/
+          - ansible: devel
+            docker_container: ubuntu2204
+            python_version: ''
+            target: gha/install/3/
+          # - ansible: devel
+          #   docker_container: alpine3  -- so far only alpine3 edge supports sops
+          #   python_version: ''
+          #   target: gha/install/3/
+          #   # NOTE: we're installing with git to work around Galaxy being a huge PITA (https://github.com/ansible/galaxy/issues/2429)
+          #   pre-test-cmd: |-
+          #     git clone --depth=1 --single-branch https://github.com/ansible-collections/community.general.git ../../community/general
+    steps:
+      - name: >-
+          Perform sops installation integration testing against
+          Ansible version ${{ matrix.ansible }}
+          under ${{ matrix.docker_container }}
+          with sops ${{ matrix.sops_version }}
+        uses: ansible-community/ansible-test-gh-action@release/v1
+        with:
+          ansible-core-version: ${{ matrix.ansible }}
+          docker-image: ${{ matrix.docker_container }}
+          pre-test-cmd: ${{ matrix.pre-test-cmd }}
+          testing-type: integration
+          target-python-version: ${{ matrix.python_version }}
+          target: ${{ matrix.target }}
