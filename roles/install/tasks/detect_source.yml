@@ -4,12 +4,16 @@
 # SPDX-FileCopyrightText: 2022, Felix Fontein
 
 - name: Check whether system packages are a valid source of sops {{ sops_version }}
-  when: _community_sops_install_system_has_system and (sops_version == 'latest' or not _community_sops_install_system_has_system_latest_only)
+  when:
+    - _community_sops_install_system_has_system
+    - not (sops_version != 'latest' and _community_sops_install_system_has_system_latest_only)
   ansible.builtin.set_fact:
     sops_source: system
 
 - name: Check whether GitHub is a valid source of sops
-  when: _community_sops_install_system_has_github and sops_source == 'auto'
+  when:
+    - _community_sops_install_system_has_github
+    - sops_source == 'auto'
   ansible.builtin.set_fact:
     sops_source: github
 
