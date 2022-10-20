@@ -8,14 +8,14 @@
     - _community_sops_install_system_has_system
     - not (sops_version != 'latest' and _community_sops_install_system_has_system_latest_only)
   ansible.builtin.set_fact:
-    sops_source: system
+    _community_sops_install_effective_sops_source: system
 
 - name: Check whether GitHub is a valid source of sops
   when:
     - _community_sops_install_system_has_github
-    - sops_source == 'auto'
+    - _community_sops_install_effective_sops_source == 'auto'
   ansible.builtin.set_fact:
-    sops_source: github
+    _community_sops_install_effective_sops_source: github
 
 - name: Ensure that something was detected
   ansible.builtin.fail:
@@ -23,4 +23,4 @@
       Was not able to determine installation source for sops {{ sops_version }}
       for {{ _community_sops_install_facts.distribution }} {{ _community_sops_install_facts.distribution_version }}.
       Please open an issue in https://github.com/ansible-collections/community.sops/issues if you think this should work.
-  when: sops_source == 'auto'
+  when: _community_sops_install_effective_sops_source == 'auto'
