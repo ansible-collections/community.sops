@@ -81,7 +81,7 @@
       when: _community_sops_install_system_packages_unsigned_actual | length > 0
 
     - name: Install packages from URL/path (Debian)
-      ansible.builtin.package:
+      ansible.builtin.apt:
         deb: '{{ _community_sops_install_system_package_deb_actual }}'
         allow_downgrade: '{{ true if _community_sops_install_allow_downgrade and sops_version != "latest" else omit }}'
       become: '{{ sops_become_on_install }}'
