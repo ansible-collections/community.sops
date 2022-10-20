@@ -18,97 +18,78 @@
   delegate_facts: true
   run_once: true
 
-- name: Show system information
-  ansible.builtin.debug:
-    msg: |-
-      Architecture: {{
-        hostvars['localhost' if sops_install_on_localhost else inventory_hostname].ansible_facts.architecture
-      }}
-      Distribution: {{
-        hostvars['localhost' if sops_install_on_localhost else inventory_hostname].ansible_facts.distribution
-      }} {{
-        hostvars['localhost' if sops_install_on_localhost else inventory_hostname].ansible_facts.distribution_major_version
-      }} ({{
-        hostvars['localhost' if sops_install_on_localhost else inventory_hostname].ansible_facts.distribution_version
-      }})
-      OS family: {{
-        hostvars['localhost' if sops_install_on_localhost else inventory_hostname].ansible_facts.os_family
-      }}
+- vars:
+    _community_sops_install_facts: >-
+      {{ hostvars['localhost' if sops_install_on_localhost else inventory_hostname].ansible_facts }}
+  block:
+    - name: Show system information
+      ansible.builtin.debug:
+        msg: |-
+          Architecture: {{ _community_sops_install_facts.architecture }}
+          Distribution: {{ _community_sops_install_facts.distribution }} {{ _community_sops_install_facts.distribution_major_version }}
+          Distribution version: {{ _community_sops_install_facts.distribution_version }}
+          OS family: {{ _community_sops_install_facts.os_family }}
 
-- name: Include distribution specific variables
-  ansible.builtin.include_vars: '{{ lookup("ansible.builtin.first_found", params) }}'
-  vars:
-    params:
-      files:
-        - >-
-          D-{{
-            hostvars['localhost' if sops_install_on_localhost else inventory_hostname].ansible_facts.distribution
-          }}-{{
-            hostvars['localhost' if sops_install_on_localhost else inventory_hostname].ansible_facts.distribution_version
-          }}.yml
-        - >-
-          D-{{
-            hostvars['localhost' if sops_install_on_localhost else inventory_hostname].ansible_facts.distribution
-          }}-{{
-            hostvars['localhost' if sops_install_on_localhost else inventory_hostname].ansible_facts.distribution_major_version
-          }}.yml
-        - >-
-          D-{{
-            hostvars['localhost' if sops_install_on_localhost else inventory_hostname].ansible_facts.distribution
-          }}.yml
-        - >-
-          OS-{{
-            hostvars['localhost' if sops_install_on_localhost else inventory_hostname].ansible_facts.os_family
-          }}-{{ hostvars['localhost' if sops_install_on_localhost else inventory_hostname].ansible_facts.distribution_major_version }}.yml
-        - >-
-          OS-{{
-            hostvars['localhost' if sops_install_on_localhost else inventory_hostname].ansible_facts.os_family
-          }}.yml
-        - default.yml
-      paths:
-        - '{{ role_path }}/vars'
+    - name: Include distribution specific variables
+      ansible.builtin.include_vars: '{{ lookup("ansible.builtin.first_found", params) }}'
+      vars:
+        params:
+          files:
+            - >-
+              D-{{ _community_sops_install_facts.distribution }}-{{ _community_sops_install_facts.distribution_version }}.yml
+            - >-
+              D-{{ _community_sops_install_facts.distribution }}-{{ _community_sops_install_facts.distribution_major_version }}.yml
+            - >-
+              D-{{ _community_sops_install_facts.distribution }}.yml
+            - >-
+              OS-{{ _community_sops_install_facts.os_family }}-{{ _community_sops_install_facts.distribution_major_version }}.yml
+            - >-
+              OS-{{ _community_sops_install_facts.os_family }}.yml
+            - default.yml
+          paths:
+            - '{{ role_path }}/vars'
 
-- name: Auto-detect source to install sops from
-  ansible.builtin.include_tasks: detect_source.yml
-  when: sops_source == 'auto'
+    - name: Auto-detect source to install sops from
+      ansible.builtin.include_tasks: detect_source.yml
+      when: sops_source == 'auto'
 
-- name: Install Mozilla sops from GitHub
-  ansible.builtin.include_tasks: github.yml
-  when: sops_source == 'github'
+    - name: Install Mozilla sops from GitHub
+      ansible.builtin.include_tasks: github.yml
+      when: sops_source == 'github'
 
-- name: Install Mozilla sops from system package repositories
-  ansible.builtin.include_tasks: system.yml
-  when: sops_source == 'system'
+    - name: Install Mozilla sops from system package repositories
+      ansible.builtin.include_tasks: system.yml
+      when: sops_source == 'system'
 
-- name: Install system packages
-  ansible.builtin.package:
-    name: '{{ _community_sops_install_system_packages_actual }}'
-    allow_downgrade: '{{ true if _community_sops_install_allow_downgrade and sops_version != "latest" else omit }}'
-  become: '{{ sops_become_on_install }}'
-  delegate_to: '{{ "localhost" if sops_install_on_localhost else omit }}'
-  run_once: '{{ sops_install_on_localhost or omit }}'
-  when: _community_sops_install_system_packages_actual | length > 0
+    - name: Install system packages
+      ansible.builtin.package:
+        name: '{{ _community_sops_install_system_packages_actual }}'
+        allow_downgrade: '{{ true if _community_sops_install_allow_downgrade and sops_version != "latest" else omit }}'
+      become: '{{ sops_become_on_install }}'
+      delegate_to: '{{ "localhost" if sops_install_on_localhost else omit }}'
+      run_once: '{{ sops_install_on_localhost or omit }}'
+      when: _community_sops_install_system_packages_actual | length > 0
 
-- name: Install unsigned system packages
-  ansible.builtin.package:
-    name: '{{ _community_sops_install_system_packages_unsigned_actual }}'
-    allow_downgrade: '{{ true if _community_sops_install_allow_downgrade and sops_version != "latest" else omit }}'
-    disable_gpg_check: true
-  become: '{{ sops_become_on_install }}'
-  delegate_to: '{{ "localhost" if sops_install_on_localhost else omit }}'
-  run_once: '{{ sops_install_on_localhost or omit }}'
-  when: _community_sops_install_system_packages_unsigned_actual | length > 0
+    - name: Install unsigned system packages
+      ansible.builtin.package:
+        name: '{{ _community_sops_install_system_packages_unsigned_actual }}'
+        allow_downgrade: '{{ true if _community_sops_install_allow_downgrade and sops_version != "latest" else omit }}'
+        disable_gpg_check: true
+      become: '{{ sops_become_on_install }}'
+      delegate_to: '{{ "localhost" if sops_install_on_localhost else omit }}'
+      run_once: '{{ sops_install_on_localhost or omit }}'
+      when: _community_sops_install_system_packages_unsigned_actual | length > 0
 
-- name: Install packages from URL/path (Debian)
-  ansible.builtin.package:
-    deb: '{{ _community_sops_install_system_package_deb_actual }}'
-    allow_downgrade: '{{ true if _community_sops_install_allow_downgrade and sops_version != "latest" else omit }}'
-  become: '{{ sops_become_on_install }}'
-  delegate_to: '{{ "localhost" if sops_install_on_localhost else omit }}'
-  run_once: '{{ sops_install_on_localhost or omit }}'
-  when: _community_sops_install_system_package_deb_actual is string
+    - name: Install packages from URL/path (Debian)
+      ansible.builtin.package:
+        deb: '{{ _community_sops_install_system_package_deb_actual }}'
+        allow_downgrade: '{{ true if _community_sops_install_allow_downgrade and sops_version != "latest" else omit }}'
+      become: '{{ sops_become_on_install }}'
+      delegate_to: '{{ "localhost" if sops_install_on_localhost else omit }}'
+      run_once: '{{ sops_install_on_localhost or omit }}'
+      when: _community_sops_install_system_package_deb_actual is string
 
-- name: Set results
-  ansible.builtin.set_fact:
-    sops_installed: true
-    age_installed: "{{ _community_sops_install_has_age }}"
+    - name: Set results
+      ansible.builtin.set_fact:
+        sops_installed: true
+        age_installed: "{{ _community_sops_install_has_age }}"

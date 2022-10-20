@@ -7,8 +7,7 @@
   ansible.builtin.fail:
     msg: >-
       Sops cannot be installed from GitHub for
-      {{ hostvars['localhost' if sops_install_on_localhost else inventory_hostname].ansible_facts.distribution }}
-      {{ hostvars['localhost' if sops_install_on_localhost else inventory_hostname].ansible_facts.distribution_version }}.
+      {{ _community_sops_install_facts.distribution }} {{ _community_sops_install_facts.distribution_version }}.
   when: not _community_sops_install_system_has_github
 
 - name: Start determining sops version

@@ -17,7 +17,6 @@
   ansible.builtin.fail:
     msg: >-
       Was not able to determine installation source for sops {{ sops_version }}
-      for {{ hostvars['localhost' if sops_install_on_localhost else inventory_hostname].ansible_facts.distribution }}
-      {{ hostvars['localhost' if sops_install_on_localhost else inventory_hostname].ansible_facts.distribution_version }}.
+      for {{ _community_sops_install_facts.distribution }} {{ _community_sops_install_facts.distribution_version }}.
       Please open an issue in https://github.com/ansible-collections/community.sops/issues if you think this should work.
   when: sops_source == 'auto'
