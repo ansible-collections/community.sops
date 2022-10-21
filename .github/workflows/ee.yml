@@ -31,10 +31,9 @@ jobs:
           - stable-2.11-latest
         execute_playbook:
           - ansible-playbook -v community.sops.install_localhost
-        # This currently does not work with Ansible 2.9 since the dnf module isn't available.
-        # include:
-        #   - runner_tag: stable-2.9-latest
-        #     execute_playbook: ansible localhost -m include_role -a name=community.sops.install -e sops_install_on_localhost=true
+        include:
+          - runner_tag: stable-2.9-latest
+            execute_playbook: ansible localhost -m include_role -a name=community.sops.install -e sops_install_on_localhost=true -e ansible_python_interpreter=/usr/libexec/platform-python
     runs-on: ubuntu-latest
     steps:
       - name: Check out code
