@@ -8,7 +8,7 @@ from __future__ import absolute_import, division, print_function
 __metaclass__ = type
 
 DOCUMENTATION = '''
-name: latest_version
+name: _latest_version
 short_description: Get latest version from a list of versions
 version_added: 1.4.0
 author:
@@ -28,7 +28,7 @@ options:
 EXAMPLES = '''
 - name: Print latest version
   ansible.builtin.debug:
-    msg: "{{ versions | community.sops.latest_version }}"
+    msg: "{{ versions | community.sops._latest_version }}"
   vars:
     versions:
       - 1.0.0
@@ -67,5 +67,5 @@ class FilterModule(object):
     '''Helper filters.'''
     def filters(self):
         return {
-            'latest_version': pick_latest_version,
+            '_latest_version': pick_latest_version,
         }

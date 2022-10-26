@@ -35,7 +35,7 @@
             | rejectattr("draft")
             | map(attribute="tag_name")
             | map("ansible.builtin.regex_replace", "^v", "")
-            | community.sops.latest_version
+            | community.sops._latest_version
           }}
 
     - name: Show selected version
