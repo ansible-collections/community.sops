@@ -52,7 +52,6 @@ extends_documentation_fragment:
 attributes:
   action:
     support: full
-    action_plugin: community.sops.load_vars
   async:
     support: none
     details:
