@@ -59,7 +59,9 @@ attributes:
   check_mode:
     support: full
   diff_mode:
-    support: full
+    support: N/A
+    details:
+      - This action does not modify state.
   facts:
     support: full
 seealso:
