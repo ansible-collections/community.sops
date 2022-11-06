@@ -55,11 +55,18 @@ extends_documentation_fragment:
   - ansible.builtin.files
   - community.sops.sops
   - community.sops.sops.encrypt_specific
+  - community.sops.attributes
+  - community.sops.attributes.files
+attributes:
+  check_mode:
+    support: full
+  diff_mode:
+    support: none
+  safe_file_operations:
+    support: full
 seealso:
   - ref: community.sops.sops lookup <ansible_collections.community.sops.sops_lookup>
     description: The sops lookup can be used decrypt sops-encrypted files.
-notes:
-  - Supports C(check_mode).
 '''
 
 EXAMPLES = r'''

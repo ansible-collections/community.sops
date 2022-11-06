@@ -46,6 +46,24 @@ options:
         - evaluate-on-load
 extends_documentation_fragment:
   - community.sops.sops
+  - community.sops.attributes
+  - community.sops.attributes.facts
+  - community.sops.attributes.flow
+attributes:
+  action:
+    support: full
+  async:
+    support: none
+    details:
+      - This action runs completely on the controller.
+  check_mode:
+    support: full
+  diff_mode:
+    support: N/A
+    details:
+      - This action does not modify state.
+  facts:
+    support: full
 seealso:
   - module: ansible.builtin.set_fact
   - module: ansible.builtin.include_vars
