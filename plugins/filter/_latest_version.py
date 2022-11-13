@@ -9,13 +9,15 @@ __metaclass__ = type
 
 DOCUMENTATION = '''
 name: _latest_version
-short_description: Get latest version from a list of versions
+short_description: "[INTERNAL] Get latest version from a list of versions"
 version_added: 1.4.0
 author:
   - Felix Fontein (@felixfontein)
 description:
+  - B(This is an internal tool and must only be used from roles in this collection!)
+    If you use it from outside this collection, be warned that its behavior can change
+    and it can be removed at any time, even in bugfix releases!
   - Given a list of version numbers, returns the largest of them.
-  - This is an internal filter mainly used for the R(community.sops.install role,ansible_collections.community.sops.install_role).
 options:
   _input:
     description:
