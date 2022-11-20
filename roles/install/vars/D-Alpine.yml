@@ -11,7 +11,6 @@ _community_sops_install_allow_downgrade: false
 
 _community_sops_install_system_packages:
   - gpg
-  - age
 _community_sops_install_system_packages_unsigned: []
 
 _community_sops_install_system_package_deb_github: false
@@ -22,5 +21,3 @@ _community_sops_install_system_package_deb_system: false
 _community_sops_install_system_packages_system:
   - sops
 _community_sops_install_system_packages_unsigned_system: []
-
-_community_sops_install_has_age: true

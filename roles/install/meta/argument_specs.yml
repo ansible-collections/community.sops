@@ -8,8 +8,7 @@ argument_specs:
     short_description: Install Mozilla sops
     version_added: 1.5.0
     description:
-      - This role installs L(Mozilla sops,https://github.com/mozilla/sops) and associated tools such as Gnu Privacy Guard (GPG) and Age,
-        if available.
+      - This role installs L(Mozilla sops,https://github.com/mozilla/sops) and Gnu Privacy Guard (GPG).
       - >-
         This role supports the following operating systems:
         Alpine (new enough),

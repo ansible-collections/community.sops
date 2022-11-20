@@ -9,6 +9,12 @@
   vars:
     sops_install_on_localhost: true
 
+- name: Install age on localhost
+  include_role:
+    name: community.sops._install_age
+  vars:
+    sops_install_on_localhost: true
+
 - name: Download sops test GPG key on localhost
   get_url:
     url: https://raw.githubusercontent.com/mozilla/sops/master/pgp/sops_functional_tests_key.asc
@@ -20,9 +26,15 @@
   ignore_errors: true
   delegate_to: localhost
 
+# ---------------------------------------------------------------------------
+
 - name: Install sops on remote
   include_role:
     name: community.sops.install
+
+- name: Install age on remote
+  include_role:
+    name: community.sops._install_age
 
 - name: Download sops test GPG key on remote
   get_url:

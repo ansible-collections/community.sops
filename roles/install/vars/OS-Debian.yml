@@ -11,7 +11,6 @@ _community_sops_install_allow_downgrade: '{{ ansible_version.full is version("2.
 
 _community_sops_install_system_packages:
   - gnupg
-  - age
 _community_sops_install_system_packages_unsigned: []
 
 _community_sops_install_arch_transform:
@@ -30,5 +29,3 @@ _community_sops_install_system_packages_unsigned_github: []
 _community_sops_install_system_package_deb_system: false
 _community_sops_install_system_packages_system: []
 _community_sops_install_system_packages_unsigned_system: []
-
-_community_sops_install_has_age: true

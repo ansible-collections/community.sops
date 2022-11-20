@@ -30,5 +30,3 @@ _community_sops_install_system_packages_unsigned_github:
 _community_sops_install_system_package_deb_system: false
 _community_sops_install_system_packages_system: []
 _community_sops_install_system_packages_unsigned_system: []
-
-_community_sops_install_has_age: false

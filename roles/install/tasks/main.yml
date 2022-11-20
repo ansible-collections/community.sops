@@ -96,4 +96,3 @@
     - name: Set results
       ansible.builtin.set_fact:
         sops_installed: true
-        age_installed: "{{ _community_sops_install_has_age }}"
