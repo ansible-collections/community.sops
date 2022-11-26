@@ -66,6 +66,16 @@ DOCUMENTATION = """
         - community.sops.sops.ansible_ini
     notes:
         - This lookup does not understand 'globbing' - use the fileglob lookup instead.
+    seealso:
+        - ref: community.sops.decrypt filter <ansible_collections.community.sops.decrypt_filter>
+          description: The decrypt filter can be used to descrypt sops-encrypted in-memory data.
+        # - plugin: community.sops.decrypt
+        #   plugin_type: filter
+        - ref: community.sops.sops vars plugin <ansible_collections.community.sops.sops_vars>
+          description: The sops vars plugin can be used to load sops-encrypted host or group variables.
+        # - plugin: community.sops.sops
+        #   plugin_type: vars
+        - module: community.sops.load_vars
 """
 
 EXAMPLES = """

@@ -214,9 +214,9 @@ The ``empty_on_not_exist=true`` flag is needed to avoid the lookup to fail when 
 Working with encrypted data from other sources
 ----------------------------------------------
 
-You can use the ``community.sops.decrypt`` Jinja2 filter plugin to decrypt arbitrary data. This can be data read earlier from a file, returned from an action, or obtained through some other means.
+You can use the :ref:`community.sops.decrypt Jinja2 filter <ansible_collections.community.sops.decrypt_filter>` to decrypt arbitrary data. This can be data read earlier from a file, returned from an action, or obtained through some other means.
 
-For example, assume that you want to decrypt a file retrieved from a HTTPS server with the `ansible.builtin.uri module <ansible_collections.ansible.builtin.uri_module>`_. To use the ``community.sops.sops`` lookup, you have to write it to a file first. With the filter, you can directly decrypt it:
+For example, assume that you want to decrypt a file retrieved from a HTTPS server with the `ansible.builtin.uri module <ansible_collections.ansible.builtin.uri_module>`_. To use the :ref:`community.sops.sops lookup <ansible_collections.community.sops.sops_lookup>`, you have to write it to a file first. With the filter, you can directly decrypt it:
 
 .. code-block:: yaml+jinja
 

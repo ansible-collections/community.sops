@@ -63,6 +63,16 @@ DOCUMENTATION = '''
         - community.sops.sops
         - community.sops.sops.ansible_env
         - community.sops.sops.ansible_ini
+    seealso:
+        - ref: community.sops.sops lookup <ansible_collections.community.sops.sops_lookup>
+          description: The sops lookup can be used decrypt sops-encrypted files.
+        # - plugin: community.sops.sops
+        #   plugin_type: lookup
+        - ref: community.sops.decrypt filter <ansible_collections.community.sops.decrypt_filter>
+          description: The decrypt filter can be used to descrypt sops-encrypted in-memory data.
+        # - plugin: community.sops.decrypt
+        #   plugin_type: filter
+        - module: community.sops.load_vars
 '''
 
 import os
