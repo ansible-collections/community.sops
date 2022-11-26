@@ -1,5 +1,5 @@
 add object.playbook:
   - name: install
-    description: Installs sops on all remote hosts
+    description: Installs sops and GNU Privacy Guard on all remote hosts
   - name: install_localhost
-    description: Installs sops on localhost
+    description: Installs sops and GNU Privacy Guard on localhost

@@ -57,14 +57,14 @@ This collection provides:
 - a [vars plugin](https://docs.ansible.com/ansible/latest/plugins/vars.html) `sops` that allows loading Ansible vars from sops-encrypted files for hosts and groups;
 - an [action plugin](https://docs.ansible.com/ansible/latest/plugins/action.html) `load_vars` that allows loading Ansible vars from a sops-encrypted file dynamically during a playbook or role;
 - a [module](https://docs.ansible.com/ansible/latest/user_guide/basic_concepts.html#modules) `sops_encrypt` which allows to encrypt data with sops.
-- a [role](https://docs.ansible.com/ansible/latest/user_guide/playbooks_reuse_roles.html) `install` which allows to install sops.
-- two [playbooks](https://docs.ansible.com/ansible/latest/user_guide/playbooks_intro.html) `install` and `install_localhost` which allow to install sops.
+- a [role](https://docs.ansible.com/ansible/latest/user_guide/playbooks_reuse_roles.html) `install` which allows to install sops and GNU Privacy Guard.
+- two [playbooks](https://docs.ansible.com/ansible/latest/user_guide/playbooks_intro.html) `install` and `install_localhost` which allow to install sops and GNU Privacy Guard.
 
 ## Using this collection
 
 ### Installing sops
 
-To install sops, you can use the ``community.sops.install`` role. The role also installs [GNU Privacy Guard (GPG)](https://en.wikipedia.org/wiki/GNU_Privacy_Guard) and [Age](https://github.com/FiloSottile/age) (if available in the system packages repositories).
+To install sops, you can use the ``community.sops.install`` role. The role also installs [GNU Privacy Guard (GPG)](https://en.wikipedia.org/wiki/GNU_Privacy_Guard).
 
 Examples:
 
