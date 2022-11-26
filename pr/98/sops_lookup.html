@@ -82,6 +82,7 @@
 <li class="toctree-l2"><a class="reference internal" href="#terms">Terms</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#parameters">Parameters</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#notes">Notes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#see-also">See Also</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#examples">Examples</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#return-value">Return Value</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="#authors">Authors</a></li>
@@ -139,8 +140,9 @@
 <li><p><a class="reference internal" href="#terms" id="id2">Terms</a></p></li>
 <li><p><a class="reference internal" href="#parameters" id="id3">Parameters</a></p></li>
 <li><p><a class="reference internal" href="#notes" id="id4">Notes</a></p></li>
-<li><p><a class="reference internal" href="#examples" id="id5">Examples</a></p></li>
-<li><p><a class="reference internal" href="#return-value" id="id6">Return Value</a></p></li>
+<li><p><a class="reference internal" href="#see-also" id="id5">See Also</a></p></li>
+<li><p><a class="reference internal" href="#examples" id="id6">Examples</a></p></li>
+<li><p><a class="reference internal" href="#return-value" id="id7">Return Value</a></p></li>
 </ul>
 </div>
 <section id="synopsis">
@@ -479,8 +481,22 @@
 </ul>
 </div>
 </section>
+<section id="see-also">
+<h2><a class="toc-backref" href="#id5">See Also</a><a class="headerlink" href="#see-also" title="Permalink to this heading"></a></h2>
+<div class="admonition seealso">
+<p class="admonition-title">See also</p>
+<dl class="simple">
+<dt><a class="reference internal" href="decrypt_filter.html#ansible-collections-community-sops-decrypt-filter"><span class="std std-ref">community.sops.decrypt filter</span></a></dt><dd><p>The decrypt filter can be used to descrypt sops-encrypted in-memory data.</p>
+</dd>
+<dt><a class="reference internal" href="sops_vars.html#ansible-collections-community-sops-sops-vars"><span class="std std-ref">community.sops.sops vars plugin</span></a></dt><dd><p>The sops vars plugin can be used to load sops-encrypted host or group variables.</p>
+</dd>
+<dt><a class="reference internal" href="load_vars_module.html#ansible-collections-community-sops-load-vars-module"><span class="std std-ref">community.sops.load_vars</span></a></dt><dd><p>The official documentation on the <strong>community.sops.load_vars</strong> module.</p>
+</dd>
+</dl>
+</div>
+</section>
 <section id="examples">
-<h2><a class="toc-backref" href="#id5">Examples</a><a class="headerlink" href="#examples" title="Permalink to this heading"></a></h2>
+<h2><a class="toc-backref" href="#id6">Examples</a><a class="headerlink" href="#examples" title="Permalink to this heading"></a></h2>
 <div class="highlight-yaml+jinja notranslate"><div class="highlight"><pre><span></span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Output secrets to screen (BAD IDEA!)</span><span class="w"></span>
 <span class="w">  </span><span class="nt">ansible.builtin.debug</span><span class="p">:</span><span class="w"></span>
 <span class="w">    </span><span class="nt">msg</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;Content:</span><span class="nv"> </span><span class="cp">{{</span> <span class="nv">lookup</span><span class="o">(</span><span class="s1">&#39;community.sops.sops&#39;</span><span class="o">,</span> <span class="nv">item</span><span class="o">)</span> <span class="cp">}}</span><span class="s">&quot;</span><span class="w"></span>
@@ -504,7 +520,7 @@
 </div>
 </section>
 <section id="return-value">
-<h2><a class="toc-backref" href="#id6">Return Value</a><a class="headerlink" href="#return-value" title="Permalink to this heading"></a></h2>
+<h2><a class="toc-backref" href="#id7">Return Value</a><a class="headerlink" href="#return-value" title="Permalink to this heading"></a></h2>
 <table class="colwidths-auto ansible-option-table docutils align-default" style="width: 100%">
 <thead>
 <tr class="row-odd"><th class="head"><p>Key</p></th>
