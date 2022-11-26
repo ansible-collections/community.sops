@@ -65,6 +65,12 @@ options:
         default: true
 extends_documentation_fragment:
     - community.sops.sops
+seealso:
+    - plugin: community.sops.sops
+      plugin_type: lookup
+    - plugin: community.sops.sops
+      plugin_type: vars
+    - module: community.sops.load_vars
 '''
 
 EXAMPLES = '''
