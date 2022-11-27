@@ -21,7 +21,7 @@ Installing sops
 
 You can find binaries and packages `on the project's release page <https://github.com/mozilla/sops/releases>`_. Depending on your operating system, you might also be able to install it with your system's package manager.
 
-This collection provides a `role community.sops.install <ansible_collections.community.sops.install_role>`_ which allows to install sops and `GNU Privacy Guard (GPG) <https://en.wikipedia.org/wiki/GNU_Privacy_Guard>`__ on the controller. The role allows to install sops from the system's package manager or from GitHub. Both sops and GPG can be installed on the remote hosts or the Ansible controller.
+This collection provides a `role community.sops.install <ansible_collections.community.sops.install_role>`_ which allows to install sops and `GNU Privacy Guard (GPG) <https://en.wikipedia.org/wiki/GNU_Privacy_Guard>`__. The role allows to install sops from the system's package manager or from GitHub. Both sops and GPG can be installed on the remote hosts or the Ansible controller.
 
 .. code-block:: yaml
 
