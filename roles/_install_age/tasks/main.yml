@@ -60,3 +60,5 @@
     - name: Set results
       ansible.builtin.set_fact:
         age_installed: "{{ _community_sops_install_age_has_age }}"
+      delegate_to: '{{ "localhost" if sops_install_on_localhost else omit }}'
+      delegate_facts: '{{ true if sops_install_on_localhost else omit }}'
