@@ -96,3 +96,5 @@
     - name: Set results
       ansible.builtin.set_fact:
         sops_installed: true
+      delegate_to: '{{ "localhost" if sops_install_on_localhost else omit }}'
+      delegate_facts: '{{ true if sops_install_on_localhost else omit }}'
