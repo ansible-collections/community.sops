@@ -208,3 +208,26 @@ releases:
     - 1.4.1.yml
     - 121-action-module-compat.yml
     release_date: '2022-09-23'
+  1.5.0:
+    changes:
+      minor_changes:
+      - Automatically install GNU Privacy Guard (GPG) in execution environments. To
+        install Mozilla sops a manual step needs to be added to the EE definition,
+        see the collection's documentation for details (https://github.com/ansible-collections/community.sops/pull/98).
+      release_summary: Feature release.
+    fragments:
+    - 1.5.0.yml
+    - 98-playbooks.yml
+    objects:
+      playbook:
+      - description: Installs sops and GNU Privacy Guard on all remote hosts
+        name: install
+        namespace: null
+      - description: Installs sops and GNU Privacy Guard on localhost
+        name: install_localhost
+        namespace: null
+      role:
+      - description: Install Mozilla sops
+        name: install
+        namespace: null
+    release_date: '2022-12-02'

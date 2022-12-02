@@ -5,6 +5,30 @@ Community Sops Release Notes
 .. contents:: Topics
 
 
+v1.5.0
+======
+
+Release Summary
+---------------
+
+Feature release.
+
+Minor Changes
+-------------
+
+- Automatically install GNU Privacy Guard (GPG) in execution environments. To install Mozilla sops a manual step needs to be added to the EE definition, see the collection's documentation for details (https://github.com/ansible-collections/community.sops/pull/98).
+
+New Playbooks
+-------------
+
+- community.sops.install - Installs sops and GNU Privacy Guard on all remote hosts
+- community.sops.install_localhost - Installs sops and GNU Privacy Guard on localhost
+
+New Roles
+---------
+
+- community.sops.install - Install Mozilla sops
+
 v1.4.1
 ======
 
