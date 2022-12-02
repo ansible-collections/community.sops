@@ -189,10 +189,6 @@ jobs:
             python_version: ''
             target: gha/install/3/
           - ansible: devel
-            docker_container: centos7
-            python_version: ''
-            target: gha/install/3/
-          - ansible: devel
             docker_container: ubuntu2004
             python_version: ''
             target: gha/install/3/
