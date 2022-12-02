@@ -165,7 +165,7 @@ jobs:
             target: gha/install/1/
           # Install on localhost vs. remote host
           - ansible: devel
-            docker_container: centos7
+            docker_container: ubuntu2004
             python_version: ''
             target: gha/install/2/
           # Install latest sops
