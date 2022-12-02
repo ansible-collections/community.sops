@@ -16,10 +16,83 @@ The ability to utilize various keysources makes it easier to use in complex envi
    :local:
    :depth: 1
 
+Installing sops
+---------------
+
+You can find binaries and packages `on the project's release page <https://github.com/mozilla/sops/releases>`_. Depending on your operating system, you might also be able to install it with your system's package manager.
+
+This collection provides a `role community.sops.install <ansible_collections.community.sops.install_role>`_ which allows to install sops and `GNU Privacy Guard (GPG) <https://en.wikipedia.org/wiki/GNU_Privacy_Guard>`__. The role allows to install sops from the system's package manager or from GitHub. Both sops and GPG can be installed on the remote hosts or the Ansible controller.
+
+.. code-block:: yaml
+
+    - name: Playbook to install sops
+      hosts: all
+      tasks:
+        # To use the sops_encrypt module on a remote host, you need to install sops on it:
+        - name: Install sops on remote hosts
+          ansible.builtin.include_role:
+            name: community.sops.install
+          vars:
+            sops_version: 2.7.0  # per default installs the latest version
+
+        # To use the lookup plugin, filter plugin, vars plugin, or the load_vars action,
+        # you need sops installed on localhost:
+        - name: Install sops on localhost
+          ansible.builtin.include_role:
+            name: community.sops.install
+          vars:
+            sops_install_on_localhost: true
+
+When using ansible-core 2.11 or later, you can also use two convenience playbooks:
+
+.. code-block:: bash
+
+    # Install sops on Ansible controller
+    $ ansible-playbook community.sops.install_localhost
+
+    # Install sops on remote servers
+    $ ansible-playbook community.sops.install --inventory /path/to/inventory
+
+Installing community.sops in an Execution Environment
+-----------------------------------------------------
+
+When building an execution environment containing community.sops, please note that by default sops is not automatically installed. This is due to a limitation of the dependency specification system for execution environments. If you are building an execution environment that contains community.sops, you should make sure that sops is installed in it.
+
+The simplest way of ensuring this is to use the ``community.sops.install_localhost`` playbook. When defining an execution environment, you can add a ``RUN`` additional build step to your ``execution-environment.yml``:
+
+.. code-block:: yaml
+
+    ---
+    version: 1
+    dependencies:
+      galaxy: requirements.yml
+    additional_build_steps:
+      append:
+        # Ensure that sops is installed in the EE, assuming the EE is for ansible-core 2.11 or newer
+        - RUN ansible-playbook -v community.sops.install_localhost
+
+Note that this only works if the execution environment is built with ansible-core 2.11 or newer. When using an execution environment with Ansible 2.9, you have to use the ``community.sops.install`` role manually. Also note that you need to make sure that Ansible 2.9 uses the correct Python interpreter to be able to install system packages with; in the below example we are assuming a RHEL/CentOS based execution environment base image:
+
+.. code-block:: yaml
+
+    ---
+    version: 1
+    dependencies:
+      galaxy: requirements.yml
+    additional_build_steps:
+      append:
+        # Special step needed for Ansible 2.9 based EEs
+        - >-
+          RUN ansible localhost -m include_role -a name=community.sops.install
+              -e sops_install_on_localhost=true
+              -e ansible_python_interpreter=/usr/libexec/platform-python
+
+Once this step has been taken care of, you can use all plugins and modules (on ``localhost``) from community.sops in the execution environment.
+
 Setting up sops
 ---------------
 
-This guide assumes that you have installed Mozilla SOPS. You can find binaries and packages `on the project's release page <https://github.com/mozilla/sops/releases>`_. Depending on your operating system, you might also be able to install it with your system's package manager.
+From now on this guide assumes that you have installed Mozilla SOPS.
 
 For simplicity, you can work with GPG keys. If you do not have one, or do not want to use yours, you can run ``gpg --quick-generate-key me@example.com`` to create a GPG key for the user ID ``me@example.com``. You will need its 40 hex-digit key ID that is printed at the end. The first step is to create a ``.sops.yaml`` file in the directory tree you are working in:
 

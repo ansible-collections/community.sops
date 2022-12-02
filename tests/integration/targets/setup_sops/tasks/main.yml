@@ -3,22 +3,44 @@
 # GNU General Public License v3.0+ (see LICENSES/GPL-3.0-or-later.txt or https://www.gnu.org/licenses/gpl-3.0.txt)
 # SPDX-License-Identifier: GPL-3.0-or-later
 
-- setup:
-    gather_subset:
-      - '!all'
-      - '!min'
-      - distribution
-      - distribution_major_version
-      - distribution_version
-      - os_family
+- name: Install sops on localhost
+  include_role:
+    name: community.sops.install
+  vars:
+    sops_install_on_localhost: true
+
+- name: Install age on localhost
+  include_role:
+    name: community.sops._install_age
+  vars:
+    sops_install_on_localhost: true
+
+- name: Download sops test GPG key on localhost
+  get_url:
+    url: https://raw.githubusercontent.com/mozilla/sops/master/pgp/sops_functional_tests_key.asc
+    dest: /tmp/sops_functional_tests_key.asc
   delegate_to: localhost
-  delegate_facts: true
 
-- include_tasks:
-    file: install.yml
-    apply:
-      delegate_to: localhost
-      vars:
-        hostname_override: localhost
+- name: Import sops test GPG key on localhost
+  command: gpg --import /tmp/sops_functional_tests_key.asc
+  ignore_errors: true
+  delegate_to: localhost
 
-- include_tasks: install.yml
+# ---------------------------------------------------------------------------
+
+- name: Install sops on remote
+  include_role:
+    name: community.sops.install
+
+- name: Install age on remote
+  include_role:
+    name: community.sops._install_age
+
+- name: Download sops test GPG key on remote
+  get_url:
+    url: https://raw.githubusercontent.com/mozilla/sops/master/pgp/sops_functional_tests_key.asc
+    dest: /tmp/sops_functional_tests_key.asc
+
+- name: Import sops test GPG key on remote
+  command: gpg --import /tmp/sops_functional_tests_key.asc
+  ignore_errors: true

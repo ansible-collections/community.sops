@@ -1,0 +1,37 @@
+---
+# Copyright (c) Ansible Project
+# GNU General Public License v3.0+ (see LICENSES/GPL-3.0-or-later.txt or https://www.gnu.org/licenses/gpl-3.0.txt)
+# SPDX-License-Identifier: GPL-3.0-or-later
+
+- name: Install sops 3.7.3 on localhost
+  include_role:
+    name: community.sops.install
+  vars:
+    sops_version: 3.7.3
+    sops_install_on_localhost: true
+
+- name: Install sops 3.7.0 on remote
+  include_role:
+    name: community.sops.install
+  vars:
+    sops_version: 3.7.0
+    sops_install_on_localhost: false
+
+- name: Figure out sops version on localhost
+  command:
+    cmd: sops --version
+  delegate_to: localhost
+  register: output_localhost
+
+- name: Figure out sops version on remote host
+  command:
+    cmd: sops --version
+  register: output_remote
+
+- name: Check sops version
+  assert:
+    that:
+      - >-
+        'sops 3.7.3' in output_localhost.stdout
+      - >-
+        'sops 3.7.0' in output_remote.stdout

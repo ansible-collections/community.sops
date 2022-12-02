@@ -1,0 +1,52 @@
+---
+# GNU General Public License v3.0+ (see LICENSES/GPL-3.0-or-later.txt or https://www.gnu.org/licenses/gpl-3.0.txt)
+# SPDX-License-Identifier: GPL-3.0-or-later
+# SPDX-FileCopyrightText: 2022, Felix Fontein
+
+- name: Make sure that sops can be installed from GitHub
+  ansible.builtin.fail:
+    msg: >-
+      Sops cannot be installed from GitHub for
+      {{ _community_sops_install_facts.distribution }} {{ _community_sops_install_facts.distribution_version }}.
+  when: not _community_sops_install_system_has_github
+
+- name: Start determining sops version
+  ansible.builtin.set_fact:
+    _community_sops_install_effective_sops_version: '{{ sops_version }}'
+
+- name: Determine latest version
+  when: sops_version == 'latest'
+  block:
+    - name: Fetch list of releases from GitHub
+      ansible.builtin.uri:
+        headers:
+          Accept: application/vnd.github+json
+        url: https://api.github.com/repos/mozilla/sops/releases
+      register: _community_sops_install_github_releases
+      delegate_to: localhost
+      run_once: true
+
+    - name: Determine the latest release
+      ansible.builtin.set_fact:
+        _community_sops_install_effective_sops_version: >-
+          {{
+            _community_sops_install_github_releases.json
+            | rejectattr("prerelease")
+            | rejectattr("draft")
+            | map(attribute="tag_name")
+            | map("ansible.builtin.regex_replace", "^v", "")
+            | community.sops._latest_version
+          }}
+
+    - name: Show selected version
+      ansible.builtin.debug:
+        msg: The latest sops version is sops {{ _community_sops_install_effective_sops_version }}.
+
+- name: Set variables
+  ansible.builtin.set_fact:
+    _community_sops_install_system_packages_actual: >-
+      {{ _community_sops_install_system_packages + _community_sops_install_system_packages_github }}
+    _community_sops_install_system_packages_unsigned_actual: >-
+      {{ _community_sops_install_system_packages_unsigned + _community_sops_install_system_packages_unsigned_github }}
+    _community_sops_install_system_package_deb_actual: >-
+      {{ _community_sops_install_system_package_deb_github }}

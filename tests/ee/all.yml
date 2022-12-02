@@ -1,0 +1,25 @@
+---
+# Copyright (c) Ansible Project
+# GNU General Public License v3.0+ (see LICENSES/GPL-3.0-or-later.txt or https://www.gnu.org/licenses/gpl-3.0.txt)
+# SPDX-License-Identifier: GPL-3.0-or-later
+
+- hosts: localhost
+  tasks:
+    - name: Download sops test GPG key on localhost
+      get_url:
+        url: https://raw.githubusercontent.com/mozilla/sops/master/pgp/sops_functional_tests_key.asc
+        dest: /tmp/sops_functional_tests_key.asc
+    - name: Import sops test GPG key on localhost
+      command: gpg --import /tmp/sops_functional_tests_key.asc
+      ignore_errors: true
+    - name: Find all roles
+      find:
+        paths:
+          - "{{ (playbook_dir | default('.')) ~ '/roles' }}"
+        file_type: directory
+        depth: 1
+      register: result
+    - name: Include all roles
+      include_role:
+        name: "{{ item }}"
+      loop: "{{ result.files | map(attribute='path') | map('regex_replace', '.*/', '') | sort }}"
