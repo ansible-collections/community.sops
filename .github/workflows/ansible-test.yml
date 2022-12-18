@@ -44,7 +44,7 @@ jobs:
       ), matrix.ansible) && 'ubuntu-20.04' || 'ubuntu-latest' }}
     steps:
       - name: Perform sanity testing
-        uses: ansible-community/ansible-test-gh-action@release/v1
+        uses: felixfontein/ansible-test-gh-action@main
         with:
           ansible-core-version: ${{ matrix.ansible }}
           testing-type: sanity
@@ -120,7 +120,7 @@ jobs:
           Ansible version ${{ matrix.ansible }}
           under ${{ matrix.docker_container }}
           with sops ${{ matrix.sops_version }}
-        uses: ansible-community/ansible-test-gh-action@release/v1
+        uses: felixfontein/ansible-test-gh-action@main
         with:
           ansible-core-version: ${{ matrix.ansible }}
           docker-image: ${{ matrix.docker_container }}
@@ -209,10 +209,13 @@ jobs:
           Ansible version ${{ matrix.ansible }}
           under ${{ matrix.docker_container }}
           with sops ${{ matrix.sops_version }}
-        uses: ansible-community/ansible-test-gh-action@release/v1
+        uses: felixfontein/ansible-test-gh-action@main
         with:
           ansible-core-version: ${{ matrix.ansible }}
           docker-image: ${{ matrix.docker_container }}
+          integration-continue-on-error: 'false'
+          integration-diff: 'false'
+          integration-retry-on-error: 'true'
           pre-test-cmd: ${{ matrix.pre-test-cmd }}
           testing-type: integration
           target-python-version: ${{ matrix.python_version }}
