@@ -127,7 +127,7 @@ jobs:
           # Adjust vars files so that sops ${{ matrix.sops_version }} is used
           # NOTE: we're installing with git to work around Galaxy being a huge PITA (https://github.com/ansible/galaxy/issues/2429)
           pre-test-cmd: |-
-            echo 'sops_version: ${{ matrix.sops_version }}' > tests/integration/integration_config.yml
+            echo 'override_sops_version: ${{ matrix.sops_version }}' > tests/integration/integration_config.yml
             git clone --depth=1 --single-branch https://github.com/ansible-collections/community.general.git ../../community/general
           testing-type: integration
           target-python-version: ${{ matrix.python_version }}
@@ -208,7 +208,6 @@ jobs:
           Perform sops installation integration testing against
           Ansible version ${{ matrix.ansible }}
           under ${{ matrix.docker_container }}
-          with sops ${{ matrix.sops_version }}
         uses: felixfontein/ansible-test-gh-action@main
         with:
           ansible-core-version: ${{ matrix.ansible }}
