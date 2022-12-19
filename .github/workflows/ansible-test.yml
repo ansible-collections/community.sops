@@ -124,6 +124,9 @@ jobs:
         with:
           ansible-core-version: ${{ matrix.ansible }}
           docker-image: ${{ matrix.docker_container }}
+          integration-continue-on-error: 'false'
+          integration-diff: 'false'
+          integration-retry-on-error: 'true'
           # Adjust vars files so that sops ${{ matrix.sops_version }} is used
           # NOTE: we're installing with git to work around Galaxy being a huge PITA (https://github.com/ansible/galaxy/issues/2429)
           pre-test-cmd: |-
