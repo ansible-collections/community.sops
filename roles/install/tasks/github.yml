@@ -14,8 +14,37 @@
   ansible.builtin.set_fact:
     _community_sops_install_effective_sops_version: '{{ sops_version }}'
 
+# This method asks GitHub for the latest release, which depends on the release to be
+# correctly marked as "latest" in the GitHub UI. Fortunately this is not as aggressively
+# rate-limited as the API (used in the fallback).
 - name: Determine latest version
-  when: sops_version == 'latest'
+  when: sops_version == 'latest' and true
+  block:
+    - name: Fetch the latest release from GitHub
+      ansible.builtin.uri:
+        url: https://github.com/mozilla/sops/releases/latest/
+        follow_redirects: false
+        status_code:
+          - 302
+          - 307
+      register: _community_sops_install_github_latest_release
+      delegate_to: localhost
+      run_once: true
+
+    - name: Determine the latest release
+      ansible.builtin.set_fact:
+        _community_sops_install_effective_sops_version: >-
+          {{
+            _community_sops_install_github_latest_release.location
+            | default("", true)
+            | ansible.builtin.regex_search("(?<=/releases/tag/)([0-9a-z._-]+)")
+            | default("", true)
+            | ansible.builtin.regex_replace("^v", "")
+          }}
+
+# This method uses the GitHub API, which is rate-limited.
+- name: Determine latest version (fallback)
+  when: sops_version == 'latest' and _community_sops_install_effective_sops_version == ''
   block:
     - name: Fetch list of releases from GitHub
       ansible.builtin.uri:
@@ -38,9 +67,10 @@
             | community.sops._latest_version
           }}
 
-    - name: Show selected version
-      ansible.builtin.debug:
-        msg: The latest sops version is sops {{ _community_sops_install_effective_sops_version }}.
+- name: Show selected version
+  ansible.builtin.debug:
+    msg: The latest sops version is sops {{ _community_sops_install_effective_sops_version }}.
+  when: sops_version == 'latest'
 
 - name: Set variables
   ansible.builtin.set_fact:
