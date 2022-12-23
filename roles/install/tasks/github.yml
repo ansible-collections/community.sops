@@ -36,6 +36,7 @@
         _community_sops_install_effective_sops_version: >-
           {{
             _community_sops_install_github_latest_release.location
+            | default("", true)
             | ansible.builtin.regex_search("(?<=/releases/tag/)([0-9a-z._-]+)")
             | default("", true)
             | ansible.builtin.regex_replace("^v", "")
