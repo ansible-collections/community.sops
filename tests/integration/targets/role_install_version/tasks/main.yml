@@ -8,7 +8,7 @@
     name: community.sops.install
   vars:
     sops_version: 3.7.3
-    sops_github_token: "{{ github_token | default('') }}"
+    sops_github_token: "{{ github_token | default('') | string }}"
 
 - name: Figure out sops version
   command:
@@ -26,7 +26,7 @@
     name: community.sops.install
   vars:
     sops_version: 3.7.0
-    sops_github_token: "{{ github_token | default('') }}"
+    sops_github_token: "{{ github_token | default('') | string }}"
 
 - name: Figure out sops version
   command:
