@@ -1,3 +1,5 @@
 minor_changes:
   - "install role - implement another method to determine the latest release on GitHub than using the GitHub API,
      which can make installation fail due to rate-limiting (https://github.com/ansible-collections/community.sops/pull/131)."
+  - "install_role - add ``sops_github_token`` option to allow passing a GitHub token. This can for example be used to
+     avoid rate limits when using the role in GitHub Actions (https://github.com/ansible-collections/community.sops/pull/131)."

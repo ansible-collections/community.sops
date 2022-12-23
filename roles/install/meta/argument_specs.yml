@@ -51,3 +51,10 @@ argument_specs:
         description:
           - 'Whether the role should use C(become: true) when installing packages.'
         type: bool
+      sops_github_token:
+        description:
+          - Token to provide when querying the GitHub API for the latest release. Without the token
+            there are rather strict rate limits.
+          - Should mainly be used in GitHub Actions.
+        type: string
+        version_added: 1.6.0
