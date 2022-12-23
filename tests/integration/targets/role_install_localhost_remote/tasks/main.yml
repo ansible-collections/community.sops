@@ -9,7 +9,6 @@
   vars:
     sops_version: 3.7.3
     sops_install_on_localhost: true
-    sops_github_token: "{{ github_token | default('') | string }}"
 
 - name: Install sops 3.7.0 on remote
   include_role:
@@ -17,7 +16,6 @@
   vars:
     sops_version: 3.7.0
     sops_install_on_localhost: false
-    sops_github_token: "{{ github_token | default('') | string }}"
 
 - name: Figure out sops version on localhost
   command:

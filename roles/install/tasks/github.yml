@@ -50,7 +50,6 @@
       ansible.builtin.uri:
         headers:
           Accept: application/vnd.github+json
-          Authorization: "{{ 'Bearer ' ~ sops_github_token if sops_github_token is defined and sops_github_token else '' }}"
         url: https://api.github.com/repos/mozilla/sops/releases
       register: _community_sops_install_github_releases
       delegate_to: localhost

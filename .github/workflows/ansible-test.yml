@@ -59,8 +59,6 @@ jobs:
       ${{ contains(fromJson(
           '["stable-2.9", "stable-2.10", "stable-2.11"]'
       ), matrix.ansible) && 'ubuntu-20.04' || 'ubuntu-latest' }}
-    permissions:
-      contents: read
     strategy:
       matrix:
         ansible:
@@ -129,10 +127,10 @@ jobs:
           integration-continue-on-error: 'false'
           integration-diff: 'false'
           integration-retry-on-error: 'true'
+          # Adjust vars files so that sops ${{ matrix.sops_version }} is used
           # NOTE: we're installing with git to work around Galaxy being a huge PITA (https://github.com/ansible/galaxy/issues/2429)
           pre-test-cmd: |-
             echo 'override_sops_version: ${{ matrix.sops_version }}' > tests/integration/integration_config.yml
-            echo 'github_token: ${{ secrets.GITHUB_TOKEN }}' >> tests/integration/integration_config.yml
             git clone --depth=1 --single-branch https://github.com/ansible-collections/community.general.git ../../community/general
           testing-type: integration
           target-python-version: ${{ matrix.python_version }}
@@ -148,8 +146,6 @@ jobs:
       ${{ contains(fromJson(
           '["stable-2.9", "stable-2.10", "stable-2.11"]'
       ), matrix.ansible) && 'ubuntu-20.04' || 'ubuntu-latest' }}
-    permissions:
-      contents: read
     strategy:
       matrix:
         ansible:
@@ -222,9 +218,7 @@ jobs:
           integration-continue-on-error: 'false'
           integration-diff: 'false'
           integration-retry-on-error: 'true'
-          pre-test-cmd: |-
-            echo 'github_token: ${{ secrets.GITHUB_TOKEN }}' > tests/integration/integration_config.yml
-            ${{ matrix.pre-test-cmd || 'echo' }}
+          pre-test-cmd: ${{ matrix.pre-test-cmd }}
           testing-type: integration
           target-python-version: ${{ matrix.python_version }}
           target: ${{ matrix.target }}
