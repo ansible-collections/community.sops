@@ -56,5 +56,5 @@ argument_specs:
           - Token to provide when querying the GitHub API for the latest release. Without the token
             there are rather strict rate limits.
           - Should mainly be used in GitHub Actions.
-        type: string
+        type: str
         version_added: 1.6.0
