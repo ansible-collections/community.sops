@@ -9,6 +9,7 @@
   vars:
     sops_install_on_localhost: true
     sops_version: '{{ override_sops_version | default("latest") }}'
+    sops_github_token: "{{ github_token | default('') | string }}"
 
 - name: Install age on localhost
   include_role:
@@ -34,6 +35,7 @@
     name: community.sops.install
   vars:
     sops_version: '{{ override_sops_version | default("latest") }}'
+    sops_github_token: "{{ github_token | default('') | string }}"
 
 - name: Install age on remote
   include_role:

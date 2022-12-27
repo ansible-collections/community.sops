@@ -8,6 +8,7 @@
     name: community.sops.install
   vars:
     sops_version: latest
+    sops_github_token: "{{ github_token | default('') | string }}"
 
 - name: Figure out sops version
   command:
