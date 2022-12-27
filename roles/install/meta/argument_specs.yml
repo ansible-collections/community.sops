@@ -51,6 +51,18 @@ argument_specs:
         description:
           - 'Whether the role should use C(become: true) when installing packages.'
         type: bool
+      sops_github_latest_detection:
+        description:
+          - When installing the latest sops version from GitHub, configures how the latest release is detected.
+          - C(auto) tries C(api) first and then uses C(latest-release).
+          - C(api) asks the GitHub API for a list of recent releases and picks the highest version.
+          - C(latest-release) uses a not fully documented URL to retrieve the release marked as "latest" by the repository maintainers.
+        type: str
+        choices:
+          - auto
+          - api
+          - latest-release
+        version_added: 1.6.0
       sops_github_token:
         description:
           - Token to provide when querying the GitHub API for the latest release. Without the token

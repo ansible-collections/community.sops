@@ -162,6 +162,8 @@ jobs:
           - gha/install/
         pre-test-cmd:
           - ''
+        github_latest_detection:
+          - ''
         exclude:
           - docker_container: ''
         include:
@@ -180,6 +182,7 @@ jobs:
             docker_container: quay.io/ansible-community/test-image:archlinux
             python_version: '3.10'
             target: gha/install/3/
+            github_latest_detection: auto
             # NOTE: we're installing with git to work around Galaxy being a huge PITA (https://github.com/ansible/galaxy/issues/2429)
             pre-test-cmd: |-
               git clone --depth=1 --single-branch https://github.com/ansible-collections/community.general.git ../../community/general
@@ -187,26 +190,32 @@ jobs:
             docker_container: quay.io/ansible-community/test-image:centos-stream8
             python_version: '3.8'
             target: gha/install/3/
+            github_latest_detection: auto
           - ansible: devel
             docker_container: quay.io/ansible-community/test-image:debian-bullseye
             python_version: '3.9'
             target: gha/install/3/
+            github_latest_detection: auto
           - ansible: devel
             docker_container: fedora36
             python_version: ''
             target: gha/install/3/
+            github_latest_detection: auto
           - ansible: devel
             docker_container: ubuntu2004
             python_version: ''
             target: gha/install/3/
+            github_latest_detection: api
           - ansible: devel
             docker_container: ubuntu2204
             python_version: ''
             target: gha/install/3/
+            github_latest_detection: latest-release
           # - ansible: devel
           #   docker_container: alpine3  -- so far only alpine3 edge supports sops
           #   python_version: ''
           #   target: gha/install/3/
+          #   github_latest_detection: auto
           #   # NOTE: we're installing with git to work around Galaxy being a huge PITA (https://github.com/ansible/galaxy/issues/2429)
           #   pre-test-cmd: |-
           #     git clone --depth=1 --single-branch https://github.com/ansible-collections/community.general.git ../../community/general
@@ -224,6 +233,7 @@ jobs:
           integration-retry-on-error: 'true'
           pre-test-cmd: |-
             echo 'github_token: ${{ secrets.GITHUB_TOKEN }}' > tests/integration/integration_config.yml
+            echo 'github_latest_detection: ${{ matrix.github_latest_detection || 'auto' }}' >> tests/integration/integration_config.yml
             ${{ matrix.pre-test-cmd || 'echo' }}
           testing-type: integration
           target-python-version: ${{ matrix.python_version }}

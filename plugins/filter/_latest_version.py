@@ -62,6 +62,8 @@ except ImportError:
 
 def pick_latest_version(version_list):
     '''Pick latest version from a list of versions.'''
+    if not version_list:
+        return ''
     return sorted(version_list, key=LooseVersion, reverse=True)[0]
 
 

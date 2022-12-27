@@ -7,3 +7,4 @@ sops_version: latest
 sops_source: auto
 sops_install_on_localhost: false
 sops_become_on_install: true
+sops_github_latest_detection: auto
