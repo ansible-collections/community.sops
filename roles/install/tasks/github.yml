@@ -12,61 +12,28 @@
 
 - name: Start determining sops version
   ansible.builtin.set_fact:
-    _community_sops_install_effective_sops_version: '{{ sops_version }}'
+    _community_sops_install_effective_sops_version: '{{ "" if sops_version == "latest" else sops_version }}'
+
+# This method uses the GitHub API, which is rate-limited.
+- name: Determine latest version (fallback)
+  when:
+    - _community_sops_install_effective_sops_version == ''
+    - sops_github_latest_detection in ['auto', 'api']
+  ansible.builtin.include_tasks: github_api.yml
 
 # This method asks GitHub for the latest release, which depends on the release to be
 # correctly marked as "latest" in the GitHub UI. Fortunately this is not as aggressively
 # rate-limited as the API (used in the fallback).
 - name: Determine latest version
-  when: sops_version == 'latest' and true
-  block:
-    - name: Fetch the latest release from GitHub
-      ansible.builtin.uri:
-        url: https://github.com/mozilla/sops/releases/latest/
-        follow_redirects: false
-        status_code:
-          - 302
-          - 307
-      register: _community_sops_install_github_latest_release
-      delegate_to: localhost
-      run_once: true
+  when:
+    - _community_sops_install_effective_sops_version == ''
+    - sops_github_latest_detection in ['auto', 'latest-release']
+  ansible.builtin.include_tasks: github_latest_release.yml
 
-    - name: Determine the latest release
-      ansible.builtin.set_fact:
-        _community_sops_install_effective_sops_version: >-
-          {{
-            _community_sops_install_github_latest_release.location
-            | default("", true)
-            | ansible.builtin.regex_search("(?<=/releases/tag/)([0-9a-z._-]+)")
-            | default("", true)
-            | ansible.builtin.regex_replace("^v", "")
-          }}
-
-# This method uses the GitHub API, which is rate-limited.
-- name: Determine latest version (fallback)
-  when: sops_version == 'latest' and _community_sops_install_effective_sops_version == ''
-  block:
-    - name: Fetch list of releases from GitHub
-      ansible.builtin.uri:
-        headers:
-          Accept: application/vnd.github+json
-          Authorization: "{{ 'Bearer ' ~ sops_github_token if sops_github_token is defined and sops_github_token else '' }}"
-        url: https://api.github.com/repos/mozilla/sops/releases
-      register: _community_sops_install_github_releases
-      delegate_to: localhost
-      run_once: true
-
-    - name: Determine the latest release
-      ansible.builtin.set_fact:
-        _community_sops_install_effective_sops_version: >-
-          {{
-            _community_sops_install_github_releases.json
-            | rejectattr("prerelease")
-            | rejectattr("draft")
-            | map(attribute="tag_name")
-            | map("ansible.builtin.regex_replace", "^v", "")
-            | community.sops._latest_version
-          }}
+- name: Fail when latest version could not be selected
+  ansible.builtin.fail:
+    msg: Could not determine the latest GitHub release
+  when: _community_sops_install_effective_sops_version == ''
 
 - name: Show selected version
   ansible.builtin.debug:

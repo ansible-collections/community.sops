@@ -1,0 +1,5 @@
+minor_changes:
+  - "install role - add ``sops_github_latest_detection`` option that allows to configure which method to use for detecting
+     the latest release on GitHub. By default (``auto``) first tries to retrieve a list of recent releases using the API,
+     and if that fails due to rate limiting, tries to obtain the latest GitHub release from a semi-documented URL
+     (https://github.com/ansible-collections/community.sops/pull/133)."
