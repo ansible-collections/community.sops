@@ -5,6 +5,21 @@ Community Sops Release Notes
 .. contents:: Topics
 
 
+v1.6.0
+======
+
+Release Summary
+---------------
+
+Feature release improving the installation role.
+
+Minor Changes
+-------------
+
+- install role - add ``sops_github_latest_detection`` option that allows to configure which method to use for detecting the latest release on GitHub. By default (``auto``) first tries to retrieve a list of recent releases using the API, and if that fails due to rate limiting, tries to obtain the latest GitHub release from a semi-documented URL (https://github.com/ansible-collections/community.sops/pull/133).
+- install role - add ``sops_github_token`` option to allow passing a GitHub token. This can for example be used to avoid rate limits when using the role in GitHub Actions (https://github.com/ansible-collections/community.sops/pull/132).
+- install role - implement another method to determine the latest release on GitHub than using the GitHub API, which can make installation fail due to rate-limiting (https://github.com/ansible-collections/community.sops/pull/131).
+
 v1.5.0
 ======
 

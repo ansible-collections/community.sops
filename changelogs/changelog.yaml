@@ -231,3 +231,24 @@ releases:
         name: install
         namespace: null
     release_date: '2022-12-02'
+  1.6.0:
+    changes:
+      minor_changes:
+      - install role - add ``sops_github_latest_detection`` option that allows to
+        configure which method to use for detecting the latest release on GitHub.
+        By default (``auto``) first tries to retrieve a list of recent releases using
+        the API, and if that fails due to rate limiting, tries to obtain the latest
+        GitHub release from a semi-documented URL (https://github.com/ansible-collections/community.sops/pull/133).
+      - install role - add ``sops_github_token`` option to allow passing a GitHub
+        token. This can for example be used to avoid rate limits when using the role
+        in GitHub Actions (https://github.com/ansible-collections/community.sops/pull/132).
+      - install role - implement another method to determine the latest release on
+        GitHub than using the GitHub API, which can make installation fail due to
+        rate-limiting (https://github.com/ansible-collections/community.sops/pull/131).
+      release_summary: Feature release improving the installation role.
+    fragments:
+    - 1.6.0.yml
+    - 131.yml
+    - 132.yml
+    - 133.yml
+    release_date: '2023-01-01'

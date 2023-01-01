@@ -1,3 +1,0 @@
-minor_changes:
-  - "install role - implement another method to determine the latest release on GitHub than using the GitHub API,
-     which can make installation fail due to rate-limiting (https://github.com/ansible-collections/community.sops/pull/131)."
