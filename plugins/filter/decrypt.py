@@ -104,7 +104,7 @@ _value:
     type: string
 '''
 
-from ansible.errors import AnsibleError, AnsibleFilterError
+from ansible.errors import AnsibleFilterError
 from ansible.module_utils.common.text.converters import to_bytes, to_native
 from ansible.utils.display import Display
 
