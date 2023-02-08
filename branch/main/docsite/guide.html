@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html class="writer-html5" lang="en" >
 <head>
-  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Protecting Ansible secrets with Mozilla SOPS &mdash; Community.Sops Collection  documentation</title>
@@ -14,10 +14,8 @@
     <script src="../_static/js/html5shiv.min.js"></script>
   <![endif]-->
   
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
         <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
-        <script src="../_static/jquery.js"></script>
-        <script src="../_static/underscore.js"></script>
-        <script src="../_static/_sphinx_javascript_frameworks_compat.js"></script>
         <script src="../_static/doctools.js"></script>
         <script src="../_static/sphinx_highlight.js"></script>
     <script src="../_static/js/theme.js"></script>
@@ -53,7 +51,11 @@
     <nav data-toggle="wy-nav-shift" class="wy-nav-side">
       <div class="wy-side-scroll">
         <div class="wy-side-nav-search" >
-            <a href="../index.html" class="icon icon-home"> Community.Sops Collection
+
+          
+          
+          <a href="../index.html" class="icon icon-home">
+            Community.Sops Collection
           </a><!--- Based on https://github.com/rtfd/sphinx_rtd_theme/pull/438/files -->
 
 <div class="version">
@@ -114,7 +116,7 @@
         <div class="rst-content">
           <div role="navigation" aria-label="Page navigation">
   <ul class="wy-breadcrumbs">
-      <li><a href="../index.html" class="icon icon-home"></a></li>
+      <li><a href="../index.html" class="icon icon-home" aria-label="Home"></a></li>
       <li class="breadcrumb-item active">Protecting Ansible secrets with Mozilla SOPS</li>
       <li class="wy-breadcrumbs-aside">
       </li>
@@ -130,7 +132,7 @@
 <span id="ansible-collections-community-sops-docsite-guide"></span><h1>Protecting Ansible secrets with Mozilla SOPS<a class="headerlink" href="#protecting-ansible-secrets-with-mozilla-sops" title="Permalink to this heading"></a></h1>
 <p><a class="reference external" href="https://github.com/mozilla/sops">Mozilla SOPS</a> allows to encrypt and decrypt files using various key sources (GPG, AWS KMS, GCP KMS, …). For structured data, such as YAML, JSON, INI and ENV files, it will encrypt values, but not mapping keys. For YAML files, it also encrypts comments. This makes it a great tool for encrypting credentials with Ansible: you can easily see which files contain which variable, but the variables themselves are encrypted.</p>
 <p>The ability to utilize various keysources makes it easier to use in complex environments than <a class="reference external" href="https://docs.ansible.com/ansible/latest/user_guide/vault.html">Ansible Vault</a>.</p>
-<div class="contents local topic" id="contents">
+<nav class="contents local" id="contents">
 <ul class="simple">
 <li><p><a class="reference internal" href="#installing-sops" id="id1">Installing sops</a></p></li>
 <li><p><a class="reference internal" href="#installing-community-sops-in-an-execution-environment" id="id2">Installing community.sops in an Execution Environment</a></p></li>
@@ -139,9 +141,9 @@
 <li><p><a class="reference internal" href="#working-with-encrypted-data-from-other-sources" id="id5">Working with encrypted data from other sources</a></p></li>
 <li><p><a class="reference internal" href="#working-with-encrypted-variables" id="id6">Working with encrypted variables</a></p></li>
 </ul>
-</div>
+</nav>
 <section id="installing-sops">
-<h2><a class="toc-backref" href="#id1">Installing sops</a><a class="headerlink" href="#installing-sops" title="Permalink to this heading"></a></h2>
+<h2><a class="toc-backref" href="#id1" role="doc-backlink">Installing sops</a><a class="headerlink" href="#installing-sops" title="Permalink to this heading"></a></h2>
 <p>You can find binaries and packages <a class="reference external" href="https://github.com/mozilla/sops/releases">on the project’s release page</a>. Depending on your operating system, you might also be able to install it with your system’s package manager.</p>
 <p>This collection provides a <a class="reference external" href="ansible_collections.community.sops.install_role">role community.sops.install</a> which allows to install sops and <a class="reference external" href="https://en.wikipedia.org/wiki/GNU_Privacy_Guard">GNU Privacy Guard (GPG)</a>. The role allows to install sops from the system’s package manager or from GitHub. Both sops and GPG can be installed on the remote hosts or the Ansible controller.</p>
 <div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Playbook to install sops</span>
@@ -173,7 +175,7 @@ $<span class="w"> </span>ansible-playbook<span class="w"> </span>community.sops.
 </div>
 </section>
 <section id="installing-community-sops-in-an-execution-environment">
-<h2><a class="toc-backref" href="#id2">Installing community.sops in an Execution Environment</a><a class="headerlink" href="#installing-community-sops-in-an-execution-environment" title="Permalink to this heading"></a></h2>
+<h2><a class="toc-backref" href="#id2" role="doc-backlink">Installing community.sops in an Execution Environment</a><a class="headerlink" href="#installing-community-sops-in-an-execution-environment" title="Permalink to this heading"></a></h2>
 <p>When building an execution environment containing community.sops, please note that by default sops is not automatically installed. This is due to a limitation of the dependency specification system for execution environments. If you are building an execution environment that contains community.sops, you should make sure that sops is installed in it.</p>
 <p>The simplest way of ensuring this is to use the <code class="docutils literal notranslate"><span class="pre">community.sops.install_localhost</span></code> playbook. When defining an execution environment, you can add a <code class="docutils literal notranslate"><span class="pre">RUN</span></code> additional build step to your <code class="docutils literal notranslate"><span class="pre">execution-environment.yml</span></code>:</p>
 <div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nn">---</span>
@@ -203,7 +205,7 @@ $<span class="w"> </span>ansible-playbook<span class="w"> </span>community.sops.
 <p>Once this step has been taken care of, you can use all plugins and modules (on <code class="docutils literal notranslate"><span class="pre">localhost</span></code>) from community.sops in the execution environment.</p>
 </section>
 <section id="setting-up-sops">
-<h2><a class="toc-backref" href="#id3">Setting up sops</a><a class="headerlink" href="#setting-up-sops" title="Permalink to this heading"></a></h2>
+<h2><a class="toc-backref" href="#id3" role="doc-backlink">Setting up sops</a><a class="headerlink" href="#setting-up-sops" title="Permalink to this heading"></a></h2>
 <p>From now on this guide assumes that you have installed Mozilla SOPS.</p>
 <p>For simplicity, you can work with GPG keys. If you do not have one, or do not want to use yours, you can run <code class="docutils literal notranslate"><span class="pre">gpg</span> <span class="pre">--quick-generate-key</span> <span class="pre">me&#64;example.com</span></code> to create a GPG key for the user ID <code class="docutils literal notranslate"><span class="pre">me&#64;example.com</span></code>. You will need its 40 hex-digit key ID that is printed at the end. The first step is to create a <code class="docutils literal notranslate"><span class="pre">.sops.yaml</span></code> file in the directory tree you are working in:</p>
 <div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">creation_rules</span><span class="p">:</span>
@@ -260,7 +262,7 @@ $<span class="w"> </span>ansible-playbook<span class="w"> </span>community.sops.
 <p>At the end, the <code class="docutils literal notranslate"><span class="pre">sops</span></code> section contains metadata, which includes the private key needed to decrypt the file encrypted with the public key of the GPG key ID <code class="docutils literal notranslate"><span class="pre">FBC7B9E2A4F9289AC0C1D4843D16CEE4A27381B4</span></code>. If you had multiple GPG keys configured, or also other key sources, you can also find the file secret key encrypted with these keys here.</p>
 </section>
 <section id="working-with-encrypted-files">
-<h2><a class="toc-backref" href="#id4">Working with encrypted files</a><a class="headerlink" href="#working-with-encrypted-files" title="Permalink to this heading"></a></h2>
+<h2><a class="toc-backref" href="#id4" role="doc-backlink">Working with encrypted files</a><a class="headerlink" href="#working-with-encrypted-files" title="Permalink to this heading"></a></h2>
 <p>You can decrypt sops-encrypted files with the <a class="reference internal" href="../sops_lookup.html#ansible-collections-community-sops-sops-lookup"><span class="std std-ref">community.sops.sops lookup plugin</span></a>, and dynamically encrypt data with the <a class="reference internal" href="../sops_encrypt_module.html#ansible-collections-community-sops-sops-encrypt-module"><span class="std std-ref">community.sops.sops_encrypt module</span></a>. Being able to encrypt is useful when you create or update secrets in your Ansible playbooks.</p>
 <p>Assume that you have an encrypted private key <code class="docutils literal notranslate"><span class="pre">keys/private_key.pem.sops</span></code>, which was in PEM format before being encrypted by sops:</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$<span class="w"> </span>openssl<span class="w"> </span>genrsa<span class="w"> </span>-out<span class="w"> </span>keys/private_key.pem<span class="w"> </span><span class="m">2048</span>
@@ -373,7 +375,7 @@ $<span class="w"> </span>wipe<span class="w"> </span>keys/private_key.pem
 </div>
 </section>
 <section id="working-with-encrypted-data-from-other-sources">
-<h2><a class="toc-backref" href="#id5">Working with encrypted data from other sources</a><a class="headerlink" href="#working-with-encrypted-data-from-other-sources" title="Permalink to this heading"></a></h2>
+<h2><a class="toc-backref" href="#id5" role="doc-backlink">Working with encrypted data from other sources</a><a class="headerlink" href="#working-with-encrypted-data-from-other-sources" title="Permalink to this heading"></a></h2>
 <p>You can use the <a class="reference internal" href="../decrypt_filter.html#ansible-collections-community-sops-decrypt-filter"><span class="std std-ref">community.sops.decrypt Jinja2 filter</span></a> to decrypt arbitrary data. This can be data read earlier from a file, returned from an action, or obtained through some other means.</p>
 <p>For example, assume that you want to decrypt a file retrieved from a HTTPS server with the <a class="reference external" href="ansible_collections.ansible.builtin.uri_module">ansible.builtin.uri module</a>. To use the <a class="reference internal" href="../sops_lookup.html#ansible-collections-community-sops-sops-lookup"><span class="std std-ref">community.sops.sops lookup</span></a>, you have to write it to a file first. With the filter, you can directly decrypt it:</p>
 <div class="highlight-yaml+jinja notranslate"><div class="highlight"><pre><span></span><span class="nn">---</span>
@@ -482,7 +484,7 @@ $<span class="w"> </span>wipe<span class="w"> </span>keys/private_key.pem
 </div>
 </section>
 <section id="working-with-encrypted-variables">
-<h2><a class="toc-backref" href="#id6">Working with encrypted variables</a><a class="headerlink" href="#working-with-encrypted-variables" title="Permalink to this heading"></a></h2>
+<h2><a class="toc-backref" href="#id6" role="doc-backlink">Working with encrypted variables</a><a class="headerlink" href="#working-with-encrypted-variables" title="Permalink to this heading"></a></h2>
 <p>You can load encrypted variables similarly to the <a class="reference external" href="https://docs.ansible.com/ansible/devel/collections/ansible/builtin/host_group_vars_vars.html#ansible-collections-ansible-builtin-host-group-vars-vars" title="(in Ansible vdevel)"><span class="xref std std-ref">ansible.builtin.host_group_vars vars plugin</span></a> with the <a class="reference internal" href="../sops_vars.html#ansible-collections-community-sops-sops-vars"><span class="std std-ref">community.sops.sops vars plugin</span></a>. If you need to load variables dynamically similarly to the <a class="reference external" href="https://docs.ansible.com/ansible/devel/collections/ansible/builtin/include_vars_module.html#ansible-collections-ansible-builtin-include-vars-module" title="(in Ansible vdevel)"><span class="xref std std-ref">ansible.builtin.include_vars action</span></a>, you can use the <a class="reference internal" href="../load_vars_module.html#ansible-collections-community-sops-load-vars-module"><span class="std std-ref">community.sops.load_vars action</span></a>.</p>
 <p>To use the vars plugin, you need to enable it in your Ansible config file (<code class="docutils literal notranslate"><span class="pre">ansible.cfg</span></code>):</p>
 <div class="highlight-ini notranslate"><div class="highlight"><pre><span></span><span class="k">[defaults]</span>
