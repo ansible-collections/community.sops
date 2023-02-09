@@ -82,7 +82,7 @@ from ansible.plugins.vars import BaseVarsPlugin
 from ansible.inventory.host import Host
 from ansible.inventory.group import Group
 from ansible.utils.vars import combine_vars
-from ansible_collections.community.sops.plugins.module_utils.sops import Sops, SopsError
+from ansible_collections.community.sops.plugins.module_utils.sops import Sops
 
 from ansible.utils.display import Display
 display = Display()
