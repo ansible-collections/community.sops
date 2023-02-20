@@ -252,3 +252,15 @@ releases:
     - 132.yml
     - 133.yml
     release_date: '2023-01-01'
+  1.6.1:
+    changes:
+      bugfixes:
+      - action plugin helper - fix handling of deprecations for ansible-core 2.14.2
+        (https://github.com/ansible-collections/community.sops/pull/136).
+      - various plugins - remove unnecessary imports (https://github.com/ansible-collections/community.sops/pull/133).
+      release_summary: Maintenance release.
+    fragments:
+    - 1.6.1.yml
+    - 136-action-module.yml
+    - remove-unneeded-imports.yml
+    release_date: '2023-02-20'

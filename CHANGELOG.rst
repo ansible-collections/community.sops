@@ -5,6 +5,20 @@ Community Sops Release Notes
 .. contents:: Topics
 
 
+v1.6.1
+======
+
+Release Summary
+---------------
+
+Maintenance release.
+
+Bugfixes
+--------
+
+- action plugin helper - fix handling of deprecations for ansible-core 2.14.2 (https://github.com/ansible-collections/community.sops/pull/136).
+- various plugins - remove unnecessary imports (https://github.com/ansible-collections/community.sops/pull/133).
+
 v1.6.0
 ======
 
