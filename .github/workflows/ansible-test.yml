@@ -111,7 +111,7 @@ jobs:
           # devel
           - ansible: devel
             docker_container: quay.io/ansible-community/test-image:archlinux
-            python_version: '3.10'
+            python_version: '3.11'
             sops_version: latest
           - ansible: devel
             docker_container: quay.io/ansible-community/test-image:debian-bullseye
@@ -185,7 +185,7 @@ jobs:
           # Install latest sops
           - ansible: devel
             docker_container: quay.io/ansible-community/test-image:archlinux
-            python_version: '3.10'
+            python_version: '3.11'
             target: gha/install/3/
             github_latest_detection: auto
             # NOTE: we're installing with git to work around Galaxy being a huge PITA (https://github.com/ansible/galaxy/issues/2429)
