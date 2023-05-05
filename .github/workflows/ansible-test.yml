@@ -119,7 +119,7 @@ jobs:
             sops_version: latest
           - ansible: devel
             docker_container: quay.io/ansible-community/test-image:centos-stream8
-            python_version: '3.8'
+            python_version: '3.6'
             sops_version: latest
     steps:
       - name: >-
@@ -193,7 +193,7 @@ jobs:
               git clone --depth=1 --single-branch https://github.com/ansible-collections/community.general.git ../../community/general
           - ansible: devel
             docker_container: quay.io/ansible-community/test-image:centos-stream8
-            python_version: '3.8'
+            python_version: '3.9'
             target: gha/install/3/
             github_latest_detection: auto
           - ansible: devel
