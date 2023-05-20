@@ -25,7 +25,7 @@
 
 - name: Import sops test GPG key on localhost
   command: gpg --import /tmp/sops_functional_tests_key.asc
-  ignore_errors: true
+  failed_when: false
   delegate_to: localhost
 
 # ---------------------------------------------------------------------------
@@ -48,4 +48,4 @@
 
 - name: Import sops test GPG key on remote
   command: gpg --import /tmp/sops_functional_tests_key.asc
-  ignore_errors: true
+  failed_when: false

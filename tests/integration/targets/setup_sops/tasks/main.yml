@@ -5,24 +5,24 @@
 
 - name: Test whether sops is installed
   command: sops --help
-  ignore_errors: true
+  failed_when: false
   changed_when: false
   register: sops_help_command
 
 - name: Install sops
   include_tasks: install.yml
-  when: sops_help_command is failed
+  when: sops_help_command.rc != 0
 
 - name: Skip sops installation
-  when: sops_help_command is not failed
+  when: sops_help_command.rc == 0
   block:
     - name: Test whether age is installed
       command: age --version
-      ignore_errors: true
+      failed_when: false
       changed_when: false
       register: age_version_command
 
     - name: Set results
       set_fact:
         sops_installed: true
-        age_installed: '{{ age_version_command is not failed }}'
+        age_installed: '{{ age_version_command.rc == 0 }}'

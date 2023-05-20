@@ -7,47 +7,43 @@
   block:
     - name: Test load_vars with missing option
       community.sops.load_vars:
-      ignore_errors: true
       register: load_vars_missing_option
+      failed_when: load_vars_missing_option is not failed
 
     - assert:
         that:
-          - load_vars_missing_option is failed
           - '"missing required arguments: file" in load_vars_missing_option.msg'
 
     - name: Test load_vars with wrong choice value
       community.sops.load_vars:
         file: a
         expressions: invalid value
-      ignore_errors: true
       register: load_vars_invalid_value
+      failed_when: load_vars_invalid_value is not failed
 
     - assert:
         that:
-          - load_vars_invalid_value is failed
           - '"value of expressions must be one of: ignore, evaluate-on-load, got: invalid value" in load_vars_invalid_value.msg'
 
     - name: Test load_vars with missing file
       community.sops.load_vars:
         file: non-existent.sops.yaml
-      ignore_errors: true
       register: load_vars_missing_file
+      failed_when: load_vars_missing_file is not failed
 
     - assert:
         that:
-          - load_vars_missing_file is failed
           - |
             "Could not find or access 'non-existent.sops.yaml'\n" in load_vars_missing_file.msg
 
     - name: Test load_vars with non-sops file
       community.sops.load_vars:
         file: wrong.yaml
-      ignore_errors: true
       register: load_vars_wrong_file
+      failed_when: load_vars_wrong_file is not failed
 
     - assert:
         that:
-          - load_vars_wrong_file is failed
           - "'sops metadata not found' in load_vars_wrong_file.msg"
 
     - name: Test load_vars with simple file into variable

@@ -11,7 +11,7 @@
         dest: /tmp/sops_functional_tests_key.asc
     - name: Import sops test GPG key on localhost
       command: gpg --import /tmp/sops_functional_tests_key.asc
-      ignore_errors: true
+      failed_when: false
     - name: Find all roles
       find:
         paths:

@@ -40,7 +40,6 @@
     - name: Test simple filter
       set_fact:
         sops_success: "{{ lookup('file', 'simple.sops.yaml') | community.sops.decrypt }}"
-      ignore_errors: true
       register: sops_filter_simple
 
     - assert:
