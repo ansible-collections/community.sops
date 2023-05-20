@@ -42,7 +42,6 @@
       set_fact:
         sops_success: "{{ lookup('community.sops.sops', 'simple.sops.yaml') }}"
       register: sops_lookup_simple
-      failed_when: sops_lookup_simple is not failed
 
     - assert:
         that:
