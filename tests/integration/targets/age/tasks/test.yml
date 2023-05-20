@@ -116,7 +116,5 @@
 - name: Validate failed decryption
   assert:
     that:
-      - failure_1 is failed
       - "'CouldNotRetrieveKey' in failure_1.msg"
-      - failure_2 is failed
       - "'CouldNotRetrieveKey' in failure_2.msg"

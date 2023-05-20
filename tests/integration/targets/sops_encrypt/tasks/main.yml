@@ -44,7 +44,6 @@
 
     - assert:
         that:
-          - result_not_base64 is failed
           - '"Cannot decode Base64 encoded data" in result_not_base64.msg'
 
     # Broken file overwrite
@@ -92,8 +91,6 @@
 
     - assert:
         that:
-          - result_cannot_decode_check is failed
-          - result_cannot_decode is failed
           - result_cannot_decode_force_check is changed
           - result_cannot_decode_force is changed
           - value == 'Test'

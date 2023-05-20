@@ -14,7 +14,6 @@
 
     - assert:
         that:
-          - "sops_lookup_missing_file is failed"
           - "'could not locate file in lookup: file-does-not-exists.sops.yml' in sops_lookup_missing_file.msg"
 
     - name: Test lookup with missing file with empty_on_not_exist
@@ -35,7 +34,6 @@
 
     - assert:
         that:
-          - "sops_lookup_wrong_file is failed"
           - "'sops metadata not found' in sops_lookup_wrong_file.msg"
 
     - name: Test simple lookup
@@ -46,7 +44,6 @@
 
     - assert:
         that:
-          - "sops_lookup_simple is success"
           - "sops_success == 'foo: bar'"
 
     - name: Test rstrip

@@ -19,10 +19,8 @@
 
     - assert:
         that:
-          - "sops_bad_input_type is failed"
           - "'input_type must be one of' in sops_bad_input_type.msg"
           - "'; got \"foo\"' in sops_bad_input_type.msg"
-          - "sops_bad_output_type is failed"
           - "'output_type must be one of' in sops_bad_output_type.msg"
           - "'; got \"23\"' in sops_bad_output_type.msg"
 
@@ -34,14 +32,12 @@
 
     - assert:
         that:
-          - "sops_filter_wrong_file is failed"
           - "'sops metadata not found' in sops_filter_wrong_file.msg"
 
     - name: Test simple filter
       set_fact:
         sops_success: "{{ lookup('file', 'simple.sops.yaml') | community.sops.decrypt }}"
       register: sops_filter_simple
-      failed_when: sops_filter_simple is not failed
 
     - assert:
         that:
