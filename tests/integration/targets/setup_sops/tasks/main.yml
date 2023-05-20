@@ -5,7 +5,7 @@
 
 - name: Test whether sops is installed
   command: sops --help
-  ignore_errors: true
+  failed_when: false
   changed_when: false
   register: sops_help_command
 
@@ -18,7 +18,7 @@
   block:
     - name: Test whether age is installed
       command: age --version
-      ignore_errors: true
+      failed_when: false
       changed_when: false
       register: age_version_command
 

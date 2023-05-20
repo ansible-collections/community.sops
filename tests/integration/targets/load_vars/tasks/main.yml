@@ -7,8 +7,8 @@
   block:
     - name: Test load_vars with missing option
       community.sops.load_vars:
-      ignore_errors: true
       register: load_vars_missing_option
+      failed_when: load_vars_missing_option is not failed
 
     - assert:
         that:
@@ -19,8 +19,8 @@
       community.sops.load_vars:
         file: a
         expressions: invalid value
-      ignore_errors: true
       register: load_vars_invalid_value
+      failed_when: load_vars_invalid_value is not failed
 
     - assert:
         that:
@@ -30,8 +30,8 @@
     - name: Test load_vars with missing file
       community.sops.load_vars:
         file: non-existent.sops.yaml
-      ignore_errors: true
       register: load_vars_missing_file
+      failed_when: load_vars_missing_file is not failed
 
     - assert:
         that:
@@ -42,8 +42,8 @@
     - name: Test load_vars with non-sops file
       community.sops.load_vars:
         file: wrong.yaml
-      ignore_errors: true
       register: load_vars_wrong_file
+      failed_when: load_vars_wrong_file is not failed
 
     - assert:
         that:

@@ -39,8 +39,8 @@
       community.sops.sops_encrypt:
         path: "{{ remote_tmp_dir }}/test_bad_base64"
         content_binary: This is not Base64
-      ignore_errors: true
       register: result_not_base64
+      failed_when: result_not_base64 is not failed
 
     - assert:
         that:
@@ -58,16 +58,16 @@
       community.sops.sops_encrypt:
         path: "{{ remote_tmp_dir }}/broken"
         content_text: Test
-      ignore_errors: true
       register: result_cannot_decode_check
+      failed_when: result_cannot_decode_check is not failed
       check_mode: true
 
     - name: Cannot decode existing file (overwrite)
       community.sops.sops_encrypt:
         path: "{{ remote_tmp_dir }}/broken"
         content_text: Test
-      ignore_errors: true
       register: result_cannot_decode
+      failed_when: result_cannot_decode is not failed
 
     - name: Cannot decode existing file (force, check mode)
       community.sops.sops_encrypt:
