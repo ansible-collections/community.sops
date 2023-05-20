@@ -104,17 +104,19 @@
 - name: Failed encryption 1
   debug:
     msg: "{{ lookup('community.sops.sops', local_tmp_dir ~ '/enc-2.sops.yaml', age_keyfile=local_tmp_dir ~ '/identity_3') | from_yaml }}"
+  ignore_errors: true
   register: failure_1
-  failed_when: failure_1 is not failed
 
 - name: Failed encryption 2
   debug:
     msg: "{{ lookup('community.sops.sops', local_tmp_dir ~ '/enc-3.sops.yaml', age_keyfile=local_tmp_dir ~ '/identity_1') | from_yaml }}"
+  ignore_errors: true
   register: failure_2
-  failed_when: failure_2 is not failed
 
 - name: Validate failed decryption
   assert:
     that:
+      - failure_1 is failed
       - "'CouldNotRetrieveKey' in failure_1.msg"
+      - failure_2 is failed
       - "'CouldNotRetrieveKey' in failure_2.msg"

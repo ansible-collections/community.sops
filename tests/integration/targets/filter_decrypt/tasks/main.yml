@@ -8,30 +8,33 @@
     - name: Test bad parameter detection (1/2)
       set_fact:
         sops_bad_input_type: "{{ 'this-is-not: a sops file' | community.sops.decrypt(input_type='foo') }}"
+      ignore_errors: true
       register: sops_bad_input_type
-      failed_when: sops_bad_input_type is not failed
 
     - name: Test bad parameter detection (2/2)
       set_fact:
         sops_bad_output_type: "{{ 'this-is-not: a sops file' | community.sops.decrypt(output_type=23) }}"
+      ignore_errors: true
       register: sops_bad_output_type
-      failed_when: sops_bad_output_type is not failed
 
     - assert:
         that:
+          - "sops_bad_input_type is failed"
           - "'input_type must be one of' in sops_bad_input_type.msg"
           - "'; got \"foo\"' in sops_bad_input_type.msg"
+          - "sops_bad_output_type is failed"
           - "'output_type must be one of' in sops_bad_output_type.msg"
           - "'; got \"23\"' in sops_bad_output_type.msg"
 
     - name: Test decrypt of non-sops file
       set_fact:
         sops_wrong_file: "{{ 'this-is-not: a sops file' | community.sops.decrypt }}"
+      ignore_errors: true
       register: sops_filter_wrong_file
-      failed_when: sops_filter_wrong_file is not failed
 
     - assert:
         that:
+          - "sops_filter_wrong_file is failed"
           - "'sops metadata not found' in sops_filter_wrong_file.msg"
 
     - name: Test simple filter

@@ -9,11 +9,12 @@
     - name: Test lookup with missing file
       set_fact:
         sops_file_does_not_exists: "{{ lookup('community.sops.sops', 'file-does-not-exists.sops.yml') }}"
+      ignore_errors: true
       register: sops_lookup_missing_file
-      failed_when: sops_lookup_missing_file is not failed
 
     - assert:
         that:
+          - "sops_lookup_missing_file is failed"
           - "'could not locate file in lookup: file-does-not-exists.sops.yml' in sops_lookup_missing_file.msg"
 
     - name: Test lookup with missing file with empty_on_not_exist
@@ -29,11 +30,12 @@
     - name: Test lookup of non-sops file
       set_fact:
         sops_wrong_file: "{{ lookup('community.sops.sops', 'wrong.yaml') }}"
+      ignore_errors: true
       register: sops_lookup_wrong_file
-      failed_when: sops_lookup_wrong_file is not failed
 
     - assert:
         that:
+          - "sops_lookup_wrong_file is failed"
           - "'sops metadata not found' in sops_lookup_wrong_file.msg"
 
     - name: Test simple lookup
@@ -44,6 +46,7 @@
 
     - assert:
         that:
+          - "sops_lookup_simple is success"
           - "sops_success == 'foo: bar'"
 
     - name: Test rstrip
