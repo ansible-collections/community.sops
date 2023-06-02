@@ -45,8 +45,8 @@ jobs:
         exclude:
           - ansible_core: ''
         include:
-          - name: ansible-core 2.12 @ Fedora 38
-            ansible_core: https://github.com/ansible/ansible/archive/stable-2.12.tar.gz
+          - name: ansible-core 2.13.1 @ Fedora 38
+            ansible_core: ansible-core==2.13.1
             ansible_runner: ansible-runner
             base_image: registry.fedoraproject.org/fedora:38
             pre_base: '"#"'
