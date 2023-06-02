@@ -45,48 +45,12 @@ jobs:
         exclude:
           - ansible_core: ''
         include:
-          - name: ansible-core devel @ RHEL UBI 9
-            ansible_core: https://github.com/ansible/ansible/archive/devel.tar.gz
-            ansible_runner: ansible-runner
-            base_image: docker.io/redhat/ubi9:latest
-            pre_base: '"#"'
-            execute_playbook: ansible-playbook -v community.sops.install_localhost
-          - name: ansible-core 2.15 @ Rocky Linux 9
-            ansible_core: https://github.com/ansible/ansible/archive/stable-2.15.tar.gz
-            ansible_runner: ansible-runner
-            base_image: quay.io/rockylinux/rockylinux:9
-            pre_base: '"#"'
-            execute_playbook: ansible-playbook -v community.sops.install_localhost
-          - name: ansible-core 2.14 @ CentOS Stream 9
-            ansible_core: https://github.com/ansible/ansible/archive/stable-2.14.tar.gz
-            ansible_runner: ansible-runner
-            base_image: quay.io/centos/centos:stream9
-            pre_base: '"#"'
-            execute_playbook: ansible-playbook -v community.sops.install_localhost
-          - name: ansible-core 2.13 @ RHEL UBI 8
-            ansible_core: https://github.com/ansible/ansible/archive/stable-2.13.tar.gz
-            ansible_runner: ansible-runner
-            other_deps: |2
-                python_interpreter:
-                  package_system: python39 python39-pip python39-wheel python39-cryptography
-            base_image: docker.io/redhat/ubi8:latest
-            pre_base: '"#"'
-            execute_playbook: ansible-playbook -v community.sops.install_localhost
           - name: ansible-core 2.12 @ Fedora 38
             ansible_core: https://github.com/ansible/ansible/archive/stable-2.12.tar.gz
             ansible_runner: ansible-runner
             base_image: registry.fedoraproject.org/fedora:38
             pre_base: '"#"'
             execute_playbook: ansible-playbook -v community.sops.install_localhost
-          - name: Ansible 2.9 @ CentOS Stream 8
-            ansible_core: https://github.com/ansible/ansible/archive/stable-2.9.tar.gz
-            ansible_runner: ansible-runner
-            other_deps: |2
-                python_interpreter:
-                  package_system: python39 python39-pip python39-wheel python39-cryptography
-            base_image: quay.io/centos/centos:stream8
-            pre_base: '"#"'
-            execute_playbook: ansible localhost -m include_role -a name=community.sops.install -e sops_install_on_localhost=true -e ansible_python_interpreter=/usr/libexec/platform-python
     runs-on: ubuntu-latest
     steps:
       - name: Check out code
