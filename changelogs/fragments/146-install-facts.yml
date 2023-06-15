@@ -1,2 +1,2 @@
 bugfixes:
-  - "install role - make sure that the ``pkg_mgr`` fact is definitely available when installing on ``localhost`` (https://github.com/ansible-collections/community.sops/issues/145, https://github.com/ansible-collections/community.sops/pull/146)."
+  - "install role - make sure that the ``pkg_mgr`` fact is definitely available when installing on ``localhost``. This can improve error messages in some cases (https://github.com/ansible-collections/community.sops/issues/145, https://github.com/ansible-collections/community.sops/pull/146)."
