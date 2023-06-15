@@ -72,6 +72,12 @@ jobs:
             base_image: docker.io/redhat/ubi8:latest
             pre_base: '"#"'
             execute_playbook: ansible-playbook -v community.sops.install_localhost
+          - name: ansible-core 2.12 @ Fedora 38
+            ansible_core: https://github.com/ansible/ansible/archive/stable-2.12.tar.gz
+            ansible_runner: ansible-runner
+            base_image: registry.fedoraproject.org/fedora:38
+            pre_base: '"#"'
+            execute_playbook: ansible-playbook -v community.sops.install_localhost
           - name: Ansible 2.9 @ CentOS Stream 8
             ansible_core: https://github.com/ansible/ansible/archive/stable-2.9.tar.gz
             ansible_runner: ansible-runner

@@ -14,6 +14,7 @@
       - distribution_major_version
       - distribution_version
       - os_family
+      - pkg_mgr
   delegate_to: localhost
   delegate_facts: true
   run_once: true
@@ -29,6 +30,7 @@
           Distribution: {{ _community_sops_install_facts.distribution }} {{ _community_sops_install_facts.distribution_major_version }}
           Distribution version: {{ _community_sops_install_facts.distribution_version }}
           OS family: {{ _community_sops_install_facts.os_family }}
+          System package manager: {{ _community_sops_install_facts.pkg_mgr }}
 
     - name: Include distribution specific variables
       ansible.builtin.include_vars: '{{ lookup("ansible.builtin.first_found", params) }}'
