@@ -5,6 +5,19 @@ Community Sops Release Notes
 .. contents:: Topics
 
 
+v1.6.2
+======
+
+Release Summary
+---------------
+
+Maintenance release.
+
+Bugfixes
+--------
+
+- install role - make sure that the ``pkg_mgr`` fact is definitely available when installing on ``localhost``. This can improve error messages in some cases (https://github.com/ansible-collections/community.sops/issues/145, https://github.com/ansible-collections/community.sops/pull/146).
+
 v1.6.1
 ======
 

@@ -264,3 +264,14 @@ releases:
     - 136-action-module.yml
     - remove-unneeded-imports.yml
     release_date: '2023-02-20'
+  1.6.2:
+    changes:
+      bugfixes:
+      - install role - make sure that the ``pkg_mgr`` fact is definitely available
+        when installing on ``localhost``. This can improve error messages in some
+        cases (https://github.com/ansible-collections/community.sops/issues/145, https://github.com/ansible-collections/community.sops/pull/146).
+      release_summary: Maintenance release.
+    fragments:
+    - 1.6.2.yml
+    - 146-install-facts.yml
+    release_date: '2023-06-15'
