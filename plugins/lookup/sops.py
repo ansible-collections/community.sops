@@ -55,7 +55,7 @@ DOCUMENTATION = """
                 - dotenv
         empty_on_not_exist:
             description:
-                - When set to C(true), will not raise an error when a file cannot be found,
+                - When set to V(true), will not raise an error when a file cannot be found,
                   but return an empty string instead.
             type: bool
             default: false

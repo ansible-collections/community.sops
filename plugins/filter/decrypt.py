@@ -46,9 +46,9 @@ options:
     output_type:
         description:
             - Tell sops how to interpret the decrypted file.
-            - Please note that the output is always text or bytes, depending on the value of I(decode_output).
-              To parse the resulting JSON or YAML, use corresponding filters such as C(ansible.builtin.from_json)
-              and C(ansible.builtin.from_yaml).
+            - Please note that the output is always text or bytes, depending on the value of O(decode_output).
+              To parse the resulting JSON or YAML, use corresponding filters such as P(ansible.builtin.from_json#filter)
+              and P(ansible.builtin.from_yaml#filter).
         type: str
         choices:
             - binary
@@ -59,8 +59,8 @@ options:
     decode_output:
         description:
             - Whether to decode the output to bytes.
-            - When I(output_type=binary), and the file isn't known to contain UTF-8 encoded text,
-              this should better be set to C(false) to prevent mangling the data with UTF-8 decoding.
+            - When O(output_type=binary), and the file isn't known to contain UTF-8 encoded text,
+              this should better be set to V(false) to prevent mangling the data with UTF-8 decoding.
         type: bool
         default: true
 extends_documentation_fragment:
@@ -100,7 +100,7 @@ EXAMPLES = '''
 RETURN = '''
 _value:
     description:
-        - Decrypted data as text (I(decode_output=true), default) or binary string (I(decode_output=false)).
+        - Decrypted data as text (O(decode_output=true), default) or binary string (O(decode_output=false)).
     type: string
 '''
 

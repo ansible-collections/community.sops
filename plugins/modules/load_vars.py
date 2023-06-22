@@ -28,13 +28,13 @@ options:
   name:
     description:
       - The name of a variable into which assign the included vars.
-      - If omitted (C(null)) they will be made top level vars.
+      - If omitted (V(null)) they will be made top level vars.
     type: str
   expressions:
     description:
       - This option controls how Jinja2 expressions in values in the loaded file are handled.
-      - If set to C(ignore), expressions will not be evaluated, but treated as regular strings.
-      - If set to C(evaluate-on-load), expressions will be evaluated on execution of this module,
+      - If set to V(ignore), expressions will not be evaluated, but treated as regular strings.
+      - If set to V(evaluate-on-load), expressions will be evaluated on execution of this module,
         in other words, when the file is loaded.
       - Unfortunately, there is no way for non-core modules to handle expressions "unsafe",
         in other words, evaluate them only on use. This can only achieved by M(ansible.builtin.include_vars),
