@@ -69,18 +69,15 @@ seealso:
   - module: ansible.builtin.include_vars
   - ref: playbooks_delegation
     description: More information related to task delegation.
-  - ref: community.sops.sops lookup <ansible_collections.community.sops.sops_lookup>
+  - plugin: community.sops.sops
+    plugin_type: lookup
     description: The sops lookup can be used decrypt sops-encrypted files.
-  # - plugin: community.sops.sops
-  #   plugin_type: lookup
-  - ref: community.sops.decrypt filter <ansible_collections.community.sops.decrypt_filter>
+  - plugin: community.sops.decrypt
+    plugin_type: filter
     description: The decrypt filter can be used to descrypt sops-encrypted in-memory data.
-  # - plugin: community.sops.decrypt
-  #   plugin_type: filter
-  - ref: community.sops.sops vars plugin <ansible_collections.community.sops.sops_vars>
+  - plugin: community.sops.sops
+    plugin_type: vars
     description: The sops vars plugin can be used to load sops-encrypted host or group variables.
-  # - plugin: community.sops.sops
-  #   plugin_type: vars
 '''
 
 EXAMPLES = r'''

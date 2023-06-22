@@ -65,10 +65,9 @@ attributes:
   safe_file_operations:
     support: full
 seealso:
-  - ref: community.sops.sops lookup <ansible_collections.community.sops.sops_lookup>
+  - plugin: community.sops.sops
+    plugin_type: lookup
     description: The sops lookup can be used decrypt sops-encrypted files.
-  # - plugin: community.sops.sops
-  #   plugin_type: lookup
 '''
 
 EXAMPLES = r'''
