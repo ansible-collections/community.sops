@@ -266,7 +266,7 @@ This playbook creates a new key on every run. If you want the private key creati
               set_fact:
                 private_key: ''
 
-The :ansopt:`community.crypto.openssl_privatekey_pipe#module:empty_on_not_exist=true` flag is needed to avoid the lookup to fail when the key does not yet exist. When this playbook is run twice, the output will be:
+The :ansopt:`community.sops.sops#lookup:empty_on_not_exist=true` flag is needed to avoid the lookup to fail when the key does not yet exist. When this playbook is run twice, the output will be:
 
 .. code-block:: ansible-output
 
