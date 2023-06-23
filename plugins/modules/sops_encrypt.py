@@ -32,24 +32,24 @@ options:
     description:
       - The data to encrypt. Must be a Unicode text.
       - Please note that the module might not be idempotent if the text can be parsed as JSON or YAML.
-      - Exactly one of I(content_text), I(content_binary), I(content_json) and I(content_yaml) must be specified.
+      - Exactly one of O(content_text), O(content_binary), O(content_json), and O(content_yaml) must be specified.
     type: str
   content_binary:
     description:
       - The data to encrypt. Must be L(Base64 encoded,https://en.wikipedia.org/wiki/Base64) binary data.
       - Please note that the module might not be idempotent if the data can be parsed as JSON or YAML.
-      - Exactly one of I(content_text), I(content_binary), I(content_json) and I(content_yaml) must be specified.
+      - Exactly one of O(content_text), O(content_binary), O(content_json), and O(content_yaml) must be specified.
     type: str
   content_json:
     description:
       - The data to encrypt. Must be a JSON dictionary.
-      - Exactly one of I(content_text), I(content_binary), I(content_json) and I(content_yaml) must be specified.
+      - Exactly one of O(content_text), O(content_binary), O(content_json), and O(content_yaml) must be specified.
     type: dict
   content_yaml:
     description:
       - The data to encrypt. Must be a YAML dictionary.
       - Please note that Ansible only allows to pass data that can be represented as a JSON dictionary.
-      - Exactly one of I(content_text), I(content_binary), I(content_json) and I(content_yaml) must be specified.
+      - Exactly one of O(content_text), O(content_binary), O(content_json), and O(content_yaml) must be specified.
     type: dict
 extends_documentation_fragment:
   - ansible.builtin.files
@@ -65,10 +65,9 @@ attributes:
   safe_file_operations:
     support: full
 seealso:
-  - ref: community.sops.sops lookup <ansible_collections.community.sops.sops_lookup>
+  - plugin: community.sops.sops
+    plugin_type: lookup
     description: The sops lookup can be used decrypt sops-encrypted files.
-  # - plugin: community.sops.sops
-  #   plugin_type: lookup
 '''
 
 EXAMPLES = r'''

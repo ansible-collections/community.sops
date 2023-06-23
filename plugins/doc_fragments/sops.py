@@ -20,14 +20,14 @@ options:
     age_key:
         description:
             - One or more age private keys that can be used to decrypt encrypted files.
-            - Will be set as the C(SOPS_AGE_KEY) environment variable when calling sops.
+            - Will be set as the E(SOPS_AGE_KEY) environment variable when calling sops.
         type: str
         version_added: 1.4.0
     age_keyfile:
         description:
             - The file containing the age private keys that sops can use to decrypt
               encrypted files.
-            - Will be set as the C(SOPS_AGE_KEY_FILE) environment variable when calling sops.
+            - Will be set as the E(SOPS_AGE_KEY_FILE) environment variable when calling sops.
             - By default, sops looks for C(sops/age/keys.txt) inside your user configuration
               directory.
         type: path
@@ -41,19 +41,19 @@ options:
     aws_access_key_id:
         description:
             - The AWS access key ID to use for requests to AWS.
-            - Sets the environment variable C(AWS_ACCESS_KEY_ID) for the sops call.
+            - Sets the environment variable E(AWS_ACCESS_KEY_ID) for the sops call.
         type: str
         version_added: 1.0.0
     aws_secret_access_key:
         description:
             - The AWS secret access key to use for requests to AWS.
-            - Sets the environment variable C(AWS_SECRET_ACCESS_KEY) for the sops call.
+            - Sets the environment variable E(AWS_SECRET_ACCESS_KEY) for the sops call.
         type: str
         version_added: 1.0.0
     aws_session_token:
         description:
             - The AWS session token to use for requests to AWS.
-            - Sets the environment variable C(AWS_SESSION_TOKEN) for the sops call.
+            - Sets the environment variable E(AWS_SESSION_TOKEN) for the sops call.
         type: str
         version_added: 1.0.0
     config_path:
@@ -264,7 +264,7 @@ options:
         description:
             - Override the encrypted key suffix.
             - When set to an empty string, all keys will be encrypted that are not explicitly
-              marked by I(unencrypted_suffix).
+              marked by O(unencrypted_suffix).
             - This corresponds to the sops C(--encrypted-suffix) option.
         type: str
         version_added: 1.0.0
@@ -293,7 +293,7 @@ options:
         description:
             - The number of distinct keys required to retrieve the data key with
               L(Shamir's Secret Sharing, https://en.wikipedia.org/wiki/Shamir%27s_Secret_Sharing).
-            - If not set here and in the sops config file, will default to C(0).
+            - If not set here and in the sops config file, will default to V(0).
             - This corresponds to the sops C(--shamir-secret-sharing-threshold) option.
         type: int
         version_added: 1.0.0

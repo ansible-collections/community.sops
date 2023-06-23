@@ -266,7 +266,7 @@ This playbook creates a new key on every run. If you want the private key creati
               set_fact:
                 private_key: ''
 
-The ``empty_on_not_exist=true`` flag is needed to avoid the lookup to fail when the key does not yet exist. When this playbook is run twice, the output will be:
+The :ansopt:`community.sops.sops#lookup:empty_on_not_exist=true` flag is needed to avoid the lookup to fail when the key does not yet exist. When this playbook is run twice, the output will be:
 
 .. code-block:: ansible-output
 
@@ -422,7 +422,7 @@ The vars plugin will decrypt them and you can use their unencrypted content tran
 
 If you need to dynamically load encrypted variables, similar to the built-in :ref:`ansible.builtin.include_vars action <ansible_collections.ansible.builtin.include_vars_module>`, you can use the :ref:`community.sops.load_vars action <ansible_collections.community.sops.load_vars_module>` action. Please note that it is not a perfect replacement, since the built-in action relies on some hard-coded special casing in ansible-core which allows it to load the variables actually as variables (more precisely: as "unsafe" Jinja2 expressions which are automatically evaluated when used). Other action plugins, such as ``community.sops.load_vars``, cannot do that and have to load the variables as facts instead.
 
-This is mostly relevant if you use Jinja2 expressions in the encrypted variable file. When ``include_vars`` loads a variable file with expressions, these expressions will only be evaluated when the variable that defines them needs to be evaluated (lazy evaluation). Since ``community.sops.load_vars`` returns facts, it has to directly evaluate expressions at load time. (For this, set its ``expressions`` option to ``evaluate-on-load``.) This is mostly relevant if you want to refer to other variables from the same file: this will not work, since Ansible does not know the other variable yet while evaluating the first. It will only "know" them as facts after all have been evaluated and the action finishes.
+This is mostly relevant if you use Jinja2 expressions in the encrypted variable file. When ``include_vars`` loads a variable file with expressions, these expressions will only be evaluated when the variable that defines them needs to be evaluated (lazy evaluation). Since ``community.sops.load_vars`` returns facts, it has to directly evaluate expressions at load time. (For this, set its :ansopt:`community.sops.load_vars#module:expressions` option to :ansval:`evaluate-on-load`.) This is mostly relevant if you want to refer to other variables from the same file: this will not work, since Ansible does not know the other variable yet while evaluating the first. It will only "know" them as facts after all have been evaluated and the action finishes.
 
 For the following example, assume you have the encrypted file ``keys/credentials.sops.yml`` which decrypts to:
 

@@ -28,13 +28,13 @@ options:
   name:
     description:
       - The name of a variable into which assign the included vars.
-      - If omitted (C(null)) they will be made top level vars.
+      - If omitted (V(null)) they will be made top level vars.
     type: str
   expressions:
     description:
       - This option controls how Jinja2 expressions in values in the loaded file are handled.
-      - If set to C(ignore), expressions will not be evaluated, but treated as regular strings.
-      - If set to C(evaluate-on-load), expressions will be evaluated on execution of this module,
+      - If set to V(ignore), expressions will not be evaluated, but treated as regular strings.
+      - If set to V(evaluate-on-load), expressions will be evaluated on execution of this module,
         in other words, when the file is loaded.
       - Unfortunately, there is no way for non-core modules to handle expressions "unsafe",
         in other words, evaluate them only on use. This can only achieved by M(ansible.builtin.include_vars),
@@ -69,18 +69,15 @@ seealso:
   - module: ansible.builtin.include_vars
   - ref: playbooks_delegation
     description: More information related to task delegation.
-  - ref: community.sops.sops lookup <ansible_collections.community.sops.sops_lookup>
+  - plugin: community.sops.sops
+    plugin_type: lookup
     description: The sops lookup can be used decrypt sops-encrypted files.
-  # - plugin: community.sops.sops
-  #   plugin_type: lookup
-  - ref: community.sops.decrypt filter <ansible_collections.community.sops.decrypt_filter>
+  - plugin: community.sops.decrypt
+    plugin_type: filter
     description: The decrypt filter can be used to descrypt sops-encrypted in-memory data.
-  # - plugin: community.sops.decrypt
-  #   plugin_type: filter
-  - ref: community.sops.sops vars plugin <ansible_collections.community.sops.sops_vars>
+  - plugin: community.sops.sops
+    plugin_type: vars
     description: The sops vars plugin can be used to load sops-encrypted host or group variables.
-  # - plugin: community.sops.sops
-  #   plugin_type: vars
 '''
 
 EXAMPLES = r'''

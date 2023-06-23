@@ -55,7 +55,7 @@ DOCUMENTATION = """
                 - dotenv
         empty_on_not_exist:
             description:
-                - When set to C(true), will not raise an error when a file cannot be found,
+                - When set to V(true), will not raise an error when a file cannot be found,
                   but return an empty string instead.
             type: bool
             default: false
@@ -67,14 +67,12 @@ DOCUMENTATION = """
     notes:
         - This lookup does not understand 'globbing' - use the fileglob lookup instead.
     seealso:
-        - ref: community.sops.decrypt filter <ansible_collections.community.sops.decrypt_filter>
+        - plugin: community.sops.decrypt
+          plugin_type: filter
           description: The decrypt filter can be used to descrypt sops-encrypted in-memory data.
-        # - plugin: community.sops.decrypt
-        #   plugin_type: filter
-        - ref: community.sops.sops vars plugin <ansible_collections.community.sops.sops_vars>
+        - plugin: community.sops.sops
+          plugin_type: vars
           description: The sops vars plugin can be used to load sops-encrypted host or group variables.
-        # - plugin: community.sops.sops
-        #   plugin_type: vars
         - module: community.sops.load_vars
 """
 
