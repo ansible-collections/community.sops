@@ -182,7 +182,7 @@
 <p><span class="ansible-option-versionadded">added in community.sops 1.4.0</span></p>
 </div></td>
 <td><div class="ansible-option-cell"><p>One or more age private keys that can be used to decrypt encrypted files.</p>
-<p>Will be set as the <code class="docutils literal notranslate"><span class="pre">SOPS_AGE_KEY</span></code> environment variable when calling sops.</p>
+<p>Will be set as the <code class="xref std std-envvar docutils literal notranslate"><span class="pre">SOPS_AGE_KEY</span></code> environment variable when calling sops.</p>
 </div></td>
 </tr>
 <tr class="row-even"><td><div class="ansible-option-cell">
@@ -191,7 +191,7 @@
 <p><span class="ansible-option-versionadded">added in community.sops 1.4.0</span></p>
 </div></td>
 <td><div class="ansible-option-cell"><p>The file containing the age private keys that sops can use to decrypt encrypted files.</p>
-<p>Will be set as the <code class="docutils literal notranslate"><span class="pre">SOPS_AGE_KEY_FILE</span></code> environment variable when calling sops.</p>
+<p>Will be set as the <code class="xref std std-envvar docutils literal notranslate"><span class="pre">SOPS_AGE_KEY_FILE</span></code> environment variable when calling sops.</p>
 <p>By default, sops looks for <code class="docutils literal notranslate"><span class="pre">sops/age/keys.txt</span></code> inside your user configuration directory.</p>
 </div></td>
 </tr>
@@ -213,7 +213,7 @@
 <p><span class="ansible-option-versionadded">added in community.sops 1.0.0</span></p>
 </div></td>
 <td><div class="ansible-option-cell"><p>The AWS access key ID to use for requests to AWS.</p>
-<p>Sets the environment variable <code class="docutils literal notranslate"><span class="pre">AWS_ACCESS_KEY_ID</span></code> for the sops call.</p>
+<p>Sets the environment variable <code class="xref std std-envvar docutils literal notranslate"><span class="pre">AWS_ACCESS_KEY_ID</span></code> for the sops call.</p>
 </div></td>
 </tr>
 <tr class="row-odd"><td><div class="ansible-option-cell">
@@ -231,7 +231,7 @@
 <p><span class="ansible-option-versionadded">added in community.sops 1.0.0</span></p>
 </div></td>
 <td><div class="ansible-option-cell"><p>The AWS secret access key to use for requests to AWS.</p>
-<p>Sets the environment variable <code class="docutils literal notranslate"><span class="pre">AWS_SECRET_ACCESS_KEY</span></code> for the sops call.</p>
+<p>Sets the environment variable <code class="xref std std-envvar docutils literal notranslate"><span class="pre">AWS_SECRET_ACCESS_KEY</span></code> for the sops call.</p>
 </div></td>
 </tr>
 <tr class="row-odd"><td><div class="ansible-option-cell">
@@ -240,7 +240,7 @@
 <p><span class="ansible-option-versionadded">added in community.sops 1.0.0</span></p>
 </div></td>
 <td><div class="ansible-option-cell"><p>The AWS session token to use for requests to AWS.</p>
-<p>Sets the environment variable <code class="docutils literal notranslate"><span class="pre">AWS_SESSION_TOKEN</span></code> for the sops call.</p>
+<p>Sets the environment variable <code class="xref std std-envvar docutils literal notranslate"><span class="pre">AWS_SESSION_TOKEN</span></code> for the sops call.</p>
 </div></td>
 </tr>
 <tr class="row-even"><td><div class="ansible-option-cell">
@@ -268,7 +268,7 @@
 </div></td>
 <td><div class="ansible-option-cell"><p>The data to encrypt. Must be <a class="reference external" href="https://en.wikipedia.org/wiki/Base64">Base64 encoded</a> binary data.</p>
 <p>Please note that the module might not be idempotent if the data can be parsed as JSON or YAML.</p>
-<p>Exactly one of <em>content_text</em>, <em>content_binary</em>, <em>content_json</em> and <em>content_yaml</em> must be specified.</p>
+<p>Exactly one of <code class="ansible-option docutils literal notranslate"><strong><a class="reference internal" href="#ansible-collections-community-sops-sops-encrypt-module-parameter-content-text"><span class="std std-ref"><span class="pre">content_text</span></span></a></strong></code>, <code class="ansible-option docutils literal notranslate"><strong><a class="reference internal" href="#ansible-collections-community-sops-sops-encrypt-module-parameter-content-binary"><span class="std std-ref"><span class="pre">content_binary</span></span></a></strong></code>, <code class="ansible-option docutils literal notranslate"><strong><a class="reference internal" href="#ansible-collections-community-sops-sops-encrypt-module-parameter-content-json"><span class="std std-ref"><span class="pre">content_json</span></span></a></strong></code>, and <code class="ansible-option docutils literal notranslate"><strong><a class="reference internal" href="#ansible-collections-community-sops-sops-encrypt-module-parameter-content-yaml"><span class="std std-ref"><span class="pre">content_yaml</span></span></a></strong></code> must be specified.</p>
 </div></td>
 </tr>
 <tr class="row-odd"><td><div class="ansible-option-cell">
@@ -276,7 +276,7 @@
 <a class="ansibleOptionLink" href="#parameter-content_json" title="Permalink to this option"></a><p class="ansible-option-type-line"><span class="ansible-option-type">dictionary</span></p>
 </div></td>
 <td><div class="ansible-option-cell"><p>The data to encrypt. Must be a JSON dictionary.</p>
-<p>Exactly one of <em>content_text</em>, <em>content_binary</em>, <em>content_json</em> and <em>content_yaml</em> must be specified.</p>
+<p>Exactly one of <code class="ansible-option docutils literal notranslate"><strong><a class="reference internal" href="#ansible-collections-community-sops-sops-encrypt-module-parameter-content-text"><span class="std std-ref"><span class="pre">content_text</span></span></a></strong></code>, <code class="ansible-option docutils literal notranslate"><strong><a class="reference internal" href="#ansible-collections-community-sops-sops-encrypt-module-parameter-content-binary"><span class="std std-ref"><span class="pre">content_binary</span></span></a></strong></code>, <code class="ansible-option docutils literal notranslate"><strong><a class="reference internal" href="#ansible-collections-community-sops-sops-encrypt-module-parameter-content-json"><span class="std std-ref"><span class="pre">content_json</span></span></a></strong></code>, and <code class="ansible-option docutils literal notranslate"><strong><a class="reference internal" href="#ansible-collections-community-sops-sops-encrypt-module-parameter-content-yaml"><span class="std std-ref"><span class="pre">content_yaml</span></span></a></strong></code> must be specified.</p>
 </div></td>
 </tr>
 <tr class="row-even"><td><div class="ansible-option-cell">
@@ -285,7 +285,7 @@
 </div></td>
 <td><div class="ansible-option-cell"><p>The data to encrypt. Must be a Unicode text.</p>
 <p>Please note that the module might not be idempotent if the text can be parsed as JSON or YAML.</p>
-<p>Exactly one of <em>content_text</em>, <em>content_binary</em>, <em>content_json</em> and <em>content_yaml</em> must be specified.</p>
+<p>Exactly one of <code class="ansible-option docutils literal notranslate"><strong><a class="reference internal" href="#ansible-collections-community-sops-sops-encrypt-module-parameter-content-text"><span class="std std-ref"><span class="pre">content_text</span></span></a></strong></code>, <code class="ansible-option docutils literal notranslate"><strong><a class="reference internal" href="#ansible-collections-community-sops-sops-encrypt-module-parameter-content-binary"><span class="std std-ref"><span class="pre">content_binary</span></span></a></strong></code>, <code class="ansible-option docutils literal notranslate"><strong><a class="reference internal" href="#ansible-collections-community-sops-sops-encrypt-module-parameter-content-json"><span class="std std-ref"><span class="pre">content_json</span></span></a></strong></code>, and <code class="ansible-option docutils literal notranslate"><strong><a class="reference internal" href="#ansible-collections-community-sops-sops-encrypt-module-parameter-content-yaml"><span class="std std-ref"><span class="pre">content_yaml</span></span></a></strong></code> must be specified.</p>
 </div></td>
 </tr>
 <tr class="row-odd"><td><div class="ansible-option-cell">
@@ -294,7 +294,7 @@
 </div></td>
 <td><div class="ansible-option-cell"><p>The data to encrypt. Must be a YAML dictionary.</p>
 <p>Please note that Ansible only allows to pass data that can be represented as a JSON dictionary.</p>
-<p>Exactly one of <em>content_text</em>, <em>content_binary</em>, <em>content_json</em> and <em>content_yaml</em> must be specified.</p>
+<p>Exactly one of <code class="ansible-option docutils literal notranslate"><strong><a class="reference internal" href="#ansible-collections-community-sops-sops-encrypt-module-parameter-content-text"><span class="std std-ref"><span class="pre">content_text</span></span></a></strong></code>, <code class="ansible-option docutils literal notranslate"><strong><a class="reference internal" href="#ansible-collections-community-sops-sops-encrypt-module-parameter-content-binary"><span class="std std-ref"><span class="pre">content_binary</span></span></a></strong></code>, <code class="ansible-option docutils literal notranslate"><strong><a class="reference internal" href="#ansible-collections-community-sops-sops-encrypt-module-parameter-content-json"><span class="std std-ref"><span class="pre">content_json</span></span></a></strong></code>, and <code class="ansible-option docutils literal notranslate"><strong><a class="reference internal" href="#ansible-collections-community-sops-sops-encrypt-module-parameter-content-yaml"><span class="std std-ref"><span class="pre">content_yaml</span></span></a></strong></code> must be specified.</p>
 </div></td>
 </tr>
 <tr class="row-even"><td><div class="ansible-option-cell">
@@ -327,7 +327,7 @@
 <p><span class="ansible-option-versionadded">added in community.sops 1.0.0</span></p>
 </div></td>
 <td><div class="ansible-option-cell"><p>Override the encrypted key suffix.</p>
-<p>When set to an empty string, all keys will be encrypted that are not explicitly marked by <em>unencrypted_suffix</em>.</p>
+<p>When set to an empty string, all keys will be encrypted that are not explicitly marked by <code class="ansible-option docutils literal notranslate"><strong><a class="reference internal" href="#ansible-collections-community-sops-sops-encrypt-module-parameter-unencrypted-suffix"><span class="std std-ref"><span class="pre">unencrypted_suffix</span></span></a></strong></code>.</p>
 <p>This corresponds to the sops <code class="docutils literal notranslate"><span class="pre">--encrypted-suffix</span></code> option.</p>
 </div></td>
 </tr>
@@ -476,7 +476,7 @@
 <p><span class="ansible-option-versionadded">added in community.sops 1.0.0</span></p>
 </div></td>
 <td><div class="ansible-option-cell"><p>The number of distinct keys required to retrieve the data key with <a class="reference external" href="https://en.wikipedia.org/wiki/Shamir%2527s_Secret_Sharing">Shamir’s Secret Sharing</a>.</p>
-<p>If not set here and in the sops config file, will default to <code class="docutils literal notranslate"><span class="pre">0</span></code>.</p>
+<p>If not set here and in the sops config file, will default to <code class="ansible-value docutils literal notranslate"><span class="pre">0</span></code>.</p>
 <p>This corresponds to the sops <code class="docutils literal notranslate"><span class="pre">--shamir-secret-sharing-threshold</span></code> option.</p>
 </div></td>
 </tr>
@@ -568,7 +568,7 @@
 <div class="admonition seealso">
 <p class="admonition-title">See also</p>
 <dl class="simple">
-<dt><a class="reference internal" href="sops_lookup.html#ansible-collections-community-sops-sops-lookup"><span class="std std-ref">community.sops.sops lookup</span></a></dt><dd><p>The sops lookup can be used decrypt sops-encrypted files.</p>
+<dt><a class="reference internal" href="sops_lookup.html#ansible-collections-community-sops-sops-lookup"><span class="std std-ref">community.sops.sops</span></a> lookup plugin</dt><dd><p>The sops lookup can be used decrypt sops-encrypted files.</p>
 </dd>
 </dl>
 </div>

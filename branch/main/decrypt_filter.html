@@ -199,7 +199,7 @@ example: <code class="docutils literal notranslate"><span class="pre">input</spa
 <p><span class="ansible-option-versionadded">added in community.sops 1.4.0</span></p>
 </div></td>
 <td><div class="ansible-option-cell"><p>One or more age private keys that can be used to decrypt encrypted files.</p>
-<p>Will be set as the <code class="docutils literal notranslate"><span class="pre">SOPS_AGE_KEY</span></code> environment variable when calling sops.</p>
+<p>Will be set as the <code class="xref std std-envvar docutils literal notranslate"><span class="pre">SOPS_AGE_KEY</span></code> environment variable when calling sops.</p>
 </div></td>
 </tr>
 <tr class="row-odd"><td><div class="ansible-option-cell">
@@ -208,7 +208,7 @@ example: <code class="docutils literal notranslate"><span class="pre">input</spa
 <p><span class="ansible-option-versionadded">added in community.sops 1.4.0</span></p>
 </div></td>
 <td><div class="ansible-option-cell"><p>The file containing the age private keys that sops can use to decrypt encrypted files.</p>
-<p>Will be set as the <code class="docutils literal notranslate"><span class="pre">SOPS_AGE_KEY_FILE</span></code> environment variable when calling sops.</p>
+<p>Will be set as the <code class="xref std std-envvar docutils literal notranslate"><span class="pre">SOPS_AGE_KEY_FILE</span></code> environment variable when calling sops.</p>
 <p>By default, sops looks for <code class="docutils literal notranslate"><span class="pre">sops/age/keys.txt</span></code> inside your user configuration directory.</p>
 </div></td>
 </tr>
@@ -218,7 +218,7 @@ example: <code class="docutils literal notranslate"><span class="pre">input</spa
 <p><span class="ansible-option-versionadded">added in community.sops 1.0.0</span></p>
 </div></td>
 <td><div class="ansible-option-cell"><p>The AWS access key ID to use for requests to AWS.</p>
-<p>Sets the environment variable <code class="docutils literal notranslate"><span class="pre">AWS_ACCESS_KEY_ID</span></code> for the sops call.</p>
+<p>Sets the environment variable <code class="xref std std-envvar docutils literal notranslate"><span class="pre">AWS_ACCESS_KEY_ID</span></code> for the sops call.</p>
 </div></td>
 </tr>
 <tr class="row-odd"><td><div class="ansible-option-cell">
@@ -236,7 +236,7 @@ example: <code class="docutils literal notranslate"><span class="pre">input</spa
 <p><span class="ansible-option-versionadded">added in community.sops 1.0.0</span></p>
 </div></td>
 <td><div class="ansible-option-cell"><p>The AWS secret access key to use for requests to AWS.</p>
-<p>Sets the environment variable <code class="docutils literal notranslate"><span class="pre">AWS_SECRET_ACCESS_KEY</span></code> for the sops call.</p>
+<p>Sets the environment variable <code class="xref std std-envvar docutils literal notranslate"><span class="pre">AWS_SECRET_ACCESS_KEY</span></code> for the sops call.</p>
 </div></td>
 </tr>
 <tr class="row-odd"><td><div class="ansible-option-cell">
@@ -245,7 +245,7 @@ example: <code class="docutils literal notranslate"><span class="pre">input</spa
 <p><span class="ansible-option-versionadded">added in community.sops 1.0.0</span></p>
 </div></td>
 <td><div class="ansible-option-cell"><p>The AWS session token to use for requests to AWS.</p>
-<p>Sets the environment variable <code class="docutils literal notranslate"><span class="pre">AWS_SESSION_TOKEN</span></code> for the sops call.</p>
+<p>Sets the environment variable <code class="xref std std-envvar docutils literal notranslate"><span class="pre">AWS_SESSION_TOKEN</span></code> for the sops call.</p>
 </div></td>
 </tr>
 <tr class="row-even"><td><div class="ansible-option-cell">
@@ -263,7 +263,7 @@ example: <code class="docutils literal notranslate"><span class="pre">input</spa
 <a class="ansibleOptionLink" href="#parameter-decode_output" title="Permalink to this option"></a><p class="ansible-option-type-line"><span class="ansible-option-type">boolean</span></p>
 </div></td>
 <td><div class="ansible-option-cell"><p>Whether to decode the output to bytes.</p>
-<p>When <em>output_type=binary</em>, and the file isn’t known to contain UTF-8 encoded text, this should better be set to <code class="docutils literal notranslate"><span class="pre">false</span></code> to prevent mangling the data with UTF-8 decoding.</p>
+<p>When <code class="ansible-option-value docutils literal notranslate"><a class="reference internal" href="#ansible-collections-community-sops-decrypt-filter-parameter-output-type"><span class="std std-ref"><span class="pre">output_type=binary</span></span></a></code>, and the file isn’t known to contain UTF-8 encoded text, this should better be set to <code class="ansible-value docutils literal notranslate"><span class="pre">false</span></code> to prevent mangling the data with UTF-8 decoding.</p>
 <p class="ansible-option-line"><span class="ansible-option-choices">Choices:</span></p>
 <ul class="simple">
 <li><p><code class="ansible-option-choices-entry docutils literal notranslate"><span class="pre">false</span></code></p></li>
@@ -315,7 +315,7 @@ example: <code class="docutils literal notranslate"><span class="pre">input</spa
 <a class="ansibleOptionLink" href="#parameter-output_type" title="Permalink to this option"></a><p class="ansible-option-type-line"><span class="ansible-option-type">string</span></p>
 </div></td>
 <td><div class="ansible-option-cell"><p>Tell sops how to interpret the decrypted file.</p>
-<p>Please note that the output is always text or bytes, depending on the value of <em>decode_output</em>. To parse the resulting JSON or YAML, use corresponding filters such as <code class="docutils literal notranslate"><span class="pre">ansible.builtin.from_json</span></code> and <code class="docutils literal notranslate"><span class="pre">ansible.builtin.from_yaml</span></code>.</p>
+<p>Please note that the output is always text or bytes, depending on the value of <code class="ansible-option docutils literal notranslate"><strong><a class="reference internal" href="#ansible-collections-community-sops-decrypt-filter-parameter-decode-output"><span class="std std-ref"><span class="pre">decode_output</span></span></a></strong></code>. To parse the resulting JSON or YAML, use corresponding filters such as <a class="reference external" href="https://docs.ansible.com/ansible/devel/collections/ansible/builtin/from_json_filter.html#ansible-collections-ansible-builtin-from-json-filter" title="(in Ansible vdevel)"><span class="xref std std-ref">ansible.builtin.from_json</span></a> and <a class="reference external" href="https://docs.ansible.com/ansible/devel/collections/ansible/builtin/from_yaml_filter.html#ansible-collections-ansible-builtin-from-yaml-filter" title="(in Ansible vdevel)"><span class="xref std std-ref">ansible.builtin.from_yaml</span></a>.</p>
 <p class="ansible-option-line"><span class="ansible-option-choices">Choices:</span></p>
 <ul class="simple">
 <li><p><code class="ansible-option-choices-entry docutils literal notranslate"><span class="pre">&quot;binary&quot;</span></code></p></li>
@@ -402,7 +402,7 @@ example: <code class="docutils literal notranslate"><span class="pre">input</spa
 <div class="ansibleOptionAnchor" id="return-_value"></div><p class="ansible-option-title" id="ansible-collections-community-sops-decrypt-filter-return-value"><strong>Return value</strong></p>
 <a class="ansibleOptionLink" href="#return-_value" title="Permalink to this return value"></a><p class="ansible-option-type-line"><span class="ansible-option-type">string</span></p>
 </div></td>
-<td><div class="ansible-option-cell"><p>Decrypted data as text (<em>decode_output=true</em>, default) or binary string (<em>decode_output=false</em>).</p>
+<td><div class="ansible-option-cell"><p>Decrypted data as text (<code class="ansible-option-value docutils literal notranslate"><a class="reference internal" href="#ansible-collections-community-sops-decrypt-filter-parameter-decode-output"><span class="std std-ref"><span class="pre">decode_output=true</span></span></a></code>, default) or binary string (<code class="ansible-option-value docutils literal notranslate"><a class="reference internal" href="#ansible-collections-community-sops-decrypt-filter-parameter-decode-output"><span class="std std-ref"><span class="pre">decode_output=false</span></span></a></code>).</p>
 <p class="ansible-option-line"><span class="ansible-option-returned-bold">Returned:</span> success</p>
 </div></td>
 </tr>
