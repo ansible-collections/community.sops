@@ -1,0 +1,598 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Protecting Ansible secrets with Mozilla SOPS &mdash; Community.Sops Collection  documentation</title>
+      <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/css/ansible.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/antsibull-minimal.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/css/rtd-ethical-ads.css" type="text/css" />
+    <link rel="shortcut icon" href="../_static/images/Ansible-Mark-RGB_Black.png"/>
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/_sphinx_javascript_frameworks_compat.js"></script>
+        <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+        <script src="../_static/doctools.js"></script>
+        <script src="../_static/sphinx_highlight.js"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="community.sops.load_vars module – Load sops-encrypted variables from files, dynamically within a task" href="../load_vars_module.html" />
+    <link rel="prev" title="Community.Sops" href="../index.html" /><!-- extra head elements for Ansible beyond RTD Sphinx Theme -->
+
+
+
+
+</head>
+
+<body class="wy-body-for-nav"><!-- extra body elements for Ansible beyond RTD Sphinx Theme -->
+
+<div class="DocSite-globalNav ansibleNav">
+  <ul>
+    <li><a href="https://www.ansible.com/ansiblefest" target="_blank">AnsibleFest</a></li>
+    <li><a href="https://www.ansible.com/tower" target="_blank">Products</a></li>
+    <li><a href="https://www.ansible.com/community" target="_blank">Community</a></li>
+    <li><a href="https://www.ansible.com/webinars-training" target="_blank">Webinars & Training</a></li>
+    <li><a href="https://www.ansible.com/blog" target="_blank">Blog</a></li>
+  </ul>
+</div>
+
+<a class="DocSite-nav" href="https://ansible-collections.github.io/community.sops/branch/main/" style="padding-bottom: 30px;">
+
+  <img class="DocSiteNav-logo"
+    src="../_static/images/Ansible-Mark-RGB_White.png"
+    alt="Ansible Logo">
+  <div class="DocSiteNav-title">Community.Sops Collection Docs</div>
+</a>
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../index.html" class="icon icon-home">
+            Community.Sops Collection
+          </a><!--- Based on https://github.com/rtfd/sphinx_rtd_theme/pull/438/files -->
+
+<div class="version">
+  
+    
+  
+</div>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <label class="sr-only" for="q">Search docs:</label>
+    <input type="text" class="st-default-search-input" id="q" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+  
+              <ul class="current">
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Protecting Ansible secrets with Mozilla SOPS</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#installing-sops">Installing sops</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#installing-community-sops-in-an-execution-environment">Installing community.sops in an Execution Environment</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#setting-up-sops">Setting up sops</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#working-with-encrypted-files">Working with encrypted files</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#working-with-encrypted-data-from-other-sources">Working with encrypted data from other sources</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#working-with-encrypted-variables">Working with encrypted variables</a></li>
+</ul>
+</li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../load_vars_module.html">community.sops.load_vars module – Load sops-encrypted variables from files, dynamically within a task</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../sops_encrypt_module.html">community.sops.sops_encrypt module – Encrypt data with sops</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../_latest_version_filter.html">community.sops._latest_version filter – [INTERNAL] Get latest version from a list of versions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../decrypt_filter.html">community.sops.decrypt filter – Decrypt sops encrypted data</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../sops_lookup.html">community.sops.sops lookup – Read sops encrypted file contents</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../sops_vars.html">community.sops.sops vars – Loading sops-encrypted vars files</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../install_role.html">community.sops.install role – Install Mozilla sops</a></li>
+</ul>
+<!-- extra nav elements for Ansible beyond RTD Sphinx Theme -->
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">Community.Sops Collection</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">Protecting Ansible secrets with Mozilla SOPS</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+
+  
+           <div itemprop="articleBody">
+             
+  <section id="protecting-ansible-secrets-with-mozilla-sops">
+<span id="ansible-collections-community-sops-docsite-guide"></span><h1>Protecting Ansible secrets with Mozilla SOPS<a class="headerlink" href="#protecting-ansible-secrets-with-mozilla-sops" title="Permalink to this heading"></a></h1>
+<p><a class="reference external" href="https://github.com/mozilla/sops">Mozilla SOPS</a> allows to encrypt and decrypt files using various key sources (GPG, AWS KMS, GCP KMS, …). For structured data, such as YAML, JSON, INI and ENV files, it will encrypt values, but not mapping keys. For YAML files, it also encrypts comments. This makes it a great tool for encrypting credentials with Ansible: you can easily see which files contain which variable, but the variables themselves are encrypted.</p>
+<p>The ability to utilize various keysources makes it easier to use in complex environments than <a class="reference external" href="https://docs.ansible.com/ansible/latest/user_guide/vault.html">Ansible Vault</a>.</p>
+<nav class="contents local" id="contents">
+<ul class="simple">
+<li><p><a class="reference internal" href="#installing-sops" id="id1">Installing sops</a></p></li>
+<li><p><a class="reference internal" href="#installing-community-sops-in-an-execution-environment" id="id2">Installing community.sops in an Execution Environment</a></p></li>
+<li><p><a class="reference internal" href="#setting-up-sops" id="id3">Setting up sops</a></p></li>
+<li><p><a class="reference internal" href="#working-with-encrypted-files" id="id4">Working with encrypted files</a></p></li>
+<li><p><a class="reference internal" href="#working-with-encrypted-data-from-other-sources" id="id5">Working with encrypted data from other sources</a></p></li>
+<li><p><a class="reference internal" href="#working-with-encrypted-variables" id="id6">Working with encrypted variables</a></p></li>
+</ul>
+</nav>
+<section id="installing-sops">
+<h2><a class="toc-backref" href="#id1" role="doc-backlink">Installing sops</a><a class="headerlink" href="#installing-sops" title="Permalink to this heading"></a></h2>
+<p>You can find binaries and packages <a class="reference external" href="https://github.com/mozilla/sops/releases">on the project’s release page</a>. Depending on your operating system, you might also be able to install it with your system’s package manager.</p>
+<p>This collection provides a <a class="reference external" href="ansible_collections.community.sops.install_role">role community.sops.install</a> which allows to install sops and <a class="reference external" href="https://en.wikipedia.org/wiki/GNU_Privacy_Guard">GNU Privacy Guard (GPG)</a>. The role allows to install sops from the system’s package manager or from GitHub. Both sops and GPG can be installed on the remote hosts or the Ansible controller.</p>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Playbook to install sops</span>
+<span class="w">  </span><span class="nt">hosts</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">all</span>
+<span class="w">  </span><span class="nt">tasks</span><span class="p">:</span>
+<span class="w">    </span><span class="c1"># To use the sops_encrypt module on a remote host, you need to install sops on it:</span>
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Install sops on remote hosts</span>
+<span class="w">      </span><span class="nt">ansible.builtin.include_role</span><span class="p">:</span>
+<span class="w">        </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">community.sops.install</span>
+<span class="w">      </span><span class="nt">vars</span><span class="p">:</span>
+<span class="w">        </span><span class="nt">sops_version</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">2.7.0</span><span class="w">  </span><span class="c1"># per default installs the latest version</span>
+
+<span class="w">    </span><span class="c1"># To use the lookup plugin, filter plugin, vars plugin, or the load_vars action,</span>
+<span class="w">    </span><span class="c1"># you need sops installed on localhost:</span>
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Install sops on localhost</span>
+<span class="w">      </span><span class="nt">ansible.builtin.include_role</span><span class="p">:</span>
+<span class="w">        </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">community.sops.install</span>
+<span class="w">      </span><span class="nt">vars</span><span class="p">:</span>
+<span class="w">        </span><span class="nt">sops_install_on_localhost</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span>
+</pre></div>
+</div>
+<p>When using ansible-core 2.11 or later, you can also use two convenience playbooks:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># Install sops on Ansible controller</span>
+$<span class="w"> </span>ansible-playbook<span class="w"> </span>community.sops.install_localhost
+
+<span class="c1"># Install sops on remote servers</span>
+$<span class="w"> </span>ansible-playbook<span class="w"> </span>community.sops.install<span class="w"> </span>--inventory<span class="w"> </span>/path/to/inventory
+</pre></div>
+</div>
+</section>
+<section id="installing-community-sops-in-an-execution-environment">
+<h2><a class="toc-backref" href="#id2" role="doc-backlink">Installing community.sops in an Execution Environment</a><a class="headerlink" href="#installing-community-sops-in-an-execution-environment" title="Permalink to this heading"></a></h2>
+<p>When building an execution environment containing community.sops, please note that by default sops is not automatically installed. This is due to a limitation of the dependency specification system for execution environments. If you are building an execution environment that contains community.sops, you should make sure that sops is installed in it.</p>
+<p>The simplest way of ensuring this is to use the <code class="docutils literal notranslate"><span class="pre">community.sops.install_localhost</span></code> playbook. When defining an execution environment, you can add a <code class="docutils literal notranslate"><span class="pre">RUN</span></code> additional build step to your <code class="docutils literal notranslate"><span class="pre">execution-environment.yml</span></code>:</p>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nn">---</span>
+<span class="nt">version</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">1</span>
+<span class="nt">dependencies</span><span class="p">:</span>
+<span class="w">  </span><span class="nt">galaxy</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">requirements.yml</span>
+<span class="nt">additional_build_steps</span><span class="p">:</span>
+<span class="w">  </span><span class="nt">append</span><span class="p">:</span>
+<span class="w">    </span><span class="c1"># Ensure that sops is installed in the EE, assuming the EE is for ansible-core 2.11 or newer</span>
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">RUN ansible-playbook -v community.sops.install_localhost</span>
+</pre></div>
+</div>
+<p>Note that this only works if the execution environment is built with ansible-core 2.11 or newer. When using an execution environment with Ansible 2.9, you have to use the <code class="docutils literal notranslate"><span class="pre">community.sops.install</span></code> role manually. Also note that you need to make sure that Ansible 2.9 uses the correct Python interpreter to be able to install system packages with; in the below example we are assuming a RHEL/CentOS based execution environment base image:</p>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nn">---</span>
+<span class="nt">version</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">1</span>
+<span class="nt">dependencies</span><span class="p">:</span>
+<span class="w">  </span><span class="nt">galaxy</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">requirements.yml</span>
+<span class="nt">additional_build_steps</span><span class="p">:</span>
+<span class="w">  </span><span class="nt">append</span><span class="p">:</span>
+<span class="w">    </span><span class="c1"># Special step needed for Ansible 2.9 based EEs</span>
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="p p-Indicator">&gt;-</span>
+<span class="w">      </span><span class="no">RUN ansible localhost -m include_role -a name=community.sops.install</span>
+<span class="w">          </span><span class="no">-e sops_install_on_localhost=true</span>
+<span class="w">          </span><span class="no">-e ansible_python_interpreter=/usr/libexec/platform-python</span>
+</pre></div>
+</div>
+<p>Once this step has been taken care of, you can use all plugins and modules (on <code class="docutils literal notranslate"><span class="pre">localhost</span></code>) from community.sops in the execution environment.</p>
+</section>
+<section id="setting-up-sops">
+<h2><a class="toc-backref" href="#id3" role="doc-backlink">Setting up sops</a><a class="headerlink" href="#setting-up-sops" title="Permalink to this heading"></a></h2>
+<p>From now on this guide assumes that you have installed Mozilla SOPS.</p>
+<p>For simplicity, you can work with GPG keys. If you do not have one, or do not want to use yours, you can run <code class="docutils literal notranslate"><span class="pre">gpg</span> <span class="pre">--quick-generate-key</span> <span class="pre">me&#64;example.com</span></code> to create a GPG key for the user ID <code class="docutils literal notranslate"><span class="pre">me&#64;example.com</span></code>. You will need its 40 hex-digit key ID that is printed at the end. The first step is to create a <code class="docutils literal notranslate"><span class="pre">.sops.yaml</span></code> file in the directory tree you are working in:</p>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">creation_rules</span><span class="p">:</span>
+<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">pgp</span><span class="p">:</span><span class="w"> </span><span class="s">&#39;FBC7B9E2A4F9289AC0C1D4843D16CEE4A27381B4&#39;</span>
+</pre></div>
+</div>
+<p>Here, <code class="docutils literal notranslate"><span class="pre">FBC7B9E2A4F9289AC0C1D4843D16CEE4A27381B4</span></code> is the 40 hex-digit key ID. With this file you can create a sops encrypted file by running the following in the directory where <code class="docutils literal notranslate"><span class="pre">.sops.yaml</span></code> was placed, or a subdirectory of it:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$<span class="w"> </span>sops<span class="w"> </span>test.sops.yaml
+</pre></div>
+</div>
+<p>This will open an editor window with an example YAML file. Put the following content in:</p>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="c1"># This is a comment</span>
+<span class="nt">hello</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">world</span>
+<span class="nt">foo</span><span class="p">:</span>
+<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">bar</span>
+<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">baz</span>
+</pre></div>
+</div>
+<p>After closing the editor, sops will create <code class="docutils literal notranslate"><span class="pre">test.sops.yaml</span></code> with the encrypted contents:</p>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="c1">#ENC[AES256_GCM,data:r6Ok05DzzHBO4tonlz2t49CF,iv:Y0P39iXwaGYU9NG5oRC3NuaGVL40uruSze0CxbDTpTk=,tag:EzoG+X+BJAHbxE0asSyGlQ==,type:comment]</span>
+<span class="nt">hello</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">ENC[AES256_GCM,data:onBZqWk=,iv:bwj4bwaeh3vpVDYqY2AnYo1thF955i5vbFpCC1DwJtM=,tag:4qbVzuHTaPrXm64r2Rqz1Q==,type:str]</span>
+<span class="nt">foo</span><span class="p">:</span>
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">ENC[AES256_GCM,data:UsY8,iv:USv71rKfvbTF+3a5T2WO56wGVu609/0uigqkO0pa6U4=,tag:s8NdqLp+8OOQg4xDfE78oA==,type:str]</span>
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">ENC[AES256_GCM,data:Dhmo,iv:qWs5gN2SCXYq0EfGelZhODsdViKB9w2taQMhsqy0D2g=,tag:I+ZFvuxnsvQmywqz+a/M9w==,type:str]</span>
+<span class="nt">sops</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">kms</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[]</span>
+<span class="w">    </span><span class="nt">gcp_kms</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[]</span>
+<span class="w">    </span><span class="nt">azure_kv</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[]</span>
+<span class="w">    </span><span class="nt">hc_vault</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[]</span>
+<span class="w">    </span><span class="nt">age</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[]</span>
+<span class="w">    </span><span class="nt">lastmodified</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;2021-06-15T19:36:34Z&quot;</span>
+<span class="w">    </span><span class="nt">mac</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">ENC[AES256_GCM,data:HAvLeOvt7xWI7B5TCeDEsL6sOSzGGeTbgBSJaZkwadmoAm3Ny4IZPF8JAbFaPPLmN8FJVAt4D61aIWa6Xwi3xMj1g6DmxFfgK6JFJqWqW122UlMhqZ/WuMWFV6yVxpTLDXgemndgGDJqUTUi14FMh/MzPDg4f6kFP64kA9fpLrY=,iv:LdhswnMymZG8J9na/jnF3WYnX0DvzvoBlvjUCu4nI6c=,tag:Qt4d7L3FXsgfmg9iOs8P4A==,type:str]</span>
+<span class="w">    </span><span class="nt">pgp</span><span class="p">:</span>
+<span class="w">        </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">created_at</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;2021-06-15T19:36:01Z&quot;</span>
+<span class="w">          </span><span class="nt">enc</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">|-</span>
+<span class="w">            </span><span class="no">-----BEGIN PGP MESSAGE-----</span>
+
+<span class="w">            </span><span class="no">wcBMAyUpShfNkFB/AQgAT8OAKnWLBQRG3kT5lZCmyoPzK6RwF0zRkwCzJkLNl6xg</span>
+<span class="w">            </span><span class="no">nQjUjpD03ZD4FtiRidspXEj7NvCLDghJ0UETtDjmrwsTeJ5YAK/JxouWmoNhVVdF</span>
+<span class="w">            </span><span class="no">p0qOlj/THXIV+ypVaqrisZGZiTqeWjUNFuayknvjm3XduOOPZA1MIJ14pQxcgca4</span>
+<span class="w">            </span><span class="no">NWmKwPwXTWEy3RJ0ZsnjjjYvKHjHyvbHdbDgARu8R1jEgdNPKPBRVpEY6RNeafXI</span>
+<span class="w">            </span><span class="no">gFBVRfrhPKD6HmnmNvjHwUc/K+wOa1ciIYVrT4mPXoyBsFkyV0egh/QRf0JO8+X7</span>
+<span class="w">            </span><span class="no">Ut/jEtCrl9BXJCNYGmC5EU3PPiFlAu1MRxlCiPNWltLmASn2w62wMpgih6f+OpI/</span>
+<span class="w">            </span><span class="no">zyEOdz0qx80LEfhv3+jBbDfBwz4GqpAHUr0fCXDzeDiKfzlU6isagoIAhJfwX6oG</span>
+<span class="w">            </span><span class="no">NeQ47ktk1XhPmgIwxxuvonG14iQoU2cA</span>
+<span class="w">            </span><span class="no">=GoXQ</span>
+<span class="w">            </span><span class="no">-----END PGP MESSAGE-----</span>
+<span class="w">          </span><span class="nt">fp</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">FBC7B9E2A4F9289AC0C1D4843D16CEE4A27381B4</span>
+<span class="w">    </span><span class="nt">unencrypted_suffix</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">_unencrypted</span>
+<span class="w">    </span><span class="nt">version</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">3.7.1</span>
+</pre></div>
+</div>
+<p>The first line contains the encrypted content. The second line contains the unencrypted key of <code class="docutils literal notranslate"><span class="pre">hello:</span> <span class="pre">world</span></code>, and the encrypted string value <code class="docutils literal notranslate"><span class="pre">world</span></code>. The next few lines contain the unencrypted key <code class="docutils literal notranslate"><span class="pre">foo</span></code> with the encrypted list elements.</p>
+<p>At the end, the <code class="docutils literal notranslate"><span class="pre">sops</span></code> section contains metadata, which includes the private key needed to decrypt the file encrypted with the public key of the GPG key ID <code class="docutils literal notranslate"><span class="pre">FBC7B9E2A4F9289AC0C1D4843D16CEE4A27381B4</span></code>. If you had multiple GPG keys configured, or also other key sources, you can also find the file secret key encrypted with these keys here.</p>
+</section>
+<section id="working-with-encrypted-files">
+<h2><a class="toc-backref" href="#id4" role="doc-backlink">Working with encrypted files</a><a class="headerlink" href="#working-with-encrypted-files" title="Permalink to this heading"></a></h2>
+<p>You can decrypt sops-encrypted files with the <a class="reference internal" href="../sops_lookup.html#ansible-collections-community-sops-sops-lookup"><span class="std std-ref">community.sops.sops lookup plugin</span></a>, and dynamically encrypt data with the <a class="reference internal" href="../sops_encrypt_module.html#ansible-collections-community-sops-sops-encrypt-module"><span class="std std-ref">community.sops.sops_encrypt module</span></a>. Being able to encrypt is useful when you create or update secrets in your Ansible playbooks.</p>
+<p>Assume that you have an encrypted private key <code class="docutils literal notranslate"><span class="pre">keys/private_key.pem.sops</span></code>, which was in PEM format before being encrypted by sops:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$<span class="w"> </span>openssl<span class="w"> </span>genrsa<span class="w"> </span>-out<span class="w"> </span>keys/private_key.pem<span class="w"> </span><span class="m">2048</span>
+$<span class="w"> </span>sops<span class="w"> </span>--encrypt<span class="w"> </span>keys/private_key.pem<span class="w"> </span>&gt;<span class="w"> </span>keys/private_key.pem.sops
+$<span class="w"> </span>wipe<span class="w"> </span>keys/private_key.pem
+</pre></div>
+</div>
+<p>To use it in a playbook, for example to pass it to the <a class="reference external" href="https://docs.ansible.com/ansible/devel/collections/community/crypto/openssl_csr_module.html#ansible-collections-community-crypto-openssl-csr-module" title="(in Ansible vdevel)"><span class="xref std std-ref">community.crypto.openssl_csr module</span></a> to create a certificate signing request (CSR), you can use the <a class="reference internal" href="../sops_lookup.html#ansible-collections-community-sops-sops-lookup"><span class="std std-ref">community.sops.sops lookup plugin</span></a> to load it:</p>
+<div class="highlight-yaml+jinja notranslate"><div class="highlight"><pre><span></span><span class="nn">---</span>
+<span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Load sops-encrypted private key</span>
+<span class="w">  </span><span class="nt">hosts</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">localhost</span>
+<span class="w">  </span><span class="nt">gather_facts</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">false</span>
+<span class="w">  </span><span class="nt">tasks</span><span class="p">:</span>
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Create CSR with encrypted private key</span>
+<span class="w">      </span><span class="nt">community.crypto.openssl_csr</span><span class="p">:</span>
+<span class="w">        </span><span class="c1"># The private key is provided with sops:</span>
+<span class="w">        </span><span class="nt">privatekey_content</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;</span><span class="cp">{{</span> <span class="nv">lookup</span><span class="o">(</span><span class="s1">&#39;community.sops.sops&#39;</span><span class="o">,</span> <span class="s1">&#39;keys/private_key.pem.sops&#39;</span><span class="o">)</span> <span class="cp">}}</span><span class="s">&quot;</span>
+<span class="w">        </span><span class="c1"># Store the CSR on disk unencrypted:</span>
+<span class="w">        </span><span class="nt">path</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">ansible.com.csr</span>
+<span class="w">        </span><span class="c1"># This is going to be a CSR for ansible.com and www.ansible.com</span>
+<span class="w">        </span><span class="nt">subject_alt_name</span><span class="p">:</span>
+<span class="w">          </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">DNS:ansible.com</span>
+<span class="w">          </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">DNS:www.ansible.com</span>
+<span class="w">        </span><span class="nt">use_common_name_for_san</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">false</span>
+</pre></div>
+</div>
+<p>This results in the following output:</p>
+<div class="highlight-ansible-output notranslate"><div class="highlight"><pre><span></span><span class="k">PLAY</span> <span class="p">[</span><span class="l">Load sops-encrypted private key</span><span class="p">]</span> <span class="nv">***************************************************************************</span>
+
+<span class="k">TASK</span> <span class="p">[</span><span class="l">Create CSR with encrypted private key</span><span class="p">]</span> <span class="nv">*********************************************************************</span>
+<span class="k">ok</span><span class="p">:</span> <span class="p">[</span><span class="nv">localhost</span><span class="p">]</span>
+
+<span class="k">PLAY RECAP</span> <span class="nv">*******************************************************************************************************</span>
+<span class="n">localhost</span>                  <span class="p">:</span> <span class="k">ok</span><span class="p">=</span><span class="mi">1</span>    <span class="k">changed</span><span class="p">=</span><span class="mi">0</span>    <span class="k">unreachable</span><span class="p">=</span><span class="mi">0</span>    <span class="k">failed</span><span class="p">=</span><span class="mi">0</span>    <span class="k">skipped</span><span class="p">=</span><span class="mi">0</span>    <span class="k">rescued</span><span class="p">=</span><span class="mi">0</span>    <span class="k">ignored</span><span class="p">=</span><span class="mi">0</span>
+</pre></div>
+</div>
+<p>Afterwards, you will have a CSR <code class="docutils literal notranslate"><span class="pre">ansible.com.csr</span></code> for the encrypted private key <code class="docutils literal notranslate"><span class="pre">keys/private_key.pem.sops</span></code>.</p>
+<p>If you want to use Ansible to generate (or update) the encrypted private key, you can use the <a class="reference external" href="https://docs.ansible.com/ansible/devel/collections/community/crypto/openssl_privatekey_pipe_module.html#ansible-collections-community-crypto-openssl-privatekey-pipe-module" title="(in Ansible vdevel)"><span class="xref std std-ref">community.crypto.openssl_privatekey_pipe module</span></a> to generate (or update) the private key, and use the <a class="reference internal" href="../sops_encrypt_module.html#ansible-collections-community-sops-sops-encrypt-module"><span class="std std-ref">community.sops.sops_encrypt module</span></a> to write it to disk in encrypted form:</p>
+<div class="highlight-yaml+jinja notranslate"><div class="highlight"><pre><span></span><span class="nn">---</span>
+<span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Create sops-encrypted private key</span>
+<span class="w">  </span><span class="nt">hosts</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">localhost</span>
+<span class="w">  </span><span class="nt">gather_facts</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">false</span>
+<span class="w">  </span><span class="nt">tasks</span><span class="p">:</span>
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">block</span><span class="p">:</span>
+<span class="w">        </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Create private key</span>
+<span class="w">          </span><span class="nt">community.crypto.openssl_privatekey_pipe</span><span class="p">:</span>
+<span class="w">            </span><span class="nt">size</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">2048</span>
+<span class="w">          </span><span class="nt">no_log</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span><span class="w">  </span><span class="c1"># Always use this with openssl_privatekey_pipe!</span>
+<span class="w">          </span><span class="nt">register</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">private_key</span>
+
+<span class="w">        </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Write encrypted key to disk</span>
+<span class="w">          </span><span class="nt">community.sops.sops_encrypt</span><span class="p">:</span>
+<span class="w">            </span><span class="nt">path</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">keys/private_key.pem.sops</span>
+<span class="w">            </span><span class="nt">content_text</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;</span><span class="cp">{{</span> <span class="nv">private_key.privatekey</span> <span class="cp">}}</span><span class="s">&quot;</span>
+
+<span class="w">      </span><span class="nt">always</span><span class="p">:</span>
+<span class="w">        </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Wipe private key from Ansible&#39;s facts</span>
+<span class="w">          </span><span class="c1"># This is particularly important if the playbook doesn&#39;t end here!</span>
+<span class="w">          </span><span class="nt">set_fact</span><span class="p">:</span>
+<span class="w">            </span><span class="nt">private_key</span><span class="p">:</span><span class="w"> </span><span class="s">&#39;&#39;</span>
+</pre></div>
+</div>
+<p>This playbook creates a new key on every run. If you want the private key creation to be idempotent, you need to do a little more work:</p>
+<div class="highlight-yaml+jinja notranslate"><div class="highlight"><pre><span></span><span class="nn">---</span>
+<span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Create sops-encrypted private key</span>
+<span class="w">  </span><span class="nt">hosts</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">localhost</span>
+<span class="w">  </span><span class="nt">gather_facts</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">false</span>
+<span class="w">  </span><span class="nt">tasks</span><span class="p">:</span>
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">block</span><span class="p">:</span>
+<span class="w">        </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Create private key</span>
+<span class="w">          </span><span class="nt">community.crypto.openssl_privatekey_pipe</span><span class="p">:</span>
+<span class="w">            </span><span class="nt">size</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">2048</span>
+<span class="w">            </span><span class="nt">content</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">&gt;-</span>
+<span class="w">              </span><span class="cp">{{</span> <span class="nv">lookup</span><span class="o">(</span>
+                    <span class="s1">&#39;community.sops.sops&#39;</span><span class="o">,</span>
+                    <span class="s1">&#39;keys/private_key.pem.sops&#39;</span><span class="o">,</span>
+                    <span class="nv">empty_on_not_exist</span><span class="o">=</span><span class="kp">true</span>
+                 <span class="o">)</span> <span class="cp">}}</span>
+<span class="w">          </span><span class="nt">no_log</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span><span class="w">  </span><span class="c1"># Always use this with openssl_privatekey_pipe!</span>
+<span class="w">          </span><span class="nt">register</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">private_key</span>
+
+<span class="w">        </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Write encrypted key to disk</span>
+<span class="w">          </span><span class="nt">community.sops.sops_encrypt</span><span class="p">:</span>
+<span class="w">            </span><span class="nt">path</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">keys/private_key.pem.sops</span>
+<span class="w">            </span><span class="nt">content_text</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;</span><span class="cp">{{</span> <span class="nv">private_key.privatekey</span> <span class="cp">}}</span><span class="s">&quot;</span>
+<span class="w">          </span><span class="nt">when</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">private_key is changed</span>
+
+<span class="w">      </span><span class="nt">always</span><span class="p">:</span>
+<span class="w">        </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Wipe private key from Ansible&#39;s facts</span>
+<span class="w">          </span><span class="c1"># This is particularly important if the playbook doesn&#39;t end here!</span>
+<span class="w">          </span><span class="nt">set_fact</span><span class="p">:</span>
+<span class="w">            </span><span class="nt">private_key</span><span class="p">:</span><span class="w"> </span><span class="s">&#39;&#39;</span>
+</pre></div>
+</div>
+<p>The <code class="ansible-option-value docutils literal notranslate"><a class="reference internal" href="../sops_lookup.html#ansible-collections-community-sops-sops-lookup-parameter-empty-on-not-exist"><span class="std std-ref"><span class="pre">empty_on_not_exist=true</span></span></a></code> flag is needed to avoid the lookup to fail when the key does not yet exist. When this playbook is run twice, the output will be:</p>
+<div class="highlight-ansible-output notranslate"><div class="highlight"><pre><span></span><span class="k">PLAY</span> <span class="p">[</span><span class="l">Create sops-encrypted private key</span><span class="p">]</span> <span class="nv">*************************************************************************</span>
+
+<span class="k">TASK</span> <span class="p">[</span><span class="l">Create private key</span><span class="p">]</span> <span class="nv">****************************************************************************************</span>
+<span class="k">ok</span><span class="p">:</span> <span class="p">[</span><span class="nv">localhost</span><span class="p">]</span>
+
+<span class="k">TASK</span> <span class="p">[</span><span class="l">Write encrypted key to disk</span><span class="p">]</span> <span class="nv">*******************************************************************************</span>
+<span class="k">skipping</span><span class="p">:</span> <span class="p">[</span><span class="nv">localhost</span><span class="p">]</span>
+
+<span class="k">TASK</span> <span class="p">[</span><span class="l">Wipe private key from Ansible&#39;s facts</span><span class="p">]</span> <span class="nv">*********************************************************************</span>
+<span class="k">ok</span><span class="p">:</span> <span class="p">[</span><span class="nv">localhost</span><span class="p">]</span>
+
+<span class="k">PLAY RECAP</span> <span class="nv">*******************************************************************************************************</span>
+<span class="n">localhost</span>                  <span class="p">:</span> <span class="k">ok</span><span class="p">=</span><span class="mi">2</span>    <span class="k">changed</span><span class="p">=</span><span class="mi">0</span>    <span class="k">unreachable</span><span class="p">=</span><span class="mi">0</span>    <span class="k">failed</span><span class="p">=</span><span class="mi">0</span>    <span class="k">skipped</span><span class="p">=</span><span class="mi">1</span>    <span class="k">rescued</span><span class="p">=</span><span class="mi">0</span>    <span class="k">ignored</span><span class="p">=</span><span class="mi">0</span>
+</pre></div>
+</div>
+</section>
+<section id="working-with-encrypted-data-from-other-sources">
+<h2><a class="toc-backref" href="#id5" role="doc-backlink">Working with encrypted data from other sources</a><a class="headerlink" href="#working-with-encrypted-data-from-other-sources" title="Permalink to this heading"></a></h2>
+<p>You can use the <a class="reference internal" href="../decrypt_filter.html#ansible-collections-community-sops-decrypt-filter"><span class="std std-ref">community.sops.decrypt Jinja2 filter</span></a> to decrypt arbitrary data. This can be data read earlier from a file, returned from an action, or obtained through some other means.</p>
+<p>For example, assume that you want to decrypt a file retrieved from a HTTPS server with the <a class="reference external" href="ansible_collections.ansible.builtin.uri_module">ansible.builtin.uri module</a>. To use the <a class="reference internal" href="../sops_lookup.html#ansible-collections-community-sops-sops-lookup"><span class="std std-ref">community.sops.sops lookup</span></a>, you have to write it to a file first. With the filter, you can directly decrypt it:</p>
+<div class="highlight-yaml+jinja notranslate"><div class="highlight"><pre><span></span><span class="nn">---</span>
+<span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Decrypt file fetched from URL</span>
+<span class="w">  </span><span class="nt">hosts</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">localhost</span>
+<span class="w">  </span><span class="nt">gather_facts</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">false</span>
+<span class="w">  </span><span class="nt">tasks</span><span class="p">:</span>
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Fetch file from URL</span>
+<span class="w">      </span><span class="nt">ansible.builtin.uri</span><span class="p">:</span>
+<span class="w">        </span><span class="nt">url</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">https://raw.githubusercontent.com/mozilla/sops/master/functional-tests/res/comments.enc.yaml</span>
+<span class="w">        </span><span class="nt">return_content</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span>
+<span class="w">      </span><span class="nt">register</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">encrypted_content</span>
+
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Show encrypted data</span>
+<span class="w">      </span><span class="nt">debug</span><span class="p">:</span>
+<span class="w">        </span><span class="nt">msg</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;</span><span class="cp">{{</span> <span class="nv">encrypted_content.content</span> <span class="o">|</span> <span class="nf">ansible</span><span class="nv">.builtin.from_yaml</span> <span class="cp">}}</span><span class="s">&quot;</span>
+
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Decrypt data and decode decrypted YAML</span>
+<span class="w">      </span><span class="nt">set_fact</span><span class="p">:</span>
+<span class="w">        </span><span class="nt">decrypted_data</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;</span><span class="cp">{{</span> <span class="nv">encrypted_content.content</span> <span class="o">|</span> <span class="nf">community</span><span class="nv">.sops.decrypt</span> <span class="o">|</span> <span class="nf">ansible</span><span class="nv">.builtin.from_yaml</span> <span class="cp">}}</span><span class="s">&quot;</span>
+
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Show decrypted data</span>
+<span class="w">      </span><span class="nt">debug</span><span class="p">:</span>
+<span class="w">        </span><span class="nt">msg</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;</span><span class="cp">{{</span> <span class="nv">decrypted_data</span> <span class="cp">}}</span><span class="s">&quot;</span>
+</pre></div>
+</div>
+<p>The output will be:</p>
+<div class="highlight-ansible-output notranslate"><div class="highlight"><pre><span></span><span class="k">PLAY</span> <span class="p">[</span><span class="l">Decrypt file fetched from URL</span><span class="p">]</span> <span class="nv">*****************************************************************************</span>
+
+<span class="k">TASK</span> <span class="p">[</span><span class="l">Fetch file from URL</span><span class="p">]</span> <span class="nv">***************************************************************************************</span>
+<span class="k">ok</span><span class="p">:</span> <span class="p">[</span><span class="nv">localhost</span><span class="p">]</span>
+
+<span class="k">TASK</span> <span class="p">[</span><span class="l">Show encrypted data</span><span class="p">]</span> <span class="nv">***************************************************************************************</span>
+<span class="k">ok</span><span class="p">:</span> <span class="p">[</span><span class="nv">localhost</span><span class="p">]</span> <span class="p">=&gt;</span> <span class="p">{</span>
+    <span class="nt">&quot;msg&quot;</span><span class="p">:</span> <span class="p">{</span>
+        <span class="nt">&quot;dolor&quot;</span><span class="p">:</span> <span class="s">&quot;ENC[AES256_GCM,data:IgvT,iv:wtPNYbDTARFE810PH6ldOLzCDcAjkB/dzPsZjpgHcko=,tag:zwE8P+AwO1hrHkgF6pTbZw==,type:str]&quot;</span><span class="p">,</span>
+        <span class="nt">&quot;lorem&quot;</span><span class="p">:</span> <span class="s">&quot;ENC[AES256_GCM,data:PhmSdTs=,iv:J5ugEWq6RfyNx+5zDXvcTdoQ18YYZkqesDED7LNzou4=,tag:0Qrom6J6aUnZMZzGz5XCxw==,type:str]&quot;</span><span class="p">,</span>
+        <span class="nt">&quot;sops&quot;</span><span class="p">:</span> <span class="p">{</span>
+            <span class="nt">&quot;age&quot;</span><span class="p">:</span> <span class="p">[],</span>
+            <span class="nt">&quot;azure_kv&quot;</span><span class="p">:</span> <span class="p">[],</span>
+            <span class="nt">&quot;gcp_kms&quot;</span><span class="p">:</span> <span class="p">[],</span>
+            <span class="nt">&quot;hc_vault&quot;</span><span class="p">:</span> <span class="p">[],</span>
+            <span class="nt">&quot;kms&quot;</span><span class="p">:</span> <span class="p">[],</span>
+            <span class="nt">&quot;lastmodified&quot;</span><span class="p">:</span> <span class="s">&quot;2020-10-07T15:49:13Z&quot;</span><span class="p">,</span>
+            <span class="nt">&quot;mac&quot;</span><span class="p">:</span> <span class="s">&quot;ENC[AES256_GCM,data:2dhyKdHYSynjXPwYrn9356wA7vRKw+T5qwBenI2vZrgthpQBOCQG4M6f7eeH3VLTxB4mN4CAchb25dsNRoGr6A38VruaSSAhPco3Rh4AlvKSvXuhgRnzZvNxE/bnHX1D4K5cdTb4FsJg/Ue1l7UcWrlrv1s3H3SwLHP/nf+suD0=,iv:6xBYURjjaQzlUOKOrs2NWOChiNFZVAGPJZQZ59MwX3o=,tag:uXD5VYme+c8eHcCc5TD2YA==,type:str]&quot;</span><span class="p">,</span>
+            <span class="nt">&quot;pgp&quot;</span><span class="p">:</span> <span class="p">[</span>
+                <span class="p">{</span>
+                    <span class="nt">&quot;created_at&quot;</span><span class="p">:</span> <span class="s">&quot;2019-08-29T21:52:32Z&quot;</span><span class="p">,</span>
+                    <span class="nt">&quot;enc&quot;</span><span class="p">:</span> <span class="s">&quot;-----BEGIN PGP MESSAGE-----\n\nhQEMAyUpShfNkFB/AQgAlvpTj0NYqF4mQyIeM7wX2SHLb4U07/flpqDpp2W/30Pz\nAHA7sYrgP0l8BrjT2kwtgCN0cdfoIHJudezrNjANp2P5TbP2b9kYYNxpehzB9PFj\nFixnCS7Zp8WIt1yXr1TX+ANZoXLopVcRbMaQ5OdH7CN1pNQtMR+R3FR3X/IqKxiU\nDo1YLaooRJICUC8LJw2Tb4K+lYnTSqd/HalLGym++ivFvdDB1Ya1GhT1FswXidXK\nIRjsOVbxV0q5VeNOR0zxsheOvuHyCje16c7NXJtATJVWtTFABJB8u7CY5HhZSgq+\nrXJHyLHqVLzJ8E4WqHQkMNUlVcrqAz7glZ6xbAhfI9JeAYk5SuBOQOQ4yvASqH4K\nb0N3+/abluBY7YPqKuRZBiEtmcYlZ+zIHuOTP1rD/7L5VY8CwE5U8SFlEqwM7nQJ\n6/vtl6qngOFjwt34WrhZzUfLPB/wRV/m1Qv2kr0RNA==\n=Ykiw\n-----END PGP MESSAGE-----\n&quot;</span><span class="p">,</span>
+                    <span class="nt">&quot;fp&quot;</span><span class="p">:</span> <span class="s">&quot;FBC7B9E2A4F9289AC0C1D4843D16CEE4A27381B4&quot;</span>
+                <span class="p">}</span>
+            <span class="p">],</span>
+            <span class="nt">&quot;unencrypted_suffix&quot;</span><span class="p">:</span> <span class="s">&quot;_unencrypted&quot;</span><span class="p">,</span>
+            <span class="nt">&quot;version&quot;</span><span class="p">:</span> <span class="s">&quot;3.6.1&quot;</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+
+<span class="k">TASK</span> <span class="p">[</span><span class="l">Decrypt data</span><span class="p">]</span> <span class="nv">**********************************************************************************************</span>
+<span class="k">ok</span><span class="p">:</span> <span class="p">[</span><span class="nv">localhost</span><span class="p">]</span>
+
+<span class="k">TASK</span> <span class="p">[</span><span class="l">Show decrypted data</span><span class="p">]</span> <span class="nv">***************************************************************************************</span>
+<span class="k">ok</span><span class="p">:</span> <span class="p">[</span><span class="nv">localhost</span><span class="p">]</span> <span class="p">=&gt;</span> <span class="p">{</span>
+    <span class="nt">&quot;msg&quot;</span><span class="p">:</span> <span class="p">{</span>
+        <span class="nt">&quot;dolor&quot;</span><span class="p">:</span> <span class="s">&quot;sit&quot;</span><span class="p">,</span>
+        <span class="nt">&quot;lorem&quot;</span><span class="p">:</span> <span class="s">&quot;ipsum&quot;</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+
+<span class="k">PLAY RECAP</span> <span class="nv">*******************************************************************************************************</span>
+<span class="n">localhost</span>                  <span class="p">:</span> <span class="k">ok</span><span class="p">=</span><span class="mi">4</span>    <span class="k">changed</span><span class="p">=</span><span class="mi">0</span>    <span class="k">unreachable</span><span class="p">=</span><span class="mi">0</span>    <span class="k">failed</span><span class="p">=</span><span class="mi">0</span>    <span class="k">skipped</span><span class="p">=</span><span class="mi">0</span>    <span class="k">rescued</span><span class="p">=</span><span class="mi">0</span>    <span class="k">ignored</span><span class="p">=</span><span class="mi">0</span>
+</pre></div>
+</div>
+<p>Please note that if you put a Jinja2 expression in a variable, it will be evaluated <strong>every time it is used</strong>. Decrypting data takes a certain amount of time. If you need to use an expression multiple times, it is better to store its evaluated form as a fact with <a class="reference external" href="ansible_collections.ansible.builtin.set_fact_module">ansible.bulitin.set_fact</a> first. This can be important if decrypted data should be passed to a role</p>
+<div class="highlight-yaml+jinja notranslate"><div class="highlight"><pre><span></span><span class="nn">---</span>
+<span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Decrypt file fetched from URL</span>
+<span class="w">  </span><span class="nt">hosts</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">localhost</span>
+<span class="w">  </span><span class="nt">gather_facts</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">false</span>
+<span class="w">  </span><span class="nt">tasks</span><span class="p">:</span>
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Fetch file from URL</span>
+<span class="w">      </span><span class="nt">ansible.builtin.uri</span><span class="p">:</span>
+<span class="w">        </span><span class="nt">url</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">https://raw.githubusercontent.com/mozilla/sops/master/functional-tests/res/comments.enc.yaml</span>
+<span class="w">        </span><span class="nt">return_content</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span>
+<span class="w">      </span><span class="nt">register</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">encrypted_content</span>
+
+<span class="w">    </span><span class="c1"># BAD: every time the role uses decrypted_data, the data will be decrypted!</span>
+
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Call role with decrypted data</span>
+<span class="w">      </span><span class="nt">include_role</span><span class="p">:</span>
+<span class="w">        </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">myrole</span>
+<span class="w">      </span><span class="nt">vars</span><span class="p">:</span>
+<span class="w">        </span><span class="nt">role_parameter</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;</span><span class="cp">{{</span> <span class="nv">encrypted_content.content</span> <span class="o">|</span> <span class="nf">community</span><span class="nv">.sops.decrypt</span> <span class="o">|</span> <span class="nf">ansible</span><span class="nv">.builtin.from_yaml</span> <span class="cp">}}</span><span class="s">&quot;</span>
+
+<span class="w">    </span><span class="c1"># GOOD: the data is decrypted once before the role is called,</span>
+
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Store decrypted data as fact</span>
+<span class="w">      </span><span class="nt">set_fact</span><span class="p">:</span>
+<span class="w">        </span><span class="nt">decrypted_data</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;</span><span class="cp">{{</span> <span class="nv">encrypted_content.content</span> <span class="o">|</span> <span class="nf">community</span><span class="nv">.sops.decrypt</span> <span class="o">|</span> <span class="nf">ansible</span><span class="nv">.builtin.from_yaml</span> <span class="cp">}}</span><span class="s">&quot;</span>
+
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Call role with decrypted data</span>
+<span class="w">      </span><span class="nt">include_role</span><span class="p">:</span>
+<span class="w">        </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">myrole</span>
+<span class="w">      </span><span class="nt">vars</span><span class="p">:</span>
+<span class="w">        </span><span class="nt">role_parameter</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;</span><span class="cp">{{</span> <span class="nv">decrypted_data</span> <span class="cp">}}</span><span class="s">&quot;</span>
+</pre></div>
+</div>
+</section>
+<section id="working-with-encrypted-variables">
+<h2><a class="toc-backref" href="#id6" role="doc-backlink">Working with encrypted variables</a><a class="headerlink" href="#working-with-encrypted-variables" title="Permalink to this heading"></a></h2>
+<p>You can load encrypted variables similarly to the <a class="reference external" href="https://docs.ansible.com/ansible/devel/collections/ansible/builtin/host_group_vars_vars.html#ansible-collections-ansible-builtin-host-group-vars-vars" title="(in Ansible vdevel)"><span class="xref std std-ref">ansible.builtin.host_group_vars vars plugin</span></a> with the <a class="reference internal" href="../sops_vars.html#ansible-collections-community-sops-sops-vars"><span class="std std-ref">community.sops.sops vars plugin</span></a>. If you need to load variables dynamically similarly to the <a class="reference external" href="https://docs.ansible.com/ansible/devel/collections/ansible/builtin/include_vars_module.html#ansible-collections-ansible-builtin-include-vars-module" title="(in Ansible vdevel)"><span class="xref std std-ref">ansible.builtin.include_vars action</span></a>, you can use the <a class="reference internal" href="../load_vars_module.html#ansible-collections-community-sops-load-vars-module"><span class="std std-ref">community.sops.load_vars action</span></a>.</p>
+<p>To use the vars plugin, you need to enable it in your Ansible config file (<code class="docutils literal notranslate"><span class="pre">ansible.cfg</span></code>):</p>
+<div class="highlight-ini notranslate"><div class="highlight"><pre><span></span><span class="k">[defaults]</span>
+<span class="na">vars_plugins_enabled</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">host_group_vars,community.sops.sops</span>
+</pre></div>
+</div>
+<p>See <a class="reference external" href="https://docs.ansible.com/ansible/devel/reference_appendices/config.html#variable-plugins-enabled" title="(in Ansible vdevel)"><span class="xref std std-ref">VARIABLE_PLUGINS_ENABLED</span></a> for more details on enabling vars plugins. Then you can put files with the following extensions into the <code class="docutils literal notranslate"><span class="pre">group_vars</span></code> and <code class="docutils literal notranslate"><span class="pre">host_vars</span></code> directories:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">.sops.yaml</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">.sops.yml</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">.sops.json</span></code></p></li>
+</ul>
+<p>The vars plugin will decrypt them and you can use their unencrypted content transparently.</p>
+<p>If you need to dynamically load encrypted variables, similar to the built-in <a class="reference external" href="https://docs.ansible.com/ansible/devel/collections/ansible/builtin/include_vars_module.html#ansible-collections-ansible-builtin-include-vars-module" title="(in Ansible vdevel)"><span class="xref std std-ref">ansible.builtin.include_vars action</span></a>, you can use the <a class="reference internal" href="../load_vars_module.html#ansible-collections-community-sops-load-vars-module"><span class="std std-ref">community.sops.load_vars action</span></a> action. Please note that it is not a perfect replacement, since the built-in action relies on some hard-coded special casing in ansible-core which allows it to load the variables actually as variables (more precisely: as “unsafe” Jinja2 expressions which are automatically evaluated when used). Other action plugins, such as <code class="docutils literal notranslate"><span class="pre">community.sops.load_vars</span></code>, cannot do that and have to load the variables as facts instead.</p>
+<p>This is mostly relevant if you use Jinja2 expressions in the encrypted variable file. When <code class="docutils literal notranslate"><span class="pre">include_vars</span></code> loads a variable file with expressions, these expressions will only be evaluated when the variable that defines them needs to be evaluated (lazy evaluation). Since <code class="docutils literal notranslate"><span class="pre">community.sops.load_vars</span></code> returns facts, it has to directly evaluate expressions at load time. (For this, set its <code class="ansible-option docutils literal notranslate"><strong><a class="reference internal" href="../load_vars_module.html#ansible-collections-community-sops-load-vars-module-parameter-expressions"><span class="std std-ref"><span class="pre">expressions</span></span></a></strong></code> option to <code class="ansible-value docutils literal notranslate"><span class="pre">evaluate-on-load</span></code>.) This is mostly relevant if you want to refer to other variables from the same file: this will not work, since Ansible does not know the other variable yet while evaluating the first. It will only “know” them as facts after all have been evaluated and the action finishes.</p>
+<p>For the following example, assume you have the encrypted file <code class="docutils literal notranslate"><span class="pre">keys/credentials.sops.yml</span></code> which decrypts to:</p>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">encrypted_password</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">foo</span>
+<span class="nt">expression</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;{{</span><span class="nv"> </span><span class="s">inventory_hostname</span><span class="nv"> </span><span class="s">}}&quot;</span>
+</pre></div>
+</div>
+<p>Consider the following playbook:</p>
+<div class="highlight-yaml+jinja notranslate"><div class="highlight"><pre><span></span><span class="nn">---</span>
+<span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Create sops-encrypted private key</span>
+<span class="w">  </span><span class="nt">hosts</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">localhost</span>
+<span class="w">  </span><span class="nt">gather_facts</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">false</span>
+<span class="w">  </span><span class="nt">tasks</span><span class="p">:</span>
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Load encrypted credentials</span>
+<span class="w">      </span><span class="nt">community.sops.load_vars</span><span class="p">:</span>
+<span class="w">        </span><span class="nt">file</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">keys/credentials.sops.yml</span>
+<span class="w">        </span><span class="nt">expressions</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">ignore</span><span class="w">  </span><span class="c1"># explicitly do not evaluate expressions</span>
+<span class="w">                             </span><span class="c1"># on load (this is the default)</span>
+
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Show password</span>
+<span class="w">      </span><span class="nt">debug</span><span class="p">:</span>
+<span class="w">        </span><span class="nt">msg</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;The</span><span class="nv"> </span><span class="s">password</span><span class="nv"> </span><span class="s">is</span><span class="nv"> </span><span class="cp">{{</span> <span class="nv">encrypted_password</span> <span class="cp">}}</span><span class="s">&quot;</span>
+
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Show expression</span>
+<span class="w">      </span><span class="nt">debug</span><span class="p">:</span>
+<span class="w">        </span><span class="nt">msg</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;The</span><span class="nv"> </span><span class="s">expression</span><span class="nv"> </span><span class="s">is</span><span class="nv"> </span><span class="cp">{{</span> <span class="nv">expression</span> <span class="cp">}}</span><span class="s">&quot;</span>
+</pre></div>
+</div>
+<p>Running it produces:</p>
+<div class="highlight-ansible-output notranslate"><div class="highlight"><pre><span></span><span class="k">PLAY</span> <span class="p">[</span><span class="l">Create sops-encrypted private key</span><span class="p">]</span> <span class="nv">*************************************************************************</span>
+
+<span class="k">TASK</span> <span class="p">[</span><span class="l">Load encrypted credentials</span><span class="p">]</span> <span class="nv">********************************************************************************</span>
+<span class="k">ok</span><span class="p">:</span> <span class="p">[</span><span class="nv">localhost</span><span class="p">]</span>
+
+<span class="k">TASK</span> <span class="p">[</span><span class="l">Show password</span><span class="p">]</span> <span class="nv">*********************************************************************************************</span>
+<span class="k">ok</span><span class="p">:</span> <span class="p">[</span><span class="nv">localhost</span><span class="p">]</span> <span class="p">=&gt;</span> <span class="p">{</span>
+    <span class="nt">&quot;msg&quot;</span><span class="p">:</span> <span class="s">&quot;The password is foo&quot;</span>
+<span class="p">}</span>
+
+<span class="k">TASK</span> <span class="p">[</span><span class="l">Show expression</span><span class="p">]</span> <span class="nv">*******************************************************************************************</span>
+<span class="k">ok</span><span class="p">:</span> <span class="p">[</span><span class="nv">localhost</span><span class="p">]</span> <span class="p">=&gt;</span> <span class="p">{</span>
+    <span class="nt">&quot;msg&quot;</span><span class="p">:</span> <span class="s">&quot;The expression is {{ inventory_hostname }}&quot;</span>
+<span class="p">}</span>
+
+<span class="k">PLAY RECAP</span> <span class="nv">*******************************************************************************************************</span>
+<span class="n">localhost</span>                  <span class="p">:</span> <span class="k">ok</span><span class="p">=</span><span class="mi">3</span>    <span class="k">changed</span><span class="p">=</span><span class="mi">0</span>    <span class="k">unreachable</span><span class="p">=</span><span class="mi">0</span>    <span class="k">failed</span><span class="p">=</span><span class="mi">0</span>    <span class="k">skipped</span><span class="p">=</span><span class="mi">0</span>    <span class="k">rescued</span><span class="p">=</span><span class="mi">0</span>    <span class="k">ignored</span><span class="p">=</span><span class="mi">0</span>
+</pre></div>
+</div>
+<p>If you change the variable loading task to:</p>
+<div class="highlight-yaml+jinja notranslate"><div class="highlight"><pre><span></span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Load encrypted credentials</span>
+<span class="w">  </span><span class="nt">community.sops.load_vars</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">file</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">keys/credentials.sops.yml</span>
+<span class="w">    </span><span class="nt">expressions</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">evaluate-on-load</span>
+</pre></div>
+</div>
+<p>The last task will now show the evaluated expression:</p>
+<div class="highlight-ansible-output notranslate"><div class="highlight"><pre><span></span><span class="k">TASK</span> <span class="p">[</span><span class="l">Show expression</span><span class="p">]</span> <span class="nv">*******************************************************************************************</span>
+<span class="k">ok</span><span class="p">:</span> <span class="p">[</span><span class="nv">localhost</span><span class="p">]</span> <span class="p">=&gt;</span> <span class="p">{</span>
+    <span class="nt">&quot;msg&quot;</span><span class="p">:</span> <span class="s">&quot;The expression is localhost&quot;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          
+
+<footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="../index.html" class="btn btn-neutral float-left" title="Community.Sops" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="../load_vars_module.html" class="btn btn-neutral float-right" title="community.sops.load_vars module – Load sops-encrypted variables from files, dynamically within a task" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright Community.Sops Contributors.</p>
+  </div>
+
+  
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script><!-- extra footer elements for Ansible beyond RTD Sphinx Theme -->
+
+</body>
+</html>
