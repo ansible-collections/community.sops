@@ -114,6 +114,10 @@ jobs:
             python_version: '3.11'
             sops_version: latest
           - ansible: devel
+            docker_container: quay.io/ansible-community/test-image:debian-bookworm
+            python_version: '3.11'
+            sops_version: latest
+          - ansible: devel
             docker_container: quay.io/ansible-community/test-image:debian-bullseye
             python_version: '3.9'
             sops_version: latest
@@ -194,6 +198,11 @@ jobs:
           - ansible: devel
             docker_container: quay.io/ansible-community/test-image:centos-stream8
             python_version: '3.9'
+            target: gha/install/3/
+            github_latest_detection: auto
+          - ansible: devel
+            docker_container: quay.io/ansible-community/test-image:debian-bookworm
+            python_version: '3.11'
             target: gha/install/3/
             github_latest_detection: auto
           - ansible: devel
