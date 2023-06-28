@@ -232,7 +232,7 @@ Environment variables used by the ansible-core configuration are documented in <
 <dd><p>Whether to cache decrypted files or not.</p>
 <p>If the cache is disabled, the files will be decrypted for almost every task. This is very slow!</p>
 <p>Only disable caching if you modify the variable files during a playbook run and want the updated result to be available from the next task on.</p>
-<p>Note that setting <code class="ansible-option-value docutils literal notranslate"><span class="pre">stage=inventory</span></code> has the same effect as setting <code class="ansible-option-value docutils literal notranslate"><span class="pre">cache=true</span></code>: the variables will be loaded only once (during inventory loading) and the vars plugin will not be called for every task.</p>
+<p>Note that setting <code class="ansible-option-value docutils literal notranslate"><span><span class="pre">stage=inventory</span></span></code> has the same effect as setting <code class="ansible-option-value docutils literal notranslate"><span><span class="pre">cache=true</span></span></code>: the variables will be loaded only once (during inventory loading) and the vars plugin will not be called for every task.</p>
 <p><em>Used by:</em>
 <a class="reference internal" href="sops_vars.html#ansible-collections-community-sops-sops-vars"><span class="std std-ref">community.sops.sops vars plugin</span></a></p>
 </dd></dl>
