@@ -19,7 +19,7 @@
 
 - name: Download sops test GPG key on localhost
   get_url:
-    url: https://raw.githubusercontent.com/mozilla/sops/master/pgp/sops_functional_tests_key.asc
+    url: https://raw.githubusercontent.com/getsops/sops/master/pgp/sops_functional_tests_key.asc
     dest: /tmp/sops_functional_tests_key.asc
   delegate_to: localhost
 
@@ -43,7 +43,7 @@
 
 - name: Download sops test GPG key on remote
   get_url:
-    url: https://raw.githubusercontent.com/mozilla/sops/master/pgp/sops_functional_tests_key.asc
+    url: https://raw.githubusercontent.com/getsops/sops/master/pgp/sops_functional_tests_key.asc
     dest: /tmp/sops_functional_tests_key.asc
 
 - name: Import sops test GPG key on remote

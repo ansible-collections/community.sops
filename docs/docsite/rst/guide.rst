@@ -8,7 +8,7 @@
 Protecting Ansible secrets with Mozilla SOPS
 ============================================
 
-`Mozilla SOPS <https://github.com/mozilla/sops>`_ allows to encrypt and decrypt files using various key sources (GPG, AWS KMS, GCP KMS, ...). For structured data, such as YAML, JSON, INI and ENV files, it will encrypt values, but not mapping keys. For YAML files, it also encrypts comments. This makes it a great tool for encrypting credentials with Ansible: you can easily see which files contain which variable, but the variables themselves are encrypted.
+`Mozilla SOPS <https://github.com/getsops/sops>`_ allows to encrypt and decrypt files using various key sources (GPG, AWS KMS, GCP KMS, ...). For structured data, such as YAML, JSON, INI and ENV files, it will encrypt values, but not mapping keys. For YAML files, it also encrypts comments. This makes it a great tool for encrypting credentials with Ansible: you can easily see which files contain which variable, but the variables themselves are encrypted.
 
 The ability to utilize various keysources makes it easier to use in complex environments than `Ansible Vault <https://docs.ansible.com/ansible/latest/user_guide/vault.html>`_.
 
@@ -19,7 +19,7 @@ The ability to utilize various keysources makes it easier to use in complex envi
 Installing sops
 ---------------
 
-You can find binaries and packages `on the project's release page <https://github.com/mozilla/sops/releases>`_. Depending on your operating system, you might also be able to install it with your system's package manager.
+You can find binaries and packages `on the project's release page <https://github.com/getsops/sops/releases>`_. Depending on your operating system, you might also be able to install it with your system's package manager.
 
 This collection provides a `role community.sops.install <ansible_collections.community.sops.install_role>`_ which allows to install sops and `GNU Privacy Guard (GPG) <https://en.wikipedia.org/wiki/GNU_Privacy_Guard>`__. The role allows to install sops from the system's package manager or from GitHub. Both sops and GPG can be installed on the remote hosts or the Ansible controller.
 
@@ -300,7 +300,7 @@ For example, assume that you want to decrypt a file retrieved from a HTTPS serve
       tasks:
         - name: Fetch file from URL
           ansible.builtin.uri:
-            url: https://raw.githubusercontent.com/mozilla/sops/master/functional-tests/res/comments.enc.yaml
+            url: https://raw.githubusercontent.com/getsops/sops/master/functional-tests/res/comments.enc.yaml
             return_content: true
           register: encrypted_content
 
@@ -376,7 +376,7 @@ Please note that if you put a Jinja2 expression in a variable, it will be evalua
       tasks:
         - name: Fetch file from URL
           ansible.builtin.uri:
-            url: https://raw.githubusercontent.com/mozilla/sops/master/functional-tests/res/comments.enc.yaml
+            url: https://raw.githubusercontent.com/getsops/sops/master/functional-tests/res/comments.enc.yaml
             return_content: true
           register: encrypted_content
 

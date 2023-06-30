@@ -14,7 +14,7 @@ from ansible.module_utils.common.text.converters import to_text, to_native
 from subprocess import Popen, PIPE
 
 
-# From https://github.com/mozilla/sops/blob/master/cmd/sops/codes/codes.go
+# From https://github.com/getsops/sops/blob/master/cmd/sops/codes/codes.go
 # Should be manually updated
 SOPS_ERROR_CODES = {
     1: "ErrorGeneric",

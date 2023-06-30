@@ -9,7 +9,7 @@
     status_code:
       - 302
       - 307
-    url: https://github.com/mozilla/sops/releases/latest/
+    url: https://github.com/getsops/sops/releases/latest/
   register: _community_sops_install_github_latest_release
   delegate_to: localhost
   run_once: true
@@ -28,7 +28,7 @@
 - name: In case this failed, inform user
   ansible.builtin.debug:
     msg: >-
-      Could not obtain latest version from https://github.com/mozilla/sops/releases/latest/.
+      Could not obtain latest version from https://github.com/getsops/sops/releases/latest/.
       Please create an issue in https://github.com/ansible-collections/community.sops/issues/
       if there is not already one.
   when: _community_sops_install_effective_sops_version == ''

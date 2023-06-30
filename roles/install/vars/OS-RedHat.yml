@@ -17,7 +17,7 @@ _community_sops_install_system_package_deb_github: false
 _community_sops_install_system_packages_github: []
 _community_sops_install_system_packages_unsigned_github:
   - >-
-    https://github.com/mozilla/sops/releases/download/v{{
+    https://github.com/getsops/sops/releases/download/v{{
       _community_sops_install_effective_sops_version
     }}/sops-{{
       (_community_sops_install_effective_sops_version is version('3.6.0', '<')) | ternary('v', '')

@@ -80,7 +80,7 @@ EXAMPLES = '''
   tasks:
     - name: Fetch file from URL
       ansible.builtin.uri:
-        url: https://raw.githubusercontent.com/mozilla/sops/master/functional-tests/res/comments.enc.yaml
+        url: https://raw.githubusercontent.com/getsops/sops/master/functional-tests/res/comments.enc.yaml
         return_content: true
       register: encrypted_content
 

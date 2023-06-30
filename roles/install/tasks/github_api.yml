@@ -11,7 +11,7 @@
     status_code:
       - 200
       - 403  # "HTTP Error 403: rate limit exceeded"
-    url: https://api.github.com/repos/mozilla/sops/releases
+    url: https://api.github.com/repos/getsops/sops/releases
   register: _community_sops_install_github_releases
   delegate_to: localhost
   run_once: true

@@ -23,4 +23,4 @@ If possible, extend an existing test. If that's not possible, or if you are afra
 2. Create a `playbook.yml` and `validate.sh` in there (copy from a similar test and adjust);
 3. Create subdirectories `group_vars` and/or `host_vars` and fill them as needed.
 
-For creating sops encrypted files, use the private GPG keys from https://raw.githubusercontent.com/mozilla/sops/master/pgp/sops_functional_tests_key.asc. There is a `.sops.yaml` file in this directory which makes sure that sops automatically uses the correct one of the keys provided in that file.
+For creating sops encrypted files, use the private GPG keys from https://raw.githubusercontent.com/getsops/sops/master/pgp/sops_functional_tests_key.asc. There is a `.sops.yaml` file in this directory which makes sure that sops automatically uses the correct one of the keys provided in that file.
