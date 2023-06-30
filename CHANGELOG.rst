@@ -5,6 +5,19 @@ Community Sops Release Notes
 .. contents:: Topics
 
 
+v1.6.4
+======
+
+Release Summary
+---------------
+
+Maintenance/bugfix release for the move of sops to the new `getsops GitHub organization <https://github.com/getsops>`__.
+
+Bugfixes
+--------
+
+- install role - fix ``sops_github_latest_detection=latest-release``, which broke due to sops moving to another GitHub organization (https://github.com/ansible-collections/community.sops/pull/151).
+
 v1.6.3
 ======
 

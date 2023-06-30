@@ -1,2 +1,0 @@
-bugfixes:
-  - "install role - fix ``sops_github_latest_detection=latest-release``, which broke due to sops moving to another GitHub organization (https://github.com/ansible-collections/community.sops/pull/151)."

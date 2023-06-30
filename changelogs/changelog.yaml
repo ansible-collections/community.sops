@@ -308,3 +308,14 @@ releases:
     - 1.6.3.yml
     - semantic-markup.yml
     release_date: '2023-06-27'
+  1.6.4:
+    changes:
+      bugfixes:
+      - install role - fix ``sops_github_latest_detection=latest-release``, which
+        broke due to sops moving to another GitHub organization (https://github.com/ansible-collections/community.sops/pull/151).
+      release_summary: Maintenance/bugfix release for the move of sops to the new
+        `getsops GitHub organization <https://github.com/getsops>`__.
+    fragments:
+    - 1.6.4.yml
+    - 151-github.yml
+    release_date: '2023-06-30'
