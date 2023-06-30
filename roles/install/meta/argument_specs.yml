@@ -19,7 +19,7 @@ argument_specs:
         RHEL 7 or newer,
         Ubuntu 16.04 or newer LTS versions
       - The Ansible facts C(ansible_facts.architecture), C(ansible_facts.distribution), C(ansible_facts.distribution_major_version),
-        C(ansible_facts.distribution_version), and C(ansible_facts.os_family) are expected to be present if I(sops_install_on_localhost) is C(false).
+        C(ansible_facts.distribution_version), and C(ansible_facts.os_family) are expected to be present if O(sops_install_on_localhost) is V(false).
     author:
       - Felix Fontein (@felixfontein)
     options:
@@ -27,15 +27,15 @@ argument_specs:
         default: latest
         description:
           - The version of sops to install.
-          - Should be a version like C(3.7.2). The special value C(latest) will select the latest version available form the given source.
+          - Should be a version like V(3.7.2). The special value V(latest) will select the latest version available form the given source.
         type: str
       sops_source:
         default: auto
         description:
           - Determines the source from where sops is installed.
-          - The value C(github) will install sops from the Mozilla sops releases on GitHub (U(https://github.com/getsops/sops/releases/)).
-          - The value C(system) will install sops from the system packages. Note that not all system package repositories support sops.
-          - The value C(auto) will determine the best source to install sops from. Here, system package repositories are preferred over GitHub.
+          - The value V(github) will install sops from the Mozilla sops releases on GitHub (U(https://github.com/getsops/sops/releases/)).
+          - The value V(system) will install sops from the system packages. Note that not all system package repositories support sops.
+          - The value V(auto) will determine the best source to install sops from. Here, system package repositories are preferred over GitHub.
         type: str
         choices:
           - auto
@@ -54,9 +54,9 @@ argument_specs:
       sops_github_latest_detection:
         description:
           - When installing the latest sops version from GitHub, configures how the latest release is detected.
-          - C(auto) tries C(api) first and then uses C(latest-release).
-          - C(api) asks the GitHub API for a list of recent releases and picks the highest version.
-          - C(latest-release) uses a not fully documented URL to retrieve the release marked as "latest" by the repository maintainers.
+          - V(auto) tries V(api) first and then uses V(latest-release).
+          - V(api) asks the GitHub API for a list of recent releases and picks the highest version.
+          - V(latest-release) uses a not fully documented URL to retrieve the release marked as "latest" by the repository maintainers.
         type: str
         choices:
           - auto
