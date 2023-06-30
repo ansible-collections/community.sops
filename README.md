@@ -8,9 +8,9 @@ SPDX-License-Identifier: GPL-3.0-or-later
 [![CI](https://github.com/ansible-collections/community.sops/workflows/CI/badge.svg?event=push)](https://github.com/ansible-collections/community.sops/actions) [![Codecov](https://img.shields.io/codecov/c/github/ansible-collections/community.sops)](https://codecov.io/gh/ansible-collections/community.sops)
 
 <!-- Describe the collection and why a user would want to use it. What does the collection do? -->
-The `community.sops` collection allows integrating [`mozilla/sops`](https://github.com/mozilla/sops) in Ansible.
+The `community.sops` collection allows integrating [`getsops/sops`](https://github.com/getsops/sops) in Ansible.
 
-`mozilla/sops` is a tool for encryption and decryption of files using secure keys (GPG, KMS). It can be leveraged in Ansible to provide an easy to use and flexible to manage way to manage ecrypted secrets' files.
+`getsops/sops` is a tool for encryption and decryption of files using secure keys (GPG, KMS). It can be leveraged in Ansible to provide an easy to use and flexible to manage way to manage ecrypted secrets' files.
 
 Please note that this collection does **not** support Windows targets.
 
@@ -18,7 +18,7 @@ Please note that this collection does **not** support Windows targets.
 
 The following table shows which versions of sops were tested with which versions of the collection. Older (or newer) versions of sops can still work fine, it just means that we did not test them. In some cases, it could be that a minimal required version of sops is explicitly documented for a specific feature. Right now, that is not the case.
 
-|`community.sops` version|`mozilla/sops` version|
+|`community.sops` version|`getsops/sops` version|
 |---|---|
 |0.1.0|`3.5.0+`|
 |1.0.6|`3.5.0+`|
@@ -34,7 +34,7 @@ The vars plugin requires ansible-base 2.10 or later.
 
 <!-- List any external resources the collection depends on, for example minimum versions of an OS, libraries, or utilities. Do not list other Ansible collections here. -->
 
-You will need to install [`sops`](https://github.com/mozilla/sops) manually before using plugins provided by this
+You will need to install [`sops`](https://github.com/getsops/sops) manually before using plugins provided by this
 collection.
 
 ## Collection Documentation

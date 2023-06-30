@@ -6,6 +6,6 @@
 galaxy_info:
   standalone: false
   description: >
-    Install Mozilla sops (https://github.com/mozilla/sops).
+    Install Mozilla sops (https://github.com/getsops/sops).
 
 dependencies: []

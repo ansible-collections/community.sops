@@ -8,7 +8,7 @@ argument_specs:
     short_description: Install Mozilla sops
     version_added: 1.5.0
     description:
-      - This role installs L(Mozilla sops,https://github.com/mozilla/sops) and Gnu Privacy Guard (GPG).
+      - This role installs L(Mozilla sops,https://github.com/getsops/sops) and Gnu Privacy Guard (GPG).
       - >-
         This role supports the following operating systems:
         Alpine (new enough),
@@ -33,7 +33,7 @@ argument_specs:
         default: auto
         description:
           - Determines the source from where sops is installed.
-          - The value C(github) will install sops from the Mozilla sops releases on GitHub (U(https://github.com/mozilla/sops/releases/)).
+          - The value C(github) will install sops from the Mozilla sops releases on GitHub (U(https://github.com/getsops/sops/releases/)).
           - The value C(system) will install sops from the system packages. Note that not all system package repositories support sops.
           - The value C(auto) will determine the best source to install sops from. Here, system package repositories are preferred over GitHub.
         type: str
