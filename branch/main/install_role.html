@@ -160,7 +160,7 @@
 <ul class="simple">
 <li><p>This role installs <a class="reference external" href="https://github.com/getsops/sops">Mozilla sops</a> and Gnu Privacy Guard (GPG).</p></li>
 <li><p>This role supports the following operating systems: Alpine (new enough), Arch Linux, CentOS 7, Stream 8, or newer, Debian 10 (Buster) or newer, Fedora (new enough), RHEL 7 or newer, Ubuntu 16.04 or newer LTS versions</p></li>
-<li><p>The Ansible facts <code class="docutils literal notranslate"><span class="pre">ansible_facts.architecture</span></code>, <code class="docutils literal notranslate"><span class="pre">ansible_facts.distribution</span></code>, <code class="docutils literal notranslate"><span class="pre">ansible_facts.distribution_major_version</span></code>, <code class="docutils literal notranslate"><span class="pre">ansible_facts.distribution_version</span></code>, and <code class="docutils literal notranslate"><span class="pre">ansible_facts.os_family</span></code> are expected to be present if <em>sops_install_on_localhost</em> is <code class="docutils literal notranslate"><span class="pre">false</span></code>.</p></li>
+<li><p>The Ansible facts <code class="docutils literal notranslate"><span class="pre">ansible_facts.architecture</span></code>, <code class="docutils literal notranslate"><span class="pre">ansible_facts.distribution</span></code>, <code class="docutils literal notranslate"><span class="pre">ansible_facts.distribution_major_version</span></code>, <code class="docutils literal notranslate"><span class="pre">ansible_facts.distribution_version</span></code>, and <code class="docutils literal notranslate"><span class="pre">ansible_facts.os_family</span></code> are expected to be present if <code class="ansible-option docutils literal notranslate"><strong><a class="reference internal" href="#ansible-collections-community-sops-install-role-parameter-main-sops-install-on-localhost"><span class="std std-ref"><span class="pre">sops_install_on_localhost</span></span></a></strong></code> is <code class="ansible-value docutils literal notranslate"><span class="pre">false</span></code>.</p></li>
 </ul>
 </section>
 <section id="parameters">
@@ -190,9 +190,9 @@
 <p><span class="ansible-option-versionadded">added in community.sops 1.6.0</span></p>
 </div></td>
 <td><div class="ansible-option-cell"><p>When installing the latest sops version from GitHub, configures how the latest release is detected.</p>
-<p><code class="docutils literal notranslate"><span class="pre">auto</span></code> tries <code class="docutils literal notranslate"><span class="pre">api</span></code> first and then uses <code class="docutils literal notranslate"><span class="pre">latest-release</span></code>.</p>
-<p><code class="docutils literal notranslate"><span class="pre">api</span></code> asks the GitHub API for a list of recent releases and picks the highest version.</p>
-<p><code class="docutils literal notranslate"><span class="pre">latest-release</span></code> uses a not fully documented URL to retrieve the release marked as “latest” by the repository maintainers.</p>
+<p><code class="ansible-value docutils literal notranslate"><span class="pre">auto</span></code> tries <code class="ansible-value docutils literal notranslate"><span class="pre">api</span></code> first and then uses <code class="ansible-value docutils literal notranslate"><span class="pre">latest-release</span></code>.</p>
+<p><code class="ansible-value docutils literal notranslate"><span class="pre">api</span></code> asks the GitHub API for a list of recent releases and picks the highest version.</p>
+<p><code class="ansible-value docutils literal notranslate"><span class="pre">latest-release</span></code> uses a not fully documented URL to retrieve the release marked as “latest” by the repository maintainers.</p>
 <p class="ansible-option-line"><span class="ansible-option-choices">Choices:</span></p>
 <ul class="simple">
 <li><p><code class="ansible-option-choices-entry docutils literal notranslate"><span class="pre">&quot;auto&quot;</span></code></p></li>
@@ -227,9 +227,9 @@
 <a class="ansibleOptionLink" href="#parameter-main--sops_source" title="Permalink to this option"></a><p class="ansible-option-type-line"><span class="ansible-option-type">string</span></p>
 </div></td>
 <td><div class="ansible-option-cell"><p>Determines the source from where sops is installed.</p>
-<p>The value <code class="docutils literal notranslate"><span class="pre">github</span></code> will install sops from the Mozilla sops releases on GitHub (<a class="reference external" href="https://github.com/getsops/sops/releases/">https://github.com/getsops/sops/releases/</a>).</p>
-<p>The value <code class="docutils literal notranslate"><span class="pre">system</span></code> will install sops from the system packages. Note that not all system package repositories support sops.</p>
-<p>The value <code class="docutils literal notranslate"><span class="pre">auto</span></code> will determine the best source to install sops from. Here, system package repositories are preferred over GitHub.</p>
+<p>The value <code class="ansible-value docutils literal notranslate"><span class="pre">github</span></code> will install sops from the Mozilla sops releases on GitHub (<a class="reference external" href="https://github.com/getsops/sops/releases/">https://github.com/getsops/sops/releases/</a>).</p>
+<p>The value <code class="ansible-value docutils literal notranslate"><span class="pre">system</span></code> will install sops from the system packages. Note that not all system package repositories support sops.</p>
+<p>The value <code class="ansible-value docutils literal notranslate"><span class="pre">auto</span></code> will determine the best source to install sops from. Here, system package repositories are preferred over GitHub.</p>
 <p class="ansible-option-line"><span class="ansible-option-choices">Choices:</span></p>
 <ul class="simple">
 <li><p><code class="ansible-option-default-bold docutils literal notranslate"><span class="pre">&quot;auto&quot;</span></code> <span class="ansible-option-choices-default-mark">← (default)</span></p></li>
@@ -243,7 +243,7 @@
 <a class="ansibleOptionLink" href="#parameter-main--sops_version" title="Permalink to this option"></a><p class="ansible-option-type-line"><span class="ansible-option-type">string</span></p>
 </div></td>
 <td><div class="ansible-option-cell"><p>The version of sops to install.</p>
-<p>Should be a version like <code class="docutils literal notranslate"><span class="pre">3.7.2</span></code>. The special value <code class="docutils literal notranslate"><span class="pre">latest</span></code> will select the latest version available form the given source.</p>
+<p>Should be a version like <code class="ansible-value docutils literal notranslate"><span class="pre">3.7.2</span></code>. The special value <code class="ansible-value docutils literal notranslate"><span class="pre">latest</span></code> will select the latest version available form the given source.</p>
 <p class="ansible-option-line"><span class="ansible-option-default-bold">Default:</span> <code class="ansible-option-default docutils literal notranslate"><span class="pre">&quot;latest&quot;</span></code></p>
 </div></td>
 </tr>
