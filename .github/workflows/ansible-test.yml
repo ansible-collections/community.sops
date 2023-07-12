@@ -195,7 +195,7 @@ jobs:
             # NOTE: we're installing with git to work around Galaxy being a huge PITA (https://github.com/ansible/galaxy/issues/2429)
             pre-test-cmd: |-
               git clone --depth=1 --single-branch https://github.com/ansible-collections/community.general.git ../../community/general
-          - ansible: devel
+          - ansible: stable-2.15
             docker_container: quay.io/ansible-community/test-image:centos-stream8
             python_version: '3.9'
             target: gha/install/3/
@@ -205,7 +205,7 @@ jobs:
             python_version: '3.11'
             target: gha/install/3/
             github_latest_detection: auto
-          - ansible: devel
+          - ansible: stable-2.15
             docker_container: quay.io/ansible-community/test-image:debian-bullseye
             python_version: '3.9'
             target: gha/install/3/
