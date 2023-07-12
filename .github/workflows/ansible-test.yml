@@ -117,7 +117,7 @@ jobs:
             docker_container: quay.io/ansible-community/test-image:debian-bookworm
             python_version: '3.11'
             sops_version: latest
-          - ansible: devel
+          - ansible: stable-2.15
             docker_container: quay.io/ansible-community/test-image:debian-bullseye
             python_version: '3.9'
             sops_version: latest
