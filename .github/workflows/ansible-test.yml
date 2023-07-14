@@ -211,7 +211,7 @@ jobs:
             target: gha/install/3/
             github_latest_detection: auto
           - ansible: devel
-            docker_container: fedora37
+            docker_container: fedora38
             python_version: ''
             target: gha/install/3/
             github_latest_detection: auto
