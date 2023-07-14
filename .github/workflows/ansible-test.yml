@@ -69,7 +69,7 @@ jobs:
         docker_container:
           - ubuntu2004
           - ubuntu2204
-          - fedora37
+          - fedora38
         sops_version:
           - 3.5.0
           - 3.6.0
