@@ -10,7 +10,7 @@ SPDX-License-Identifier: GPL-3.0-or-later
 <!-- Describe the collection and why a user would want to use it. What does the collection do? -->
 The `community.sops` collection allows integrating [`getsops/sops`](https://github.com/getsops/sops) in Ansible.
 
-`getsops/sops` is a tool for encryption and decryption of files using secure keys (GPG, KMS). It can be leveraged in Ansible to provide an easy to use and flexible to manage way to manage ecrypted secrets' files.
+`getsops/sops` is a tool for encryption and decryption of files using secure keys (GPG, KMS, age). It can be leveraged in Ansible to provide an easy to use and flexible to manage way to manage ecrypted secrets' files.
 
 Please note that this collection does **not** support Windows targets.
 
