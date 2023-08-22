@@ -48,6 +48,17 @@
           - "sops_lookup_simple is success"
           - "sops_success == 'foo: bar'"
 
+    - name: Test key lookup
+      set_fact:
+        sops_success: "{{ lookup('community.sops.sops', 'key.sops.yaml', key='test') }}"
+      register: sops_lookup_key
+
+    - assert:
+        that:
+          - "sops_lookup_key is success"
+          - "sops_success['foo']['bar'] == 'hello world'"
+          - "'another' not in sops_success"
+
     - name: Test rstrip
       set_fact:
         with_rstrip: "{{ lookup('community.sops.sops', 'rstrip.sops', rstrip=true) }}"

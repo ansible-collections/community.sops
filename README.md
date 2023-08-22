@@ -108,6 +108,40 @@ tasks:
     no_log: true  # avoid content to be written to log
 ```
 
+You can also optionally fetch a specific key from a SOPS file and even load its own keys if it's a dict.
+
+Assuming the SOPS file looks like this:
+
+```yaml
+specific_key_in_sops_file:
+   foo:
+     bar: something
+
+another_key:
+   boo:
+     hello: world
+```
+
+Then this:
+
+```yaml
+tasks:
+  - name: Test community.sops integration
+    ansible.builtin.debug:
+        msg: >
+          {{ lookup('community.sops.sops', playbook_dir + '/../vars/sops/my-secret-file.sops.yml', key='specific_key_in_sops_file') }}
+```
+
+Should return this:
+
+```json
+    "msg": {
+        "foo": {
+            "bar": "something"
+        }
+    }
+```
+
 See [Lookup Plugins](https://docs.ansible.com/ansible/latest/plugins/lookup.html) for more details on lookup plugins.
 
 ### filter plugin

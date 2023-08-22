@@ -29,6 +29,11 @@ DOCUMENTATION = """
                 - Use this if you want to store binary data in Ansible variables.
             type: bool
             default: false
+        key:
+            description:
+                - Optionally return a specific key from the SOPS file, rather than all of them.
+                - This only works with YAML inputs, as it loads the data with yaml.safe_load()
+            type: str
         input_type:
             description:
                 - Tell sops how to interpret the encrypted file.
@@ -107,6 +112,7 @@ RETURN = """
 """
 
 import base64
+import yaml
 
 from ansible.errors import AnsibleLookupError
 from ansible.plugins.lookup import LookupBase
@@ -123,6 +129,7 @@ class LookupModule(LookupBase):
         self.set_options(var_options=variables, direct=kwargs)
         rstrip = self.get_option('rstrip')
         use_base64 = self.get_option('base64')
+        key = self.get_option('key')
         input_type = self.get_option('input_type')
         output_type = self.get_option('output_type')
         empty_on_not_exist = self.get_option('empty_on_not_exist')
@@ -153,6 +160,19 @@ class LookupModule(LookupBase):
             if use_base64:
                 output = to_native(base64.b64encode(output))
 
-            ret.append(output)
+            if key:
+                try:
+                    y = yaml.safe_load(output)
+                    # Full-file encryption, rather than letting, SOPS encrypt YAML files in place,
+                    # creates a top-level "data" key.
+                    # If that's found, unpack it, and re-evaluate the YAML inside.
+                    if "data" in y:
+                        y = yaml.safe_load(y["data"])
+                    v = y[key]
+                    ret.append(v)
+                except yaml.YAMLError as e:
+                    raise AnsibleLookupError(to_native(e))
+            else:
+                ret.append(output)
 
         return ret
