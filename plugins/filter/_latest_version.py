@@ -62,14 +62,11 @@ except ImportError:
 
 def pick_latest_version(version_list):
     '''Pick latest version from a list of versions.'''
+    # Remove all prereleases (versions with '+' or '-' in them)
+    version_list = [v for v in version_list if '-' not in v and '+' not in v]
     if not version_list:
         return ''
-    return sorted(
-        # Remove all prereleases (versions with '+' or '-' in them)
-        [v for v in version_list if '-' not in v and '+' not in v],
-        key=LooseVersion,
-        reverse=True,
-    )[0]
+    return sorted(version_list, key=LooseVersion, reverse=True)[0]
 
 
 class FilterModule(object):
