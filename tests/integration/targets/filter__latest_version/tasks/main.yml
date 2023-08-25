@@ -1,0 +1,33 @@
+---
+# Copyright (c) Ansible Project
+# GNU General Public License v3.0+ (see LICENSES/GPL-3.0-or-later.txt or https://www.gnu.org/licenses/gpl-3.0.txt)
+# SPDX-License-Identifier: GPL-3.0-or-later
+
+- name: Test _latest_version filter
+  ansible.builtin.assert:
+    that:
+      - list_0 | community.sops._latest_version == '1.0.0'
+      - list_1 | community.sops._latest_version == '1.2.1'
+      - list_2 | community.sops._latest_version == '1.2.1'
+      - list_3 | community.sops._latest_version == '1.2.3'
+  vars:
+    list_0:
+      - '1'
+      - '1.0'
+      - 1.0.0
+    list_1:
+      - '1.0'
+      - 1.2.1
+      - 1.0.0
+    list_2:
+      - '1.0'
+      - 1.2.1
+      - 1.2.1-rc.1
+      - 1.0.0
+    list_3:
+      - '1.0'
+      - 1.2.3
+      - 1.4.0-rc.1
+      - 1.4.0-a1+5
+      - 1.4.0+5
+      - 1.0.0
