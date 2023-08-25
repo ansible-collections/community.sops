@@ -319,3 +319,14 @@ releases:
     - 1.6.4.yml
     - 151-github.yml
     release_date: '2023-06-30'
+  1.6.5:
+    changes:
+      bugfixes:
+      - Avoid pre-releases when picking the latest version when using the GitHub API
+        method (https://github.com/ansible-collections/community.sops/pull/159).
+      - Fix changed DEB and RPM URLs for 3.8.0 and its prerelease(s) (https://github.com/ansible-collections/community.sops/pull/159).
+      release_summary: Make compatible with and test against sops 1.8.0-rc.1.
+    fragments:
+    - 1.6.5.yml
+    - 159-new-releases.yml
+    release_date: '2023-08-25'

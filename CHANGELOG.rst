@@ -5,6 +5,20 @@ Community Sops Release Notes
 .. contents:: Topics
 
 
+v1.6.5
+======
+
+Release Summary
+---------------
+
+Make compatible with and test against sops 1.8.0-rc.1.
+
+Bugfixes
+--------
+
+- Avoid pre-releases when picking the latest version when using the GitHub API method (https://github.com/ansible-collections/community.sops/pull/159).
+- Fix changed DEB and RPM URLs for 3.8.0 and its prerelease(s) (https://github.com/ansible-collections/community.sops/pull/159).
+
 v1.6.4
 ======
 
