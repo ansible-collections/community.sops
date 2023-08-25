@@ -55,7 +55,7 @@ argument_specs:
         description:
           - When installing the latest sops version from GitHub, configures how the latest release is detected.
           - V(auto) tries V(api) first and then uses V(latest-release).
-          - V(api) asks the GitHub API for a list of recent releases and picks the highest version.
+          - V(api) asks the GitHub API for a list of recent releases and picks the highest version. Pre-releases are avoided.
           - V(latest-release) uses a not fully documented URL to retrieve the release marked as "latest" by the repository maintainers.
         type: str
         choices:

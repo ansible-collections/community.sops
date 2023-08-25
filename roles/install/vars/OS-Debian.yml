@@ -19,7 +19,7 @@ _community_sops_install_system_package_deb_github: >-
   https://github.com/getsops/sops/releases/download/v{{
     _community_sops_install_effective_sops_version
   }}/sops_{{
-    _community_sops_install_effective_sops_version
+    _community_sops_install_effective_sops_version.replace('-', '.')
   }}_{{
     _community_sops_install_arch_transform.get(ansible_facts.architecture, ansible_facts.architecture)
   }}.deb
