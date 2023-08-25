@@ -191,7 +191,7 @@
 </div></td>
 <td><div class="ansible-option-cell"><p>When installing the latest sops version from GitHub, configures how the latest release is detected.</p>
 <p><code class="ansible-value docutils literal notranslate"><span class="pre">auto</span></code> tries <code class="ansible-value docutils literal notranslate"><span class="pre">api</span></code> first and then uses <code class="ansible-value docutils literal notranslate"><span class="pre">latest-release</span></code>.</p>
-<p><code class="ansible-value docutils literal notranslate"><span class="pre">api</span></code> asks the GitHub API for a list of recent releases and picks the highest version.</p>
+<p><code class="ansible-value docutils literal notranslate"><span class="pre">api</span></code> asks the GitHub API for a list of recent releases and picks the highest version. Pre-releases are avoided.</p>
 <p><code class="ansible-value docutils literal notranslate"><span class="pre">latest-release</span></code> uses a not fully documented URL to retrieve the release marked as “latest” by the repository maintainers.</p>
 <p class="ansible-option-line"><span class="ansible-option-choices">Choices:</span></p>
 <ul class="simple">
