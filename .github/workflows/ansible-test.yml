@@ -74,7 +74,7 @@ jobs:
           - 3.5.0
           - 3.6.0
           - 3.7.3
-          - 3.8.0-rc.1
+          - 3.8.0
         python_version:
           - ''
         include:
@@ -182,6 +182,10 @@ jobs:
             docker_container: ubuntu2204
             python_version: ''
             target: gha/install/1/
+          - ansible: devel
+            docker_container: fedora38
+            python_version: ''
+            target: gha/install/1/
           # Install on localhost vs. remote host
           - ansible: devel
             docker_container: ubuntu2004
@@ -234,6 +238,7 @@ jobs:
           #   # NOTE: we're installing with git to work around Galaxy being a huge PITA (https://github.com/ansible/galaxy/issues/2429)
           #   pre-test-cmd: |-
           #     git clone --depth=1 --single-branch https://github.com/ansible-collections/community.general.git ../../community/general
+          # Install 3.8.0-rc.1 prerelease
     steps:
       - name: >-
           Perform sops installation integration testing against

@@ -38,3 +38,21 @@
     that:
       - >-
         'sops 3.7.0' in output.stdout
+
+- name: Install sops 3.8.0-rc.1
+  include_role:
+    name: community.sops.install
+  vars:
+    sops_version: 3.8.0-rc.1
+    sops_github_token: "{{ github_token | default('') | string }}"
+
+- name: Figure out sops version
+  command:
+    cmd: sops --version --disable-version-check
+  register: output
+
+- name: Check sops version
+  assert:
+    that:
+      - >-
+        'sops 3.8.0-rc.1' == output.stdout
