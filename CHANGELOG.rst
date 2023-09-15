@@ -5,13 +5,26 @@ Community Sops Release Notes
 .. contents:: Topics
 
 
+v1.6.6
+======
+
+Release Summary
+---------------
+
+Make fully compatible with and test against sops 3.8.0.
+
+Bugfixes
+--------
+
+- Fix RPM URL for the 3.8.0 release (https://github.com/ansible-collections/community.sops/pull/161).
+
 v1.6.5
 ======
 
 Release Summary
 ---------------
 
-Make compatible with and test against sops 1.8.0-rc.1.
+Make compatible with and test against sops 3.8.0-rc.1.
 
 Bugfixes
 --------

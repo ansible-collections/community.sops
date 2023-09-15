@@ -1,2 +1,0 @@
-bugfixes:
-  - Fix RPM URL for the 3.8.0 release (https://github.com/ansible-collections/community.sops/pull/161).
