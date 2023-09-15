@@ -24,7 +24,7 @@ _community_sops_install_system_packages_unsigned_github:
     }}{{
       _community_sops_install_effective_sops_version.replace('-', '.')
     }}{{
-      (_community_sops_install_effective_sops_version is version('3.8.0-a', '<')) | ternary('-1', '')
+      (_community_sops_install_effective_sops_version is version('3.8.0', '<')) | ternary('-1', '')
     }}.{{
       ansible_facts.architecture
     }}.rpm
