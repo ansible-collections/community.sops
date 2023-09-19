@@ -33,6 +33,7 @@ jobs:
           - stable-2.13
           - stable-2.14
           - stable-2.15
+          - stable-2.16
           - devel
     # Ansible-test on various stable branches does not yet work well with cgroups v2.
     # Since ubuntu-latest now uses Ubuntu 22.04, we need to fall back to the ubuntu-20.04
@@ -109,6 +110,10 @@ jobs:
           - ansible: stable-2.15
             docker_container: ubuntu2204
             sops_version: 3.7.3
+          # 2.15
+          - ansible: stable-2.16
+            docker_container: ubuntu2204
+            sops_version: 3.8.0
           # devel
           - ansible: devel
             docker_container: quay.io/ansible-community/test-image:archlinux
@@ -210,7 +215,7 @@ jobs:
             python_version: '3.11'
             target: gha/install/3/
             github_latest_detection: auto
-          - ansible: stable-2.15
+          - ansible: stable-2.16
             docker_container: quay.io/ansible-community/test-image:debian-bullseye
             python_version: '3.9'
             target: gha/install/3/
