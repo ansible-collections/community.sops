@@ -1,0 +1,4 @@
+tests/integration/targets/filter_decrypt/files/hidden-binary.yaml yamllint:error
+tests/integration/targets/filter_decrypt/files/hidden-json.yaml yamllint:error
+tests/integration/targets/lookup_sops/files/hidden-binary.yaml yamllint:error
+tests/integration/targets/lookup_sops/files/hidden-json.yaml yamllint:error
