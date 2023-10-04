@@ -110,10 +110,14 @@ jobs:
           - ansible: stable-2.15
             docker_container: ubuntu2204
             sops_version: 3.7.3
-          # 2.15
+          # 2.16
           - ansible: stable-2.16
             docker_container: ubuntu2204
             sops_version: 3.8.0
+          - ansible: stable-2.16
+            docker_container: quay.io/ansible-community/test-image:centos-stream8
+            python_version: '3.6'
+            sops_version: latest
           # devel
           - ansible: devel
             docker_container: quay.io/ansible-community/test-image:archlinux
@@ -126,10 +130,6 @@ jobs:
           - ansible: stable-2.15
             docker_container: quay.io/ansible-community/test-image:debian-bullseye
             python_version: '3.9'
-            sops_version: latest
-          - ansible: devel
-            docker_container: quay.io/ansible-community/test-image:centos-stream8
-            python_version: '3.6'
             sops_version: latest
     steps:
       - name: >-
