@@ -63,11 +63,11 @@ The simplest way of ensuring this is to use the ``community.sops.install_localho
 .. code-block:: yaml
 
     ---
-    version: 1
+    version: 3
     dependencies:
       galaxy: requirements.yml
     additional_build_steps:
-      append:
+      append_final:
         # Ensure that sops is installed in the EE, assuming the EE is for ansible-core 2.11 or newer
         - RUN ansible-playbook -v community.sops.install_localhost
 
@@ -76,11 +76,11 @@ Note that this only works if the execution environment is built with ansible-cor
 .. code-block:: yaml
 
     ---
-    version: 1
+    version: 3
     dependencies:
       galaxy: requirements.yml
     additional_build_steps:
-      append:
+      append_final:
         # Special step needed for Ansible 2.9 based EEs
         - >-
           RUN ansible localhost -m include_role -a name=community.sops.install
