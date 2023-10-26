@@ -112,7 +112,7 @@ ENCRYPT_OPTIONS = {
 
 
 class SopsError(Exception):
-    ''' Extend Exception class with sops specific informations '''
+    ''' Extend Exception class with sops specific information '''
 
     def __init__(self, filename, exit_code, message, decryption=True):
         if exit_code in SOPS_ERROR_CODES:

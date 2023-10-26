@@ -135,7 +135,7 @@ class VarsModule(BaseVarsPlugin):
                         if os.path.exists(b_opath):
                             if os.path.isdir(b_opath):
                                 self._display.debug("\tprocessing dir %s" % opath)
-                                # NOTE: iterating without extension allow retriving files recursively
+                                # NOTE: iterating without extension allow retrieving files recursively
                                 # A filter is then applied by iterating on all results and filtering by
                                 # extension.
                                 # See:
