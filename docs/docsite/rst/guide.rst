@@ -10,7 +10,7 @@ Protecting Ansible secrets with Mozilla SOPS
 
 `Mozilla SOPS <https://github.com/getsops/sops>`_ allows to encrypt and decrypt files using various key sources (GPG, AWS KMS, GCP KMS, ...). For structured data, such as YAML, JSON, INI and ENV files, it will encrypt values, but not mapping keys. For YAML files, it also encrypts comments. This makes it a great tool for encrypting credentials with Ansible: you can easily see which files contain which variable, but the variables themselves are encrypted.
 
-The ability to utilize various keysources makes it easier to use in complex environments than `Ansible Vault <https://docs.ansible.com/ansible/latest/user_guide/vault.html>`_.
+The ability to utilize various keysources makes it easier to use in complex environments than :ref:`Ansible Vault <vault_guide_index>`.
 
 .. contents::
    :local:
@@ -21,7 +21,7 @@ Installing sops
 
 You can find binaries and packages `on the project's release page <https://github.com/getsops/sops/releases>`_. Depending on your operating system, you might also be able to install it with your system's package manager.
 
-This collection provides a `role community.sops.install <ansible_collections.community.sops.install_role>`_ which allows to install sops and `GNU Privacy Guard (GPG) <https://en.wikipedia.org/wiki/GNU_Privacy_Guard>`__. The role allows to install sops from the system's package manager or from GitHub. Both sops and GPG can be installed on the remote hosts or the Ansible controller.
+This collection provides a :ansplugin:`role community.sops.install <community.sops.install#role>` which allows to install sops and `GNU Privacy Guard (GPG) <https://en.wikipedia.org/wiki/GNU_Privacy_Guard>`__. The role allows to install sops from the system's package manager or from GitHub. Both sops and GPG can be installed on the remote hosts or the Ansible controller.
 
 .. code-block:: yaml
 
@@ -63,24 +63,24 @@ The simplest way of ensuring this is to use the ``community.sops.install_localho
 .. code-block:: yaml
 
     ---
-    version: 1
+    version: 3
     dependencies:
       galaxy: requirements.yml
     additional_build_steps:
-      append:
+      append_final:
         # Ensure that sops is installed in the EE, assuming the EE is for ansible-core 2.11 or newer
         - RUN ansible-playbook -v community.sops.install_localhost
 
-Note that this only works if the execution environment is built with ansible-core 2.11 or newer. When using an execution environment with Ansible 2.9, you have to use the ``community.sops.install`` role manually. Also note that you need to make sure that Ansible 2.9 uses the correct Python interpreter to be able to install system packages with; in the below example we are assuming a RHEL/CentOS based execution environment base image:
+Note that this only works if the execution environment is built with ansible-core 2.11 or newer. When using an execution environment with Ansible 2.9, you have to use the :ansplugin:`community.sops.install#role` role manually. Also note that you need to make sure that Ansible 2.9 uses the correct Python interpreter to be able to install system packages with; in the below example we are assuming a RHEL/CentOS based execution environment base image:
 
 .. code-block:: yaml
 
     ---
-    version: 1
+    version: 3
     dependencies:
       galaxy: requirements.yml
     additional_build_steps:
-      append:
+      append_final:
         # Special step needed for Ansible 2.9 based EEs
         - >-
           RUN ansible localhost -m include_role -a name=community.sops.install
@@ -160,7 +160,7 @@ At the end, the ``sops`` section contains metadata, which includes the private k
 Working with encrypted files
 ----------------------------
 
-You can decrypt sops-encrypted files with the :ref:`community.sops.sops lookup plugin <ansible_collections.community.sops.sops_lookup>`, and dynamically encrypt data with the :ref:`community.sops.sops_encrypt module <ansible_collections.community.sops.sops_encrypt_module>`. Being able to encrypt is useful when you create or update secrets in your Ansible playbooks.
+You can decrypt sops-encrypted files with the :ansplugin:`community.sops.sops lookup plugin <community.sops.sops#lookup>`, and dynamically encrypt data with the :ansplugin:`community.sops.sops_encrypt module <community.sops.sops_encrypt#module>`. Being able to encrypt is useful when you create or update secrets in your Ansible playbooks.
 
 Assume that you have an encrypted private key ``keys/private_key.pem.sops``, which was in PEM format before being encrypted by sops:
 
@@ -170,7 +170,7 @@ Assume that you have an encrypted private key ``keys/private_key.pem.sops``, whi
     $ sops --encrypt keys/private_key.pem > keys/private_key.pem.sops
     $ wipe keys/private_key.pem
 
-To use it in a playbook, for example to pass it to the :ref:`community.crypto.openssl_csr module <ansible_collections.community.crypto.openssl_csr_module>` to create a certificate signing request (CSR), you can use the :ref:`community.sops.sops lookup plugin <ansible_collections.community.sops.sops_lookup>` to load it:
+To use it in a playbook, for example to pass it to the :ansplugin:`community.crypto.openssl_csr module <community.crypto.openssl_csr#module>` to create a certificate signing request (CSR), you can use the :ansplugin:`community.sops.sops lookup plugin <community.sops.sops#lookup>` to load it:
 
 .. code-block:: yaml+jinja
 
@@ -205,7 +205,7 @@ This results in the following output:
 
 Afterwards, you will have a CSR ``ansible.com.csr`` for the encrypted private key ``keys/private_key.pem.sops``.
 
-If you want to use Ansible to generate (or update) the encrypted private key, you can use the :ref:`community.crypto.openssl_privatekey_pipe module <ansible_collections.community.crypto.openssl_privatekey_pipe_module>` to generate (or update) the private key, and use the :ref:`community.sops.sops_encrypt module <ansible_collections.community.sops.sops_encrypt_module>` to write it to disk in encrypted form:
+If you want to use Ansible to generate (or update) the encrypted private key, you can use the :ansplugin:`community.crypto.openssl_privatekey_pipe module <community.crypto.openssl_privatekey_pipe#module>` to generate (or update) the private key, and use the :ansplugin:`community.sops.sops_encrypt module <community.sops.sops_encrypt#module>` to write it to disk in encrypted form:
 
 .. code-block:: yaml+jinja
 
@@ -287,9 +287,9 @@ The :ansopt:`community.sops.sops#lookup:empty_on_not_exist=true` flag is needed 
 Working with encrypted data from other sources
 ----------------------------------------------
 
-You can use the :ref:`community.sops.decrypt Jinja2 filter <ansible_collections.community.sops.decrypt_filter>` to decrypt arbitrary data. This can be data read earlier from a file, returned from an action, or obtained through some other means.
+You can use the :ansplugin:`community.sops.decrypt Jinja2 filter <community.sops.decrypt#filter>` to decrypt arbitrary data. This can be data read earlier from a file, returned from an action, or obtained through some other means.
 
-For example, assume that you want to decrypt a file retrieved from a HTTPS server with the `ansible.builtin.uri module <ansible_collections.ansible.builtin.uri_module>`_. To use the :ref:`community.sops.sops lookup <ansible_collections.community.sops.sops_lookup>`, you have to write it to a file first. With the filter, you can directly decrypt it:
+For example, assume that you want to decrypt a file retrieved from a HTTPS server with the :ansplugin:`ansible.builtin.uri module <ansible.builtin.uri#module>`. To use the :ansplugin:`community.sops.sops lookup <community.sops.sops#lookup>`, you have to write it to a file first. With the filter, you can directly decrypt it:
 
 .. code-block:: yaml+jinja
 
@@ -365,7 +365,7 @@ The output will be:
     PLAY RECAP *******************************************************************************************************
     localhost                  : ok=4    changed=0    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0
 
-Please note that if you put a Jinja2 expression in a variable, it will be evaluated **every time it is used**. Decrypting data takes a certain amount of time. If you need to use an expression multiple times, it is better to store its evaluated form as a fact with `ansible.bulitin.set_fact <ansible_collections.ansible.builtin.set_fact_module>`_ first. This can be important if decrypted data should be passed to a role
+Please note that if you put a Jinja2 expression in a variable, it will be evaluated **every time it is used**. Decrypting data takes a certain amount of time. If you need to use an expression multiple times, it is better to store its evaluated form as a fact with :ansplugin:`ansible.bulitin.set_fact <ansible.builtin.set_fact#module>` first. This can be important if decrypted data should be passed to a role
 
 .. code-block:: yaml+jinja
 
@@ -403,7 +403,7 @@ Please note that if you put a Jinja2 expression in a variable, it will be evalua
 Working with encrypted variables
 --------------------------------
 
-You can load encrypted variables similarly to the :ref:`ansible.builtin.host_group_vars vars plugin <ansible_collections.ansible.builtin.host_group_vars_vars>` with the :ref:`community.sops.sops vars plugin <ansible_collections.community.sops.sops_vars>`. If you need to load variables dynamically similarly to the :ref:`ansible.builtin.include_vars action <ansible_collections.ansible.builtin.include_vars_module>`, you can use the :ref:`community.sops.load_vars action <ansible_collections.community.sops.load_vars_module>`.
+You can load encrypted variables similarly to the :ansplugin:`ansible.builtin.host_group_vars vars plugin <ansible.builtin.host_group_vars#vars>` with the :ansplugin:`community.sops.sops vars plugin <community.sops.sops#vars>`. If you need to load variables dynamically similarly to the :ansplugin:`ansible.builtin.include_vars action <ansible.builtin.include_vars#module>`, you can use the :ansplugin:`community.sops.load_vars action <community.sops.load_vars#module>`.
 
 To use the vars plugin, you need to enable it in your Ansible config file (``ansible.cfg``):
 
@@ -420,9 +420,9 @@ See :ref:`VARIABLE_PLUGINS_ENABLED <VARIABLE_PLUGINS_ENABLED>` for more details 
 
 The vars plugin will decrypt them and you can use their unencrypted content transparently.
 
-If you need to dynamically load encrypted variables, similar to the built-in :ref:`ansible.builtin.include_vars action <ansible_collections.ansible.builtin.include_vars_module>`, you can use the :ref:`community.sops.load_vars action <ansible_collections.community.sops.load_vars_module>` action. Please note that it is not a perfect replacement, since the built-in action relies on some hard-coded special casing in ansible-core which allows it to load the variables actually as variables (more precisely: as "unsafe" Jinja2 expressions which are automatically evaluated when used). Other action plugins, such as ``community.sops.load_vars``, cannot do that and have to load the variables as facts instead.
+If you need to dynamically load encrypted variables, similar to the built-in :ansplugin:`ansible.builtin.include_vars action <ansible.builtin.include_vars#module>`, you can use the :ansplugin:`community.sops.load_vars action <community.sops.load_vars#module>` action. Please note that it is not a perfect replacement, since the built-in action relies on some hard-coded special casing in ansible-core which allows it to load the variables actually as variables (more precisely: as "unsafe" Jinja2 expressions which are automatically evaluated when used). Other action plugins, such as :ansplugin:`community.sops.load_vars#module`, cannot do that and have to load the variables as facts instead.
 
-This is mostly relevant if you use Jinja2 expressions in the encrypted variable file. When ``include_vars`` loads a variable file with expressions, these expressions will only be evaluated when the variable that defines them needs to be evaluated (lazy evaluation). Since ``community.sops.load_vars`` returns facts, it has to directly evaluate expressions at load time. (For this, set its :ansopt:`community.sops.load_vars#module:expressions` option to :ansval:`evaluate-on-load`.) This is mostly relevant if you want to refer to other variables from the same file: this will not work, since Ansible does not know the other variable yet while evaluating the first. It will only "know" them as facts after all have been evaluated and the action finishes.
+This is mostly relevant if you use Jinja2 expressions in the encrypted variable file. When :ansplugin:`ansible.builtin.include_vars#module` loads a variable file with expressions, these expressions will only be evaluated when the variable that defines them needs to be evaluated (lazy evaluation). Since :ansplugin:`community.sops.load_vars#module` returns facts, it has to directly evaluate expressions at load time. (For this, set its :ansopt:`community.sops.load_vars#module:expressions` option to :ansval:`evaluate-on-load`.) This is mostly relevant if you want to refer to other variables from the same file: this will not work, since Ansible does not know the other variable yet while evaluating the first. It will only "know" them as facts after all have been evaluated and the action finishes.
 
 For the following example, assume you have the encrypted file ``keys/credentials.sops.yml`` which decrypts to:
 
