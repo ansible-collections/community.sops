@@ -5,6 +5,19 @@ Community Sops Release Notes
 .. contents:: Topics
 
 
+v1.6.7
+======
+
+Release Summary
+---------------
+
+Bugfix release.
+
+Bugfixes
+--------
+
+- sops_encrypt - ensure that output-type is set to ``yaml`` when the file extension ``.yml`` is used. Now both ``.yaml`` and ``.yml`` files use the SOPS ``--output-type=yaml`` formatting (https://github.com/ansible-collections/community.sops/issues/164).
+
 v1.6.6
 ======
 

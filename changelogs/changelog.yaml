@@ -339,3 +339,14 @@ releases:
     - 1.6.6.yml
     - 161-rhel-3.8.0.yml
     release_date: '2023-09-15'
+  1.6.7:
+    changes:
+      bugfixes:
+      - sops_encrypt - ensure that output-type is set to ``yaml`` when the file extension
+        ``.yml`` is used. Now both ``.yaml`` and ``.yml`` files use the SOPS ``--output-type=yaml``
+        formatting (https://github.com/ansible-collections/community.sops/issues/164).
+      release_summary: Bugfix release.
+    fragments:
+    - 1.6.7.yml
+    - 165-yaml-output-for-yml-extension.yaml
+    release_date: '2023-10-29'
