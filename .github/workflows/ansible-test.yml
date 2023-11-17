@@ -70,7 +70,7 @@ jobs:
         docker_container:
           - ubuntu2004
           - ubuntu2204
-          - fedora38
+          - fedora39
         sops_version:
           - 3.5.0
           - 3.6.0
@@ -188,7 +188,7 @@ jobs:
             python_version: ''
             target: gha/install/1/
           - ansible: devel
-            docker_container: fedora38
+            docker_container: fedora39
             python_version: ''
             target: gha/install/1/
           # Install on localhost vs. remote host
@@ -221,7 +221,7 @@ jobs:
             target: gha/install/3/
             github_latest_detection: auto
           - ansible: devel
-            docker_container: fedora38
+            docker_container: fedora39
             python_version: ''
             target: gha/install/3/
             github_latest_detection: auto
