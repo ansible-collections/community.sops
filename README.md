@@ -314,7 +314,7 @@ See [CONTRIBUTING.md](./CONTRIBUTING.md)
 
 ## Release notes
 
-See [CHANGELOG.rst](https://github.com/ansible-collections/community.sops/blob/main/CHANGELOG.rst).
+See [CHANGELOG.md](https://github.com/ansible-collections/community.sops/blob/main/CHANGELOG.md).
 
 ## Releasing, Versioning and Deprecation
 
