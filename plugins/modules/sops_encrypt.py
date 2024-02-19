@@ -16,7 +16,7 @@ module: sops_encrypt
 short_description: Encrypt data with sops
 version_added: '0.1.0'
 description:
-  - Allows to encrypt binary data (Base64 encoded), text data, JSON or YAML data with sops.
+  - Allows to encrypt binary data (Base64 encoded), text data, JSON or YAML data with sops. A binary executable C(sops) must exist in C($PATH).
 options:
   path:
     description:
