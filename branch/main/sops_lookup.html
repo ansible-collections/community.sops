@@ -89,6 +89,7 @@
 <ul class="current">
 <li class="toctree-l1 current"><a class="current reference internal" href="#">community.sops.sops lookup – Read sops encrypted file contents</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="#synopsis">Synopsis</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#requirements">Requirements</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#terms">Terms</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#keyword-parameters">Keyword parameters</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#notes">Notes</a></li>
@@ -144,19 +145,22 @@
 <p>This lookup plugin is part of the <a class="reference external" href="https://galaxy.ansible.com/ui/repo/published/community/sops/">community.sops collection</a> (version 1.6.7).</p>
 <p>It is not included in <code class="docutils literal notranslate"><span class="pre">ansible-core</span></code>.
 To check whether it is installed, run <code class="code docutils literal notranslate"><span class="pre">ansible-galaxy</span> <span class="pre">collection</span> <span class="pre">list</span></code>.</p>
-<p>To install it, use: <code class="code docutils literal notranslate"><span class="pre">ansible-galaxy</span> <span class="pre">collection</span> <span class="pre">install</span> <span class="pre">community.sops</span></code>.</p>
+<p>To install it, use: <code class="code docutils literal notranslate"><span class="pre">ansible-galaxy</span> <span class="pre">collection</span> <span class="pre">install</span> <span class="pre">community.sops</span></code>.
+You need further requirements to be able to use this lookup plugin,
+see <a class="reference internal" href="#ansible-collections-community-sops-sops-lookup-requirements"><span class="std std-ref">Requirements</span></a> for details.</p>
 <p>To use it in a playbook, specify: <code class="code docutils literal notranslate"><span class="pre">community.sops.sops</span></code>.</p>
 </div>
 <p class="ansible-version-added">New in community.sops 0.1.0</p>
 <nav class="contents local" id="contents">
 <ul class="simple">
 <li><p><a class="reference internal" href="#synopsis" id="id1">Synopsis</a></p></li>
-<li><p><a class="reference internal" href="#terms" id="id2">Terms</a></p></li>
-<li><p><a class="reference internal" href="#keyword-parameters" id="id3">Keyword parameters</a></p></li>
-<li><p><a class="reference internal" href="#notes" id="id4">Notes</a></p></li>
-<li><p><a class="reference internal" href="#see-also" id="id5">See Also</a></p></li>
-<li><p><a class="reference internal" href="#examples" id="id6">Examples</a></p></li>
-<li><p><a class="reference internal" href="#return-value" id="id7">Return Value</a></p></li>
+<li><p><a class="reference internal" href="#requirements" id="id2">Requirements</a></p></li>
+<li><p><a class="reference internal" href="#terms" id="id3">Terms</a></p></li>
+<li><p><a class="reference internal" href="#keyword-parameters" id="id4">Keyword parameters</a></p></li>
+<li><p><a class="reference internal" href="#notes" id="id5">Notes</a></p></li>
+<li><p><a class="reference internal" href="#see-also" id="id6">See Also</a></p></li>
+<li><p><a class="reference internal" href="#examples" id="id7">Examples</a></p></li>
+<li><p><a class="reference internal" href="#return-value" id="id8">Return Value</a></p></li>
 </ul>
 </nav>
 <section id="synopsis">
@@ -166,8 +170,15 @@ To check whether it is installed, run <code class="code docutils literal notrans
 <li><p>This lookup requires the <code class="docutils literal notranslate"><span class="pre">sops</span></code> executable to be available in the controller PATH.</p></li>
 </ul>
 </section>
+<section id="requirements">
+<span id="ansible-collections-community-sops-sops-lookup-requirements"></span><h2><a class="toc-backref" href="#id2" role="doc-backlink">Requirements</a><a class="headerlink" href="#requirements" title="Link to this heading"></a></h2>
+<p>The below requirements are needed on the local controller node that executes this lookup.</p>
+<ul class="simple">
+<li><p>A binary executable <code class="docutils literal notranslate"><span class="pre">sops</span></code> (<a class="reference external" href="https://github.com/getsops/sops">https://github.com/getsops/sops</a>) must exist either in <code class="xref std std-envvar docutils literal notranslate"><span class="pre">PATH</span></code> or configured as <code class="ansible-option docutils literal notranslate"><strong><a class="reference internal" href="#ansible-collections-community-sops-sops-lookup-parameter-sops-binary"><span class="std std-ref"><span class="pre">sops_binary</span></span></a></strong></code>.</p></li>
+</ul>
+</section>
 <section id="terms">
-<h2><a class="toc-backref" href="#id2" role="doc-backlink">Terms</a><a class="headerlink" href="#terms" title="Link to this heading"></a></h2>
+<h2><a class="toc-backref" href="#id3" role="doc-backlink">Terms</a><a class="headerlink" href="#terms" title="Link to this heading"></a></h2>
 <table class="longtable ansible-option-table docutils align-default" style="width: 100%">
 <thead>
 <tr class="row-odd"><th class="head"><p>Parameter</p></th>
@@ -186,7 +197,7 @@ To check whether it is installed, run <code class="code docutils literal notrans
 </table>
 </section>
 <section id="keyword-parameters">
-<h2><a class="toc-backref" href="#id3" role="doc-backlink">Keyword parameters</a><a class="headerlink" href="#keyword-parameters" title="Link to this heading"></a></h2>
+<h2><a class="toc-backref" href="#id4" role="doc-backlink">Keyword parameters</a><a class="headerlink" href="#keyword-parameters" title="Link to this heading"></a></h2>
 <p>This describes keyword parameters of the lookup. These are the values <code class="docutils literal notranslate"><span class="pre">key1=value1</span></code>, <code class="docutils literal notranslate"><span class="pre">key2=value2</span></code> and so on in the following
 examples: <code class="docutils literal notranslate"><span class="pre">lookup('community.sops.sops',</span> <span class="pre">key1=value1,</span> <span class="pre">key2=value2,</span> <span class="pre">...)</span></code> and <code class="docutils literal notranslate"><span class="pre">query('community.sops.sops',</span> <span class="pre">key1=value1,</span> <span class="pre">key2=value2,</span> <span class="pre">...)</span></code></p>
 <table class="longtable ansible-option-table docutils align-default" style="width: 100%">
@@ -489,7 +500,7 @@ examples: <code class="docutils literal notranslate"><span class="pre">lookup('c
 </table>
 </section>
 <section id="notes">
-<h2><a class="toc-backref" href="#id4" role="doc-backlink">Notes</a><a class="headerlink" href="#notes" title="Link to this heading"></a></h2>
+<h2><a class="toc-backref" href="#id5" role="doc-backlink">Notes</a><a class="headerlink" href="#notes" title="Link to this heading"></a></h2>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
 <ul class="simple">
@@ -500,7 +511,7 @@ examples: <code class="docutils literal notranslate"><span class="pre">lookup('c
 </div>
 </section>
 <section id="see-also">
-<h2><a class="toc-backref" href="#id5" role="doc-backlink">See Also</a><a class="headerlink" href="#see-also" title="Link to this heading"></a></h2>
+<h2><a class="toc-backref" href="#id6" role="doc-backlink">See Also</a><a class="headerlink" href="#see-also" title="Link to this heading"></a></h2>
 <div class="admonition seealso">
 <p class="admonition-title">See also</p>
 <dl class="simple">
@@ -514,7 +525,7 @@ examples: <code class="docutils literal notranslate"><span class="pre">lookup('c
 </div>
 </section>
 <section id="examples">
-<h2><a class="toc-backref" href="#id6" role="doc-backlink">Examples</a><a class="headerlink" href="#examples" title="Link to this heading"></a></h2>
+<h2><a class="toc-backref" href="#id7" role="doc-backlink">Examples</a><a class="headerlink" href="#examples" title="Link to this heading"></a></h2>
 <div class="highlight-yaml+jinja notranslate"><div class="highlight"><pre><span></span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Output secrets to screen (BAD IDEA!)</span>
 <span class="w">  </span><span class="nt">ansible.builtin.debug</span><span class="p">:</span>
 <span class="w">    </span><span class="nt">msg</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;Content:</span><span class="nv"> </span><span class="cp">{{</span> <span class="nv">lookup</span><span class="o">(</span><span class="s1">&#39;community.sops.sops&#39;</span><span class="o">,</span> <span class="nv">item</span><span class="o">)</span> <span class="cp">}}</span><span class="s">&quot;</span>
@@ -538,7 +549,7 @@ examples: <code class="docutils literal notranslate"><span class="pre">lookup('c
 </div>
 </section>
 <section id="return-value">
-<h2><a class="toc-backref" href="#id7" role="doc-backlink">Return Value</a><a class="headerlink" href="#return-value" title="Link to this heading"></a></h2>
+<h2><a class="toc-backref" href="#id8" role="doc-backlink">Return Value</a><a class="headerlink" href="#return-value" title="Link to this heading"></a></h2>
 <table class="longtable ansible-option-table docutils align-default" style="width: 100%">
 <thead>
 <tr class="row-odd"><th class="head"><p>Key</p></th>
