@@ -11,7 +11,7 @@ __metaclass__ = type
 class ModuleDocFragment(object):
     DOCUMENTATION = r'''
 requirements:
-  - A binary executable C(sops) (U(https://github.com/getsops/sops)) must exist either in C($PATH) or configured as
+  - A binary executable C(sops) (U(https://github.com/getsops/sops)) must exist either in E(PATH) or configured as
     O(sops_binary).
 options:
     sops_binary:
