@@ -236,14 +236,13 @@ jobs:
             target: gha/install/3/
             github_latest_detection: latest-release
           # - ansible: devel
-          #   docker_container: alpine3  -- so far only alpine3 edge supports sops
+          #   docker_container: alpine3.19  -- so far only alpine3 edge supports sops
           #   python_version: ''
           #   target: gha/install/3/
           #   github_latest_detection: auto
           #   # NOTE: we're installing with git to work around Galaxy being a huge PITA (https://github.com/ansible/galaxy/issues/2429)
           #   pre-test-cmd: |-
           #     git clone --depth=1 --single-branch https://github.com/ansible-collections/community.general.git ../../community/general
-          # Install 3.8.0-rc.1 prerelease
     steps:
       - name: >-
           Perform sops installation integration testing against
