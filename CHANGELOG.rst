@@ -276,7 +276,7 @@ v1.0.5
 Release Summary
 ---------------
 
-This release fixes a bug that prevented correct YAML file to be created when the output was ending in `.yaml`.
+This release fixes a bug that prevented correct YAML file to be created when the output was ending in ``.yaml``.
 
 Bugfixes
 --------
@@ -361,8 +361,8 @@ v0.1.0
 Release Summary
 ---------------
 
-First release of the `community.sops` collection!
-This release includes multiple plugins: an `action` plugin, a `lookup` plugin and a `vars` plugin.
+First release of the ``community.sops`` collection!
+This release includes multiple plugins: an ``action`` plugin, a ``lookup`` plugin and a ``vars`` plugin.
 
 New Plugins
 -----------
