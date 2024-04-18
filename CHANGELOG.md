@@ -1,88 +1,89 @@
 # Community Sops Release Notes
 
 **Topics**
+
 - <a href="#v1-6-7">v1\.6\.7</a>
-  - <a href="#release-summary">Release Summary</a>
-  - <a href="#bugfixes">Bugfixes</a>
+    - <a href="#release-summary">Release Summary</a>
+    - <a href="#bugfixes">Bugfixes</a>
 - <a href="#v1-6-6">v1\.6\.6</a>
-  - <a href="#release-summary-1">Release Summary</a>
-  - <a href="#bugfixes-1">Bugfixes</a>
+    - <a href="#release-summary-1">Release Summary</a>
+    - <a href="#bugfixes-1">Bugfixes</a>
 - <a href="#v1-6-5">v1\.6\.5</a>
-  - <a href="#release-summary-2">Release Summary</a>
-  - <a href="#bugfixes-2">Bugfixes</a>
+    - <a href="#release-summary-2">Release Summary</a>
+    - <a href="#bugfixes-2">Bugfixes</a>
 - <a href="#v1-6-4">v1\.6\.4</a>
-  - <a href="#release-summary-3">Release Summary</a>
-  - <a href="#bugfixes-3">Bugfixes</a>
+    - <a href="#release-summary-3">Release Summary</a>
+    - <a href="#bugfixes-3">Bugfixes</a>
 - <a href="#v1-6-3">v1\.6\.3</a>
-  - <a href="#release-summary-4">Release Summary</a>
-  - <a href="#known-issues">Known Issues</a>
+    - <a href="#release-summary-4">Release Summary</a>
+    - <a href="#known-issues">Known Issues</a>
 - <a href="#v1-6-2">v1\.6\.2</a>
-  - <a href="#release-summary-5">Release Summary</a>
-  - <a href="#bugfixes-4">Bugfixes</a>
+    - <a href="#release-summary-5">Release Summary</a>
+    - <a href="#bugfixes-4">Bugfixes</a>
 - <a href="#v1-6-1">v1\.6\.1</a>
-  - <a href="#release-summary-6">Release Summary</a>
-  - <a href="#bugfixes-5">Bugfixes</a>
+    - <a href="#release-summary-6">Release Summary</a>
+    - <a href="#bugfixes-5">Bugfixes</a>
 - <a href="#v1-6-0">v1\.6\.0</a>
-  - <a href="#release-summary-7">Release Summary</a>
-  - <a href="#minor-changes">Minor Changes</a>
+    - <a href="#release-summary-7">Release Summary</a>
+    - <a href="#minor-changes">Minor Changes</a>
 - <a href="#v1-5-0">v1\.5\.0</a>
-  - <a href="#release-summary-8">Release Summary</a>
-  - <a href="#minor-changes-1">Minor Changes</a>
-  - <a href="#new-playbooks">New Playbooks</a>
-  - <a href="#new-roles">New Roles</a>
+    - <a href="#release-summary-8">Release Summary</a>
+    - <a href="#minor-changes-1">Minor Changes</a>
+    - <a href="#new-playbooks">New Playbooks</a>
+    - <a href="#new-roles">New Roles</a>
 - <a href="#v1-4-1">v1\.4\.1</a>
-  - <a href="#release-summary-9">Release Summary</a>
-  - <a href="#bugfixes-6">Bugfixes</a>
+    - <a href="#release-summary-9">Release Summary</a>
+    - <a href="#bugfixes-6">Bugfixes</a>
 - <a href="#v1-4-0">v1\.4\.0</a>
-  - <a href="#release-summary-10">Release Summary</a>
-  - <a href="#minor-changes-2">Minor Changes</a>
+    - <a href="#release-summary-10">Release Summary</a>
+    - <a href="#minor-changes-2">Minor Changes</a>
 - <a href="#v1-3-0">v1\.3\.0</a>
-  - <a href="#release-summary-11">Release Summary</a>
-  - <a href="#minor-changes-3">Minor Changes</a>
+    - <a href="#release-summary-11">Release Summary</a>
+    - <a href="#minor-changes-3">Minor Changes</a>
 - <a href="#v1-2-3">v1\.2\.3</a>
-  - <a href="#release-summary-12">Release Summary</a>
+    - <a href="#release-summary-12">Release Summary</a>
 - <a href="#v1-2-2">v1\.2\.2</a>
-  - <a href="#release-summary-13">Release Summary</a>
-  - <a href="#bugfixes-7">Bugfixes</a>
+    - <a href="#release-summary-13">Release Summary</a>
+    - <a href="#bugfixes-7">Bugfixes</a>
 - <a href="#v1-2-1">v1\.2\.1</a>
-  - <a href="#release-summary-14">Release Summary</a>
+    - <a href="#release-summary-14">Release Summary</a>
 - <a href="#v1-2-0">v1\.2\.0</a>
-  - <a href="#release-summary-15">Release Summary</a>
-  - <a href="#minor-changes-4">Minor Changes</a>
-  - <a href="#bugfixes-8">Bugfixes</a>
+    - <a href="#release-summary-15">Release Summary</a>
+    - <a href="#minor-changes-4">Minor Changes</a>
+    - <a href="#bugfixes-8">Bugfixes</a>
 - <a href="#v1-1-0">v1\.1\.0</a>
-  - <a href="#release-summary-16">Release Summary</a>
-  - <a href="#minor-changes-5">Minor Changes</a>
-  - <a href="#new-plugins">New Plugins</a>
-    - <a href="#filter">Filter</a>
+    - <a href="#release-summary-16">Release Summary</a>
+    - <a href="#minor-changes-5">Minor Changes</a>
+    - <a href="#new-plugins">New Plugins</a>
+        - <a href="#filter">Filter</a>
 - <a href="#v1-0-6">v1\.0\.6</a>
-  - <a href="#release-summary-17">Release Summary</a>
-  - <a href="#bugfixes-9">Bugfixes</a>
+    - <a href="#release-summary-17">Release Summary</a>
+    - <a href="#bugfixes-9">Bugfixes</a>
 - <a href="#v1-0-5">v1\.0\.5</a>
-  - <a href="#release-summary-18">Release Summary</a>
-  - <a href="#bugfixes-10">Bugfixes</a>
+    - <a href="#release-summary-18">Release Summary</a>
+    - <a href="#bugfixes-10">Bugfixes</a>
 - <a href="#v1-0-4">v1\.0\.4</a>
-  - <a href="#release-summary-19">Release Summary</a>
-  - <a href="#security-fixes">Security Fixes</a>
+    - <a href="#release-summary-19">Release Summary</a>
+    - <a href="#security-fixes">Security Fixes</a>
 - <a href="#v1-0-3">v1\.0\.3</a>
-  - <a href="#release-summary-20">Release Summary</a>
-  - <a href="#bugfixes-11">Bugfixes</a>
+    - <a href="#release-summary-20">Release Summary</a>
+    - <a href="#bugfixes-11">Bugfixes</a>
 - <a href="#v1-0-2">v1\.0\.2</a>
-  - <a href="#release-summary-21">Release Summary</a>
+    - <a href="#release-summary-21">Release Summary</a>
 - <a href="#v1-0-1">v1\.0\.1</a>
-  - <a href="#release-summary-22">Release Summary</a>
+    - <a href="#release-summary-22">Release Summary</a>
 - <a href="#v1-0-0">v1\.0\.0</a>
-  - <a href="#release-summary-23">Release Summary</a>
-  - <a href="#minor-changes-6">Minor Changes</a>
+    - <a href="#release-summary-23">Release Summary</a>
+    - <a href="#minor-changes-6">Minor Changes</a>
 - <a href="#v0-2-0">v0\.2\.0</a>
-  - <a href="#release-summary-24">Release Summary</a>
-  - <a href="#minor-changes-7">Minor Changes</a>
+    - <a href="#release-summary-24">Release Summary</a>
+    - <a href="#minor-changes-7">Minor Changes</a>
 - <a href="#v0-1-0">v0\.1\.0</a>
-  - <a href="#release-summary-25">Release Summary</a>
-  - <a href="#new-plugins-1">New Plugins</a>
-    - <a href="#lookup">Lookup</a>
-    - <a href="#vars">Vars</a>
-  - <a href="#new-modules">New Modules</a>
+    - <a href="#release-summary-25">Release Summary</a>
+    - <a href="#new-plugins-1">New Plugins</a>
+        - <a href="#lookup">Lookup</a>
+        - <a href="#vars">Vars</a>
+    - <a href="#new-modules">New Modules</a>
 
 <a id="v1-6-7"></a>
 ## v1\.6\.7
@@ -355,7 +356,7 @@ This release makes the collection compatible to the latest beta release of ansib
 <a id="release-summary-18"></a>
 ### Release Summary
 
-This release fixes a bug that prevented correct YAML file to be created when the output was ending in <em class="title-reference">\.yaml</em>\.
+This release fixes a bug that prevented correct YAML file to be created when the output was ending in <code>\.yaml</code>\.
 
 <a id="bugfixes-10"></a>
 ### Bugfixes
@@ -440,8 +441,8 @@ This release adds features for the lookup and vars plugins\.
 <a id="release-summary-25"></a>
 ### Release Summary
 
-First release of the <em class="title-reference">community\.sops</em> collection\!
-This release includes multiple plugins\: an <em class="title-reference">action</em> plugin\, a <em class="title-reference">lookup</em> plugin and a <em class="title-reference">vars</em> plugin\.
+First release of the <code>community\.sops</code> collection\!
+This release includes multiple plugins\: an <code>action</code> plugin\, a <code>lookup</code> plugin and a <code>vars</code> plugin\.
 
 <a id="new-plugins-1"></a>
 ### New Plugins

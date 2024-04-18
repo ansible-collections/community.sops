@@ -2,10 +2,10 @@ ancestor: null
 releases:
   0.1.0:
     changes:
-      release_summary: 'First release of the `community.sops` collection!
+      release_summary: 'First release of the ``community.sops`` collection!
 
-        This release includes multiple plugins: an `action` plugin, a `lookup` plugin
-        and a `vars` plugin.'
+        This release includes multiple plugins: an ``action`` plugin, a ``lookup`` plugin
+        and a ``vars`` plugin.'
     fragments:
     - 0.1.0.yml
     modules:
@@ -97,7 +97,7 @@ releases:
       - community.sops.sops_encrypt - use output type ``yaml`` when path ends with
         ``.yaml`` (https://github.com/ansible-collections/community.sops/pull/56).
       release_summary: This release fixes a bug that prevented correct YAML file to
-        be created when the output was ending in `.yaml`.
+        be created when the output was ending in ``.yaml``.
     fragments:
     - 1.0.5.yml
     - 56-sops_encrypt-yaml-output.yaml
