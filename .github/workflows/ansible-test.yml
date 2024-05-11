@@ -50,6 +50,7 @@ jobs:
         uses: felixfontein/ansible-test-gh-action@main
         with:
           ansible-core-version: ${{ matrix.ansible }}
+          codecov-token: ${{ secrets.CODECOV_TOKEN }}
           testing-type: sanity
 
   integration:
@@ -145,6 +146,7 @@ jobs:
         uses: felixfontein/ansible-test-gh-action@main
         with:
           ansible-core-version: ${{ matrix.ansible }}
+          codecov-token: ${{ secrets.CODECOV_TOKEN }}
           docker-image: ${{ matrix.docker_container }}
           integration-continue-on-error: 'false'
           integration-diff: 'false'
@@ -256,6 +258,7 @@ jobs:
         uses: felixfontein/ansible-test-gh-action@main
         with:
           ansible-core-version: ${{ matrix.ansible }}
+          codecov-token: ${{ secrets.CODECOV_TOKEN }}
           docker-image: ${{ matrix.docker_container }}
           integration-continue-on-error: 'false'
           integration-diff: 'false'
