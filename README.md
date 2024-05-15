@@ -5,7 +5,9 @@ SPDX-License-Identifier: GPL-3.0-or-later
 -->
 
 # Community Sops Collection
-[![CI](https://github.com/ansible-collections/community.sops/workflows/CI/badge.svg?event=push)](https://github.com/ansible-collections/community.sops/actions) [![Codecov](https://img.shields.io/codecov/c/github/ansible-collections/community.sops)](https://codecov.io/gh/ansible-collections/community.sops)
+[![CI](https://github.com/ansible-collections/community.sops/workflows/CI/badge.svg?event=push)](https://github.com/ansible-collections/community.sops/actions)
+[![Codecov](https://img.shields.io/codecov/c/github/ansible-collections/community.sops)](https://codecov.io/gh/ansible-collections/community.sops)
+[![REUSE status](https://api.reuse.software/badge/github.com/ansible-collections/community.sops)](https://api.reuse.software/info/github.com/ansible-collections/community.sops)
 
 <!-- Describe the collection and why a user would want to use it. What does the collection do? -->
 The `community.sops` collection allows integrating [`getsops/sops`](https://github.com/getsops/sops) in Ansible.
