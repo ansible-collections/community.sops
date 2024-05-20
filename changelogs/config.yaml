@@ -36,3 +36,4 @@ sections:
 title: Community Sops
 trivial_section_name: trivial
 use_fqcn: true
+add_plugin_period: true
