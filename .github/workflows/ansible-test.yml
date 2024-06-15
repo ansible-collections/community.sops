@@ -49,6 +49,7 @@ jobs:
       - name: Perform sanity testing
         uses: felixfontein/ansible-test-gh-action@main
         with:
+          ansible-core-github-repository-slug: ${{ contains(fromJson('["stable-2.9", "stable-2.10", "stable-2.11"]'), matrix.ansible) && 'ansible-community/eol-ansible' || 'ansible/ansible' }}
           ansible-core-version: ${{ matrix.ansible }}
           codecov-token: ${{ secrets.CODECOV_TOKEN }}
           testing-type: sanity
@@ -94,7 +95,7 @@ jobs:
             sops_version: 3.6.0
           # 2.11
           - ansible: stable-2.11
-            docker_container: ubuntu2004
+            docker_container: ubuntu1804
             sops_version: 3.7.2
           # 2.12
           - ansible: stable-2.12
@@ -141,6 +142,7 @@ jobs:
           with sops ${{ matrix.sops_version }}
         uses: felixfontein/ansible-test-gh-action@main
         with:
+          ansible-core-github-repository-slug: ${{ contains(fromJson('["stable-2.9", "stable-2.10", "stable-2.11"]'), matrix.ansible) && 'ansible-community/eol-ansible' || 'ansible/ansible' }}
           ansible-core-version: ${{ matrix.ansible }}
           codecov-token: ${{ secrets.CODECOV_TOKEN }}
           docker-image: ${{ matrix.docker_container }}
@@ -248,6 +250,7 @@ jobs:
           under ${{ matrix.docker_container }}
         uses: felixfontein/ansible-test-gh-action@main
         with:
+          ansible-core-github-repository-slug: ${{ contains(fromJson('["stable-2.9", "stable-2.10", "stable-2.11"]'), matrix.ansible) && 'ansible-community/eol-ansible' || 'ansible/ansible' }}
           ansible-core-version: ${{ matrix.ansible }}
           codecov-token: ${{ secrets.CODECOV_TOKEN }}
           docker-image: ${{ matrix.docker_container }}
