@@ -25,6 +25,13 @@ DOCUMENTATION = '''
           - 'This affects vars_files, include_vars, inventory and vars plugins among others.'
         type: list
         elements: string
+        ini:
+          - key: valid_extensions
+            section: community.sops
+            version_added: 1.7.0
+        env:
+          - name: ANSIBLE_VARS_SOPS_PLUGIN_VALID_EXTENSIONS
+            version_added: 1.7.0
       stage:
         version_added: 0.2.0
         ini:
@@ -88,7 +95,6 @@ display = Display()
 
 FOUND = {}
 DECRYPTED = {}
-DEFAULT_VALID_EXTENSIONS = [".sops.yaml", ".sops.yml", ".sops.json"]
 
 
 class VarsModule(BaseVarsPlugin):
@@ -109,6 +115,8 @@ class VarsModule(BaseVarsPlugin):
 
         if self.get_option('_disable_vars_plugin_temporarily'):
             return {}
+
+        valid_extensions = self.get_option('_valid_extensions')
 
         data = {}
         for entity in entities:
@@ -140,9 +148,9 @@ class VarsModule(BaseVarsPlugin):
                                 # extension.
                                 # See:
                                 # - https://github.com/ansible-collections/community.sops/pull/6
-                                found_files = loader.find_vars_files(opath, entity.name, extensions=DEFAULT_VALID_EXTENSIONS, allow_dir=False)
+                                found_files = loader.find_vars_files(opath, entity.name, extensions=valid_extensions, allow_dir=False)
                                 found_files.extend([file_path for file_path in loader.find_vars_files(opath, entity.name)
-                                                    if any(to_text(file_path).endswith(extension) for extension in DEFAULT_VALID_EXTENSIONS)])
+                                                    if any(to_text(file_path).endswith(extension) for extension in valid_extensions)])
                                 FOUND[key] = found_files
                             else:
                                 self._display.warning("Found %s that is not a directory, skipping: %s" % (subdir, opath))
