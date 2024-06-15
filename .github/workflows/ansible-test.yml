@@ -95,7 +95,7 @@ jobs:
             sops_version: 3.6.0
           # 2.11
           - ansible: stable-2.11
-            docker_container: ubuntu2004
+            docker_container: ubuntu1804
             sops_version: 3.7.2
           # 2.12
           - ansible: stable-2.12
