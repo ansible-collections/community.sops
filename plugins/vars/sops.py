@@ -13,16 +13,19 @@ DOCUMENTATION = '''
     short_description: Loading sops-encrypted vars files
     version_added: '0.1.0'
     description:
-        - Load encrypted YAML files into corresponding groups/hosts in group_vars/ and host_vars/ directories.
-        - Files are encrypted prior to reading, making this plugin an effective companion to host_group_vars plugin.
-        - Files are restricted to .sops.yaml, .sops.yml, .sops.json extensions.
+        - Load encrypted YAML files into corresponding groups/hosts in C(group_vars/) and C(host_vars/) directories.
+        - Files are encrypted prior to reading, making this plugin an effective companion to P(ansible.builtin.host_group_vars#vars) plugin.
+        - Files are restricted to V(.sops.yaml), V(.sops.yml), V(.sops.json) extensions, unless configured otherwise
+          with O(_valid_extensions).
         - Hidden files are ignored.
     options:
       _valid_extensions:
         default: [".sops.yml", ".sops.yaml", ".sops.json"]
         description:
-          - "Check all of these extensions when looking for 'variable' files which should be YAML or JSON or vaulted versions of these."
-          - 'This affects vars_files, include_vars, inventory and vars plugins among others.'
+          - Check all of these extensions when looking for 'variable' files.
+          - These files must be SOPS encrypted YAML or JSON files.
+            The plugin will produce errors when encountering files matching these extensions that are not SOPS encrypted.
+            (This might change in a future version.)
         type: list
         elements: string
         ini:
