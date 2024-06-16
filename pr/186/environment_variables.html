@@ -256,8 +256,8 @@ Environment variables used by the ansible-core configuration are documented in <
 <dl class="std envvar">
 <dt class="sig sig-object std" id="envvar-ANSIBLE_VARS_SOPS_PLUGIN_VALID_EXTENSIONS">
 <span class="sig-name descname"><span class="pre">ANSIBLE_VARS_SOPS_PLUGIN_VALID_EXTENSIONS</span></span><a class="headerlink" href="#envvar-ANSIBLE_VARS_SOPS_PLUGIN_VALID_EXTENSIONS" title="Link to this definition"></a></dt>
-<dd><p>Check all of these extensions when looking for ‘variable’ files which should be YAML or JSON or vaulted versions of these.</p>
-<p>This affects vars_files, include_vars, inventory and vars plugins among others.</p>
+<dd><p>Check all of these extensions when looking for ‘variable’ files.</p>
+<p>These files must be SOPS encrypted YAML or JSON files. The plugin will produce errors when encountering files matching these extensions that are not SOPS encrypted. (This might change in a future version.)</p>
 <p><em>Used by:</em>
 <a class="reference internal" href="sops_vars.html#ansible-collections-community-sops-sops-vars"><span class="std std-ref">community.sops.sops vars plugin</span></a></p>
 </dd></dl>
