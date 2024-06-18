@@ -71,14 +71,15 @@ jobs:
         ansible:
           - devel
         docker_container:
-          - ubuntu2004
           - ubuntu2204
-          - fedora39
+          - ubuntu2404
+          - fedora40
         sops_version:
           - 3.5.0
           - 3.6.0
           - 3.7.3
           - 3.8.0
+          - 3.8.1
         python_version:
           - ''
         include:
@@ -120,6 +121,9 @@ jobs:
           # 2.17
           - ansible: stable-2.17
             docker_container: ubuntu2204
+            sops_version: 3.8.1
+          - ansible: stable-2.17
+            docker_container: fedora39
             sops_version: 3.8.1
           # devel
           - ansible: devel
@@ -188,12 +192,20 @@ jobs:
           - docker_container: ''
         include:
           # Install specific sops
-          - ansible: devel
+          - ansible: stable-2.17
             docker_container: ubuntu2204
             python_version: ''
             target: gha/install/1/
-          - ansible: devel
+          - ansible: stable-2.17
             docker_container: fedora39
+            python_version: ''
+            target: gha/install/1/
+          - ansible: devel
+            docker_container: ubuntu2404
+            python_version: ''
+            target: gha/install/1/
+          - ansible: devel
+            docker_container: fedora40
             python_version: ''
             target: gha/install/1/
           # Install on localhost vs. remote host
@@ -221,17 +233,17 @@ jobs:
             target: gha/install/3/
             github_latest_detection: auto
           - ansible: devel
-            docker_container: fedora39
+            docker_container: fedora40
             python_version: ''
             target: gha/install/3/
             github_latest_detection: auto
           - ansible: devel
-            docker_container: ubuntu2004
+            docker_container: ubuntu2204
             python_version: ''
             target: gha/install/3/
             github_latest_detection: api
           - ansible: devel
-            docker_container: ubuntu2204
+            docker_container: ubuntu2404
             python_version: ''
             target: gha/install/3/
             github_latest_detection: latest-release
