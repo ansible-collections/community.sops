@@ -1,0 +1,2 @@
+minor_changes:
+  - "sops vars plugin - allow to configure the valid extensions with an ``ansible.cfg`` entry or with an environment variable (https://github.com/ansible-collections/community.sops/pull/185)."

@@ -13,18 +13,28 @@ DOCUMENTATION = '''
     short_description: Loading sops-encrypted vars files
     version_added: '0.1.0'
     description:
-        - Load encrypted YAML files into corresponding groups/hosts in group_vars/ and host_vars/ directories.
-        - Files are encrypted prior to reading, making this plugin an effective companion to host_group_vars plugin.
-        - Files are restricted to .sops.yaml, .sops.yml, .sops.json extensions.
+        - Load encrypted YAML files into corresponding groups/hosts in C(group_vars/) and C(host_vars/) directories.
+        - Files are encrypted prior to reading, making this plugin an effective companion to P(ansible.builtin.host_group_vars#vars) plugin.
+        - Files are restricted to V(.sops.yaml), V(.sops.yml), V(.sops.json) extensions, unless configured otherwise
+          with O(_valid_extensions).
         - Hidden files are ignored.
     options:
       _valid_extensions:
         default: [".sops.yml", ".sops.yaml", ".sops.json"]
         description:
-          - "Check all of these extensions when looking for 'variable' files which should be YAML or JSON or vaulted versions of these."
-          - 'This affects vars_files, include_vars, inventory and vars plugins among others.'
+          - Check all of these extensions when looking for 'variable' files.
+          - These files must be SOPS encrypted YAML or JSON files.
+            The plugin will produce errors when encountering files matching these extensions that are not SOPS encrypted.
+            (This might change in a future version.)
         type: list
         elements: string
+        ini:
+          - key: valid_extensions
+            section: community.sops
+            version_added: 1.7.0
+        env:
+          - name: ANSIBLE_VARS_SOPS_PLUGIN_VALID_EXTENSIONS
+            version_added: 1.7.0
       stage:
         version_added: 0.2.0
         ini:
@@ -88,7 +98,6 @@ display = Display()
 
 FOUND = {}
 DECRYPTED = {}
-DEFAULT_VALID_EXTENSIONS = [".sops.yaml", ".sops.yml", ".sops.json"]
 
 
 class VarsModule(BaseVarsPlugin):
@@ -109,6 +118,8 @@ class VarsModule(BaseVarsPlugin):
 
         if self.get_option('_disable_vars_plugin_temporarily'):
             return {}
+
+        valid_extensions = self.get_option('_valid_extensions')
 
         data = {}
         for entity in entities:
@@ -140,9 +151,9 @@ class VarsModule(BaseVarsPlugin):
                                 # extension.
                                 # See:
                                 # - https://github.com/ansible-collections/community.sops/pull/6
-                                found_files = loader.find_vars_files(opath, entity.name, extensions=DEFAULT_VALID_EXTENSIONS, allow_dir=False)
+                                found_files = loader.find_vars_files(opath, entity.name, extensions=valid_extensions, allow_dir=False)
                                 found_files.extend([file_path for file_path in loader.find_vars_files(opath, entity.name)
-                                                    if any(to_text(file_path).endswith(extension) for extension in DEFAULT_VALID_EXTENSIONS)])
+                                                    if any(to_text(file_path).endswith(extension) for extension in valid_extensions)])
                                 FOUND[key] = found_files
                             else:
                                 self._display.warning("Found %s that is not a directory, skipping: %s" % (subdir, opath))
