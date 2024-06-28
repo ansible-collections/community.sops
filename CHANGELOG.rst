@@ -4,6 +4,24 @@ Community Sops Release Notes
 
 .. contents:: Topics
 
+v1.7.0
+======
+
+Release Summary
+---------------
+
+Bugfix and feature release to fix installation issues with SOPS 3.9.0.
+
+Minor Changes
+-------------
+
+- sops vars plugin - allow to configure the valid extensions with an ``ansible.cfg`` entry or with an environment variable (https://github.com/ansible-collections/community.sops/pull/185).
+
+Bugfixes
+--------
+
+- Fix RPM URL for the 3.9.0 release (https://github.com/ansible-collections/community.sops/pull/188).
+
 v1.6.7
 ======
 
