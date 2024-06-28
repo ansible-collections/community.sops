@@ -24,7 +24,7 @@ The following table shows which versions of sops were tested with which versions
 |---|---|
 |0.1.0|`3.5.0+`|
 |1.0.6|`3.5.0+`|
-|`main` branch|`3.5.0`, `3.6.0`, `3.7.3`, `3.8.0`|
+|`main` branch|`3.5.0`, `3.6.0`, `3.7.3`, `3.8.0`, `3.8.1`, `3.9.0`|
 
 ## Tested with Ansible
 
