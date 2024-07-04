@@ -6,6 +6,8 @@ from __future__ import absolute_import, division, print_function
 __metaclass__ = type
 
 
+import collections
+import json
 import os
 import re
 
@@ -117,15 +119,20 @@ ENCRYPT_OPTIONS = {
 class SopsError(Exception):
     ''' Extend Exception class with sops specific information '''
 
-    def __init__(self, filename, exit_code, message, decryption=True):
+    def __init__(self, filename, exit_code, message, decryption=True, operation=None):
+        if operation is None:
+            operation = 'decrypt' if decryption else 'encrypt'
         if exit_code in SOPS_ERROR_CODES:
             exception_name = SOPS_ERROR_CODES[exit_code]
             message = "error with file %s: %s exited with code %d: %s" % (
                 filename, exception_name, exit_code, to_native(message))
         else:
             message = "could not %s file %s; Unknown sops error code: %s; message: %s" % (
-                'decrypt' if decryption else 'encrypt', filename, exit_code, to_native(message))
+                operation, filename, exit_code, to_native(message))
         super(SopsError, self).__init__(message)
+
+
+SopsFileStatus = collections.namedtuple('SopsFileStatus', ['encrypted'])
 
 
 class SopsRunner(object):
@@ -155,12 +162,14 @@ class SopsRunner(object):
         self.display = display
 
         self.version = (3, 7, 3)  # if --disable-version-check is not supported, this is version 3.7.3 or older
+        self.version_string = '(before 3.8.0)'
 
         exit_code, output, err = self._run_command([self.binary, '--version', '--disable-version-check'])
         if exit_code == 0:
             m = _SOPS_VERSION.match(output.decode('utf-8'))
             if m:
                 self.version = int(m.group(1)), int(m.group(2)), int(m.group(3))
+                self.version_string = '%d.%d.%d' % self.version
                 self._debug('SOPS version detected as %s' % (self.version, ))
             else:
                 self._warn('Cannot extract SOPS version from: %s' % repr(output))
@@ -235,13 +244,36 @@ class SopsRunner(object):
 
         # sops logs always to stderr, as stdout is used for
         # file content
-        if err and self.display:
+        if err:
             self._debug(u'Unexpected stderr:\n' + to_text(err, errors='surrogate_or_strict'))
 
         if exit_code != 0:
             raise SopsError('to stdout', exit_code, err, decryption=False)
 
         return output
+
+    def has_filestatus(self):
+        return self.version >= (3, 9, 0)
+
+    def get_filestatus(self, path):
+        command = [self.binary, 'filestatus', path]
+
+        exit_code, output, err = self._run_command(command)
+
+        # sops logs always to stderr, as stdout is used for
+        # file content
+        if err:
+            self._debug(u'Unexpected stderr:\n' + to_text(err, errors='surrogate_or_strict'))
+
+        if exit_code != 0:
+            raise SopsError(path, exit_code, err, operation='inspect')
+
+        try:
+            result = json.loads(output)
+            return SopsFileStatus(result['encrypted'])
+        except Exception as exc:
+            self._debug(u'Unexpected stdout:\n' + to_text(output, errors='surrogate_or_strict'))
+            raise SopsError(path, 0, 'Cannot decode filestatus result: %s' % exc, operation='inspect')
 
 
 _SOPS_RUNNER_CACHE = dict()

@@ -24,8 +24,8 @@ DOCUMENTATION = '''
         description:
           - Check all of these extensions when looking for 'variable' files.
           - These files must be SOPS encrypted YAML or JSON files.
-            The plugin will produce errors when encountering files matching these extensions that are not SOPS encrypted.
-            (This might change in a future version.)
+          - By default the plugin will produce errors when encountering files matching these extensions that are not SOPS encrypted.
+            This behavior can be controlled with the O(handle_unencrypted_files) option.
         type: list
         elements: string
         ini:
@@ -68,6 +68,27 @@ DOCUMENTATION = '''
         version_added: 1.3.0
         env:
           - name: SOPS_ANSIBLE_AWX_DISABLE_VARS_PLUGIN_TEMPORARILY
+      handle_unencrypted_files:
+        description:
+          - How to handle files that match the extensions in O(_valid_extensions) that are not SOPS encrypted.
+          - The default value V(error) will produce an error.
+          - The value V(skip) will simply skip these files. This requires SOPS 3.9.0 or later.
+          - The value V(warn) will skip these files and emit a warning. This requires SOPS 3.9.0 or later.
+          - B(Note) that this will not help if the store SOPS uses cannot parse the file, for example because it is
+            no valid JSON/YAML/... file despite its file extension. For extensions other than the default ones SOPS
+            uses the binary store, which tries to parse the file as JSON.
+        type: string
+        choices:
+          - skip
+          - warn
+          - error
+        default: error
+        version_added: 1.8.0
+        ini:
+          - key: handle_unencrypted_files
+            section: community.sops
+        env:
+          - name: ANSIBLE_VARS_SOPS_PLUGIN_HANDLE_UNENCRYPTED_FILES
     extends_documentation_fragment:
         - ansible.builtin.vars_plugin_staging
         - community.sops.sops
@@ -90,7 +111,7 @@ from ansible.plugins.vars import BaseVarsPlugin
 from ansible.inventory.host import Host
 from ansible.inventory.group import Group
 from ansible.utils.vars import combine_vars
-from ansible_collections.community.sops.plugins.module_utils.sops import Sops
+from ansible_collections.community.sops.plugins.module_utils.sops import Sops, SopsError
 
 from ansible.utils.display import Display
 display = Display()
@@ -120,6 +141,7 @@ class VarsModule(BaseVarsPlugin):
             return {}
 
         valid_extensions = self.get_option('_valid_extensions')
+        handle_unencrypted_files = self.get_option('handle_unencrypted_files')
 
         data = {}
         for entity in entities:
@@ -162,13 +184,46 @@ class VarsModule(BaseVarsPlugin):
                         if cache and found in DECRYPTED:
                             file_content = DECRYPTED[found]
                         else:
-                            file_content = Sops.decrypt(found, display=display, get_option_value=get_option_value)
+                            sops_runner = Sops.get_sops_runner_from_options(get_option_value, display=display)
+                            if handle_unencrypted_files != 'error' and not sops_runner.has_filestatus():
+                                raise AnsibleParserError(
+                                    'Cannot use handle_unencrypted_files=%s with SOPS %s' % (handle_unencrypted_files, sops_runner.version_string)
+                                )
+                            try:
+                                file_content = sops_runner.decrypt(found, get_option_value=get_option_value)
+                            except SopsError as exc:
+                                skip = False
+                                if sops_runner.has_filestatus():
+                                    # Check whether sops thinks the file might be encrypted. If it thinks it is not,
+                                    # skip it. Otherwise, re-raise the original error
+                                    try:
+                                        file_status = sops_runner.get_filestatus(found)
+                                        if not file_status.encrypted:
+                                            if handle_unencrypted_files == 'skip':
+                                                self._display.vvvv("SOPS vars plugin: skipping unencrypted file %s" % found)
+                                                skip = True
+                                            elif handle_unencrypted_files == 'warn':
+                                                self._display.warning("SOPS vars plugin: skipping unencrypted file %s" % found)
+                                                skip = True
+                                            elif handle_unencrypted_files == 'error':
+                                                raise AnsibleParserError("SOPS vars plugin: file %s is not encrypted" % found)
+                                    except SopsError as status_exc:
+                                        # The filestatus operation can fail for example if sops cannot parse the file
+                                        # as JSON/YAML. In that case, also re-raise the original error
+                                        self._display.warning("SOPS vars plugin: cannot obtain file status of %s: %s" % (found, status_exc))
+                                if skip:
+                                    continue
+                                raise
                             DECRYPTED[found] = file_content
                         new_data = loader.load(file_content)
                         if new_data:  # ignore empty files
                             data = combine_vars(data, new_data)
 
-                except Exception as e:
+                except AnsibleParserError:
+                    raise
+                except SopsError as e:
                     raise AnsibleParserError(to_native(e))
+                except Exception as e:
+                    raise AnsibleParserError('Unexpected error in the SOPS vars plugin: %s' % to_native(e))
 
         return data

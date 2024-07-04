@@ -9,5 +9,4 @@ if [ "$1" != 4 ]; then
     exit 1
 fi
 
-grep -F "ERROR! error with file" "$2"
-grep "sops metadata not found" "$2"
+( grep -F "ERROR! error with file" "$2" && grep "sops metadata not found" "$2" ) || ( grep -F "ERROR! SOPS vars plugin: file" "$2" && grep "is not encrypted" "$2" )
