@@ -245,6 +245,23 @@
         value_1_raw: "{{ slurp.content | b64decode | community.sops.decrypt(output_type='json') | b64encode }}"
         value_1: "{{ slurp.content | b64decode | community.sops.decrypt(output_type='json') | from_json }}"
 
+    - name: "SOPS 3.9.0+: check whether path_regex in .sops.yaml works"
+      assert:
+        that:
+          - >-
+            '"key1": "value1"' in slurp.content | b64decode
+          - >-
+            '"unencrypted_regex": "^key1$"' in slurp.content | b64decode
+      when: sops_version_controller is version('3.9.0', '>=')
+    - name: "SOPS before 3.9.0: check whether path_regex in .sops.yaml did not work"
+      assert:
+        that:
+          - >-
+            '"key1": "value1"' not in slurp.content | b64decode
+          - >-
+            '"unencrypted_regex": "^key1$"' not in slurp.content | b64decode
+      when: sops_version_controller is version('3.9.0', '<')
+
     - name: Create JSON file (idempotency, check mode)
       community.sops.sops_encrypt:
         path: "{{ remote_tmp_dir }}/test_json"
