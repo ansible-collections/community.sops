@@ -5,18 +5,11 @@
 
 set -eux
 
-# Don't run this on Ansible 2.9
-if (ansible --version | grep '^ansible 2\.9\.'); then
-    # Ansible 2.9 doesn't know about var plugins
-    exit
-fi
-
-# Install sops
-ANSIBLE_ROLES_PATH=.. ansible-playbook setup.yml
-
 if [ "$(command -v sops)" == "" ]; then
-    # sops was not installed
-    exit
+    echo "sops is not installed"
+    exit 1
 fi
 
-./run-tests.sh
+for TEST in $(find . -maxdepth 1 -type d -name 'test-*' | sort); do
+    ./run-test.sh "${TEST}" "$@"
+done
