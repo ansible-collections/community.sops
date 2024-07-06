@@ -10,6 +10,13 @@ if [ "$(command -v sops)" == "" ]; then
     exit 1
 fi
 
+# Get hold of SOPS version
+set +e
+SOPS_VERSION_RAW="$(sops --version --disable-version-check)" || SOPS_VERSION_RAW="$(sops --version)"
+set -e
+SOPS_VERSION="$(echo "${SOPS_VERSION_RAW}" | sed -E 's/^sops ([0-9.]+).*/\1/g')"
+
+# Run all tests
 for TEST in $(find . -maxdepth 1 -type d -name 'test-*' | sort); do
-    ./run-test.sh "${TEST}" "$@"
+    ./run-test.sh "${TEST}" "${SOPS_VERSION}" "$@"
 done

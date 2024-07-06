@@ -10,13 +10,27 @@ if [ "$(command -v sops)" == "" ]; then
     exit 1
 fi
 
-TEST="$1"
-if [ "${TEST}" == "" ]; then
-    echo "First parameter must be test name!"
+if [ $# -lt 2 ]; then
+    echo "First parameter must be test name, second parameter the SOPS version!"
     exit 1
 fi
+TEST="$1"
+SOPS_VERSION="$2"
 
-shift
+if [ -e "${TEST}/min-version" ]; then
+    MIN_VERSION="$(cat "${TEST}/min-version")"
+    if [ "$(echo -e "${SOPS_VERSION}\n${MIN_VERSION}" | sort -V | head -1)" != "${MIN_VERSION}" ]; then
+        exit
+    fi
+fi
+if [ -e "${TEST}/max-version" ]; then
+    MAX_VERSION="$(cat "${TEST}/max-version")"
+    if [ "$(echo -e "${SOPS_VERSION}\n${MAX_VERSION}" | sort -V | head -1)" != "${SOPS_VERSION}" ]; then
+        exit
+    fi
+fi
+
+shift 2
 
 (
     cd "${TEST}"
