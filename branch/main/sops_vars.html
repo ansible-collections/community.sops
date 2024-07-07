@@ -5,7 +5,7 @@
 <meta content="2.12.0" name="antsibull-docs" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>community.sops.sops vars – Loading sops-encrypted vars files &mdash; Community.Sops Collection  documentation</title>
+  <title>community.sops.sops vars – Loading SOPS-encrypted vars files &mdash; Community.Sops Collection  documentation</title>
       <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=5707b69d" />
       <link rel="stylesheet" type="text/css" href="_static/css/ansible.css?v=c5b67dd2" />
       <link rel="stylesheet" type="text/css" href="_static/antsibull-minimal.css" />
@@ -24,8 +24,8 @@
         <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
     <script src="_static/js/theme.js"></script>
     <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="community.sops.install role – Install Mozilla sops" href="install_role.html" />
-    <link rel="prev" title="community.sops.sops lookup – Read sops encrypted file contents" href="sops_lookup.html" /><!-- extra head elements for Ansible beyond RTD Sphinx Theme -->
+    <link rel="next" title="community.sops.install role – Install SOPS" href="install_role.html" />
+    <link rel="prev" title="community.sops.sops lookup – Read SOPS-encrypted file contents" href="sops_lookup.html" /><!-- extra head elements for Ansible beyond RTD Sphinx Theme -->
 
 
 
@@ -79,21 +79,21 @@
 <li class="toctree-l1"><a class="reference internal" href="changelog.html">Community.Sops Release Notes</a></li>
 </ul>
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="docsite/guide.html">Protecting Ansible secrets with Mozilla SOPS</a></li>
+<li class="toctree-l1"><a class="reference internal" href="docsite/guide.html">Protecting Ansible secrets with SOPS</a></li>
 </ul>
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="load_vars_module.html">community.sops.load_vars module – Load sops-encrypted variables from files, dynamically within a task</a></li>
-<li class="toctree-l1"><a class="reference internal" href="sops_encrypt_module.html">community.sops.sops_encrypt module – Encrypt data with sops</a></li>
+<li class="toctree-l1"><a class="reference internal" href="load_vars_module.html">community.sops.load_vars module – Load SOPS-encrypted variables from files, dynamically within a task</a></li>
+<li class="toctree-l1"><a class="reference internal" href="sops_encrypt_module.html">community.sops.sops_encrypt module – Encrypt data with SOPS</a></li>
 </ul>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="_latest_version_filter.html">community.sops._latest_version filter – [INTERNAL] Get latest version from a list of versions</a></li>
-<li class="toctree-l1"><a class="reference internal" href="decrypt_filter.html">community.sops.decrypt filter – Decrypt sops encrypted data</a></li>
+<li class="toctree-l1"><a class="reference internal" href="decrypt_filter.html">community.sops.decrypt filter – Decrypt SOPS-encrypted data</a></li>
 </ul>
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="sops_lookup.html">community.sops.sops lookup – Read sops encrypted file contents</a></li>
+<li class="toctree-l1"><a class="reference internal" href="sops_lookup.html">community.sops.sops lookup – Read SOPS-encrypted file contents</a></li>
 </ul>
 <ul class="current">
-<li class="toctree-l1 current"><a class="current reference internal" href="#">community.sops.sops vars – Loading sops-encrypted vars files</a><ul>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">community.sops.sops vars – Loading SOPS-encrypted vars files</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="#synopsis">Synopsis</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#requirements">Requirements</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#parameters">Parameters</a></li>
@@ -106,7 +106,7 @@
 </li>
 </ul>
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="install_role.html">community.sops.install role – Install Mozilla sops</a></li>
+<li class="toctree-l1"><a class="reference internal" href="install_role.html">community.sops.install role – Install SOPS</a></li>
 </ul>
 <!-- extra nav elements for Ansible beyond RTD Sphinx Theme -->
 
@@ -124,7 +124,7 @@
           <div role="navigation" aria-label="Page navigation">
   <ul class="wy-breadcrumbs">
       <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
-      <li class="breadcrumb-item active">community.sops.sops vars – Loading sops-encrypted vars files</li>
+      <li class="breadcrumb-item active">community.sops.sops vars – Loading SOPS-encrypted vars files</li>
       <li class="wy-breadcrumbs-aside">
               <!-- User defined GitHub URL -->
               <a href="https://github.com/ansible-collections/community.sops/edit/main/plugins/vars/sops.py?description=%23%23%23%23%23%20SUMMARY%0A%3C!—%20Your%20description%20here%20–%3E%0A%0A%0A%23%23%23%23%23%20ISSUE%20TYPE%0A-%20Docs%20Pull%20Request%0A%0A%2Blabel:%20docsite_pr" class="fa fa-github"> Edit on GitHub</a>
@@ -138,7 +138,7 @@
            <div itemprop="articleBody">
              
   <span class="target" id="ansible-collections-community-sops-sops-vars"></span><section id="community-sops-sops-vars-loading-sops-encrypted-vars-files">
-<h1>community.sops.sops vars – Loading sops-encrypted vars files<a class="headerlink" href="#community-sops-sops-vars-loading-sops-encrypted-vars-files" title="Link to this heading"></a></h1>
+<h1>community.sops.sops vars – Loading SOPS-encrypted vars files<a class="headerlink" href="#community-sops-sops-vars-loading-sops-encrypted-vars-files" title="Link to this heading"></a></h1>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
 <p>This vars plugin is part of the <a class="reference external" href="https://galaxy.ansible.com/ui/repo/published/community/sops/">community.sops collection</a> (version 1.8.0).</p>
@@ -230,7 +230,7 @@ see <a class="reference internal" href="#ansible-collections-community-sops-sops
 <p><em class="ansible-option-versionadded">added in community.sops 1.4.0</em></p>
 </div></td>
 <td><div class="ansible-option-cell"><p>One or more age private keys that can be used to decrypt encrypted files.</p>
-<p>Will be set as the <code class="xref std std-envvar docutils literal notranslate"><span class="pre">SOPS_AGE_KEY</span></code> environment variable when calling sops.</p>
+<p>Will be set as the <code class="xref std std-envvar docutils literal notranslate"><span class="pre">SOPS_AGE_KEY</span></code> environment variable when calling SOPS.</p>
 <p class="ansible-option-line"><strong class="ansible-option-configuration">Configuration:</strong></p>
 <ul class="simple">
 <li><p>Environment variable: <span class="target" id="index-2"></span><a class="reference internal" href="environment_variables.html#envvar-ANSIBLE_SOPS_AGE_KEY"><code class="xref std std-envvar docutils literal notranslate"><span class="pre">ANSIBLE_SOPS_AGE_KEY</span></code></a></p></li>
@@ -242,9 +242,9 @@ see <a class="reference internal" href="#ansible-collections-community-sops-sops
 <a class="ansibleOptionLink" href="#parameter-age_keyfile" title="Permalink to this option"></a><p class="ansible-option-type-line"><span class="ansible-option-type">path</span></p>
 <p><em class="ansible-option-versionadded">added in community.sops 1.4.0</em></p>
 </div></td>
-<td><div class="ansible-option-cell"><p>The file containing the age private keys that sops can use to decrypt encrypted files.</p>
-<p>Will be set as the <code class="xref std std-envvar docutils literal notranslate"><span class="pre">SOPS_AGE_KEY_FILE</span></code> environment variable when calling sops.</p>
-<p>By default, sops looks for <code class="docutils literal notranslate"><span class="pre">sops/age/keys.txt</span></code> inside your user configuration directory.</p>
+<td><div class="ansible-option-cell"><p>The file containing the age private keys that SOPS can use to decrypt encrypted files.</p>
+<p>Will be set as the <code class="xref std std-envvar docutils literal notranslate"><span class="pre">SOPS_AGE_KEY_FILE</span></code> environment variable when calling SOPS.</p>
+<p>By default, SOPS looks for <code class="docutils literal notranslate"><span class="pre">sops/age/keys.txt</span></code> inside your user configuration directory.</p>
 <p class="ansible-option-line"><strong class="ansible-option-configuration">Configuration:</strong></p>
 <ul>
 <li><p>INI entry:</p>
@@ -263,7 +263,7 @@ see <a class="reference internal" href="#ansible-collections-community-sops-sops
 <p><em class="ansible-option-versionadded">added in community.sops 1.0.0</em></p>
 </div></td>
 <td><div class="ansible-option-cell"><p>The AWS access key ID to use for requests to AWS.</p>
-<p>Sets the environment variable <code class="xref std std-envvar docutils literal notranslate"><span class="pre">AWS_ACCESS_KEY_ID</span></code> for the sops call.</p>
+<p>Sets the environment variable <code class="xref std std-envvar docutils literal notranslate"><span class="pre">AWS_ACCESS_KEY_ID</span></code> for the SOPS call.</p>
 <p class="ansible-option-line"><strong class="ansible-option-configuration">Configuration:</strong></p>
 <ul>
 <li><p>INI entry:</p>
@@ -285,7 +285,7 @@ see <a class="reference internal" href="#ansible-collections-community-sops-sops
 <p><em class="ansible-option-versionadded">added in community.sops 1.0.0</em></p>
 </div></td>
 <td><div class="ansible-option-cell"><p>The AWS profile to use for requests to AWS.</p>
-<p>This corresponds to the sops <code class="docutils literal notranslate"><span class="pre">--aws-profile</span></code> option.</p>
+<p>This corresponds to the SOPS <code class="docutils literal notranslate"><span class="pre">--aws-profile</span></code> option.</p>
 <p class="ansible-option-line"><strong class="ansible-option-configuration">Configuration:</strong></p>
 <ul>
 <li><p>INI entry:</p>
@@ -307,7 +307,7 @@ see <a class="reference internal" href="#ansible-collections-community-sops-sops
 <p><em class="ansible-option-versionadded">added in community.sops 1.0.0</em></p>
 </div></td>
 <td><div class="ansible-option-cell"><p>The AWS secret access key to use for requests to AWS.</p>
-<p>Sets the environment variable <code class="xref std std-envvar docutils literal notranslate"><span class="pre">AWS_SECRET_ACCESS_KEY</span></code> for the sops call.</p>
+<p>Sets the environment variable <code class="xref std std-envvar docutils literal notranslate"><span class="pre">AWS_SECRET_ACCESS_KEY</span></code> for the SOPS call.</p>
 <p class="ansible-option-line"><strong class="ansible-option-configuration">Configuration:</strong></p>
 <ul>
 <li><p>Environment variable: <span class="target" id="index-6"></span><a class="reference internal" href="environment_variables.html#envvar-ANSIBLE_SOPS_AWS_SECRET_ACCESS_KEY"><code class="xref std std-envvar docutils literal notranslate"><span class="pre">ANSIBLE_SOPS_AWS_SECRET_ACCESS_KEY</span></code></a></p>
@@ -322,7 +322,7 @@ see <a class="reference internal" href="#ansible-collections-community-sops-sops
 <p><em class="ansible-option-versionadded">added in community.sops 1.0.0</em></p>
 </div></td>
 <td><div class="ansible-option-cell"><p>The AWS session token to use for requests to AWS.</p>
-<p>Sets the environment variable <code class="xref std std-envvar docutils literal notranslate"><span class="pre">AWS_SESSION_TOKEN</span></code> for the sops call.</p>
+<p>Sets the environment variable <code class="xref std std-envvar docutils literal notranslate"><span class="pre">AWS_SESSION_TOKEN</span></code> for the SOPS call.</p>
 <p class="ansible-option-line"><strong class="ansible-option-configuration">Configuration:</strong></p>
 <ul>
 <li><p>INI entry:</p>
@@ -369,9 +369,9 @@ see <a class="reference internal" href="#ansible-collections-community-sops-sops
 <a class="ansibleOptionLink" href="#parameter-config_path" title="Permalink to this option"></a><p class="ansible-option-type-line"><span class="ansible-option-type">path</span></p>
 <p><em class="ansible-option-versionadded">added in community.sops 1.0.0</em></p>
 </div></td>
-<td><div class="ansible-option-cell"><p>Path to the sops configuration file.</p>
-<p>If not set, sops will recursively search for the config file starting at the file that is encrypted or decrypted.</p>
-<p>This corresponds to the sops <code class="docutils literal notranslate"><span class="pre">--config</span></code> option.</p>
+<td><div class="ansible-option-cell"><p>Path to the SOPS configuration file.</p>
+<p>If not set, SOPS will recursively search for the config file starting at the file that is encrypted or decrypted.</p>
+<p>This corresponds to the SOPS <code class="docutils literal notranslate"><span class="pre">--config</span></code> option.</p>
 <p class="ansible-option-line"><strong class="ansible-option-configuration">Configuration:</strong></p>
 <ul>
 <li><p>INI entry:</p>
@@ -392,8 +392,8 @@ see <a class="reference internal" href="#ansible-collections-community-sops-sops
 <a class="ansibleOptionLink" href="#parameter-enable_local_keyservice" title="Permalink to this option"></a><p class="ansible-option-type-line"><span class="ansible-option-type">boolean</span></p>
 <p><em class="ansible-option-versionadded">added in community.sops 1.0.0</em></p>
 </div></td>
-<td><div class="ansible-option-cell"><p>Tell sops to use local key service.</p>
-<p>This corresponds to the sops <code class="docutils literal notranslate"><span class="pre">--enable-local-keyservice</span></code> option.</p>
+<td><div class="ansible-option-cell"><p>Tell SOPS to use local key service.</p>
+<p>This corresponds to the SOPS <code class="docutils literal notranslate"><span class="pre">--enable-local-keyservice</span></code> option.</p>
 <p class="ansible-option-line"><strong class="ansible-option-choices">Choices:</strong></p>
 <ul class="simple">
 <li><p><code class="ansible-option-default-bold docutils literal notranslate"><strong><span class="pre">false</span></strong></code> <span class="ansible-option-choices-default-mark">← (default)</span></p></li>
@@ -449,7 +449,7 @@ see <a class="reference internal" href="#ansible-collections-community-sops-sops
 </div></td>
 <td><div class="ansible-option-cell"><p>Specify key services to use next to the local one.</p>
 <p>A key service must be specified in the form <code class="docutils literal notranslate"><span class="pre">protocol://address</span></code>, for example <code class="docutils literal notranslate"><span class="pre">tcp://myserver.com:5000</span></code>.</p>
-<p>This corresponds to the sops <code class="docutils literal notranslate"><span class="pre">--keyservice</span></code> option.</p>
+<p>This corresponds to the SOPS <code class="docutils literal notranslate"><span class="pre">--keyservice</span></code> option.</p>
 <p class="ansible-option-line"><strong class="ansible-option-configuration">Configuration:</strong></p>
 <ul>
 <li><p>INI entry:</p>
@@ -470,7 +470,7 @@ see <a class="reference internal" href="#ansible-collections-community-sops-sops
 <a class="ansibleOptionLink" href="#parameter-sops_binary" title="Permalink to this option"></a><p class="ansible-option-type-line"><span class="ansible-option-type">path</span></p>
 <p><em class="ansible-option-versionadded">added in community.sops 1.0.0</em></p>
 </div></td>
-<td><div class="ansible-option-cell"><p>Path to the sops binary.</p>
+<td><div class="ansible-option-cell"><p>Path to the SOPS binary.</p>
 <p>By default uses <code class="docutils literal notranslate"><span class="pre">sops</span></code>.</p>
 <p class="ansible-option-line"><strong class="ansible-option-configuration">Configuration:</strong></p>
 <ul>
@@ -523,11 +523,11 @@ see <a class="reference internal" href="#ansible-collections-community-sops-sops
 <div class="admonition seealso">
 <p class="admonition-title">See also</p>
 <dl class="simple">
-<dt><a class="reference internal" href="sops_lookup.html#ansible-collections-community-sops-sops-lookup"><span class="std std-ref">community.sops.sops</span></a> lookup plugin</dt><dd><p>The sops lookup can be used decrypt sops-encrypted files.</p>
+<dt><a class="reference internal" href="sops_lookup.html#ansible-collections-community-sops-sops-lookup"><span class="std std-ref">community.sops.sops</span></a> lookup plugin</dt><dd><p>The sops lookup can be used decrypt SOPS-encrypted files.</p>
 </dd>
-<dt><a class="reference internal" href="decrypt_filter.html#ansible-collections-community-sops-decrypt-filter"><span class="std std-ref">community.sops.decrypt</span></a> filter plugin</dt><dd><p>The decrypt filter can be used to descrypt sops-encrypted in-memory data.</p>
+<dt><a class="reference internal" href="decrypt_filter.html#ansible-collections-community-sops-decrypt-filter"><span class="std std-ref">community.sops.decrypt</span></a> filter plugin</dt><dd><p>The decrypt filter can be used to decrypt SOPS-encrypted in-memory data.</p>
 </dd>
-<dt><a class="reference internal" href="load_vars_module.html#ansible-collections-community-sops-load-vars-module"><span class="std std-ref">community.sops.load_vars</span></a></dt><dd><p>Load sops-encrypted variables from files, dynamically within a task.</p>
+<dt><a class="reference internal" href="load_vars_module.html#ansible-collections-community-sops-load-vars-module"><span class="std std-ref">community.sops.load_vars</span></a></dt><dd><p>Load SOPS-encrypted variables from files, dynamically within a task.</p>
 </dd>
 </dl>
 </div>
@@ -560,8 +560,8 @@ see <a class="reference internal" href="#ansible-collections-community-sops-sops
           
 
 <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
-        <a href="sops_lookup.html" class="btn btn-neutral float-left" title="community.sops.sops lookup – Read sops encrypted file contents" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
-        <a href="install_role.html" class="btn btn-neutral float-right" title="community.sops.install role – Install Mozilla sops" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+        <a href="sops_lookup.html" class="btn btn-neutral float-left" title="community.sops.sops lookup – Read SOPS-encrypted file contents" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="install_role.html" class="btn btn-neutral float-right" title="community.sops.install role – Install SOPS" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
     </div>
 
   <hr/>

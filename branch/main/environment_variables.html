@@ -77,24 +77,24 @@
 <li class="toctree-l1"><a class="reference internal" href="changelog.html">Community.Sops Release Notes</a></li>
 </ul>
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="docsite/guide.html">Protecting Ansible secrets with Mozilla SOPS</a></li>
+<li class="toctree-l1"><a class="reference internal" href="docsite/guide.html">Protecting Ansible secrets with SOPS</a></li>
 </ul>
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="load_vars_module.html">community.sops.load_vars module – Load sops-encrypted variables from files, dynamically within a task</a></li>
-<li class="toctree-l1"><a class="reference internal" href="sops_encrypt_module.html">community.sops.sops_encrypt module – Encrypt data with sops</a></li>
+<li class="toctree-l1"><a class="reference internal" href="load_vars_module.html">community.sops.load_vars module – Load SOPS-encrypted variables from files, dynamically within a task</a></li>
+<li class="toctree-l1"><a class="reference internal" href="sops_encrypt_module.html">community.sops.sops_encrypt module – Encrypt data with SOPS</a></li>
 </ul>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="_latest_version_filter.html">community.sops._latest_version filter – [INTERNAL] Get latest version from a list of versions</a></li>
-<li class="toctree-l1"><a class="reference internal" href="decrypt_filter.html">community.sops.decrypt filter – Decrypt sops encrypted data</a></li>
+<li class="toctree-l1"><a class="reference internal" href="decrypt_filter.html">community.sops.decrypt filter – Decrypt SOPS-encrypted data</a></li>
 </ul>
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="sops_lookup.html">community.sops.sops lookup – Read sops encrypted file contents</a></li>
+<li class="toctree-l1"><a class="reference internal" href="sops_lookup.html">community.sops.sops lookup – Read SOPS-encrypted file contents</a></li>
 </ul>
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="sops_vars.html">community.sops.sops vars – Loading sops-encrypted vars files</a></li>
+<li class="toctree-l1"><a class="reference internal" href="sops_vars.html">community.sops.sops vars – Loading SOPS-encrypted vars files</a></li>
 </ul>
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="install_role.html">community.sops.install role – Install Mozilla sops</a></li>
+<li class="toctree-l1"><a class="reference internal" href="install_role.html">community.sops.install role – Install SOPS</a></li>
 </ul>
 <!-- extra nav elements for Ansible beyond RTD Sphinx Theme -->
 
@@ -131,7 +131,7 @@ Environment variables used by the ansible-core configuration are documented in <
 <dt class="sig sig-object std" id="envvar-ANSIBLE_SOPS_AGE_KEY">
 <span class="sig-name descname"><span class="pre">ANSIBLE_SOPS_AGE_KEY</span></span><a class="headerlink" href="#envvar-ANSIBLE_SOPS_AGE_KEY" title="Link to this definition"></a></dt>
 <dd><p>One or more age private keys that can be used to decrypt encrypted files.</p>
-<p>Will be set as the <code class="xref std std-envvar docutils literal notranslate"><span class="pre">SOPS_AGE_KEY</span></code> environment variable when calling sops.</p>
+<p>Will be set as the <code class="xref std std-envvar docutils literal notranslate"><span class="pre">SOPS_AGE_KEY</span></code> environment variable when calling SOPS.</p>
 <p><em>Used by:</em>
 <a class="reference internal" href="sops_lookup.html#ansible-collections-community-sops-sops-lookup"><span class="std std-ref">community.sops.sops lookup plugin</span></a>,
 <a class="reference internal" href="sops_vars.html#ansible-collections-community-sops-sops-vars"><span class="std std-ref">community.sops.sops vars plugin</span></a></p>
@@ -140,9 +140,9 @@ Environment variables used by the ansible-core configuration are documented in <
 <dl class="std envvar">
 <dt class="sig sig-object std" id="envvar-ANSIBLE_SOPS_AGE_KEYFILE">
 <span class="sig-name descname"><span class="pre">ANSIBLE_SOPS_AGE_KEYFILE</span></span><a class="headerlink" href="#envvar-ANSIBLE_SOPS_AGE_KEYFILE" title="Link to this definition"></a></dt>
-<dd><p>The file containing the age private keys that sops can use to decrypt encrypted files.</p>
-<p>Will be set as the <code class="xref std std-envvar docutils literal notranslate"><span class="pre">SOPS_AGE_KEY_FILE</span></code> environment variable when calling sops.</p>
-<p>By default, sops looks for <code class="docutils literal notranslate"><span class="pre">sops/age/keys.txt</span></code> inside your user configuration directory.</p>
+<dd><p>The file containing the age private keys that SOPS can use to decrypt encrypted files.</p>
+<p>Will be set as the <code class="xref std std-envvar docutils literal notranslate"><span class="pre">SOPS_AGE_KEY_FILE</span></code> environment variable when calling SOPS.</p>
+<p>By default, SOPS looks for <code class="docutils literal notranslate"><span class="pre">sops/age/keys.txt</span></code> inside your user configuration directory.</p>
 <p><em>Used by:</em>
 <a class="reference internal" href="sops_lookup.html#ansible-collections-community-sops-sops-lookup"><span class="std std-ref">community.sops.sops lookup plugin</span></a>,
 <a class="reference internal" href="sops_vars.html#ansible-collections-community-sops-sops-vars"><span class="std std-ref">community.sops.sops vars plugin</span></a></p>
@@ -152,7 +152,7 @@ Environment variables used by the ansible-core configuration are documented in <
 <dt class="sig sig-object std" id="envvar-ANSIBLE_SOPS_AWS_ACCESS_KEY_ID">
 <span class="sig-name descname"><span class="pre">ANSIBLE_SOPS_AWS_ACCESS_KEY_ID</span></span><a class="headerlink" href="#envvar-ANSIBLE_SOPS_AWS_ACCESS_KEY_ID" title="Link to this definition"></a></dt>
 <dd><p>The AWS access key ID to use for requests to AWS.</p>
-<p>Sets the environment variable <code class="xref std std-envvar docutils literal notranslate"><span class="pre">AWS_ACCESS_KEY_ID</span></code> for the sops call.</p>
+<p>Sets the environment variable <code class="xref std std-envvar docutils literal notranslate"><span class="pre">AWS_ACCESS_KEY_ID</span></code> for the SOPS call.</p>
 <p><em>Used by:</em>
 <a class="reference internal" href="sops_lookup.html#ansible-collections-community-sops-sops-lookup"><span class="std std-ref">community.sops.sops lookup plugin</span></a>,
 <a class="reference internal" href="sops_vars.html#ansible-collections-community-sops-sops-vars"><span class="std std-ref">community.sops.sops vars plugin</span></a></p>
@@ -162,7 +162,7 @@ Environment variables used by the ansible-core configuration are documented in <
 <dt class="sig sig-object std" id="envvar-ANSIBLE_SOPS_AWS_PROFILE">
 <span class="sig-name descname"><span class="pre">ANSIBLE_SOPS_AWS_PROFILE</span></span><a class="headerlink" href="#envvar-ANSIBLE_SOPS_AWS_PROFILE" title="Link to this definition"></a></dt>
 <dd><p>The AWS profile to use for requests to AWS.</p>
-<p>This corresponds to the sops <code class="docutils literal notranslate"><span class="pre">--aws-profile</span></code> option.</p>
+<p>This corresponds to the SOPS <code class="docutils literal notranslate"><span class="pre">--aws-profile</span></code> option.</p>
 <p><em>Used by:</em>
 <a class="reference internal" href="sops_lookup.html#ansible-collections-community-sops-sops-lookup"><span class="std std-ref">community.sops.sops lookup plugin</span></a>,
 <a class="reference internal" href="sops_vars.html#ansible-collections-community-sops-sops-vars"><span class="std std-ref">community.sops.sops vars plugin</span></a></p>
@@ -172,7 +172,7 @@ Environment variables used by the ansible-core configuration are documented in <
 <dt class="sig sig-object std" id="envvar-ANSIBLE_SOPS_AWS_SECRET_ACCESS_KEY">
 <span class="sig-name descname"><span class="pre">ANSIBLE_SOPS_AWS_SECRET_ACCESS_KEY</span></span><a class="headerlink" href="#envvar-ANSIBLE_SOPS_AWS_SECRET_ACCESS_KEY" title="Link to this definition"></a></dt>
 <dd><p>The AWS secret access key to use for requests to AWS.</p>
-<p>Sets the environment variable <code class="xref std std-envvar docutils literal notranslate"><span class="pre">AWS_SECRET_ACCESS_KEY</span></code> for the sops call.</p>
+<p>Sets the environment variable <code class="xref std std-envvar docutils literal notranslate"><span class="pre">AWS_SECRET_ACCESS_KEY</span></code> for the SOPS call.</p>
 <p><em>Used by:</em>
 <a class="reference internal" href="sops_lookup.html#ansible-collections-community-sops-sops-lookup"><span class="std std-ref">community.sops.sops lookup plugin</span></a>,
 <a class="reference internal" href="sops_vars.html#ansible-collections-community-sops-sops-vars"><span class="std std-ref">community.sops.sops vars plugin</span></a></p>
@@ -182,7 +182,7 @@ Environment variables used by the ansible-core configuration are documented in <
 <dt class="sig sig-object std" id="envvar-ANSIBLE_SOPS_AWS_SESSION_TOKEN">
 <span class="sig-name descname"><span class="pre">ANSIBLE_SOPS_AWS_SESSION_TOKEN</span></span><a class="headerlink" href="#envvar-ANSIBLE_SOPS_AWS_SESSION_TOKEN" title="Link to this definition"></a></dt>
 <dd><p>The AWS session token to use for requests to AWS.</p>
-<p>Sets the environment variable <code class="xref std std-envvar docutils literal notranslate"><span class="pre">AWS_SESSION_TOKEN</span></code> for the sops call.</p>
+<p>Sets the environment variable <code class="xref std std-envvar docutils literal notranslate"><span class="pre">AWS_SESSION_TOKEN</span></code> for the SOPS call.</p>
 <p><em>Used by:</em>
 <a class="reference internal" href="sops_lookup.html#ansible-collections-community-sops-sops-lookup"><span class="std std-ref">community.sops.sops lookup plugin</span></a>,
 <a class="reference internal" href="sops_vars.html#ansible-collections-community-sops-sops-vars"><span class="std std-ref">community.sops.sops vars plugin</span></a></p>
@@ -191,7 +191,7 @@ Environment variables used by the ansible-core configuration are documented in <
 <dl class="std envvar">
 <dt class="sig sig-object std" id="envvar-ANSIBLE_SOPS_BINARY">
 <span class="sig-name descname"><span class="pre">ANSIBLE_SOPS_BINARY</span></span><a class="headerlink" href="#envvar-ANSIBLE_SOPS_BINARY" title="Link to this definition"></a></dt>
-<dd><p>Path to the sops binary.</p>
+<dd><p>Path to the SOPS binary.</p>
 <p>By default uses <code class="docutils literal notranslate"><span class="pre">sops</span></code>.</p>
 <p><em>Used by:</em>
 <a class="reference internal" href="sops_lookup.html#ansible-collections-community-sops-sops-lookup"><span class="std std-ref">community.sops.sops lookup plugin</span></a>,
@@ -201,9 +201,9 @@ Environment variables used by the ansible-core configuration are documented in <
 <dl class="std envvar">
 <dt class="sig sig-object std" id="envvar-ANSIBLE_SOPS_CONFIG_PATH">
 <span class="sig-name descname"><span class="pre">ANSIBLE_SOPS_CONFIG_PATH</span></span><a class="headerlink" href="#envvar-ANSIBLE_SOPS_CONFIG_PATH" title="Link to this definition"></a></dt>
-<dd><p>Path to the sops configuration file.</p>
-<p>If not set, sops will recursively search for the config file starting at the file that is encrypted or decrypted.</p>
-<p>This corresponds to the sops <code class="docutils literal notranslate"><span class="pre">--config</span></code> option.</p>
+<dd><p>Path to the SOPS configuration file.</p>
+<p>If not set, SOPS will recursively search for the config file starting at the file that is encrypted or decrypted.</p>
+<p>This corresponds to the SOPS <code class="docutils literal notranslate"><span class="pre">--config</span></code> option.</p>
 <p><em>Used by:</em>
 <a class="reference internal" href="sops_lookup.html#ansible-collections-community-sops-sops-lookup"><span class="std std-ref">community.sops.sops lookup plugin</span></a>,
 <a class="reference internal" href="sops_vars.html#ansible-collections-community-sops-sops-vars"><span class="std std-ref">community.sops.sops vars plugin</span></a></p>
@@ -212,8 +212,8 @@ Environment variables used by the ansible-core configuration are documented in <
 <dl class="std envvar">
 <dt class="sig sig-object std" id="envvar-ANSIBLE_SOPS_ENABLE_LOCAL_KEYSERVICE">
 <span class="sig-name descname"><span class="pre">ANSIBLE_SOPS_ENABLE_LOCAL_KEYSERVICE</span></span><a class="headerlink" href="#envvar-ANSIBLE_SOPS_ENABLE_LOCAL_KEYSERVICE" title="Link to this definition"></a></dt>
-<dd><p>Tell sops to use local key service.</p>
-<p>This corresponds to the sops <code class="docutils literal notranslate"><span class="pre">--enable-local-keyservice</span></code> option.</p>
+<dd><p>Tell SOPS to use local key service.</p>
+<p>This corresponds to the SOPS <code class="docutils literal notranslate"><span class="pre">--enable-local-keyservice</span></code> option.</p>
 <p><em>Used by:</em>
 <a class="reference internal" href="sops_lookup.html#ansible-collections-community-sops-sops-lookup"><span class="std std-ref">community.sops.sops lookup plugin</span></a>,
 <a class="reference internal" href="sops_vars.html#ansible-collections-community-sops-sops-vars"><span class="std std-ref">community.sops.sops vars plugin</span></a></p>
@@ -224,7 +224,7 @@ Environment variables used by the ansible-core configuration are documented in <
 <span class="sig-name descname"><span class="pre">ANSIBLE_SOPS_KEYSERVICE</span></span><a class="headerlink" href="#envvar-ANSIBLE_SOPS_KEYSERVICE" title="Link to this definition"></a></dt>
 <dd><p>Specify key services to use next to the local one.</p>
 <p>A key service must be specified in the form <code class="docutils literal notranslate"><span class="pre">protocol://address</span></code>, for example <code class="docutils literal notranslate"><span class="pre">tcp://myserver.com:5000</span></code>.</p>
-<p>This corresponds to the sops <code class="docutils literal notranslate"><span class="pre">--keyservice</span></code> option.</p>
+<p>This corresponds to the SOPS <code class="docutils literal notranslate"><span class="pre">--keyservice</span></code> option.</p>
 <p><em>Used by:</em>
 <a class="reference internal" href="sops_lookup.html#ansible-collections-community-sops-sops-lookup"><span class="std std-ref">community.sops.sops lookup plugin</span></a>,
 <a class="reference internal" href="sops_vars.html#ansible-collections-community-sops-sops-vars"><span class="std std-ref">community.sops.sops vars plugin</span></a></p>
