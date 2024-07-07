@@ -16,10 +16,10 @@ DOCUMENTATION = '''
         - Load encrypted YAML files into corresponding groups/hosts in C(group_vars/) and C(host_vars/) directories.
         - Files are encrypted prior to reading, making this plugin an effective companion to P(ansible.builtin.host_group_vars#vars) plugin.
         - Files are restricted to V(.sops.yaml), V(.sops.yml), V(.sops.json) extensions, unless configured otherwise
-          with O(_valid_extensions).
+          with O(valid_extensions).
         - Hidden files are ignored.
     options:
-      _valid_extensions:
+      valid_extensions:
         default: [".sops.yml", ".sops.yaml", ".sops.json"]
         description:
           - Check all of these extensions when looking for 'variable' files.
@@ -59,7 +59,7 @@ DOCUMENTATION = '''
             section: community.sops
         env:
           - name: ANSIBLE_VARS_SOPS_PLUGIN_CACHE
-      _disable_vars_plugin_temporarily:
+      disable_vars_plugin_temporarily:
         description:
           - Temporarily disable this plugin.
           - Useful if ansible-inventory is supposed to be run without decrypting secrets (in AWX for instance).
@@ -70,7 +70,7 @@ DOCUMENTATION = '''
           - name: SOPS_ANSIBLE_AWX_DISABLE_VARS_PLUGIN_TEMPORARILY
       handle_unencrypted_files:
         description:
-          - How to handle files that match the extensions in O(_valid_extensions) that are not SOPS encrypted.
+          - How to handle files that match the extensions in O(valid_extensions) that are not SOPS encrypted.
           - The default value V(error) will produce an error.
           - The value V(skip) will simply skip these files. This requires SOPS 3.9.0 or later.
           - The value V(warn) will skip these files and emit a warning. This requires SOPS 3.9.0 or later.
@@ -137,10 +137,10 @@ class VarsModule(BaseVarsPlugin):
         if cache is None:
             cache = self.get_option('cache')
 
-        if self.get_option('_disable_vars_plugin_temporarily'):
+        if self.get_option('disable_vars_plugin_temporarily'):
             return {}
 
-        valid_extensions = self.get_option('_valid_extensions')
+        valid_extensions = self.get_option('valid_extensions')
         handle_unencrypted_files = self.get_option('handle_unencrypted_files')
 
         data = {}

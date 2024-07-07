@@ -418,7 +418,7 @@ See :ref:`VARIABLE_PLUGINS_ENABLED <VARIABLE_PLUGINS_ENABLED>` for more details 
 - ``.sops.yml``
 - ``.sops.json``
 
-(The list of extensions can be adjusted with :ansopt:`community.sops.sops#vars:_valid_extensions`.) The vars plugin will decrypt them and you can use their unencrypted content transparently.
+(The list of extensions can be adjusted with :ansopt:`community.sops.sops#vars:valid_extensions`.) The vars plugin will decrypt them and you can use their unencrypted content transparently.
 
 If you need to dynamically load encrypted variables, similar to the built-in :ansplugin:`ansible.builtin.include_vars action <ansible.builtin.include_vars#module>`, you can use the :ansplugin:`community.sops.load_vars action <community.sops.load_vars#module>` action. Please note that it is not a perfect replacement, since the built-in action relies on some hard-coded special casing in ansible-core which allows it to load the variables actually as variables (more precisely: as "unsafe" Jinja2 expressions which are automatically evaluated when used). Other action plugins, such as :ansplugin:`community.sops.load_vars#module`, cannot do that and have to load the variables as facts instead.
 
