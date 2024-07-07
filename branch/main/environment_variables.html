@@ -242,6 +242,18 @@ Environment variables used by the ansible-core configuration are documented in <
 </dd></dl>
 
 <dl class="std envvar">
+<dt class="sig sig-object std" id="envvar-ANSIBLE_VARS_SOPS_PLUGIN_HANDLE_UNENCRYPTED_FILES">
+<span class="sig-name descname"><span class="pre">ANSIBLE_VARS_SOPS_PLUGIN_HANDLE_UNENCRYPTED_FILES</span></span><a class="headerlink" href="#envvar-ANSIBLE_VARS_SOPS_PLUGIN_HANDLE_UNENCRYPTED_FILES" title="Link to this definition"></a></dt>
+<dd><p>How to handle files that match the extensions in <code class="ansible-option docutils literal notranslate"><strong><span><span class="pre">_valid_extensions</span></span></strong></code> that are not SOPS encrypted.</p>
+<p>The default value <code class="ansible-value docutils literal notranslate"><span class="pre">error</span></code> will produce an error.</p>
+<p>The value <code class="ansible-value docutils literal notranslate"><span class="pre">skip</span></code> will simply skip these files. This requires SOPS 3.9.0 or later.</p>
+<p>The value <code class="ansible-value docutils literal notranslate"><span class="pre">warn</span></code> will skip these files and emit a warning. This requires SOPS 3.9.0 or later.</p>
+<p><strong>Note</strong> that this will not help if the store SOPS uses cannot parse the file, for example because it is no valid JSON/YAML/… file despite its file extension. For extensions other than the default ones SOPS uses the binary store, which tries to parse the file as JSON.</p>
+<p><em>Used by:</em>
+<a class="reference internal" href="sops_vars.html#ansible-collections-community-sops-sops-vars"><span class="std std-ref">community.sops.sops vars plugin</span></a></p>
+</dd></dl>
+
+<dl class="std envvar">
 <dt class="sig sig-object std" id="envvar-ANSIBLE_VARS_SOPS_PLUGIN_STAGE">
 <span class="sig-name descname"><span class="pre">ANSIBLE_VARS_SOPS_PLUGIN_STAGE</span></span><a class="headerlink" href="#envvar-ANSIBLE_VARS_SOPS_PLUGIN_STAGE" title="Link to this definition"></a></dt>
 <dd><p>Control when this vars plugin may be executed.</p>
@@ -257,7 +269,8 @@ Environment variables used by the ansible-core configuration are documented in <
 <dt class="sig sig-object std" id="envvar-ANSIBLE_VARS_SOPS_PLUGIN_VALID_EXTENSIONS">
 <span class="sig-name descname"><span class="pre">ANSIBLE_VARS_SOPS_PLUGIN_VALID_EXTENSIONS</span></span><a class="headerlink" href="#envvar-ANSIBLE_VARS_SOPS_PLUGIN_VALID_EXTENSIONS" title="Link to this definition"></a></dt>
 <dd><p>Check all of these extensions when looking for ‘variable’ files.</p>
-<p>These files must be SOPS encrypted YAML or JSON files. The plugin will produce errors when encountering files matching these extensions that are not SOPS encrypted. (This might change in a future version.)</p>
+<p>These files must be SOPS encrypted YAML or JSON files.</p>
+<p>By default the plugin will produce errors when encountering files matching these extensions that are not SOPS encrypted. This behavior can be controlled with the <code class="ansible-option docutils literal notranslate"><strong><span><span class="pre">handle_unencrypted_files</span></span></strong></code> option.</p>
 <p><em>Used by:</em>
 <a class="reference internal" href="sops_vars.html#ansible-collections-community-sops-sops-vars"><span class="std std-ref">community.sops.sops vars plugin</span></a></p>
 </dd></dl>
