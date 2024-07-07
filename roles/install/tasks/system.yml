@@ -3,17 +3,17 @@
 # SPDX-License-Identifier: GPL-3.0-or-later
 # SPDX-FileCopyrightText: 2022, Felix Fontein
 
-- name: Make sure that sops can be installed from system packages
+- name: Make sure that SOPS can be installed from system packages
   ansible.builtin.fail:
     msg: >-
-      Sops cannot be installed from system packages for
+      SOPS cannot be installed from system packages for
       {{ _community_sops_install_facts.distribution }} {{ _community_sops_install_facts.distribution_version }}.
   when: not _community_sops_install_system_has_system
 
 - name: Make sure that systems only supporting 'latest' are not told to install another version
   ansible.builtin.fail:
     msg: >-
-      Sops version {{ sops_version }} was requested, but we can only install latest sops from system packages.
+      SOPS version {{ sops_version }} was requested, but we can only install latest SOPS from system packages.
   when: sops_version != 'latest' and _community_sops_install_system_has_system_latest_only
 
 - name: Set variables

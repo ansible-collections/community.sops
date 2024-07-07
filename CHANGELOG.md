@@ -1,4 +1,4 @@
-# Community Sops Release Notes
+# Community SOPS Release Notes
 
 **Topics**
 

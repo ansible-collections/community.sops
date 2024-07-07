@@ -1,5 +1,5 @@
 ============================
-Community Sops Release Notes
+Community SOPS Release Notes
 ============================
 
 .. contents:: Topics

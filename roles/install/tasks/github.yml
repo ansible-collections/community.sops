@@ -3,14 +3,14 @@
 # SPDX-License-Identifier: GPL-3.0-or-later
 # SPDX-FileCopyrightText: 2022, Felix Fontein
 
-- name: Make sure that sops can be installed from GitHub
+- name: Make sure that SOPS can be installed from GitHub
   ansible.builtin.fail:
     msg: >-
-      Sops cannot be installed from GitHub for
+      SOPS cannot be installed from GitHub for
       {{ _community_sops_install_facts.distribution }} {{ _community_sops_install_facts.distribution_version }}.
   when: not _community_sops_install_system_has_github
 
-- name: Start determining sops version
+- name: Start determining SOPS version
   ansible.builtin.set_fact:
     _community_sops_install_effective_sops_version: '{{ "" if sops_version == "latest" else sops_version }}'
 
@@ -37,7 +37,7 @@
 
 - name: Show selected version
   ansible.builtin.debug:
-    msg: The latest sops version is sops {{ _community_sops_install_effective_sops_version }}.
+    msg: The latest SOPS version is SOPS {{ _community_sops_install_effective_sops_version }}.
   when: sops_version == 'latest'
 
 - name: Set variables
