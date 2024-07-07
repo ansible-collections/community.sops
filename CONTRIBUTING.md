@@ -18,20 +18,20 @@ Please [search in the issue list](https://github.com/ansible-collections/communi
 
 ## 🏗 To contribute
 
-A more extensive walk-through can be found in [Ansible's Contributing to collections](https://docs.ansible.com/ansible/latest/dev_guide/developing_collections.html#hacking-collections).
+A more extensive walk-through can be found in [Ansible's Contributing to collections](https://docs.ansible.com/ansible/devel/dev_guide/developing_collections.html#hacking-collections).
 
-1. Fork this repo (when checking it out, see [here](https://docs.ansible.com/ansible/latest/dev_guide/developing_collections.html#contributing-to-collections) for how to place the checkout correctly)
+1. Fork this repo (when checking it out, see [here](https://docs.ansible.com/ansible/devel/dev_guide/developing_collections.html#contributing-to-collections) for how to place the checkout correctly)
 1. Create a feature branch
 1. Commit and push your code. To make the process faster, please ensure:
 
     - the tests are green. Tests runs using [GitHub Actions](https://help.github.com/en/actions)
-    - you added a [changelog fragment](https://docs.ansible.com/ansible/latest/community/development_process.html#changelogs-how-to)
+    - you added a [changelog fragment](https://docs.ansible.com/ansible/devel/community/collection_development_process.html#creating-a-changelog-fragment)
 
-Please note that all PRs that are not strictly documentation, testing, or add a new plugin or module, require a changelog fragment. See [Creating a changelog fragment](https://docs.ansible.com/ansible/latest/community/development_process.html#changelogs-how-to) for information on that.
+Please note that all PRs that are not strictly documentation, testing, or add a new plugin or module, require a changelog fragment. See [Creating a changelog fragment](https://docs.ansible.com/ansible/devel/community/collection_development_process.html#creating-a-changelog-fragment) for information on that.
 
 Further resources:
 
-- [Ansible Developer guide: developing collections](https://docs.ansible.com/ansible/latest/dev_guide/developing_collections.html)
-- [Ansible Developer guide](https://docs.ansible.com/ansible/latest/dev_guide/index.html)
+- [Ansible Developer guide: developing collections](https://docs.ansible.com/ansible/devel/dev_guide/developing_collections.html)
+- [Ansible Developer guide](https://docs.ansible.com/ansible/devel/dev_guide/index.html)
 
-This repository adheres to the [Ansible Community code of conduct](https://docs.ansible.com/ansible/latest/community/code_of_conduct.html)
+This repository adheres to the [Ansible Community code of conduct](https://docs.ansible.com/ansible/devel/community/code_of_conduct.html)

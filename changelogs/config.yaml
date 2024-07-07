@@ -33,7 +33,7 @@ sections:
   - Bugfixes
 - - known_issues
   - Known Issues
-title: Community Sops
+title: Community SOPS
 trivial_section_name: trivial
 use_fqcn: true
 add_plugin_period: true

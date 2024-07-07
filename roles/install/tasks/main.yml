@@ -55,15 +55,15 @@
       ansible.builtin.set_fact:
         _community_sops_install_effective_sops_source: '{{ sops_source }}'
 
-    - name: Auto-detect source to install sops from
+    - name: Auto-detect source to install SOPS from
       ansible.builtin.include_tasks: detect_source.yml
       when: _community_sops_install_effective_sops_source == 'auto'
 
-    - name: Install Mozilla sops from GitHub
+    - name: Install SOPS from GitHub
       ansible.builtin.include_tasks: github.yml
       when: _community_sops_install_effective_sops_source == 'github'
 
-    - name: Install Mozilla sops from system package repositories
+    - name: Install SOPS from system package repositories
       ansible.builtin.include_tasks: system.yml
       when: _community_sops_install_effective_sops_source == 'system'
 

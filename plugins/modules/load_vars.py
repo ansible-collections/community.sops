@@ -13,10 +13,10 @@ DOCUMENTATION = r'''
 ---
 author: Felix Fontein (@felixfontein)
 module: load_vars
-short_description: Load sops-encrypted variables from files, dynamically within a task
+short_description: Load SOPS-encrypted variables from files, dynamically within a task
 version_added: '0.1.0'
 description:
-  - Loads sops-encrypted YAML/JSON variables dynamically from a file during task runtime.
+  - Loads SOPS-encrypted YAML/JSON variables dynamically from a file during task runtime.
   - To assign included variables to a different host than C(inventory_hostname),
     use C(delegate_to) and set C(delegate_facts=true).
 options:
@@ -38,7 +38,7 @@ options:
         in other words, when the file is loaded.
       - Unfortunately, there is no way for non-core modules to handle expressions "unsafe",
         in other words, evaluate them only on use. This can only achieved by M(ansible.builtin.include_vars),
-        which unfortunately cannot handle sops-encrypted files.
+        which unfortunately cannot handle SOPS-encrypted files.
     type: str
     default: ignore
     choices:
@@ -71,13 +71,13 @@ seealso:
     description: More information related to task delegation.
   - plugin: community.sops.sops
     plugin_type: lookup
-    description: The sops lookup can be used decrypt sops-encrypted files.
+    description: The sops lookup can be used decrypt SOPS-encrypted files.
   - plugin: community.sops.decrypt
     plugin_type: filter
-    description: The decrypt filter can be used to descrypt sops-encrypted in-memory data.
+    description: The decrypt filter can be used to descrypt SOPS-encrypted in-memory data.
   - plugin: community.sops.sops
     plugin_type: vars
-    description: The sops vars plugin can be used to load sops-encrypted host or group variables.
+    description: The sops vars plugin can be used to load SOPS-encrypted host or group variables.
 '''
 
 EXAMPLES = r'''

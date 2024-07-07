@@ -5,10 +5,10 @@
 
 .. _ansible_collections.community.sops.docsite.guide:
 
-Protecting Ansible secrets with Mozilla SOPS
-============================================
+Protecting Ansible secrets with SOPS
+====================================
 
-`Mozilla SOPS <https://github.com/getsops/sops>`_ allows to encrypt and decrypt files using various key sources (GPG, AWS KMS, GCP KMS, ...). For structured data, such as YAML, JSON, INI and ENV files, it will encrypt values, but not mapping keys. For YAML files, it also encrypts comments. This makes it a great tool for encrypting credentials with Ansible: you can easily see which files contain which variable, but the variables themselves are encrypted.
+`CNCF SOPS <https://github.com/getsops/sops>`_ allows to encrypt and decrypt files using various key sources (GPG, AWS KMS, GCP KMS, ...). For structured data, such as YAML, JSON, INI and ENV files, it will encrypt values, but not mapping keys. For YAML files, it also encrypts comments. This makes it a great tool for encrypting credentials with Ansible: you can easily see which files contain which variable, but the variables themselves are encrypted.
 
 The ability to utilize various keysources makes it easier to use in complex environments than :ref:`Ansible Vault <vault_guide_index>`.
 
@@ -16,28 +16,28 @@ The ability to utilize various keysources makes it easier to use in complex envi
    :local:
    :depth: 1
 
-Installing sops
+Installing SOPS
 ---------------
 
 You can find binaries and packages `on the project's release page <https://github.com/getsops/sops/releases>`_. Depending on your operating system, you might also be able to install it with your system's package manager.
 
-This collection provides a :ansplugin:`role community.sops.install <community.sops.install#role>` which allows to install sops and `GNU Privacy Guard (GPG) <https://en.wikipedia.org/wiki/GNU_Privacy_Guard>`__. The role allows to install sops from the system's package manager or from GitHub. Both sops and GPG can be installed on the remote hosts or the Ansible controller.
+This collection provides a :ansplugin:`role community.sops.install <community.sops.install#role>` which allows to install SOPS and `GNU Privacy Guard (GPG) <https://en.wikipedia.org/wiki/GNU_Privacy_Guard>`__. The role allows to install SOPS from the system's package manager or from GitHub. Both SOPS and GPG can be installed on the remote hosts or the Ansible controller.
 
 .. code-block:: yaml
 
-    - name: Playbook to install sops
+    - name: Playbook to install SOPS
       hosts: all
       tasks:
-        # To use the sops_encrypt module on a remote host, you need to install sops on it:
-        - name: Install sops on remote hosts
+        # To use the sops_encrypt module on a remote host, you need to install SOPS on it:
+        - name: Install SOPS on remote hosts
           ansible.builtin.include_role:
             name: community.sops.install
           vars:
             sops_version: 2.7.0  # per default installs the latest version
 
         # To use the lookup plugin, filter plugin, vars plugin, or the load_vars action,
-        # you need sops installed on localhost:
-        - name: Install sops on localhost
+        # you need SOPS installed on localhost:
+        - name: Install SOPS on localhost
           ansible.builtin.include_role:
             name: community.sops.install
           vars:
@@ -47,16 +47,16 @@ When using ansible-core 2.11 or later, you can also use two convenience playbook
 
 .. code-block:: bash
 
-    # Install sops on Ansible controller
+    # Install SOPS on Ansible controller
     $ ansible-playbook community.sops.install_localhost
 
-    # Install sops on remote servers
+    # Install SOPS on remote servers
     $ ansible-playbook community.sops.install --inventory /path/to/inventory
 
 Installing community.sops in an Execution Environment
 -----------------------------------------------------
 
-When building an execution environment containing community.sops, please note that by default sops is not automatically installed. This is due to a limitation of the dependency specification system for execution environments. If you are building an execution environment that contains community.sops, you should make sure that sops is installed in it.
+When building an execution environment containing community.sops, please note that by default SOPS is not automatically installed. This is due to a limitation of the dependency specification system for execution environments. If you are building an execution environment that contains community.sops, you should make sure that SOPS is installed in it.
 
 The simplest way of ensuring this is to use the ``community.sops.install_localhost`` playbook. When defining an execution environment, you can add a ``RUN`` additional build step to your ``execution-environment.yml``:
 
@@ -68,7 +68,7 @@ The simplest way of ensuring this is to use the ``community.sops.install_localho
       galaxy: requirements.yml
     additional_build_steps:
       append_final:
-        # Ensure that sops is installed in the EE, assuming the EE is for ansible-core 2.11 or newer
+        # Ensure that SOPS is installed in the EE, assuming the EE is for ansible-core 2.11 or newer
         - RUN ansible-playbook -v community.sops.install_localhost
 
 Note that this only works if the execution environment is built with ansible-core 2.11 or newer. When using an execution environment with Ansible 2.9, you have to use the :ansplugin:`community.sops.install#role` role manually. Also note that you need to make sure that Ansible 2.9 uses the correct Python interpreter to be able to install system packages with; in the below example we are assuming a RHEL/CentOS based execution environment base image:
@@ -89,10 +89,10 @@ Note that this only works if the execution environment is built with ansible-cor
 
 Once this step has been taken care of, you can use all plugins and modules (on ``localhost``) from community.sops in the execution environment.
 
-Setting up sops
+Setting up SOPS
 ---------------
 
-From now on this guide assumes that you have installed Mozilla SOPS.
+From now on this guide assumes that you have installed SOPS.
 
 For simplicity, you can work with GPG keys. If you do not have one, or do not want to use yours, you can run ``gpg --quick-generate-key me@example.com`` to create a GPG key for the user ID ``me@example.com``. You will need its 40 hex-digit key ID that is printed at the end. The first step is to create a ``.sops.yaml`` file in the directory tree you are working in:
 
@@ -101,7 +101,7 @@ For simplicity, you can work with GPG keys. If you do not have one, or do not wa
     creation_rules:
       - pgp: 'FBC7B9E2A4F9289AC0C1D4843D16CEE4A27381B4'
 
-Here, ``FBC7B9E2A4F9289AC0C1D4843D16CEE4A27381B4`` is the 40 hex-digit key ID. With this file you can create a sops encrypted file by running the following in the directory where ``.sops.yaml`` was placed, or a subdirectory of it:
+Here, ``FBC7B9E2A4F9289AC0C1D4843D16CEE4A27381B4`` is the 40 hex-digit key ID. With this file you can create a SOPS-encrypted file by running the following in the directory where ``.sops.yaml`` was placed, or a subdirectory of it:
 
 .. code-block:: bash
 
@@ -117,7 +117,7 @@ This will open an editor window with an example YAML file. Put the following con
       - bar
       - baz
 
-After closing the editor, sops will create ``test.sops.yaml`` with the encrypted contents:
+After closing the editor, SOPS will create ``test.sops.yaml`` with the encrypted contents:
 
 .. code-block:: yaml
 
@@ -160,9 +160,9 @@ At the end, the ``sops`` section contains metadata, which includes the private k
 Working with encrypted files
 ----------------------------
 
-You can decrypt sops-encrypted files with the :ansplugin:`community.sops.sops lookup plugin <community.sops.sops#lookup>`, and dynamically encrypt data with the :ansplugin:`community.sops.sops_encrypt module <community.sops.sops_encrypt#module>`. Being able to encrypt is useful when you create or update secrets in your Ansible playbooks.
+You can decrypt SOPS-encrypted files with the :ansplugin:`community.sops.sops lookup plugin <community.sops.sops#lookup>`, and dynamically encrypt data with the :ansplugin:`community.sops.sops_encrypt module <community.sops.sops_encrypt#module>`. Being able to encrypt is useful when you create or update secrets in your Ansible playbooks.
 
-Assume that you have an encrypted private key ``keys/private_key.pem.sops``, which was in PEM format before being encrypted by sops:
+Assume that you have an encrypted private key ``keys/private_key.pem.sops``, which was in PEM format before being encrypted by SOPS:
 
 .. code-block:: bash
 
@@ -175,13 +175,13 @@ To use it in a playbook, for example to pass it to the :ansplugin:`community.cry
 .. code-block:: yaml+jinja
 
     ---
-    - name: Load sops-encrypted private key
+    - name: Load SOPS-encrypted private key
       hosts: localhost
       gather_facts: false
       tasks:
         - name: Create CSR with encrypted private key
           community.crypto.openssl_csr:
-            # The private key is provided with sops:
+            # The private key is provided with SOPS:
             privatekey_content: "{{ lookup('community.sops.sops', 'keys/private_key.pem.sops') }}"
             # Store the CSR on disk unencrypted:
             path: ansible.com.csr
@@ -195,7 +195,7 @@ This results in the following output:
 
 .. code-block:: ansible-output
 
-    PLAY [Load sops-encrypted private key] ***************************************************************************
+    PLAY [Load SOPS-encrypted private key] ***************************************************************************
 
     TASK [Create CSR with encrypted private key] *********************************************************************
     ok: [localhost]
@@ -210,7 +210,7 @@ If you want to use Ansible to generate (or update) the encrypted private key, yo
 .. code-block:: yaml+jinja
 
     ---
-    - name: Create sops-encrypted private key
+    - name: Create SOPS-encrypted private key
       hosts: localhost
       gather_facts: false
       tasks:
@@ -237,7 +237,7 @@ This playbook creates a new key on every run. If you want the private key creati
 .. code-block:: yaml+jinja
 
     ---
-    - name: Create sops-encrypted private key
+    - name: Create SOPS-encrypted private key
       hosts: localhost
       gather_facts: false
       tasks:
@@ -270,7 +270,7 @@ The :ansopt:`community.sops.sops#lookup:empty_on_not_exist=true` flag is needed 
 
 .. code-block:: ansible-output
 
-    PLAY [Create sops-encrypted private key] *************************************************************************
+    PLAY [Create SOPS-encrypted private key] *************************************************************************
 
     TASK [Create private key] ****************************************************************************************
     ok: [localhost]
@@ -418,7 +418,7 @@ See :ref:`VARIABLE_PLUGINS_ENABLED <VARIABLE_PLUGINS_ENABLED>` for more details 
 - ``.sops.yml``
 - ``.sops.json``
 
-The vars plugin will decrypt them and you can use their unencrypted content transparently.
+(The list of extensions can be adjusted with :ansopt:`community.sops.sops#vars:_valid_extensions`.) The vars plugin will decrypt them and you can use their unencrypted content transparently.
 
 If you need to dynamically load encrypted variables, similar to the built-in :ansplugin:`ansible.builtin.include_vars action <ansible.builtin.include_vars#module>`, you can use the :ansplugin:`community.sops.load_vars action <community.sops.load_vars#module>` action. Please note that it is not a perfect replacement, since the built-in action relies on some hard-coded special casing in ansible-core which allows it to load the variables actually as variables (more precisely: as "unsafe" Jinja2 expressions which are automatically evaluated when used). Other action plugins, such as :ansplugin:`community.sops.load_vars#module`, cannot do that and have to load the variables as facts instead.
 
@@ -436,7 +436,7 @@ Consider the following playbook:
 .. code-block:: yaml+jinja
 
     ---
-    - name: Create sops-encrypted private key
+    - name: Create SOPS-encrypted private key
       hosts: localhost
       gather_facts: false
       tasks:
@@ -458,7 +458,7 @@ Running it produces:
 
 .. code-block:: ansible-output
 
-    PLAY [Create sops-encrypted private key] *************************************************************************
+    PLAY [Create SOPS-encrypted private key] *************************************************************************
 
     TASK [Load encrypted credentials] ********************************************************************************
     ok: [localhost]

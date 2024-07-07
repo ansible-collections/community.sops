@@ -13,14 +13,14 @@ DOCUMENTATION = r'''
 ---
 author: Felix Fontein (@felixfontein)
 module: sops_encrypt
-short_description: Encrypt data with sops
+short_description: Encrypt data with SOPS
 version_added: '0.1.0'
 description:
-  - Allows to encrypt binary data (Base64 encoded), text data, JSON or YAML data with sops.
+  - Allows to encrypt binary data (Base64 encoded), text data, JSON or YAML data with SOPS.
 options:
   path:
     description:
-      - The sops encrypt file.
+      - The SOPS encrypt file.
     type: path
     required: true
   force:
@@ -67,7 +67,7 @@ attributes:
 seealso:
   - plugin: community.sops.sops
     plugin_type: lookup
-    description: The sops lookup can be used decrypt sops-encrypted files.
+    description: The sops lookup can be used decrypt SOPS-encrypted files.
 '''
 
 EXAMPLES = r'''

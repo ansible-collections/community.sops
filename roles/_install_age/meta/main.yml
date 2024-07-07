@@ -6,6 +6,6 @@
 galaxy_info:
   standalone: false
   description: >
-    [INTERNAL] Install age (https://github.com/FiloSottile/age/).
+    [INTERNAL] Install age (https://age-encryption.org/).
 
 dependencies: []

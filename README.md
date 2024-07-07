@@ -4,7 +4,7 @@ GNU General Public License v3.0+ (see LICENSES/GPL-3.0-or-later.txt or https://w
 SPDX-License-Identifier: GPL-3.0-or-later
 -->
 
-# Community Sops Collection
+# Community SOPS Collection
 [![CI](https://github.com/ansible-collections/community.sops/workflows/CI/badge.svg?event=push)](https://github.com/ansible-collections/community.sops/actions)
 [![Codecov](https://img.shields.io/codecov/c/github/ansible-collections/community.sops)](https://codecov.io/gh/ansible-collections/community.sops)
 [![REUSE status](https://api.reuse.software/badge/github.com/ansible-collections/community.sops)](https://api.reuse.software/info/github.com/ansible-collections/community.sops)
@@ -16,11 +16,11 @@ The `community.sops` collection allows integrating [`getsops/sops`](https://gith
 
 Please note that this collection does **not** support Windows targets.
 
-**Sops version compatibility**
+**SOPS version compatibility**
 
-The following table shows which versions of sops were tested with which versions of the collection. Older (or newer) versions of sops can still work fine, it just means that we did not test them. In some cases, it could be that a minimal required version of sops is explicitly documented for a specific feature. Right now, that is not the case.
+The following table shows which versions of SOPS were tested with which versions of the collection. Older (or newer) versions of SOPS can still work fine, it just means that we did not test them. In some cases, it could be that a minimal required version of SOPS is explicitly documented for a specific feature. This is the case from community.sops 1.8.0 on; from that version on the collection automatically detects the SOPS version to determine whether a feature is supported or not.
 
-|`community.sops` version|`getsops/sops` version|
+|`community.sops` version|SOPS version|
 |---|---|
 |0.1.0|`3.5.0+`|
 |1.0.6|`3.5.0+`|
@@ -36,7 +36,7 @@ The vars plugin requires ansible-base 2.10 or later.
 
 <!-- List any external resources the collection depends on, for example minimum versions of an OS, libraries, or utilities. Do not list other Ansible collections here. -->
 
-You will need to install [`sops`](https://github.com/getsops/sops) manually before using plugins provided by this
+You will need to install [the `sops` CLI tool](https://github.com/getsops/sops) manually before using plugins provided by this
 collection.
 
 ## Collection Documentation
@@ -55,33 +55,33 @@ If you use the Ansible package and do not update collections independently, use 
 
 This collection provides:
 
-- a [lookup plugin](https://docs.ansible.com/ansible/latest/user_guide/playbooks_lookups.html#playbooks-lookups) `sops` that allows looking up a sops-encrypted file content;
-- a [vars plugin](https://docs.ansible.com/ansible/latest/plugins/vars.html) `sops` that allows loading Ansible vars from sops-encrypted files for hosts and groups;
-- an [action plugin](https://docs.ansible.com/ansible/latest/plugins/action.html) `load_vars` that allows loading Ansible vars from a sops-encrypted file dynamically during a playbook or role;
-- a [module](https://docs.ansible.com/ansible/latest/user_guide/basic_concepts.html#modules) `sops_encrypt` which allows to encrypt data with sops.
-- a [role](https://docs.ansible.com/ansible/latest/user_guide/playbooks_reuse_roles.html) `install` which allows to install sops and GNU Privacy Guard.
-- two [playbooks](https://docs.ansible.com/ansible/latest/user_guide/playbooks_intro.html) `install` and `install_localhost` which allow to install sops and GNU Privacy Guard.
+- a [lookup plugin](https://docs.ansible.com/ansible/latest/user_guide/playbooks_lookups.html#playbooks-lookups) `community.sops.sops` that allows looking up a SOPS-encrypted file content;
+- a [vars plugin](https://docs.ansible.com/ansible/latest/plugins/vars.html) `community.sops.sops` that allows loading Ansible vars from SOPS-encrypted files for hosts and groups;
+- an [action plugin](https://docs.ansible.com/ansible/latest/plugins/action.html) `community.sops.load_vars` that allows loading Ansible vars from a SOPS-encrypted file dynamically during a playbook or role;
+- a [module](https://docs.ansible.com/ansible/latest/user_guide/basic_concepts.html#modules) `community.sops.sops_encrypt` which allows to encrypt data with SOPS.
+- a [role](https://docs.ansible.com/ansible/latest/user_guide/playbooks_reuse_roles.html) `community.sops.install` which allows to install SOPS and GNU Privacy Guard.
+- two [playbooks](https://docs.ansible.com/ansible/latest/user_guide/playbooks_intro.html) `community.sops.install` and `install_localhost` which allow to install SOPS and GNU Privacy Guard.
 
 ## Using this collection
 
-### Installing sops
+### Installing SOPS
 
-To install sops, you can use the ``community.sops.install`` role. The role also installs [GNU Privacy Guard (GPG)](https://en.wikipedia.org/wiki/GNU_Privacy_Guard).
+To install SOPS, you can use the `community.sops.install` role. The role also installs [GNU Privacy Guard (GPG)](https://en.wikipedia.org/wiki/GNU_Privacy_Guard).
 
 Examples:
 
 ```yaml
 tasks:
-  # To use the sops_encrypt module on a remote host, you need to install sops on it:
-  - name: Install sops on remote hosts
+  # To use the sops_encrypt module on a remote host, you need to install SOPS on it:
+  - name: Install SOPS on remote hosts
     ansible.builtin.include_role:
       name: community.sops.install
     vars:
       sops_version: 2.7.0  # per default installs the latest version
 
   # To use the lookup plugin, filter plugin, vars plugin, or the load_vars action,
-  # you need sops installed on localhost:
-  - name: Install sops on localhost
+  # you need SOPS installed on localhost:
+  - name: Install SOPS on localhost
     ansible.builtin.include_role:
       name: community.sops.install
     vars:
@@ -98,15 +98,15 @@ Examples:
 tasks:
   - name: Output secrets to screen (BAD IDEA!)
     ansible.builtin.debug:
-        msg: "Content: {{ lookup('community.sops.sops', '/path/to/sops-encrypted-file.enc.yaml') }}"
+      msg: "Content: {{ lookup('community.sops.sops', '/path/to/sops-encrypted-file.enc.yaml') }}"
 
   - name: Add SSH private key
     ansible.builtin.copy:
-        content: "{{ lookup('community.sops.sops', user + '-id_rsa') }}"
-        dest: /home/{{ user }}/.ssh/id_rsa
-        owner: "{{ user }}"
-        group: "{{ user }}"
-        mode: 0600
+      content: "{{ lookup('community.sops.sops', user + '-id_rsa') }}"
+      dest: /home/{{ user }}/.ssh/id_rsa
+      owner: "{{ user }}"
+      group: "{{ user }}"
+      mode: 0600
     no_log: true  # avoid content to be written to log
 ```
 
@@ -114,13 +114,13 @@ See [Lookup Plugins](https://docs.ansible.com/ansible/latest/plugins/lookup.html
 
 ### filter plugin
 
-The filter plugin can be used in Jinja2 expressions by the name `community.sops.decrypt`. It can decrypt sops-encrypted data coming from other sources than files.
+The filter plugin can be used in Jinja2 expressions by the name `community.sops.decrypt`. It can decrypt SOPS-encrypted data coming from other sources than files.
 
 Example:
 
 ```yaml
 tasks:
-  - name: Load sops encrypted data
+  - name: Load SOPS encrypted data
     ansible.builtin.set_fact:
       encrypted_data: "{{ lookup('file', '/path/to/sops-encrypted-file.enc.yaml') }}"
 
@@ -166,7 +166,7 @@ vars_plugins_enabled = host_group_vars,community.sops.sops
 See [VARIABLE_PLUGINS_ENABLED](https://docs.ansible.com/ansible/devel/reference_appendices/config.html#variable-plugins-enabled) for more details.
 
 After the plugin is enabled, correctly named group and host vars files will be
-transparently decrypted with sops.
+transparently decrypted with SOPS.
 
 The files must end with one of these extensions:
 
@@ -174,7 +174,7 @@ The files must end with one of these extensions:
 * `.sops.yml`
 * `.sops.json`
 
-Here is an example file structure
+(These extensions can be adjusted, check out the vars plugin's options for details.) Here is an example file structure:
 
 ```
 ├── inventory/
@@ -191,7 +191,7 @@ Here is an example file structure
 ```
 
 You could execute the playbook in this example with the following command. The
-sops vars files would be decrypted and used.
+SOPS-encrypted vars files would be decrypted and used.
 
 ```console
 $ ansible-playbook playbooks/setup-server.yml -i inventory/hosts
@@ -201,7 +201,7 @@ $ ansible-playbook playbooks/setup-server.yml -i inventory/hosts
 
 Ansible 2.10 allows to determine [when vars plugins load the data](https://docs.ansible.com/ansible/latest/plugins/vars.html#using-vars-plugins).
 
-To run the sops vars plugin right after importing inventory, you can add the following to `ansible.cfg`:
+To run the SOPS vars plugin right after importing inventory, you can add the following to `ansible.cfg`:
 
 ```ini
 [community.sops]
@@ -210,7 +210,7 @@ vars_stage = inventory
 
 #### Caching variable files
 
-By default, the sops vars plugin caches decrypted files to avoid having to decrypt them every task. If this is not wanted, it can be explicitly disabled in `ansible.cfg`:
+By default, the vars plugin caches decrypted files to avoid having to decrypt them every task. If this is not wanted, it can be explicitly disabled in `ansible.cfg`:
 
 ```ini
 [community.sops]
@@ -221,7 +221,7 @@ Please note that when using vars plugin staging, this setting only has effect if
 
 ### load_vars action plugin
 
-The `load_vars` action plugin can be used similarly to Ansible's `include_vars`, except that it right now only supports single files. Also, it does not allow to load proper variables (i.e. "unsafe" Jinja2 expressions which evaluate on usage), but only facts. It does allow to evaluate expressions on load-time though.
+The `load_vars` action plugin can be used similarly to Ansible's `include_vars`, except that it right now only supports single files. Also, it does not allow to load proper variables (i.e. "unsafe" Jinja2 expressions which evaluate on usage), but only facts. This is a restriction imposed by ansible-core. The plugin does allow to evaluate expressions on load-time, though.
 
 Examples:
 
@@ -229,61 +229,61 @@ Examples:
 tasks:
   - name: Load variables from file and store them in a variable
     community.sops.load_vars:
-        file: path/to/sops-encrypted-file.sops.yaml
-        name: variable_to_store_contents_in
+      file: path/to/sops-encrypted-file.sops.yaml
+      name: variable_to_store_contents_in
 
   - name: Load variables from file into global namespace, and evaluate Jinja2 expressions
     community.sops.load_vars:
-        file: path/to/sops-encrypted-file-with-jinja2-expressions.sops.yaml
-        # The following allows to use Jinja2 expressions in the encrypted file!
-        # They are evaluated right now, i.e. not later like when loaded with include_vars.
-        expressions: evaluate-on-load
+      file: path/to/sops-encrypted-file-with-jinja2-expressions.sops.yaml
+      # The following allows to use Jinja2 expressions in the encrypted file!
+      # They are evaluated right now, i.e. not later like when loaded with include_vars.
+      expressions: evaluate-on-load
 ```
 
 ### sops_encrypt module
 
-The `sops_encrypt` module can be used to create and update sops encrypted files. It assumes that sops is configured via environment variables or a `.sops.yaml` file.
+The `sops_encrypt` module can be used to create and update SOPS-encrypted files. It assumes that SOPS is configured via environment variables or a `.sops.yaml` file.
 
 Examples:
 
 ```yaml
 tasks:
-  - name: Store secret text sops encrypted
+  - name: Store secret text SOPS-encrypted
     community.sops.sops_encrypt:
-        path: path/to/sops-encrypted-file.sops
-        content_text: This is some secret text.
+      path: path/to/sops-encrypted-file.sops
+      content_text: This is some secret text.
 
-  - name: Store secret binary data sops encrypted
+  - name: Store secret binary data SOPS-encrypted
     community.sops.sops_encrypt:
-        path: path/to/sops-encrypted-file.sops
-        content_binary: "{{ some_secret_binary_data | b64encode }}"
+      path: path/to/sops-encrypted-file.sops
+      content_binary: "{{ some_secret_binary_data | b64encode }}"
 
   - name: Store secret JSON data
     community.sops.sops_encrypt:
-        path: path/to/sops-encrypted-file.sops.json
-        content_json:
-            key1: value1
-            key2:
-                - value2
-                - key3: value3
-                  key4: value5
+      path: path/to/sops-encrypted-file.sops.json
+      content_json:
+        key1: value1
+        key2:
+          - value2
+          - key3: value3
+            key4: value5
 
   - name: Store secret YAML data
     community.sops.sops_encrypt:
-        path: path/to/sops-encrypted-file.sops.yaml
-        content_yaml:
-            key1: value1
-            key2:
-                - value2
-                - key3: value3
-                  key4: value5
+      path: path/to/sops-encrypted-file.sops.yaml
+      content_yaml:
+        key1: value1
+        key2:
+          - value2
+          - key3: value3
+            key4: value5
 ```
 
 ## Troubleshooting
 
 ### Spurious failures during encryption and decryption with gpg
 
-Sops calls `gpg` with `--use-agent`. When running multiple of these in parallel, for example when loading variables or looking up files for various hosts at once, some of these can randomly fail with messages such as
+Older versions of SOPS calls `gpg` with `--use-agent`. When running multiple of these in parallel, for example when loading variables or looking up files for various hosts at once, some of these can randomly fail with messages such as
 ```
 Failed to get the data key required to decrypt the SOPS file.
 
@@ -312,7 +312,7 @@ This is a limitation of gpg-agent which can be fixed by adding `auto-expand-secm
 
 <!--Describe how the community can contribute to your collection. At a minimum, include how and where users can create issues to report problems or request features for this collection.  List contribution requirements, including preferred workflows and necessary testing, so you can benefit from community PRs. If you are following general Ansible contributor guidelines, you can link to - [Ansible Community Guide](https://docs.ansible.com/ansible/latest/community/index.html). -->
 
-See [CONTRIBUTING.md](./CONTRIBUTING.md)
+See [CONTRIBUTING.md](https://github.com/ansible-collections/community.sops/blob/main/CONTRIBUTING.md)
 
 ## Release notes
 
@@ -327,11 +327,6 @@ We plan to regularly release new minor or bugfix versions once new features or b
 Releasing the current major version happens from the `main` branch. We will create a `stable-1` branch for 1.x.y versions once we start working on a 2.0.0 release, to allow backporting bugfixes and features from the 2.0.0 branch (`main`) to `stable-1`. A `stable-2` branch will be created once we work on a 3.0.0 release, and so on.
 
 We currently are not planning any deprecations or new major releases like 2.0.0 containing backwards incompatible changes. If backwards incompatible changes are needed, we plan to deprecate the old behavior as early as possible. We also plan to backport at least bugfixes for the old major version for some time after releasing a new major version. We will not block community members from backporting other bugfixes and features from the latest stable version to older release branches, under the condition that these backports are of reasonable quality.
-
-### TODO
-
-- add a role providing sops installation (with version pinning)
-- a full test suite
 
 ## Code of Conduct
 

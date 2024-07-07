@@ -9,12 +9,12 @@ __metaclass__ = type
 
 DOCUMENTATION = '''
 name: decrpyt
-short_description: Decrypt sops encrypted data
+short_description: Decrypt SOPS-encrypted data
 version_added: 1.1.0
 author:
     - Felix Fontein (@felixfontein)
 description:
-    - Decrypt sops encrypted data.
+    - Decrypt SOPS-encrypted data.
     - Allows to decrypt data that has been provided by an arbitrary source.
     - Note that due to Ansible lazy-evaluating expressions, it is better to use M(ansible.builtin.set_fact)
       to store the result of an evaluation in a fact to avoid recomputing the value every time the expression
@@ -32,9 +32,9 @@ options:
         default: true
     input_type:
         description:
-            - Tell sops how to interpret the encrypted data.
+            - Tell SOPS how to interpret the encrypted data.
             - There is no auto-detection since we do not have a filename. By default
-              sops is told to treat the input as YAML. If that is wrong, please set this
+              SOPS is told to treat the input as YAML. If that is wrong, please set this
               option to the correct value.
         type: str
         choices:
@@ -45,7 +45,7 @@ options:
         default: yaml
     output_type:
         description:
-            - Tell sops how to interpret the decrypted file.
+            - Tell SOPS how to interpret the decrypted file.
             - Please note that the output is always text or bytes, depending on the value of O(decode_output).
               To parse the resulting JSON or YAML, use corresponding filters such as P(ansible.builtin.from_json#filter)
               and P(ansible.builtin.from_yaml#filter).

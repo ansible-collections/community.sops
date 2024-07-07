@@ -10,7 +10,7 @@ __metaclass__ = type
 DOCUMENTATION = '''
     name: sops
     author: Edoardo Tenani (@endorama) <e.tenani@arduino.cc>
-    short_description: Loading sops-encrypted vars files
+    short_description: Loading SOPS-encrypted vars files
     version_added: '0.1.0'
     description:
         - Load encrypted YAML files into corresponding groups/hosts in C(group_vars/) and C(host_vars/) directories.
@@ -97,10 +97,10 @@ DOCUMENTATION = '''
     seealso:
         - plugin: community.sops.sops
           plugin_type: lookup
-          description: The sops lookup can be used decrypt sops-encrypted files.
+          description: The sops lookup can be used decrypt SOPS-encrypted files.
         - plugin: community.sops.decrypt
           plugin_type: filter
-          description: The decrypt filter can be used to descrypt sops-encrypted in-memory data.
+          description: The decrypt filter can be used to decrypt SOPS-encrypted in-memory data.
         - module: community.sops.load_vars
 '''
 
