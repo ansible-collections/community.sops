@@ -26,3 +26,47 @@
       set_fact:
         sops_installed: true
         age_installed: '{{ age_version_command.rc == 0 }}'
+
+- name: Determine SOPS versions
+  when: sops_version_remote is not defined or sops_version_controller is not defined
+  block:
+    - name: Determine SOPS version on remote
+      command: sops --version --disable-version-check
+      changed_when: false
+      ignore_errors: true
+      register: sops_version_remote_tmp
+
+    - name: Determine SOPS version on remote, try 2
+      command: sops --version
+      changed_when: false
+      register: sops_version_remote_tmp_2
+      when: sops_version_remote_tmp is failed
+
+    - name: Determine SOPS version on controller
+      command: sops --version --disable-version-check
+      delegate_to: localhost
+      changed_when: false
+      ignore_errors: true
+      register: sops_version_controller_tmp
+
+    - name: Determine SOPS version on controller, try 2
+      command: sops --version {{ '--disable-version-check' if sops_version_controller_tmp is not defined else '' }}
+      delegate_to: localhost
+      changed_when: false
+      register: sops_version_controller_tmp_2
+      when: sops_version_controller_tmp is failed
+
+    - name: Set versions
+      set_fact:
+        sops_version_remote: >-
+          {{
+            (sops_version_remote_tmp_2 if sops_version_remote_tmp is failed else sops_version_remote_tmp).stdout_lines[0]
+            | regex_replace(".*sops ([0-9]+\.[0-9]+\.[0-9]+).*", "\1")
+            | trim
+          }}
+        sops_version_controller: >-
+          {{
+            (sops_version_controller_tmp_2 if sops_version_controller_tmp is failed else sops_version_controller_tmp).stdout_lines[0]
+            | regex_replace(".*sops ([0-9]+\.[0-9]+\.[0-9]+).*", "\1")
+            | trim
+          }}

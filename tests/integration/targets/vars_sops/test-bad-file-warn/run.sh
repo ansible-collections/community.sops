@@ -1,10 +1,8 @@
----
+#!/bin/sh
 # Copyright (c) Ansible Project
 # GNU General Public License v3.0+ (see LICENSES/GPL-3.0-or-later.txt or https://www.gnu.org/licenses/gpl-3.0.txt)
 # SPDX-License-Identifier: GPL-3.0-or-later
 
-creation_rules:
-  - path_regex: test_json
-    unencrypted_regex: ^key1$
-    pgp: FBC7B9E2A4F9289AC0C1D4843D16CEE4A27381B4
-  - pgp: FBC7B9E2A4F9289AC0C1D4843D16CEE4A27381B4
+set -e
+ANSIBLE_VARS_SOPS_PLUGIN_HANDLE_UNENCRYPTED_FILES=warn \
+ansible-playbook playbook.yml -i hosts -v "$@"
