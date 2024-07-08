@@ -163,7 +163,7 @@ see <a class="reference internal" href="#ansible-collections-community-sops-sops
 <ul class="simple">
 <li><p>Load encrypted YAML files into corresponding groups/hosts in <code class="docutils literal notranslate"><span class="pre">group_vars/</span></code> and <code class="docutils literal notranslate"><span class="pre">host_vars/</span></code> directories.</p></li>
 <li><p>Files are encrypted prior to reading, making this plugin an effective companion to <a class="reference external" href="https://docs.ansible.com/ansible/devel/collections/ansible/builtin/host_group_vars_vars.html#ansible-collections-ansible-builtin-host-group-vars-vars" title="(in Ansible vdevel)"><span class="xref std std-ref">ansible.builtin.host_group_vars</span></a> plugin.</p></li>
-<li><p>Files are restricted to <code class="ansible-value docutils literal notranslate"><span class="pre">.sops.yaml</span></code>, <code class="ansible-value docutils literal notranslate"><span class="pre">.sops.yml</span></code>, <code class="ansible-value docutils literal notranslate"><span class="pre">.sops.json</span></code> extensions, unless configured otherwise with <code class="ansible-option docutils literal notranslate"><strong><a class="reference internal" href="#ansible-collections-community-sops-sops-vars-parameter-valid-extensions"><span class="std std-ref"><span class="pre">_valid_extensions</span></span></a></strong></code>.</p></li>
+<li><p>Files are restricted to <code class="ansible-value docutils literal notranslate"><span class="pre">.sops.yaml</span></code>, <code class="ansible-value docutils literal notranslate"><span class="pre">.sops.yml</span></code>, <code class="ansible-value docutils literal notranslate"><span class="pre">.sops.json</span></code> extensions, unless configured otherwise with <code class="ansible-option docutils literal notranslate"><strong><a class="reference internal" href="#ansible-collections-community-sops-sops-vars-parameter-valid-extensions"><span class="std std-ref"><span class="pre">valid_extensions</span></span></a></strong></code>.</p></li>
 <li><p>Hidden files are ignored.</p></li>
 </ul>
 </section>
@@ -184,47 +184,6 @@ see <a class="reference internal" href="#ansible-collections-community-sops-sops
 </thead>
 <tbody>
 <tr class="row-even"><td><div class="ansible-option-cell">
-<div class="ansibleOptionAnchor" id="parameter-_disable_vars_plugin_temporarily"></div><p class="ansible-option-title" id="ansible-collections-community-sops-sops-vars-parameter-disable-vars-plugin-temporarily"><strong>_disable_vars_plugin_temporarily</strong></p>
-<a class="ansibleOptionLink" href="#parameter-_disable_vars_plugin_temporarily" title="Permalink to this option"></a><p class="ansible-option-type-line"><span class="ansible-option-type">boolean</span></p>
-<p><em class="ansible-option-versionadded">added in community.sops 1.3.0</em></p>
-</div></td>
-<td><div class="ansible-option-cell"><p>Temporarily disable this plugin.</p>
-<p>Useful if ansible-inventory is supposed to be run without decrypting secrets (in AWX for instance).</p>
-<p class="ansible-option-line"><strong class="ansible-option-choices">Choices:</strong></p>
-<ul class="simple">
-<li><p><code class="ansible-option-default-bold docutils literal notranslate"><strong><span class="pre">false</span></strong></code> <span class="ansible-option-choices-default-mark">← (default)</span></p></li>
-<li><p><code class="ansible-option-choices-entry docutils literal notranslate"><span class="pre">true</span></code></p></li>
-</ul>
-<p class="ansible-option-line"><strong class="ansible-option-configuration">Configuration:</strong></p>
-<ul class="simple">
-<li><p>Environment variable: <span class="target" id="index-0"></span><a class="reference internal" href="environment_variables.html#envvar-SOPS_ANSIBLE_AWX_DISABLE_VARS_PLUGIN_TEMPORARILY"><code class="xref std std-envvar docutils literal notranslate"><span class="pre">SOPS_ANSIBLE_AWX_DISABLE_VARS_PLUGIN_TEMPORARILY</span></code></a></p></li>
-</ul>
-</div></td>
-</tr>
-<tr class="row-odd"><td><div class="ansible-option-cell">
-<div class="ansibleOptionAnchor" id="parameter-_valid_extensions"></div><p class="ansible-option-title" id="ansible-collections-community-sops-sops-vars-parameter-valid-extensions"><strong>_valid_extensions</strong></p>
-<a class="ansibleOptionLink" href="#parameter-_valid_extensions" title="Permalink to this option"></a><p class="ansible-option-type-line"><span class="ansible-option-type">list</span> / <span class="ansible-option-elements">elements=string</span></p>
-</div></td>
-<td><div class="ansible-option-cell"><p>Check all of these extensions when looking for ‘variable’ files.</p>
-<p>These files must be SOPS encrypted YAML or JSON files.</p>
-<p>By default the plugin will produce errors when encountering files matching these extensions that are not SOPS encrypted. This behavior can be controlled with the <code class="ansible-option docutils literal notranslate"><strong><a class="reference internal" href="#ansible-collections-community-sops-sops-vars-parameter-handle-unencrypted-files"><span class="std std-ref"><span class="pre">handle_unencrypted_files</span></span></a></strong></code> option.</p>
-<p class="ansible-option-line"><strong class="ansible-option-default-bold">Default:</strong> <code class="ansible-option-default docutils literal notranslate"><span class="pre">[&quot;.sops.yml&quot;,</span> <span class="pre">&quot;.sops.yaml&quot;,</span> <span class="pre">&quot;.sops.json&quot;]</span></code></p>
-<p class="ansible-option-line"><strong class="ansible-option-configuration">Configuration:</strong></p>
-<ul>
-<li><p>INI entry:</p>
-<div class="highlight-YAML+Jinja notranslate"><div class="highlight"><pre><span></span><span class="p p-Indicator">[</span><span class="nv">community.sops</span><span class="p p-Indicator">]</span>
-<span class="l l-Scalar l-Scalar-Plain">valid_extensions = .sops.yml, .sops.yaml, .sops.json</span>
-</pre></div>
-</div>
-<p><em class="ansible-option-versionadded">added in community.sops 1.7.0</em></p>
-</li>
-<li><p>Environment variable: <span class="target" id="index-1"></span><a class="reference internal" href="environment_variables.html#envvar-ANSIBLE_VARS_SOPS_PLUGIN_VALID_EXTENSIONS"><code class="xref std std-envvar docutils literal notranslate"><span class="pre">ANSIBLE_VARS_SOPS_PLUGIN_VALID_EXTENSIONS</span></code></a></p>
-<p><em class="ansible-option-versionadded">added in community.sops 1.7.0</em></p>
-</li>
-</ul>
-</div></td>
-</tr>
-<tr class="row-even"><td><div class="ansible-option-cell">
 <div class="ansibleOptionAnchor" id="parameter-age_key"></div><p class="ansible-option-title" id="ansible-collections-community-sops-sops-vars-parameter-age-key"><strong>age_key</strong></p>
 <a class="ansibleOptionLink" href="#parameter-age_key" title="Permalink to this option"></a><p class="ansible-option-type-line"><span class="ansible-option-type">string</span></p>
 <p><em class="ansible-option-versionadded">added in community.sops 1.4.0</em></p>
@@ -233,7 +192,7 @@ see <a class="reference internal" href="#ansible-collections-community-sops-sops
 <p>Will be set as the <code class="xref std std-envvar docutils literal notranslate"><span class="pre">SOPS_AGE_KEY</span></code> environment variable when calling SOPS.</p>
 <p class="ansible-option-line"><strong class="ansible-option-configuration">Configuration:</strong></p>
 <ul class="simple">
-<li><p>Environment variable: <span class="target" id="index-2"></span><a class="reference internal" href="environment_variables.html#envvar-ANSIBLE_SOPS_AGE_KEY"><code class="xref std std-envvar docutils literal notranslate"><span class="pre">ANSIBLE_SOPS_AGE_KEY</span></code></a></p></li>
+<li><p>Environment variable: <span class="target" id="index-0"></span><a class="reference internal" href="environment_variables.html#envvar-ANSIBLE_SOPS_AGE_KEY"><code class="xref std std-envvar docutils literal notranslate"><span class="pre">ANSIBLE_SOPS_AGE_KEY</span></code></a></p></li>
 </ul>
 </div></td>
 </tr>
@@ -253,7 +212,7 @@ see <a class="reference internal" href="#ansible-collections-community-sops-sops
 </pre></div>
 </div>
 </li>
-<li><p>Environment variable: <span class="target" id="index-3"></span><a class="reference internal" href="environment_variables.html#envvar-ANSIBLE_SOPS_AGE_KEYFILE"><code class="xref std std-envvar docutils literal notranslate"><span class="pre">ANSIBLE_SOPS_AGE_KEYFILE</span></code></a></p></li>
+<li><p>Environment variable: <span class="target" id="index-1"></span><a class="reference internal" href="environment_variables.html#envvar-ANSIBLE_SOPS_AGE_KEYFILE"><code class="xref std std-envvar docutils literal notranslate"><span class="pre">ANSIBLE_SOPS_AGE_KEYFILE</span></code></a></p></li>
 </ul>
 </div></td>
 </tr>
@@ -273,7 +232,7 @@ see <a class="reference internal" href="#ansible-collections-community-sops-sops
 </div>
 <p><em class="ansible-option-versionadded">added in community.sops 1.2.0</em></p>
 </li>
-<li><p>Environment variable: <span class="target" id="index-4"></span><a class="reference internal" href="environment_variables.html#envvar-ANSIBLE_SOPS_AWS_ACCESS_KEY_ID"><code class="xref std std-envvar docutils literal notranslate"><span class="pre">ANSIBLE_SOPS_AWS_ACCESS_KEY_ID</span></code></a></p>
+<li><p>Environment variable: <span class="target" id="index-2"></span><a class="reference internal" href="environment_variables.html#envvar-ANSIBLE_SOPS_AWS_ACCESS_KEY_ID"><code class="xref std std-envvar docutils literal notranslate"><span class="pre">ANSIBLE_SOPS_AWS_ACCESS_KEY_ID</span></code></a></p>
 <p><em class="ansible-option-versionadded">added in community.sops 1.2.0</em></p>
 </li>
 </ul>
@@ -295,7 +254,7 @@ see <a class="reference internal" href="#ansible-collections-community-sops-sops
 </div>
 <p><em class="ansible-option-versionadded">added in community.sops 1.2.0</em></p>
 </li>
-<li><p>Environment variable: <span class="target" id="index-5"></span><a class="reference internal" href="environment_variables.html#envvar-ANSIBLE_SOPS_AWS_PROFILE"><code class="xref std std-envvar docutils literal notranslate"><span class="pre">ANSIBLE_SOPS_AWS_PROFILE</span></code></a></p>
+<li><p>Environment variable: <span class="target" id="index-3"></span><a class="reference internal" href="environment_variables.html#envvar-ANSIBLE_SOPS_AWS_PROFILE"><code class="xref std std-envvar docutils literal notranslate"><span class="pre">ANSIBLE_SOPS_AWS_PROFILE</span></code></a></p>
 <p><em class="ansible-option-versionadded">added in community.sops 1.2.0</em></p>
 </li>
 </ul>
@@ -310,7 +269,7 @@ see <a class="reference internal" href="#ansible-collections-community-sops-sops
 <p>Sets the environment variable <code class="xref std std-envvar docutils literal notranslate"><span class="pre">AWS_SECRET_ACCESS_KEY</span></code> for the SOPS call.</p>
 <p class="ansible-option-line"><strong class="ansible-option-configuration">Configuration:</strong></p>
 <ul>
-<li><p>Environment variable: <span class="target" id="index-6"></span><a class="reference internal" href="environment_variables.html#envvar-ANSIBLE_SOPS_AWS_SECRET_ACCESS_KEY"><code class="xref std std-envvar docutils literal notranslate"><span class="pre">ANSIBLE_SOPS_AWS_SECRET_ACCESS_KEY</span></code></a></p>
+<li><p>Environment variable: <span class="target" id="index-4"></span><a class="reference internal" href="environment_variables.html#envvar-ANSIBLE_SOPS_AWS_SECRET_ACCESS_KEY"><code class="xref std std-envvar docutils literal notranslate"><span class="pre">ANSIBLE_SOPS_AWS_SECRET_ACCESS_KEY</span></code></a></p>
 <p><em class="ansible-option-versionadded">added in community.sops 1.2.0</em></p>
 </li>
 </ul>
@@ -332,7 +291,7 @@ see <a class="reference internal" href="#ansible-collections-community-sops-sops
 </div>
 <p><em class="ansible-option-versionadded">added in community.sops 1.2.0</em></p>
 </li>
-<li><p>Environment variable: <span class="target" id="index-7"></span><a class="reference internal" href="environment_variables.html#envvar-ANSIBLE_SOPS_AWS_SESSION_TOKEN"><code class="xref std std-envvar docutils literal notranslate"><span class="pre">ANSIBLE_SOPS_AWS_SESSION_TOKEN</span></code></a></p>
+<li><p>Environment variable: <span class="target" id="index-5"></span><a class="reference internal" href="environment_variables.html#envvar-ANSIBLE_SOPS_AWS_SESSION_TOKEN"><code class="xref std std-envvar docutils literal notranslate"><span class="pre">ANSIBLE_SOPS_AWS_SESSION_TOKEN</span></code></a></p>
 <p><em class="ansible-option-versionadded">added in community.sops 1.2.0</em></p>
 </li>
 </ul>
@@ -360,7 +319,7 @@ see <a class="reference internal" href="#ansible-collections-community-sops-sops
 </pre></div>
 </div>
 </li>
-<li><p>Environment variable: <span class="target" id="index-8"></span><a class="reference internal" href="environment_variables.html#envvar-ANSIBLE_VARS_SOPS_PLUGIN_CACHE"><code class="xref std std-envvar docutils literal notranslate"><span class="pre">ANSIBLE_VARS_SOPS_PLUGIN_CACHE</span></code></a></p></li>
+<li><p>Environment variable: <span class="target" id="index-6"></span><a class="reference internal" href="environment_variables.html#envvar-ANSIBLE_VARS_SOPS_PLUGIN_CACHE"><code class="xref std std-envvar docutils literal notranslate"><span class="pre">ANSIBLE_VARS_SOPS_PLUGIN_CACHE</span></code></a></p></li>
 </ul>
 </div></td>
 </tr>
@@ -381,13 +340,31 @@ see <a class="reference internal" href="#ansible-collections-community-sops-sops
 </div>
 <p><em class="ansible-option-versionadded">added in community.sops 1.2.0</em></p>
 </li>
-<li><p>Environment variable: <span class="target" id="index-9"></span><a class="reference internal" href="environment_variables.html#envvar-ANSIBLE_SOPS_CONFIG_PATH"><code class="xref std std-envvar docutils literal notranslate"><span class="pre">ANSIBLE_SOPS_CONFIG_PATH</span></code></a></p>
+<li><p>Environment variable: <span class="target" id="index-7"></span><a class="reference internal" href="environment_variables.html#envvar-ANSIBLE_SOPS_CONFIG_PATH"><code class="xref std std-envvar docutils literal notranslate"><span class="pre">ANSIBLE_SOPS_CONFIG_PATH</span></code></a></p>
 <p><em class="ansible-option-versionadded">added in community.sops 1.2.0</em></p>
 </li>
 </ul>
 </div></td>
 </tr>
 <tr class="row-even"><td><div class="ansible-option-cell">
+<div class="ansibleOptionAnchor" id="parameter-disable_vars_plugin_temporarily"></div><p class="ansible-option-title" id="ansible-collections-community-sops-sops-vars-parameter-disable-vars-plugin-temporarily"><strong>disable_vars_plugin_temporarily</strong></p>
+<a class="ansibleOptionLink" href="#parameter-disable_vars_plugin_temporarily" title="Permalink to this option"></a><p class="ansible-option-type-line"><span class="ansible-option-type">boolean</span></p>
+<p><em class="ansible-option-versionadded">added in community.sops 1.3.0</em></p>
+</div></td>
+<td><div class="ansible-option-cell"><p>Temporarily disable this plugin.</p>
+<p>Useful if ansible-inventory is supposed to be run without decrypting secrets (in AWX for instance).</p>
+<p class="ansible-option-line"><strong class="ansible-option-choices">Choices:</strong></p>
+<ul class="simple">
+<li><p><code class="ansible-option-default-bold docutils literal notranslate"><strong><span class="pre">false</span></strong></code> <span class="ansible-option-choices-default-mark">← (default)</span></p></li>
+<li><p><code class="ansible-option-choices-entry docutils literal notranslate"><span class="pre">true</span></code></p></li>
+</ul>
+<p class="ansible-option-line"><strong class="ansible-option-configuration">Configuration:</strong></p>
+<ul class="simple">
+<li><p>Environment variable: <span class="target" id="index-8"></span><a class="reference internal" href="environment_variables.html#envvar-SOPS_ANSIBLE_AWX_DISABLE_VARS_PLUGIN_TEMPORARILY"><code class="xref std std-envvar docutils literal notranslate"><span class="pre">SOPS_ANSIBLE_AWX_DISABLE_VARS_PLUGIN_TEMPORARILY</span></code></a></p></li>
+</ul>
+</div></td>
+</tr>
+<tr class="row-odd"><td><div class="ansible-option-cell">
 <div class="ansibleOptionAnchor" id="parameter-enable_local_keyservice"></div><p class="ansible-option-title" id="ansible-collections-community-sops-sops-vars-parameter-enable-local-keyservice"><strong>enable_local_keyservice</strong></p>
 <a class="ansibleOptionLink" href="#parameter-enable_local_keyservice" title="Permalink to this option"></a><p class="ansible-option-type-line"><span class="ansible-option-type">boolean</span></p>
 <p><em class="ansible-option-versionadded">added in community.sops 1.0.0</em></p>
@@ -408,18 +385,18 @@ see <a class="reference internal" href="#ansible-collections-community-sops-sops
 </div>
 <p><em class="ansible-option-versionadded">added in community.sops 1.2.0</em></p>
 </li>
-<li><p>Environment variable: <span class="target" id="index-10"></span><a class="reference internal" href="environment_variables.html#envvar-ANSIBLE_SOPS_ENABLE_LOCAL_KEYSERVICE"><code class="xref std std-envvar docutils literal notranslate"><span class="pre">ANSIBLE_SOPS_ENABLE_LOCAL_KEYSERVICE</span></code></a></p>
+<li><p>Environment variable: <span class="target" id="index-9"></span><a class="reference internal" href="environment_variables.html#envvar-ANSIBLE_SOPS_ENABLE_LOCAL_KEYSERVICE"><code class="xref std std-envvar docutils literal notranslate"><span class="pre">ANSIBLE_SOPS_ENABLE_LOCAL_KEYSERVICE</span></code></a></p>
 <p><em class="ansible-option-versionadded">added in community.sops 1.2.0</em></p>
 </li>
 </ul>
 </div></td>
 </tr>
-<tr class="row-odd"><td><div class="ansible-option-cell">
+<tr class="row-even"><td><div class="ansible-option-cell">
 <div class="ansibleOptionAnchor" id="parameter-handle_unencrypted_files"></div><p class="ansible-option-title" id="ansible-collections-community-sops-sops-vars-parameter-handle-unencrypted-files"><strong>handle_unencrypted_files</strong></p>
 <a class="ansibleOptionLink" href="#parameter-handle_unencrypted_files" title="Permalink to this option"></a><p class="ansible-option-type-line"><span class="ansible-option-type">string</span></p>
 <p><em class="ansible-option-versionadded">added in community.sops 1.8.0</em></p>
 </div></td>
-<td><div class="ansible-option-cell"><p>How to handle files that match the extensions in <code class="ansible-option docutils literal notranslate"><strong><a class="reference internal" href="#ansible-collections-community-sops-sops-vars-parameter-valid-extensions"><span class="std std-ref"><span class="pre">_valid_extensions</span></span></a></strong></code> that are not SOPS encrypted.</p>
+<td><div class="ansible-option-cell"><p>How to handle files that match the extensions in <code class="ansible-option docutils literal notranslate"><strong><a class="reference internal" href="#ansible-collections-community-sops-sops-vars-parameter-valid-extensions"><span class="std std-ref"><span class="pre">valid_extensions</span></span></a></strong></code> that are not SOPS encrypted.</p>
 <p>The default value <code class="ansible-value docutils literal notranslate"><span class="pre">error</span></code> will produce an error.</p>
 <p>The value <code class="ansible-value docutils literal notranslate"><span class="pre">skip</span></code> will simply skip these files. This requires SOPS 3.9.0 or later.</p>
 <p>The value <code class="ansible-value docutils literal notranslate"><span class="pre">warn</span></code> will skip these files and emit a warning. This requires SOPS 3.9.0 or later.</p>
@@ -438,11 +415,11 @@ see <a class="reference internal" href="#ansible-collections-community-sops-sops
 </pre></div>
 </div>
 </li>
-<li><p>Environment variable: <span class="target" id="index-11"></span><a class="reference internal" href="environment_variables.html#envvar-ANSIBLE_VARS_SOPS_PLUGIN_HANDLE_UNENCRYPTED_FILES"><code class="xref std std-envvar docutils literal notranslate"><span class="pre">ANSIBLE_VARS_SOPS_PLUGIN_HANDLE_UNENCRYPTED_FILES</span></code></a></p></li>
+<li><p>Environment variable: <span class="target" id="index-10"></span><a class="reference internal" href="environment_variables.html#envvar-ANSIBLE_VARS_SOPS_PLUGIN_HANDLE_UNENCRYPTED_FILES"><code class="xref std std-envvar docutils literal notranslate"><span class="pre">ANSIBLE_VARS_SOPS_PLUGIN_HANDLE_UNENCRYPTED_FILES</span></code></a></p></li>
 </ul>
 </div></td>
 </tr>
-<tr class="row-even"><td><div class="ansible-option-cell">
+<tr class="row-odd"><td><div class="ansible-option-cell">
 <div class="ansibleOptionAnchor" id="parameter-keyservice"></div><p class="ansible-option-title" id="ansible-collections-community-sops-sops-vars-parameter-keyservice"><strong>keyservice</strong></p>
 <a class="ansibleOptionLink" href="#parameter-keyservice" title="Permalink to this option"></a><p class="ansible-option-type-line"><span class="ansible-option-type">list</span> / <span class="ansible-option-elements">elements=string</span></p>
 <p><em class="ansible-option-versionadded">added in community.sops 1.0.0</em></p>
@@ -459,13 +436,13 @@ see <a class="reference internal" href="#ansible-collections-community-sops-sops
 </div>
 <p><em class="ansible-option-versionadded">added in community.sops 1.2.0</em></p>
 </li>
-<li><p>Environment variable: <span class="target" id="index-12"></span><a class="reference internal" href="environment_variables.html#envvar-ANSIBLE_SOPS_KEYSERVICE"><code class="xref std std-envvar docutils literal notranslate"><span class="pre">ANSIBLE_SOPS_KEYSERVICE</span></code></a></p>
+<li><p>Environment variable: <span class="target" id="index-11"></span><a class="reference internal" href="environment_variables.html#envvar-ANSIBLE_SOPS_KEYSERVICE"><code class="xref std std-envvar docutils literal notranslate"><span class="pre">ANSIBLE_SOPS_KEYSERVICE</span></code></a></p>
 <p><em class="ansible-option-versionadded">added in community.sops 1.2.0</em></p>
 </li>
 </ul>
 </div></td>
 </tr>
-<tr class="row-odd"><td><div class="ansible-option-cell">
+<tr class="row-even"><td><div class="ansible-option-cell">
 <div class="ansibleOptionAnchor" id="parameter-sops_binary"></div><p class="ansible-option-title" id="ansible-collections-community-sops-sops-vars-parameter-sops-binary"><strong>sops_binary</strong></p>
 <a class="ansibleOptionLink" href="#parameter-sops_binary" title="Permalink to this option"></a><p class="ansible-option-type-line"><span class="ansible-option-type">path</span></p>
 <p><em class="ansible-option-versionadded">added in community.sops 1.0.0</em></p>
@@ -481,13 +458,13 @@ see <a class="reference internal" href="#ansible-collections-community-sops-sops
 </div>
 <p><em class="ansible-option-versionadded">added in community.sops 1.2.0</em></p>
 </li>
-<li><p>Environment variable: <span class="target" id="index-13"></span><a class="reference internal" href="environment_variables.html#envvar-ANSIBLE_SOPS_BINARY"><code class="xref std std-envvar docutils literal notranslate"><span class="pre">ANSIBLE_SOPS_BINARY</span></code></a></p>
+<li><p>Environment variable: <span class="target" id="index-12"></span><a class="reference internal" href="environment_variables.html#envvar-ANSIBLE_SOPS_BINARY"><code class="xref std std-envvar docutils literal notranslate"><span class="pre">ANSIBLE_SOPS_BINARY</span></code></a></p>
 <p><em class="ansible-option-versionadded">added in community.sops 1.2.0</em></p>
 </li>
 </ul>
 </div></td>
 </tr>
-<tr class="row-even"><td><div class="ansible-option-cell">
+<tr class="row-odd"><td><div class="ansible-option-cell">
 <div class="ansibleOptionAnchor" id="parameter-stage"></div><p class="ansible-option-title" id="ansible-collections-community-sops-sops-vars-parameter-stage"><strong>stage</strong></p>
 <a class="ansibleOptionLink" href="#parameter-stage" title="Permalink to this option"></a><p class="ansible-option-type-line"><span class="ansible-option-type">string</span></p>
 <p><em class="ansible-option-versionadded">added in community.sops 0.2.0</em></p>
@@ -511,7 +488,30 @@ see <a class="reference internal" href="#ansible-collections-community-sops-sops
 </pre></div>
 </div>
 </li>
-<li><p>Environment variable: <span class="target" id="index-14"></span><a class="reference internal" href="environment_variables.html#envvar-ANSIBLE_VARS_SOPS_PLUGIN_STAGE"><code class="xref std std-envvar docutils literal notranslate"><span class="pre">ANSIBLE_VARS_SOPS_PLUGIN_STAGE</span></code></a></p></li>
+<li><p>Environment variable: <span class="target" id="index-13"></span><a class="reference internal" href="environment_variables.html#envvar-ANSIBLE_VARS_SOPS_PLUGIN_STAGE"><code class="xref std std-envvar docutils literal notranslate"><span class="pre">ANSIBLE_VARS_SOPS_PLUGIN_STAGE</span></code></a></p></li>
+</ul>
+</div></td>
+</tr>
+<tr class="row-even"><td><div class="ansible-option-cell">
+<div class="ansibleOptionAnchor" id="parameter-valid_extensions"></div><p class="ansible-option-title" id="ansible-collections-community-sops-sops-vars-parameter-valid-extensions"><strong>valid_extensions</strong></p>
+<a class="ansibleOptionLink" href="#parameter-valid_extensions" title="Permalink to this option"></a><p class="ansible-option-type-line"><span class="ansible-option-type">list</span> / <span class="ansible-option-elements">elements=string</span></p>
+</div></td>
+<td><div class="ansible-option-cell"><p>Check all of these extensions when looking for ‘variable’ files.</p>
+<p>These files must be SOPS encrypted YAML or JSON files.</p>
+<p>By default the plugin will produce errors when encountering files matching these extensions that are not SOPS encrypted. This behavior can be controlled with the <code class="ansible-option docutils literal notranslate"><strong><a class="reference internal" href="#ansible-collections-community-sops-sops-vars-parameter-handle-unencrypted-files"><span class="std std-ref"><span class="pre">handle_unencrypted_files</span></span></a></strong></code> option.</p>
+<p class="ansible-option-line"><strong class="ansible-option-default-bold">Default:</strong> <code class="ansible-option-default docutils literal notranslate"><span class="pre">[&quot;.sops.yml&quot;,</span> <span class="pre">&quot;.sops.yaml&quot;,</span> <span class="pre">&quot;.sops.json&quot;]</span></code></p>
+<p class="ansible-option-line"><strong class="ansible-option-configuration">Configuration:</strong></p>
+<ul>
+<li><p>INI entry:</p>
+<div class="highlight-YAML+Jinja notranslate"><div class="highlight"><pre><span></span><span class="p p-Indicator">[</span><span class="nv">community.sops</span><span class="p p-Indicator">]</span>
+<span class="l l-Scalar l-Scalar-Plain">valid_extensions = .sops.yml, .sops.yaml, .sops.json</span>
+</pre></div>
+</div>
+<p><em class="ansible-option-versionadded">added in community.sops 1.7.0</em></p>
+</li>
+<li><p>Environment variable: <span class="target" id="index-14"></span><a class="reference internal" href="environment_variables.html#envvar-ANSIBLE_VARS_SOPS_PLUGIN_VALID_EXTENSIONS"><code class="xref std std-envvar docutils literal notranslate"><span class="pre">ANSIBLE_VARS_SOPS_PLUGIN_VALID_EXTENSIONS</span></code></a></p>
+<p><em class="ansible-option-versionadded">added in community.sops 1.7.0</em></p>
+</li>
 </ul>
 </div></td>
 </tr>

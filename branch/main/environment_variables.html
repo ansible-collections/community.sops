@@ -244,7 +244,7 @@ Environment variables used by the ansible-core configuration are documented in <
 <dl class="std envvar">
 <dt class="sig sig-object std" id="envvar-ANSIBLE_VARS_SOPS_PLUGIN_HANDLE_UNENCRYPTED_FILES">
 <span class="sig-name descname"><span class="pre">ANSIBLE_VARS_SOPS_PLUGIN_HANDLE_UNENCRYPTED_FILES</span></span><a class="headerlink" href="#envvar-ANSIBLE_VARS_SOPS_PLUGIN_HANDLE_UNENCRYPTED_FILES" title="Link to this definition"></a></dt>
-<dd><p>How to handle files that match the extensions in <code class="ansible-option docutils literal notranslate"><strong><span><span class="pre">_valid_extensions</span></span></strong></code> that are not SOPS encrypted.</p>
+<dd><p>How to handle files that match the extensions in <code class="ansible-option docutils literal notranslate"><strong><span><span class="pre">valid_extensions</span></span></strong></code> that are not SOPS encrypted.</p>
 <p>The default value <code class="ansible-value docutils literal notranslate"><span class="pre">error</span></code> will produce an error.</p>
 <p>The value <code class="ansible-value docutils literal notranslate"><span class="pre">skip</span></code> will simply skip these files. This requires SOPS 3.9.0 or later.</p>
 <p>The value <code class="ansible-value docutils literal notranslate"><span class="pre">warn</span></code> will skip these files and emit a warning. This requires SOPS 3.9.0 or later.</p>
