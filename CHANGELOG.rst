@@ -4,6 +4,25 @@ Community SOPS Release Notes
 
 .. contents:: Topics
 
+v1.8.0
+======
+
+Release Summary
+---------------
+
+Feature release for supporting improvements coming with SOPS 3.9.0.
+
+Minor Changes
+-------------
+
+- Detect SOPS 3.9.0 and use new ``decrypt`` and ``encrypt`` subcommands (https://github.com/ansible-collections/community.sops/pull/190).
+- sops vars plugin - new option ``handle_unencrypted_files`` allows to control behavior when encountering unencrypted files with SOPS 3.9.0+ (https://github.com/ansible-collections/community.sops/pull/190).
+
+Bugfixes
+--------
+
+- sops_encrypt - properly support ``path_regex`` in ``.sops.yaml`` when SOPS 3.9.0 or later is used (https://github.com/ansible-collections/community.sops/issues/153, https://github.com/ansible-collections/community.sops/pull/190).
+
 v1.7.0
 ======
 
