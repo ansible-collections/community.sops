@@ -50,38 +50,38 @@ SOPS_ERROR_CODES = {
 _SOPS_VERSION = re.compile(r'^sops ([0-9]+)\.([0-9]+)\.([0-9]+)')
 
 
-def _create_single_arg(argument_name):
-    def f(value, arguments, env, version):
-        arguments.extend([argument_name, to_native(value)])
+def _create_single_arg(argument_name, pre=False):
+    def f(value, arguments, arguments_post, env, version):
+        (arguments if pre else arguments_post).extend([argument_name, to_native(value)])
 
     return f
 
 
-def _create_comma_separated(argument_name):
-    def f(value, arguments, env, version):
-        arguments.extend([argument_name, ','.join([to_native(v) for v in value])])
+def _create_comma_separated(argument_name, pre=False):
+    def f(value, arguments, arguments_post, env, version):
+        (arguments if pre else arguments_post).extend([argument_name, ','.join([to_native(v) for v in value])])
 
     return f
 
 
-def _create_repeated(argument_name):
-    def f(value, arguments, env, version):
+def _create_repeated(argument_name, pre=False):
+    def f(value, arguments, arguments_post, env, version):
         for v in value:
-            arguments.extend([argument_name, to_native(v)])
+            (arguments if pre else arguments_post).extend([argument_name, to_native(v)])
 
     return f
 
 
-def _create_boolean(argument_name):
-    def f(value, arguments, env, version):
+def _create_boolean(argument_name, pre=False):
+    def f(value, arguments, arguments_post, env, version):
         if value:
-            arguments.append(argument_name)
+            (arguments if pre else arguments_post).append(argument_name)
 
     return f
 
 
 def _create_env_variable(argument_name):
-    def f(value, arguments, env, version):
+    def f(value, arguments, arguments_post, env, version):
         env[argument_name] = value
 
     return f
@@ -94,7 +94,7 @@ GENERAL_OPTIONS = {
     'aws_access_key_id': _create_env_variable('AWS_ACCESS_KEY_ID'),
     'aws_secret_access_key': _create_env_variable('AWS_SECRET_ACCESS_KEY'),
     'aws_session_token': _create_env_variable('AWS_SESSION_TOKEN'),
-    'config_path': _create_single_arg('--config'),
+    'config_path': _create_single_arg('--config', pre=True),
     'enable_local_keyservice': _create_boolean('--enable-local-keyservice'),
     'keyservice': _create_repeated('--keyservice'),
 }
@@ -136,13 +136,13 @@ SopsFileStatus = collections.namedtuple('SopsFileStatus', ['encrypted'])
 
 
 class SopsRunner(object):
-    def _add_options(self, command, env, get_option_value, options):
+    def _add_options(self, command, command_post, env, get_option_value, options):
         if get_option_value is None:
             return
         for option, f in options.items():
             v = get_option_value(option)
             if v is not None:
-                f(v, command, env, self.version)
+                f(v, command, command_post, env, self.version)
 
     def _debug(self, message):
         if self.display:
@@ -188,18 +188,20 @@ class SopsRunner(object):
                 decode_output=True, rstrip=True, input_type=None, output_type=None, get_option_value=None):
         # Run sops directly, python module is deprecated
         command = [self.binary]
+        command_post = []
+        env = os.environ.copy()
+        self._add_options(command, command_post, env, get_option_value, GENERAL_OPTIONS)
         if self.version >= (3, 9, 0):
             command.append("decrypt")
-        env = os.environ.copy()
-        self._add_options(command, env, get_option_value, GENERAL_OPTIONS)
+        command.extend(command_post)
         if input_type is not None:
             command.extend(["--input-type", input_type])
         if output_type is not None:
             command.extend(["--output-type", output_type])
-        if content is not None:
-            encrypted_file = '/dev/stdin'
         if self.version < (3, 9, 0):
             command.append("--decrypt")
+        if content is not None:
+            encrypted_file = '/dev/stdin'
         command.append(encrypted_file)
 
         exit_code, output, err = self._run_command(command, env=env, data=content)
@@ -225,18 +227,20 @@ class SopsRunner(object):
     def encrypt(self, data, cwd=None, input_type=None, output_type=None, filename=None, get_option_value=None):
         # Run sops directly, python module is deprecated
         command = [self.binary]
+        command_post = []
+        env = os.environ.copy()
+        self._add_options(command, command_post, env, get_option_value, GENERAL_OPTIONS)
+        self._add_options(command, command_post, env, get_option_value, ENCRYPT_OPTIONS)
         if self.version >= (3, 9, 0):
             command.append("encrypt")
-        env = os.environ.copy()
-        self._add_options(command, env, get_option_value, GENERAL_OPTIONS)
-        self._add_options(command, env, get_option_value, ENCRYPT_OPTIONS)
+        command.extend(command_post)
         if input_type is not None:
             command.extend(["--input-type", input_type])
         if output_type is not None:
             command.extend(["--output-type", output_type])
         if self.version < (3, 9, 0):
             command.append("--encrypt")
-        elif filename:
+        if self.version >= (3, 9, 0) and filename:
             command.extend(["--filename-override", filename])
         command.append("/dev/stdin")
 
