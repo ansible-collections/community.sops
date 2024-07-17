@@ -50,7 +50,8 @@ SOPS_ERROR_CODES = {
 _SOPS_VERSION = re.compile(r'^sops ([0-9]+)\.([0-9]+)\.([0-9]+)')
 
 
-def _add_argument(arguments_pre, arguments_post, *args, pre=False):
+def _add_argument(arguments_pre, arguments_post, *args, **kwargs):
+    pre = kwargs.pop('pre', False)
     (arguments_pre if pre else arguments_post).extend(args)
 
 
