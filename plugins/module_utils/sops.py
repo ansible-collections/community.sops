@@ -188,8 +188,6 @@ class SopsRunner(object):
                 decode_output=True, rstrip=True, input_type=None, output_type=None, get_option_value=None):
         # Run sops directly, python module is deprecated
         command = [self.binary]
-        if self.version >= (3, 9, 0):
-            command.append("decrypt")
         env = os.environ.copy()
         self._add_options(command, env, get_option_value, GENERAL_OPTIONS)
         if input_type is not None:
@@ -200,6 +198,8 @@ class SopsRunner(object):
             encrypted_file = '/dev/stdin'
         if self.version < (3, 9, 0):
             command.append("--decrypt")
+        if self.version >= (3, 9, 0):
+            command.append("decrypt")
         command.append(encrypted_file)
 
         exit_code, output, err = self._run_command(command, env=env, data=content)
@@ -225,8 +225,6 @@ class SopsRunner(object):
     def encrypt(self, data, cwd=None, input_type=None, output_type=None, filename=None, get_option_value=None):
         # Run sops directly, python module is deprecated
         command = [self.binary]
-        if self.version >= (3, 9, 0):
-            command.append("encrypt")
         env = os.environ.copy()
         self._add_options(command, env, get_option_value, GENERAL_OPTIONS)
         self._add_options(command, env, get_option_value, ENCRYPT_OPTIONS)
@@ -236,6 +234,8 @@ class SopsRunner(object):
             command.extend(["--output-type", output_type])
         if self.version < (3, 9, 0):
             command.append("--encrypt")
+        if self.version >= (3, 9, 0):
+            command.append("encrypt")
         elif filename:
             command.extend(["--filename-override", filename])
         command.append("/dev/stdin")
