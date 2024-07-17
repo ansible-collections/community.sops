@@ -50,38 +50,43 @@ SOPS_ERROR_CODES = {
 _SOPS_VERSION = re.compile(r'^sops ([0-9]+)\.([0-9]+)\.([0-9]+)')
 
 
+def _add_argument(arguments_pre, arguments_post, *args, pre=False):
+    (arguments_pre if pre else arguments_post).extend(args)
+
+
 def _create_single_arg(argument_name, pre=False):
-    def f(value, arguments, arguments_post, env, version):
-        (arguments if pre else arguments_post).extend([argument_name, to_native(value)])
+    def f(value, arguments_pre, arguments_post, env, version):
+        _add_argument(arguments_pre, arguments_post, argument_name, to_native(value), pre=pre)
 
     return f
 
 
 def _create_comma_separated(argument_name, pre=False):
-    def f(value, arguments, arguments_post, env, version):
-        (arguments if pre else arguments_post).extend([argument_name, ','.join([to_native(v) for v in value])])
+    def f(value, arguments_pre, arguments_post, env, version):
+        value = ','.join([to_native(v) for v in value])
+        _add_argument(arguments_pre, arguments_post, argument_name, value, pre=pre)
 
     return f
 
 
 def _create_repeated(argument_name, pre=False):
-    def f(value, arguments, arguments_post, env, version):
+    def f(value, arguments_pre, arguments_post, env, version):
         for v in value:
-            (arguments if pre else arguments_post).extend([argument_name, to_native(v)])
+            _add_argument(arguments_pre, arguments_post, argument_name, to_native(v), pre=pre)
 
     return f
 
 
 def _create_boolean(argument_name, pre=False):
-    def f(value, arguments, arguments_post, env, version):
+    def f(value, arguments_pre, arguments_post, env, version):
         if value:
-            (arguments if pre else arguments_post).append(argument_name)
+            _add_argument(arguments_pre, arguments_post, argument_name, pre=pre)
 
     return f
 
 
 def _create_env_variable(argument_name):
-    def f(value, arguments, arguments_post, env, version):
+    def f(value, arguments_pre, arguments_post, env, version):
         env[argument_name] = value
 
     return f
@@ -136,13 +141,13 @@ SopsFileStatus = collections.namedtuple('SopsFileStatus', ['encrypted'])
 
 
 class SopsRunner(object):
-    def _add_options(self, command, command_post, env, get_option_value, options):
+    def _add_options(self, command_pre, command_post, env, get_option_value, options):
         if get_option_value is None:
             return
         for option, f in options.items():
             v = get_option_value(option)
             if v is not None:
-                f(v, command, command_post, env, self.version)
+                f(v, command_pre, command_post, env, self.version)
 
     def _debug(self, message):
         if self.display:
