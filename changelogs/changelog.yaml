@@ -383,3 +383,13 @@ releases:
       - 1.8.0.yml
       - 190-sops-3.9.0.yml
     release_date: '2024-07-09'
+  1.8.1:
+    changes:
+      bugfixes:
+        - Pass ``config_path`` on SOPS 3.9.0 before the subcommand instead of after
+          it (https://github.com/ansible-collections/community.sops/issues/195, https://github.com/ansible-collections/community.sops/pull/197).
+      release_summary: Bugfix release.
+    fragments:
+      - 1.8.1.yml
+      - 197-sops-3.9.0-order.yml
+    release_date: '2024-07-18'

@@ -1,3 +1,0 @@
-bugfixes:
-  - "Pass ``config_path`` on SOPS 3.9.0 before the subcommand instead of after it
-     (https://github.com/ansible-collections/community.sops/issues/195, https://github.com/ansible-collections/community.sops/pull/197)."
