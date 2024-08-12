@@ -15,7 +15,7 @@ The `community.sops` collection allows integrating [CNCF SOPS (`getsops/sops`)](
 
 Please note that this collection does **not** support Windows targets.
 
-**SOPS version compatibility**
+## SOPS version compatibility
 
 The following table shows which versions of SOPS were tested with which versions of the collection. Older (or newer) versions of SOPS can still work fine, it just means that we did not test them. In some cases, it could be that a minimal required version of SOPS is explicitly documented for a specific feature. This is the case from community.sops 1.8.0 on; from that version on the collection automatically detects the SOPS version to determine whether a feature is supported or not.
 
@@ -24,6 +24,24 @@ The following table shows which versions of SOPS were tested with which versions
 |0.1.0|`3.5.0+`|
 |1.0.6|`3.5.0+`|
 |`main` branch|`3.5.0`, `3.6.0`, `3.7.3`, `3.8.0`, `3.8.1`, `3.9.0`|
+
+## Code of Conduct
+
+We follow [Ansible Code of Conduct](https://docs.ansible.com/ansible/latest/community/code_of_conduct.html) in all our interactions within this project.
+
+If you encounter abusive behavior violating the [Ansible Code of Conduct](https://docs.ansible.com/ansible/latest/community/code_of_conduct.html), please refer to the [policy violations](https://docs.ansible.com/ansible/latest/community/code_of_conduct.html#policy-violations) section of the Code of Conduct for information on how to raise a complaint.
+
+## Communication
+
+* Join the Ansible forum:
+  * [Get Help](https://forum.ansible.com/c/help/6): get help or help others. This is for questions about modules or plugins in the collection.
+  * [Posts tagged with 'sops'](https://forum.ansible.com/tag/sops): subscribe to participate in SOPS related conversations.
+  * [Social Spaces](https://forum.ansible.com/c/chat/4): gather and interact with fellow enthusiasts.
+  * [News & Announcements](https://forum.ansible.com/c/news/5): track project-wide announcements including social events.
+
+* The Ansible [Bullhorn newsletter](https://docs.ansible.com/ansible/devel/community/communication.html#the-bullhorn): used to announce releases and important changes.
+
+For more information about communication, see the [Ansible communication guide](https://docs.ansible.com/ansible/devel/community/communication.html).
 
 ## Tested with Ansible
 
@@ -59,7 +77,7 @@ This collection provides:
 - an [action plugin](https://docs.ansible.com/ansible/latest/plugins/action.html) `community.sops.load_vars` that allows loading Ansible vars from a SOPS-encrypted file dynamically during a playbook or role;
 - a [module](https://docs.ansible.com/ansible/latest/user_guide/basic_concepts.html#modules) `community.sops.sops_encrypt` which allows to encrypt data with SOPS.
 - a [role](https://docs.ansible.com/ansible/latest/user_guide/playbooks_reuse_roles.html) `community.sops.install` which allows to install SOPS and GNU Privacy Guard.
-- two [playbooks](https://docs.ansible.com/ansible/latest/user_guide/playbooks_intro.html) `community.sops.install` and `install_localhost` which allow to install SOPS and GNU Privacy Guard.
+- two [playbooks](https://docs.ansible.com/ansible/latest/user_guide/playbooks_intro.html) `community.sops.install` and `community.sops.install_localhost` which allow to install SOPS and GNU Privacy Guard.
 
 ## Using this collection
 
@@ -326,10 +344,6 @@ We plan to regularly release new minor or bugfix versions once new features or b
 Releasing the current major version happens from the `main` branch. We will create a `stable-1` branch for 1.x.y versions once we start working on a 2.0.0 release, to allow backporting bugfixes and features from the 2.0.0 branch (`main`) to `stable-1`. A `stable-2` branch will be created once we work on a 3.0.0 release, and so on.
 
 We currently are not planning any deprecations or new major releases like 2.0.0 containing backwards incompatible changes. If backwards incompatible changes are needed, we plan to deprecate the old behavior as early as possible. We also plan to backport at least bugfixes for the old major version for some time after releasing a new major version. We will not block community members from backporting other bugfixes and features from the latest stable version to older release branches, under the condition that these backports are of reasonable quality.
-
-## Code of Conduct
-
-This repository adheres to the [Ansible Community code of conduct](https://docs.ansible.com/ansible/latest/community/code_of_conduct.html)
 
 ## More information
 
