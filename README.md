@@ -34,7 +34,7 @@ If you encounter abusive behavior violating the [Ansible Code of Conduct](https:
 ## Communication
 
 * Join the Ansible forum:
-  * [Get Help](https://forum.ansible.com/c/help/6): get help or help others. This is for questions about modules or plugins in the collection.
+  * [Get Help](https://forum.ansible.com/c/help/6): get help or help others.Please add appropriate tags if you start new discussions, for example the `sops` tag.
   * [Posts tagged with 'sops'](https://forum.ansible.com/tag/sops): subscribe to participate in SOPS related conversations.
   * [Social Spaces](https://forum.ansible.com/c/chat/4): gather and interact with fellow enthusiasts.
   * [News & Announcements](https://forum.ansible.com/c/news/5): track project-wide announcements including social events.
