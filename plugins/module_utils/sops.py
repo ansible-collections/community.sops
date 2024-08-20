@@ -328,7 +328,7 @@ class Sops():
             input_type=input_type,
             output_type=output_type,
             get_option_value=get_option_value,
-            extract=extract
+            extract=extract,
         )
 
     @staticmethod
