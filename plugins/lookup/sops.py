@@ -62,6 +62,8 @@ DOCUMENTATION = """
         extract:
             description:
                 - Tell SOPS to extract a specific key from a JSON or YAML file.
+                # - Expects the same 'query' syntax as SOPS' --encrypt option, 
+                #   e.g. '["somekey"][0]'. Note: all quotes are mandatory and must be escaped appropriately.
             type: str
             version_added: 1.9.0
     extends_documentation_fragment:
