@@ -407,3 +407,11 @@ releases:
       - 1.8.2.yml
       - deprecate-eol-ansible-core.yml
     release_date: '2024-08-13'
+  1.9.0:
+    changes:
+      minor_changes:
+        - sops lookup plugin - new option ``extract`` allows extracting a single
+          key out of a JSON or YAML file, equivalent to sops' ``decrypt --extract``.
+      fragments:
+        - 1.9.0.yml
+        - 200-lookup-extract.yaml
