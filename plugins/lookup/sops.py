@@ -61,7 +61,7 @@ DOCUMENTATION = """
             default: false
         extract:
             description:
-                - Tell SOPS to extract a specific key from a json or yaml file.
+                - Tell SOPS to extract a specific key from a JSON or YAML file.
             type: str
     extends_documentation_fragment:
         - community.sops.sops
