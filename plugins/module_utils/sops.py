@@ -91,7 +91,7 @@ def _create_env_variable(argument_name):
         env[argument_name] = value
 
     return f
-
+ 
 
 GENERAL_OPTIONS = {
     'age_key': _create_env_variable('SOPS_AGE_KEY'),
@@ -191,7 +191,7 @@ class SopsRunner(object):
         return process.returncode, output, err
 
     def decrypt(self, encrypted_file, content=None,
-                decode_output=True, rstrip=True, input_type=None, output_type=None, get_option_value=None):
+                decode_output=True, rstrip=True, input_type=None, output_type=None, get_option_value=None, extract=None):
         # Run sops directly, python module is deprecated
         command = [self.binary]
         command_post = []
@@ -206,6 +206,8 @@ class SopsRunner(object):
             command.extend(["--output-type", output_type])
         if self.version < (3, 9, 0):
             command.append("--decrypt")
+        if extract is not None:
+            command.extend(["--extract", extract])
         if content is not None:
             encrypted_file = '/dev/stdin'
         command.append(encrypted_file)
@@ -316,7 +318,7 @@ class Sops():
 
     @staticmethod
     def decrypt(encrypted_file, content=None,
-                display=None, decode_output=True, rstrip=True, input_type=None, output_type=None, get_option_value=None, module=None):
+                display=None, decode_output=True, rstrip=True, input_type=None, output_type=None, get_option_value=None, extract=None, module=None):
         runner = Sops.get_sops_runner_from_options(get_option_value, module=module, display=display)
         return runner.decrypt(
             encrypted_file,
@@ -326,6 +328,7 @@ class Sops():
             input_type=input_type,
             output_type=output_type,
             get_option_value=get_option_value,
+            extract=extract
         )
 
     @staticmethod
