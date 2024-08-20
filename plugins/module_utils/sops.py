@@ -318,7 +318,7 @@ class Sops():
 
     @staticmethod
     def decrypt(encrypted_file, content=None,
-                display=None, decode_output=True, rstrip=True, input_type=None, output_type=None, get_option_value=None, extract=None, module=None):
+                display=None, decode_output=True, rstrip=True, input_type=None, output_type=None, get_option_value=None, module=None, extract=None):
         runner = Sops.get_sops_runner_from_options(get_option_value, module=module, display=display)
         return runner.decrypt(
             encrypted_file,
