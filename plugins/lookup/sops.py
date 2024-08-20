@@ -63,6 +63,7 @@ DOCUMENTATION = """
             description:
                 - Tell SOPS to extract a specific key from a JSON or YAML file.
             type: str
+            version_added: 1.9.0
     extends_documentation_fragment:
         - community.sops.sops
         - community.sops.sops.ansible_variables
