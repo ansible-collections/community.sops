@@ -416,6 +416,8 @@ examples: <code class="docutils literal notranslate"><span class="pre">lookup('c
 <p><em class="ansible-option-versionadded">added in community.sops 1.9.0</em></p>
 </div></td>
 <td><div class="ansible-option-cell"><p>Tell SOPS to extract a specific key from a JSON or YAML file.</p>
+<p>Expects the same ‘querystring’ syntax as SOPS’ <code class="docutils literal notranslate"><span class="pre">--encrypt</span></code> option, for example <code class="ansible-value docutils literal notranslate"><span class="pre">'[&quot;somekey&quot;][0]'</span></code>.</p>
+<p><strong>Note:</strong> all quotes are mandatory and must be escaped appropriately.</p>
 </div></td>
 </tr>
 <tr class="row-odd"><td><div class="ansible-option-cell">
