@@ -62,7 +62,7 @@ DOCUMENTATION = """
         extract:
             description:
                 - Tell SOPS to extract a specific key from a JSON or YAML file.
-                - Expects the same 'querystring' syntax as SOPS' C(--encrypt) option, 
+                - Expects the same 'querystring' syntax as SOPS' C(--encrypt) option,
                   for example V('["somekey"][0]').
                 - B(Note:) all quotes are mandatory and must be escaped appropriately.
             type: str
