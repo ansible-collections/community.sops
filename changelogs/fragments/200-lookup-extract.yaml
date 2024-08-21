@@ -1,0 +1,3 @@
+minor_changes:
+  - sops lookup plugin - new option ``extract`` allows extracting a single
+    key out of a JSON or YAML file, equivalent to sops' ``decrypt --extract``.

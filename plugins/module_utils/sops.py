@@ -91,7 +91,7 @@ def _create_env_variable(argument_name):
         env[argument_name] = value
 
     return f
- 
+
 
 GENERAL_OPTIONS = {
     'age_key': _create_env_variable('SOPS_AGE_KEY'),
