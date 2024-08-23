@@ -50,10 +50,14 @@
 
     - name: Test extract
       set_fact:
-        simple_yaml_with_extract: "{{ lookup('community.sops.sops', 'extract.yaml', extract=\"['foo']\") }}"
-        simple_json_with_extract: "{{ lookup('community.sops.sops', 'extract.json', extract=\"['bar']\") }}"
-        nested_yaml_with_extract: "{{ lookup('community.sops.sops', 'extract.yaml', extract=\"['baz']['bar'][0]\") }}"
-        nested_json_with_extract: "{{ lookup('community.sops.sops', 'extract.json', extract=\"['baz']['bar'][2]\") }}"
+        simple_yaml_with_extract: >-
+          {{ lookup('community.sops.sops', 'extract.yaml', extract="['foo']") }}
+        simple_json_with_extract: >-
+          {{ lookup('community.sops.sops', 'extract.json', extract="['bar']") }}
+        nested_yaml_with_extract: >-
+          {{ lookup('community.sops.sops', 'extract.yaml', extract="['baz']['bar'][0]") }}
+        nested_json_with_extract: >-
+          {{ lookup('community.sops.sops', 'extract.json', extract="['baz']['bar'][2]") }}
       register: sops_lookup_extract
 
     - assert:
