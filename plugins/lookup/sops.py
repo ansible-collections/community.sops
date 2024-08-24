@@ -59,6 +59,14 @@ DOCUMENTATION = """
                   but return an empty string instead.
             type: bool
             default: false
+        extract:
+            description:
+                - Tell SOPS to extract a specific key from a JSON or YAML file.
+                - Expects a string with the same 'querystring' syntax as SOPS' C(--encrypt)
+                  option, for example V(["somekey"][0]).
+                - B(Note:) Escape quotes appropriately.
+            type: str
+            version_added: 1.9.0
     extends_documentation_fragment:
         - community.sops.sops
         - community.sops.sops.ansible_variables
@@ -126,6 +134,7 @@ class LookupModule(LookupBase):
         input_type = self.get_option('input_type')
         output_type = self.get_option('output_type')
         empty_on_not_exist = self.get_option('empty_on_not_exist')
+        extract = self.get_option('extract')
 
         ret = []
 
@@ -145,8 +154,8 @@ class LookupModule(LookupBase):
 
             try:
                 output = Sops.decrypt(
-                    lookupfile, display=display, rstrip=rstrip, decode_output=not use_base64,
-                    input_type=input_type, output_type=output_type, get_option_value=get_option_value)
+                    lookupfile, display=display, rstrip=rstrip, decode_output=(not use_base64),
+                    input_type=input_type, output_type=output_type, get_option_value=get_option_value, extract=extract)
             except SopsError as e:
                 raise AnsibleLookupError(to_native(e))
 

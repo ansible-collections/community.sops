@@ -48,6 +48,26 @@
           - "sops_lookup_simple is success"
           - "sops_success == 'foo: bar'"
 
+    - name: Test extract
+      set_fact:
+        simple_yaml_with_extract: >-
+          {{ lookup('community.sops.sops', 'extract.yaml', extract="['foo']") }}
+        simple_json_with_extract: >-
+          {{ lookup('community.sops.sops', 'extract.json', extract="['bar']") }}
+        nested_yaml_with_extract: >-
+          {{ lookup('community.sops.sops', 'extract.yaml', extract="['baz']['bar'][0]") }}
+        nested_json_with_extract: >-
+          {{ lookup('community.sops.sops', 'extract.json', extract="['baz']['bar'][2]") }}
+      register: sops_lookup_extract
+
+    - assert:
+        that:
+          - "sops_lookup_extract is success"
+          - "simple_yaml_with_extract == 'bar'"
+          - "simple_json_with_extract == 'baz'"
+          - "nested_yaml_with_extract == 'zab'"
+          - "nested_json_with_extract == 'oof'"
+          
     - name: Test rstrip
       set_fact:
         with_rstrip: "{{ lookup('community.sops.sops', 'rstrip.sops', rstrip=true) }}"
