@@ -411,6 +411,16 @@ examples: <code class="docutils literal notranslate"><span class="pre">lookup('c
 </div></td>
 </tr>
 <tr class="row-even"><td><div class="ansible-option-cell">
+<div class="ansibleOptionAnchor" id="parameter-extract"></div><p class="ansible-option-title" id="ansible-collections-community-sops-sops-lookup-parameter-extract"><strong>extract</strong></p>
+<a class="ansibleOptionLink" href="#parameter-extract" title="Permalink to this option"></a><p class="ansible-option-type-line"><span class="ansible-option-type">string</span></p>
+<p><em class="ansible-option-versionadded">added in community.sops 1.9.0</em></p>
+</div></td>
+<td><div class="ansible-option-cell"><p>Tell SOPS to extract a specific key from a JSON or YAML file.</p>
+<p>Expects a string with the same ‘querystring’ syntax as SOPS’ <code class="docutils literal notranslate"><span class="pre">--encrypt</span></code> option, for example <code class="ansible-value docutils literal notranslate"><span class="pre">[&quot;somekey&quot;][0]</span></code>.</p>
+<p><strong>Note:</strong> Escape quotes appropriately.</p>
+</div></td>
+</tr>
+<tr class="row-odd"><td><div class="ansible-option-cell">
 <div class="ansibleOptionAnchor" id="parameter-input_type"></div><p class="ansible-option-title" id="ansible-collections-community-sops-sops-lookup-parameter-input-type"><strong>input_type</strong></p>
 <a class="ansibleOptionLink" href="#parameter-input_type" title="Permalink to this option"></a><p class="ansible-option-type-line"><span class="ansible-option-type">string</span></p>
 </div></td>
@@ -425,7 +435,7 @@ examples: <code class="docutils literal notranslate"><span class="pre">lookup('c
 </ul>
 </div></td>
 </tr>
-<tr class="row-odd"><td><div class="ansible-option-cell">
+<tr class="row-even"><td><div class="ansible-option-cell">
 <div class="ansibleOptionAnchor" id="parameter-keyservice"></div><p class="ansible-option-title" id="ansible-collections-community-sops-sops-lookup-parameter-keyservice"><strong>keyservice</strong></p>
 <a class="ansibleOptionLink" href="#parameter-keyservice" title="Permalink to this option"></a><p class="ansible-option-type-line"><span class="ansible-option-type">list</span> / <span class="ansible-option-elements">elements=string</span></p>
 <p><em class="ansible-option-versionadded">added in community.sops 1.0.0</em></p>
@@ -449,7 +459,7 @@ examples: <code class="docutils literal notranslate"><span class="pre">lookup('c
 </ul>
 </div></td>
 </tr>
-<tr class="row-even"><td><div class="ansible-option-cell">
+<tr class="row-odd"><td><div class="ansible-option-cell">
 <div class="ansibleOptionAnchor" id="parameter-output_type"></div><p class="ansible-option-title" id="ansible-collections-community-sops-sops-lookup-parameter-output-type"><strong>output_type</strong></p>
 <a class="ansibleOptionLink" href="#parameter-output_type" title="Permalink to this option"></a><p class="ansible-option-type-line"><span class="ansible-option-type">string</span></p>
 </div></td>
@@ -464,7 +474,7 @@ examples: <code class="docutils literal notranslate"><span class="pre">lookup('c
 </ul>
 </div></td>
 </tr>
-<tr class="row-odd"><td><div class="ansible-option-cell">
+<tr class="row-even"><td><div class="ansible-option-cell">
 <div class="ansibleOptionAnchor" id="parameter-rstrip"></div><p class="ansible-option-title" id="ansible-collections-community-sops-sops-lookup-parameter-rstrip"><strong>rstrip</strong></p>
 <a class="ansibleOptionLink" href="#parameter-rstrip" title="Permalink to this option"></a><p class="ansible-option-type-line"><span class="ansible-option-type">boolean</span></p>
 </div></td>
@@ -476,7 +486,7 @@ examples: <code class="docutils literal notranslate"><span class="pre">lookup('c
 </ul>
 </div></td>
 </tr>
-<tr class="row-even"><td><div class="ansible-option-cell">
+<tr class="row-odd"><td><div class="ansible-option-cell">
 <div class="ansibleOptionAnchor" id="parameter-sops_binary"></div><p class="ansible-option-title" id="ansible-collections-community-sops-sops-lookup-parameter-sops-binary"><strong>sops_binary</strong></p>
 <a class="ansibleOptionLink" href="#parameter-sops_binary" title="Permalink to this option"></a><p class="ansible-option-type-line"><span class="ansible-option-type">path</span></p>
 <p><em class="ansible-option-versionadded">added in community.sops 1.0.0</em></p>
