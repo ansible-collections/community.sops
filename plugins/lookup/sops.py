@@ -41,6 +41,7 @@ DOCUMENTATION = """
                 - json
                 - yaml
                 - dotenv
+                - ini
         output_type:
             description:
                 - Tell SOPS how to interpret the decrypted file.
@@ -53,6 +54,7 @@ DOCUMENTATION = """
                 - json
                 - yaml
                 - dotenv
+                - ini
         empty_on_not_exist:
             description:
                 - When set to V(true), will not raise an error when a file cannot be found,

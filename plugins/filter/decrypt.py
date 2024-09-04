@@ -42,6 +42,7 @@ options:
             - json
             - yaml
             - dotenv
+            - ini
         default: yaml
     output_type:
         description:
@@ -55,6 +56,7 @@ options:
             - json
             - yaml
             - dotenv
+            - ini
         default: yaml
     decode_output:
         description:
@@ -111,7 +113,7 @@ from ansible.utils.display import Display
 from ansible_collections.community.sops.plugins.module_utils.sops import Sops, SopsError
 
 
-_VALID_TYPES = set(['binary', 'json', 'yaml', 'dotenv'])
+_VALID_TYPES = set(['binary', 'json', 'yaml', 'dotenv', 'ini'])
 
 
 def decrypt_filter(data, input_type='yaml', output_type='yaml', sops_binary='sops', rstrip=True, decode_output=True,
