@@ -35,6 +35,7 @@ DOCUMENTATION = """
                 - By default, SOPS will chose the input type from the file extension.
                   If it detects the wrong type for a file, this could result in decryption
                   failing.
+                - The value V(ini) is available since community.sops 1.9.0.
             type: str
             choices:
                 - binary
@@ -48,6 +49,7 @@ DOCUMENTATION = """
                 - By default, SOPS will chose the output type from the file extension.
                   If it detects the wrong type for a file, this could result in decryption
                   failing.
+                - The value V(ini) is available since community.sops 1.9.0.
             type: str
             choices:
                 - binary
