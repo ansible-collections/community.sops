@@ -308,12 +308,14 @@ example: <code class="docutils literal notranslate"><span class="pre">input</spa
 </div></td>
 <td><div class="ansible-option-cell"><p>Tell SOPS how to interpret the encrypted data.</p>
 <p>There is no auto-detection since we do not have a filename. By default SOPS is told to treat the input as YAML. If that is wrong, please set this option to the correct value.</p>
+<p>The value <code class="ansible-value docutils literal notranslate"><span class="pre">ini</span></code> is available since community.sops 1.9.0.</p>
 <p class="ansible-option-line"><strong class="ansible-option-choices">Choices:</strong></p>
 <ul class="simple">
 <li><p><code class="ansible-option-choices-entry docutils literal notranslate"><span class="pre">&quot;binary&quot;</span></code></p></li>
 <li><p><code class="ansible-option-choices-entry docutils literal notranslate"><span class="pre">&quot;json&quot;</span></code></p></li>
 <li><p><code class="ansible-option-default-bold docutils literal notranslate"><strong><span class="pre">&quot;yaml&quot;</span></strong></code> <span class="ansible-option-choices-default-mark">← (default)</span></p></li>
 <li><p><code class="ansible-option-choices-entry docutils literal notranslate"><span class="pre">&quot;dotenv&quot;</span></code></p></li>
+<li><p><code class="ansible-option-choices-entry docutils literal notranslate"><span class="pre">&quot;ini&quot;</span></code></p></li>
 </ul>
 </div></td>
 </tr>
@@ -333,12 +335,14 @@ example: <code class="docutils literal notranslate"><span class="pre">input</spa
 </div></td>
 <td><div class="ansible-option-cell"><p>Tell SOPS how to interpret the decrypted file.</p>
 <p>Please note that the output is always text or bytes, depending on the value of <code class="ansible-option docutils literal notranslate"><strong><a class="reference internal" href="#ansible-collections-community-sops-decrypt-filter-parameter-decode-output"><span class="std std-ref"><span class="pre">decode_output</span></span></a></strong></code>. To parse the resulting JSON or YAML, use corresponding filters such as <a class="reference external" href="https://docs.ansible.com/ansible/devel/collections/ansible/builtin/from_json_filter.html#ansible-collections-ansible-builtin-from-json-filter" title="(in Ansible vdevel)"><span class="xref std std-ref">ansible.builtin.from_json</span></a> and <a class="reference external" href="https://docs.ansible.com/ansible/devel/collections/ansible/builtin/from_yaml_filter.html#ansible-collections-ansible-builtin-from-yaml-filter" title="(in Ansible vdevel)"><span class="xref std std-ref">ansible.builtin.from_yaml</span></a>.</p>
+<p>The value <code class="ansible-value docutils literal notranslate"><span class="pre">ini</span></code> is available since community.sops 1.9.0.</p>
 <p class="ansible-option-line"><strong class="ansible-option-choices">Choices:</strong></p>
 <ul class="simple">
 <li><p><code class="ansible-option-choices-entry docutils literal notranslate"><span class="pre">&quot;binary&quot;</span></code></p></li>
 <li><p><code class="ansible-option-choices-entry docutils literal notranslate"><span class="pre">&quot;json&quot;</span></code></p></li>
 <li><p><code class="ansible-option-default-bold docutils literal notranslate"><strong><span class="pre">&quot;yaml&quot;</span></strong></code> <span class="ansible-option-choices-default-mark">← (default)</span></p></li>
 <li><p><code class="ansible-option-choices-entry docutils literal notranslate"><span class="pre">&quot;dotenv&quot;</span></code></p></li>
+<li><p><code class="ansible-option-choices-entry docutils literal notranslate"><span class="pre">&quot;ini&quot;</span></code></p></li>
 </ul>
 </div></td>
 </tr>
