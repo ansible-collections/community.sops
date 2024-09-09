@@ -36,12 +36,14 @@ options:
             - There is no auto-detection since we do not have a filename. By default
               SOPS is told to treat the input as YAML. If that is wrong, please set this
               option to the correct value.
+            - The value V(ini) is available since community.sops 1.9.0.
         type: str
         choices:
             - binary
             - json
             - yaml
             - dotenv
+            - ini
         default: yaml
     output_type:
         description:
@@ -49,12 +51,14 @@ options:
             - Please note that the output is always text or bytes, depending on the value of O(decode_output).
               To parse the resulting JSON or YAML, use corresponding filters such as P(ansible.builtin.from_json#filter)
               and P(ansible.builtin.from_yaml#filter).
+            - The value V(ini) is available since community.sops 1.9.0.
         type: str
         choices:
             - binary
             - json
             - yaml
             - dotenv
+            - ini
         default: yaml
     decode_output:
         description:
@@ -111,7 +115,7 @@ from ansible.utils.display import Display
 from ansible_collections.community.sops.plugins.module_utils.sops import Sops, SopsError
 
 
-_VALID_TYPES = set(['binary', 'json', 'yaml', 'dotenv'])
+_VALID_TYPES = set(['binary', 'json', 'yaml', 'dotenv', 'ini'])
 
 
 def decrypt_filter(data, input_type='yaml', output_type='yaml', sops_binary='sops', rstrip=True, decode_output=True,
