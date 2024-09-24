@@ -26,12 +26,6 @@ jobs:
         ansible:
           # It's important that Sanity is tested against all stable-X.Y branches
           # Testing against `devel` may fail as new tests are added.
-          - stable-2.9
-          - stable-2.10
-          - stable-2.11
-          - stable-2.12
-          - stable-2.13
-          - stable-2.14
           - stable-2.15
           - stable-2.16
           - stable-2.17
@@ -84,48 +78,27 @@ jobs:
         python_version:
           - ''
         include:
-          # 2.9
-          - ansible: stable-2.9
-            docker_container: ubuntu1604
-            sops_version: 3.5.0
-          - ansible: stable-2.9
-            docker_container: ubuntu1804
-            sops_version: 3.7.1
-          # 2.10
-          - ansible: stable-2.10
-            docker_container: ubuntu1804
-            sops_version: 3.6.0
-          # 2.11
-          - ansible: stable-2.11
-            docker_container: ubuntu1804
-            sops_version: 3.7.2
-          # 2.12
-          - ansible: stable-2.12
-            docker_container: ubuntu2004
-            sops_version: 3.7.0
-          # 2.13
-          - ansible: stable-2.13
-            docker_container: ubuntu2004
-            sops_version: 3.7.3
-          # 2.14
-          - ansible: stable-2.14
-            docker_container: ubuntu2204
-            sops_version: 3.7.3
           # 2.15
           - ansible: stable-2.15
+            docker_container: ubuntu2004
+            sops_version: 3.5.0
+          - ansible: stable-2.15
             docker_container: ubuntu2204
-            sops_version: 3.7.3
+            sops_version: 3.6.0
           # 2.16
           - ansible: stable-2.16
+            docker_container: ubuntu2004
+            sops_version: 3.7.0
+          - ansible: stable-2.16
             docker_container: ubuntu2204
-            sops_version: 3.8.0
+            sops_version: 3.7.3
           # 2.17
           - ansible: stable-2.17
             docker_container: ubuntu2204
-            sops_version: 3.8.1
+            sops_version: 3.8.0
           - ansible: stable-2.17
             docker_container: fedora39
-            sops_version: 3.9.0
+            sops_version: 3.8.1
           # 2.18
           - ansible: stable-2.18
             docker_container: ubuntu2404
