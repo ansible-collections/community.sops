@@ -1,0 +1,2 @@
+bugfixes:
+  - "sops_encrypt - pass absolute paths to ``module.atomic_move()`` (https://github.com/ansible/ansible/issues/83950, https://github.com/ansible-collections/community.sops/pull/208)."
