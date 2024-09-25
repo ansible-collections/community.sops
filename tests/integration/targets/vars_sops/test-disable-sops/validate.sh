@@ -9,4 +9,4 @@ if [ "$1" != 2 ]; then
     exit 1
 fi
 
-grep -F "The error was: 'foo' is undefined" "$2"
+grep -F "'foo' is undefined" "$2"
