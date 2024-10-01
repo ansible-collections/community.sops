@@ -42,7 +42,7 @@ def write_file(module, content):
         if os.path.exists(file_args['path']):
             module.set_fs_attributes_if_different(file_args, False)
         # Move tempfile to final destination
-        module.atomic_move(tmp_name, file_args['path'])
+        module.atomic_move(os.path.abspath(tmp_name), os.path.abspath(file_args['path']))
         # Try to update permissions again
         module.set_fs_attributes_if_different(file_args, False)
     except Exception as e:
