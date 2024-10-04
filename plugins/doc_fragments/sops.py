@@ -24,6 +24,7 @@ options:
         description:
             - One or more age private keys that can be used to decrypt encrypted files.
             - Will be set as the E(SOPS_AGE_KEY) environment variable when calling SOPS.
+            - Requires SOPS 3.7.1+.
         type: str
         version_added: 1.4.0
     age_keyfile:
@@ -33,6 +34,7 @@ options:
             - Will be set as the E(SOPS_AGE_KEY_FILE) environment variable when calling SOPS.
             - By default, SOPS looks for C(sops/age/keys.txt) inside your user configuration
               directory.
+            - Requires SOPS 3.7.0+.
         type: path
         version_added: 1.4.0
     aws_profile:

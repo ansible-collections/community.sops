@@ -47,7 +47,7 @@
     - enc-2
     - enc-3
 
-- name: Decrypt some data
+- name: Decrypt some data (3.7.0+)
   set_fact:
     decrypt_1: "{{ lookup('community.sops.sops', local_tmp_dir ~ '/enc-1.sops.yaml', age_keyfile=local_tmp_dir ~ '/identities_all') | from_yaml }}"
     decrypt_1_1: "{{ lookup('community.sops.sops', local_tmp_dir ~ '/enc-1.sops.yaml', age_keyfile=local_tmp_dir ~ '/identity_1') | from_yaml }}"
@@ -55,12 +55,6 @@
     decrypt_1_3: "{{ lookup('community.sops.sops', local_tmp_dir ~ '/enc-1.sops.yaml', age_keyfile=local_tmp_dir ~ '/identity_3') | from_yaml }}"
     decrypt_1_4: "{{ lookup('community.sops.sops', local_tmp_dir ~ '/enc-1.sops.yaml', age_keyfile=local_tmp_dir ~ '/identity_4') | from_yaml }}"
     decrypt_1_1_2_3: "{{ lookup('community.sops.sops', local_tmp_dir ~ '/enc-1.sops.yaml', age_keyfile=local_tmp_dir ~ '/identities_1_2_3') | from_yaml }}"
-    decrypt_1b: "{{ lookup('community.sops.sops', local_tmp_dir ~ '/enc-1.sops.yaml', age_key=lookup('file', local_tmp_dir ~ '/identities_all')) | from_yaml }}"
-    decrypt_1_1b: "{{ lookup('community.sops.sops', local_tmp_dir ~ '/enc-1.sops.yaml', age_key=lookup('file', local_tmp_dir ~ '/identity_1')) | from_yaml }}"
-    decrypt_1_2b: "{{ lookup('community.sops.sops', local_tmp_dir ~ '/enc-1.sops.yaml', age_key=lookup('file', local_tmp_dir ~ '/identity_2')) | from_yaml }}"
-    decrypt_1_3b: "{{ lookup('community.sops.sops', local_tmp_dir ~ '/enc-1.sops.yaml', age_key=lookup('file', local_tmp_dir ~ '/identity_3')) | from_yaml }}"
-    decrypt_1_4b: "{{ lookup('community.sops.sops', local_tmp_dir ~ '/enc-1.sops.yaml', age_key=lookup('file', local_tmp_dir ~ '/identity_4')) | from_yaml }}"
-    decrypt_1_1_2_3b: "{{ lookup('community.sops.sops', local_tmp_dir ~ '/enc-1.sops.yaml', age_key=lookup('file', local_tmp_dir ~ '/identities_1_2_3')) | from_yaml }}"
     decrypt_2: "{{ lookup('community.sops.sops', local_tmp_dir ~ '/enc-2.sops.yaml', age_keyfile=local_tmp_dir ~ '/identities_all') | from_yaml }}"
     decrypt_2_1: "{{ lookup('community.sops.sops', local_tmp_dir ~ '/enc-2.sops.yaml', age_keyfile=local_tmp_dir ~ '/identity_1') | from_yaml }}"
     decrypt_2_2: "{{ lookup('community.sops.sops', local_tmp_dir ~ '/enc-2.sops.yaml', age_keyfile=local_tmp_dir ~ '/identity_2') | from_yaml }}"
@@ -81,12 +75,6 @@
       - decrypt_1 == decrypt_1_3
       - decrypt_1 == decrypt_1_4
       - decrypt_1 == decrypt_1_1_2_3
-      - decrypt_1 == decrypt_1b
-      - decrypt_1 == decrypt_1_1b
-      - decrypt_1 == decrypt_1_2b
-      - decrypt_1 == decrypt_1_3b
-      - decrypt_1 == decrypt_1_4b
-      - decrypt_1 == decrypt_1_1_2_3b
       - decrypt_2.foo == 19
       - decrypt_2.bar == 'this is another secret'
       - decrypt_2.bam is undefined
@@ -100,6 +88,28 @@
       - decrypt_3.bam is undefined
       - decrypt_3.int is undefined
       - decrypt_3 == decrypt_3_4
+
+- when: >-
+    {{ sops_version_controller is version('3.7.1', '>=') }}
+  block:
+    - name: Decrypt some data (3.7.1+)
+      set_fact:
+        decrypt_1b: "{{ lookup('community.sops.sops', local_tmp_dir ~ '/enc-1.sops.yaml', age_key=lookup('file', local_tmp_dir ~ '/identities_all')) | from_yaml }}"
+        decrypt_1_1b: "{{ lookup('community.sops.sops', local_tmp_dir ~ '/enc-1.sops.yaml', age_key=lookup('file', local_tmp_dir ~ '/identity_1')) | from_yaml }}"
+        decrypt_1_2b: "{{ lookup('community.sops.sops', local_tmp_dir ~ '/enc-1.sops.yaml', age_key=lookup('file', local_tmp_dir ~ '/identity_2')) | from_yaml }}"
+        decrypt_1_3b: "{{ lookup('community.sops.sops', local_tmp_dir ~ '/enc-1.sops.yaml', age_key=lookup('file', local_tmp_dir ~ '/identity_3')) | from_yaml }}"
+        decrypt_1_4b: "{{ lookup('community.sops.sops', local_tmp_dir ~ '/enc-1.sops.yaml', age_key=lookup('file', local_tmp_dir ~ '/identity_4')) | from_yaml }}"
+        decrypt_1_1_2_3b: "{{ lookup('community.sops.sops', local_tmp_dir ~ '/enc-1.sops.yaml', age_key=lookup('file', local_tmp_dir ~ '/identities_1_2_3')) | from_yaml }}"
+
+    - name: Validate decryption
+      assert:
+        that:
+          - decrypt_1 == decrypt_1b
+          - decrypt_1 == decrypt_1_1b
+          - decrypt_1 == decrypt_1_2b
+          - decrypt_1 == decrypt_1_3b
+          - decrypt_1 == decrypt_1_4b
+          - decrypt_1 == decrypt_1_1_2_3b
 
 - name: Failed encryption 1
   debug:

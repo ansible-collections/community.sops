@@ -77,11 +77,10 @@ jobs:
           - fedora40
         sops_version:
           - 3.5.0
-          - 3.6.0
+          - 3.6.1
           - 3.7.3
-          - 3.8.0
           - 3.8.1
-          - 3.9.0
+          - 3.9.1
         python_version:
           - ''
         include:
@@ -132,6 +131,18 @@ jobs:
             docker_container: ubuntu2404
             sops_version: 3.9.0
           # devel
+          - ansible: devel
+            docker_container: ubuntu2204
+            sops_version: 3.6.0
+          - ansible: devel
+            docker_container: ubuntu2204
+            sops_version: 3.7.0
+          - ansible: devel
+            docker_container: ubuntu2404
+            sops_version: 3.8.0
+          - ansible: devel
+            docker_container: fedora40
+            sops_version: 3.9.0
           - ansible: devel
             docker_container: quay.io/ansible-community/test-image:archlinux
             python_version: '3.12'
