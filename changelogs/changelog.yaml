@@ -420,3 +420,13 @@ releases:
       - 200-lookup-extract.yaml
       - 204-input-output-type-ini.yml
     release_date: '2024-09-09'
+  1.9.1:
+    changes:
+      bugfixes:
+        - sops_encrypt - pass absolute paths to ``module.atomic_move()`` (https://github.com/ansible/ansible/issues/83950,
+          https://github.com/ansible-collections/community.sops/pull/208).
+      release_summary: Bugfix release.
+    fragments:
+      - 1.9.1.yml
+      - 208-atomic.yml
+    release_date: '2024-10-04'

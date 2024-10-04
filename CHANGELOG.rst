@@ -4,6 +4,19 @@ Community SOPS Release Notes
 
 .. contents:: Topics
 
+v1.9.1
+======
+
+Release Summary
+---------------
+
+Bugfix release.
+
+Bugfixes
+--------
+
+- sops_encrypt - pass absolute paths to ``module.atomic_move()`` (https://github.com/ansible/ansible/issues/83950, https://github.com/ansible-collections/community.sops/pull/208).
+
 v1.9.0
 ======
 
