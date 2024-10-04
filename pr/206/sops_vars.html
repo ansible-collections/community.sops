@@ -190,6 +190,7 @@ see <a class="reference internal" href="#ansible-collections-community-sops-sops
 </div></td>
 <td><div class="ansible-option-cell"><p>One or more age private keys that can be used to decrypt encrypted files.</p>
 <p>Will be set as the <code class="xref std std-envvar docutils literal notranslate"><span class="pre">SOPS_AGE_KEY</span></code> environment variable when calling SOPS.</p>
+<p>Requires SOPS 3.7.1+.</p>
 <p class="ansible-option-line"><strong class="ansible-option-configuration">Configuration:</strong></p>
 <ul class="simple">
 <li><p>Environment variable: <span class="target" id="index-0"></span><a class="reference internal" href="environment_variables.html#envvar-ANSIBLE_SOPS_AGE_KEY"><code class="xref std std-envvar docutils literal notranslate"><span class="pre">ANSIBLE_SOPS_AGE_KEY</span></code></a></p></li>
@@ -204,6 +205,7 @@ see <a class="reference internal" href="#ansible-collections-community-sops-sops
 <td><div class="ansible-option-cell"><p>The file containing the age private keys that SOPS can use to decrypt encrypted files.</p>
 <p>Will be set as the <code class="xref std std-envvar docutils literal notranslate"><span class="pre">SOPS_AGE_KEY_FILE</span></code> environment variable when calling SOPS.</p>
 <p>By default, SOPS looks for <code class="docutils literal notranslate"><span class="pre">sops/age/keys.txt</span></code> inside your user configuration directory.</p>
+<p>Requires SOPS 3.7.0+.</p>
 <p class="ansible-option-line"><strong class="ansible-option-configuration">Configuration:</strong></p>
 <ul>
 <li><p>INI entry:</p>

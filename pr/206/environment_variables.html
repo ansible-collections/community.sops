@@ -132,6 +132,7 @@ Environment variables used by the ansible-core configuration are documented in <
 <span class="sig-name descname"><span class="pre">ANSIBLE_SOPS_AGE_KEY</span></span><a class="headerlink" href="#envvar-ANSIBLE_SOPS_AGE_KEY" title="Link to this definition"></a></dt>
 <dd><p>One or more age private keys that can be used to decrypt encrypted files.</p>
 <p>Will be set as the <code class="xref std std-envvar docutils literal notranslate"><span class="pre">SOPS_AGE_KEY</span></code> environment variable when calling SOPS.</p>
+<p>Requires SOPS 3.7.1+.</p>
 <p><em>Used by:</em>
 <a class="reference internal" href="sops_lookup.html#ansible-collections-community-sops-sops-lookup"><span class="std std-ref">community.sops.sops lookup plugin</span></a>,
 <a class="reference internal" href="sops_vars.html#ansible-collections-community-sops-sops-vars"><span class="std std-ref">community.sops.sops vars plugin</span></a></p>
@@ -143,6 +144,7 @@ Environment variables used by the ansible-core configuration are documented in <
 <dd><p>The file containing the age private keys that SOPS can use to decrypt encrypted files.</p>
 <p>Will be set as the <code class="xref std std-envvar docutils literal notranslate"><span class="pre">SOPS_AGE_KEY_FILE</span></code> environment variable when calling SOPS.</p>
 <p>By default, SOPS looks for <code class="docutils literal notranslate"><span class="pre">sops/age/keys.txt</span></code> inside your user configuration directory.</p>
+<p>Requires SOPS 3.7.0+.</p>
 <p><em>Used by:</em>
 <a class="reference internal" href="sops_lookup.html#ansible-collections-community-sops-sops-lookup"><span class="std std-ref">community.sops.sops lookup plugin</span></a>,
 <a class="reference internal" href="sops_vars.html#ansible-collections-community-sops-sops-vars"><span class="std std-ref">community.sops.sops vars plugin</span></a></p>
