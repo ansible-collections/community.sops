@@ -42,6 +42,7 @@ RETURN = '''
 _value:
     description:
       - The latest version from the input.
+      - Returns the empty string if the input was empty.
     type: string
 '''
 
