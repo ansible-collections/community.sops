@@ -19,6 +19,8 @@ DOCUMENTATION = """
         _terms:
             description: Path(s) of files to read.
             required: true
+            type: list
+            elements: str
         rstrip:
             description: Whether to remove trailing newlines and spaces.
             type: bool
@@ -77,7 +79,7 @@ DOCUMENTATION = """
         - community.sops.sops.ansible_env
         - community.sops.sops.ansible_ini
     notes:
-        - This lookup does not understand 'globbing' - use the fileglob lookup instead.
+        - This lookup does not understand 'globbing' - use the P(ansible.builtin.fileglob#lookup) lookup instead.
     seealso:
         - plugin: community.sops.decrypt
           plugin_type: filter

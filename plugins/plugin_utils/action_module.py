@@ -33,13 +33,7 @@ from ansible.module_utils.six import string_types
 from ansible.plugins.action import ActionBase
 
 
-# For ansible-core 2.11, we can use the ArgumentSpecValidator. We also import
-# ModuleArgumentSpecValidator since that indicates that the 'classical' approach
-# will no longer work.
-from ansible.module_utils.common.arg_spec import (  # noqa: F401, pylint: disable=unused-import
-    ArgumentSpecValidator,
-    ModuleArgumentSpecValidator,  # ModuleArgumentSpecValidator is not used
-)
+from ansible.module_utils.common.arg_spec import ArgumentSpecValidator
 from ansible.module_utils.errors import UnsupportedError
 
 
