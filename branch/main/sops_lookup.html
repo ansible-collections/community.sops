@@ -189,7 +189,7 @@ see <a class="reference internal" href="#ansible-collections-community-sops-sops
 <tbody>
 <tr class="row-even"><td><div class="ansible-option-cell">
 <div class="ansibleOptionAnchor" id="parameter-_terms"></div><p class="ansible-option-title" id="ansible-collections-community-sops-sops-lookup-parameter-terms"><strong>Terms</strong></p>
-<a class="ansibleOptionLink" href="#parameter-_terms" title="Permalink to this option"></a><p class="ansible-option-type-line"><span class="ansible-option-type">string</span> / <span class="ansible-option-required">required</span></p>
+<a class="ansibleOptionLink" href="#parameter-_terms" title="Permalink to this option"></a><p class="ansible-option-type-line"><span class="ansible-option-type">list</span> / <span class="ansible-option-elements">elements=string</span> / <span class="ansible-option-required">required</span></p>
 </div></td>
 <td><div class="ansible-option-cell"><p>Path(s) of files to read.</p>
 </div></td>
@@ -523,7 +523,7 @@ examples: <code class="docutils literal notranslate"><span class="pre">lookup('c
 <ul class="simple">
 <li><p>When keyword and positional parameters are used together, positional parameters must be listed before keyword parameters:
 <code class="docutils literal notranslate"><span class="pre">lookup('community.sops.sops',</span> <span class="pre">term1,</span> <span class="pre">term2,</span> <span class="pre">key1=value1,</span> <span class="pre">key2=value2)</span></code> and <code class="docutils literal notranslate"><span class="pre">query('community.sops.sops',</span> <span class="pre">term1,</span> <span class="pre">term2,</span> <span class="pre">key1=value1,</span> <span class="pre">key2=value2)</span></code></p></li>
-<li><p>This lookup does not understand ‘globbing’ - use the fileglob lookup instead.</p></li>
+<li><p>This lookup does not understand ‘globbing’ - use the <a class="reference external" href="https://docs.ansible.com/ansible/devel/collections/ansible/builtin/fileglob_lookup.html#ansible-collections-ansible-builtin-fileglob-lookup" title="(in Ansible vdevel)"><span class="xref std std-ref">ansible.builtin.fileglob</span></a> lookup instead.</p></li>
 </ul>
 </div>
 </section>
