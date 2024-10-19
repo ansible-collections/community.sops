@@ -1,0 +1,1016 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="./">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Community.Sops Release Notes &mdash; Community.Sops Collection  documentation</title>
+      <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=5707b69d" />
+      <link rel="stylesheet" type="text/css" href="_static/css/ansible.css?v=c5b67dd2" />
+      <link rel="stylesheet" type="text/css" href="_static/antsibull-minimal.css" />
+      <link rel="stylesheet" type="text/css" href="_static/css/rtd-ethical-ads.css?v=289b023e" />
+
+  
+    <link rel="shortcut icon" href="_static/images/Ansible-Mark-RGB_Black.png"/>
+      <script src="_static/jquery.js?v=5d32c60e"></script>
+      <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="_static/documentation_options.js?v=7f41d439"></script>
+      <script src="_static/doctools.js?v=9bcbadda"></script>
+      <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Protecting Ansible secrets with SOPS" href="docsite/guide.html" />
+    <link rel="prev" title="Community.Sops" href="index.html" /><!-- extra head elements for Ansible beyond RTD Sphinx Theme -->
+
+
+
+
+</head>
+
+<body class="wy-body-for-nav"><!-- extra body elements for Ansible beyond RTD Sphinx Theme -->
+
+<div class="DocSite-globalNav ansibleNav">
+  <ul>
+    <li><a href="https://www.ansible.com/blog" target="_blank">Blog</a></li>
+    <li><a href="https://forum.ansible.com/" target="_blank">Ansible community forum</a></li>
+    <li><a href="https://docs.ansible.com/" target="_blank">Documentation</a></li>
+  </ul>
+</div>
+
+<a class="DocSite-nav" href="https://ansible-collections.github.io/community.sops/branch/main/" style="padding-bottom: 30px;">
+
+  <img class="DocSiteNav-logo"
+    src="_static/images/Ansible-Mark-RGB_White.png"
+    alt="Ansible Logo">
+  <div class="DocSiteNav-title">Community.Sops Collection Docs</div>
+</a>
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="index.html" class="icon icon-home">
+            Community.Sops Collection
+          </a><!--- Based on https://github.com/rtfd/sphinx_rtd_theme/pull/438/files -->
+
+<div class="version">
+  
+    
+  
+</div>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <label class="sr-only" for="q">Search docs:</label>
+    <input type="text" class="st-default-search-input" id="q" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+  
+              <ul class="current">
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Community.Sops Release Notes</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#v1-9-1">v1.9.1</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#release-summary">Release Summary</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#bugfixes">Bugfixes</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#v1-9-0">v1.9.0</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#id1">Release Summary</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#minor-changes">Minor Changes</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#v1-8-2">v1.8.2</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#id2">Release Summary</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#deprecated-features">Deprecated Features</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#v1-8-1">v1.8.1</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#id3">Release Summary</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id4">Bugfixes</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#v1-8-0">v1.8.0</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#id5">Release Summary</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id6">Minor Changes</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id7">Bugfixes</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#v1-7-0">v1.7.0</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#id8">Release Summary</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id9">Minor Changes</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id10">Bugfixes</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#v1-6-7">v1.6.7</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#id11">Release Summary</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id12">Bugfixes</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#v1-6-6">v1.6.6</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#id13">Release Summary</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id14">Bugfixes</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#v1-6-5">v1.6.5</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#id15">Release Summary</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id16">Bugfixes</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#v1-6-4">v1.6.4</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#id17">Release Summary</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id18">Bugfixes</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#v1-6-3">v1.6.3</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#id19">Release Summary</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#known-issues">Known Issues</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#v1-6-2">v1.6.2</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#id20">Release Summary</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id21">Bugfixes</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#v1-6-1">v1.6.1</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#id22">Release Summary</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id23">Bugfixes</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#v1-6-0">v1.6.0</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#id24">Release Summary</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id25">Minor Changes</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#v1-5-0">v1.5.0</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#id26">Release Summary</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id27">Minor Changes</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#new-playbooks">New Playbooks</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#new-roles">New Roles</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#v1-4-1">v1.4.1</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#id28">Release Summary</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id29">Bugfixes</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#v1-4-0">v1.4.0</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#id30">Release Summary</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id31">Minor Changes</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#v1-3-0">v1.3.0</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#id32">Release Summary</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id33">Minor Changes</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#v1-2-3">v1.2.3</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#id34">Release Summary</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#v1-2-2">v1.2.2</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#id35">Release Summary</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id36">Bugfixes</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#v1-2-1">v1.2.1</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#id37">Release Summary</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#v1-2-0">v1.2.0</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#id38">Release Summary</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id39">Minor Changes</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id40">Bugfixes</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#v1-1-0">v1.1.0</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#id41">Release Summary</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id42">Minor Changes</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#new-plugins">New Plugins</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#filter">Filter</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#v1-0-6">v1.0.6</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#id43">Release Summary</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id44">Bugfixes</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#v1-0-5">v1.0.5</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#id45">Release Summary</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id46">Bugfixes</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#v1-0-4">v1.0.4</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#id47">Release Summary</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#security-fixes">Security Fixes</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#v1-0-3">v1.0.3</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#id48">Release Summary</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id49">Bugfixes</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#v1-0-2">v1.0.2</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#id50">Release Summary</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#v1-0-1">v1.0.1</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#id51">Release Summary</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#v1-0-0">v1.0.0</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#id52">Release Summary</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id53">Minor Changes</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#v0-2-0">v0.2.0</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#id54">Release Summary</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id55">Minor Changes</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#v0-1-0">v0.1.0</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#id56">Release Summary</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id57">New Plugins</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#lookup">Lookup</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#vars">Vars</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#new-modules">New Modules</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="docsite/guide.html">Protecting Ansible secrets with SOPS</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="load_vars_module.html">community.sops.load_vars module – Load SOPS-encrypted variables from files, dynamically within a task</a></li>
+<li class="toctree-l1"><a class="reference internal" href="sops_encrypt_module.html">community.sops.sops_encrypt module – Encrypt data with SOPS</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="_latest_version_filter.html">community.sops._latest_version filter – [INTERNAL] Get latest version from a list of versions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="decrypt_filter.html">community.sops.decrypt filter – Decrypt SOPS-encrypted data</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="sops_lookup.html">community.sops.sops lookup – Read SOPS-encrypted file contents</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="sops_vars.html">community.sops.sops vars – Loading SOPS-encrypted vars files</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="install_role.html">community.sops.install role – Install SOPS</a></li>
+</ul>
+<!-- extra nav elements for Ansible beyond RTD Sphinx Theme -->
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">Community.Sops Collection</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">Community.Sops Release Notes</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+
+  
+           <div itemprop="articleBody">
+             
+  <section id="community-sops-release-notes">
+<h1><a class="toc-backref" href="#id58" role="doc-backlink">Community.Sops Release Notes</a><a class="headerlink" href="#community-sops-release-notes" title="Link to this heading"></a></h1>
+<nav class="contents" id="topics">
+<p class="topic-title">Topics</p>
+<ul class="simple">
+<li><p><a class="reference internal" href="#community-sops-release-notes" id="id58">Community.Sops Release Notes</a></p>
+<ul>
+<li><p><a class="reference internal" href="#v1-9-1" id="id59">v1.9.1</a></p>
+<ul>
+<li><p><a class="reference internal" href="#release-summary" id="id60">Release Summary</a></p></li>
+<li><p><a class="reference internal" href="#bugfixes" id="id61">Bugfixes</a></p></li>
+</ul>
+</li>
+<li><p><a class="reference internal" href="#v1-9-0" id="id62">v1.9.0</a></p>
+<ul>
+<li><p><a class="reference internal" href="#id1" id="id63">Release Summary</a></p></li>
+<li><p><a class="reference internal" href="#minor-changes" id="id64">Minor Changes</a></p></li>
+</ul>
+</li>
+<li><p><a class="reference internal" href="#v1-8-2" id="id65">v1.8.2</a></p>
+<ul>
+<li><p><a class="reference internal" href="#id2" id="id66">Release Summary</a></p></li>
+<li><p><a class="reference internal" href="#deprecated-features" id="id67">Deprecated Features</a></p></li>
+</ul>
+</li>
+<li><p><a class="reference internal" href="#v1-8-1" id="id68">v1.8.1</a></p>
+<ul>
+<li><p><a class="reference internal" href="#id3" id="id69">Release Summary</a></p></li>
+<li><p><a class="reference internal" href="#id4" id="id70">Bugfixes</a></p></li>
+</ul>
+</li>
+<li><p><a class="reference internal" href="#v1-8-0" id="id71">v1.8.0</a></p>
+<ul>
+<li><p><a class="reference internal" href="#id5" id="id72">Release Summary</a></p></li>
+<li><p><a class="reference internal" href="#id6" id="id73">Minor Changes</a></p></li>
+<li><p><a class="reference internal" href="#id7" id="id74">Bugfixes</a></p></li>
+</ul>
+</li>
+<li><p><a class="reference internal" href="#v1-7-0" id="id75">v1.7.0</a></p>
+<ul>
+<li><p><a class="reference internal" href="#id8" id="id76">Release Summary</a></p></li>
+<li><p><a class="reference internal" href="#id9" id="id77">Minor Changes</a></p></li>
+<li><p><a class="reference internal" href="#id10" id="id78">Bugfixes</a></p></li>
+</ul>
+</li>
+<li><p><a class="reference internal" href="#v1-6-7" id="id79">v1.6.7</a></p>
+<ul>
+<li><p><a class="reference internal" href="#id11" id="id80">Release Summary</a></p></li>
+<li><p><a class="reference internal" href="#id12" id="id81">Bugfixes</a></p></li>
+</ul>
+</li>
+<li><p><a class="reference internal" href="#v1-6-6" id="id82">v1.6.6</a></p>
+<ul>
+<li><p><a class="reference internal" href="#id13" id="id83">Release Summary</a></p></li>
+<li><p><a class="reference internal" href="#id14" id="id84">Bugfixes</a></p></li>
+</ul>
+</li>
+<li><p><a class="reference internal" href="#v1-6-5" id="id85">v1.6.5</a></p>
+<ul>
+<li><p><a class="reference internal" href="#id15" id="id86">Release Summary</a></p></li>
+<li><p><a class="reference internal" href="#id16" id="id87">Bugfixes</a></p></li>
+</ul>
+</li>
+<li><p><a class="reference internal" href="#v1-6-4" id="id88">v1.6.4</a></p>
+<ul>
+<li><p><a class="reference internal" href="#id17" id="id89">Release Summary</a></p></li>
+<li><p><a class="reference internal" href="#id18" id="id90">Bugfixes</a></p></li>
+</ul>
+</li>
+<li><p><a class="reference internal" href="#v1-6-3" id="id91">v1.6.3</a></p>
+<ul>
+<li><p><a class="reference internal" href="#id19" id="id92">Release Summary</a></p></li>
+<li><p><a class="reference internal" href="#known-issues" id="id93">Known Issues</a></p></li>
+</ul>
+</li>
+<li><p><a class="reference internal" href="#v1-6-2" id="id94">v1.6.2</a></p>
+<ul>
+<li><p><a class="reference internal" href="#id20" id="id95">Release Summary</a></p></li>
+<li><p><a class="reference internal" href="#id21" id="id96">Bugfixes</a></p></li>
+</ul>
+</li>
+<li><p><a class="reference internal" href="#v1-6-1" id="id97">v1.6.1</a></p>
+<ul>
+<li><p><a class="reference internal" href="#id22" id="id98">Release Summary</a></p></li>
+<li><p><a class="reference internal" href="#id23" id="id99">Bugfixes</a></p></li>
+</ul>
+</li>
+<li><p><a class="reference internal" href="#v1-6-0" id="id100">v1.6.0</a></p>
+<ul>
+<li><p><a class="reference internal" href="#id24" id="id101">Release Summary</a></p></li>
+<li><p><a class="reference internal" href="#id25" id="id102">Minor Changes</a></p></li>
+</ul>
+</li>
+<li><p><a class="reference internal" href="#v1-5-0" id="id103">v1.5.0</a></p>
+<ul>
+<li><p><a class="reference internal" href="#id26" id="id104">Release Summary</a></p></li>
+<li><p><a class="reference internal" href="#id27" id="id105">Minor Changes</a></p></li>
+<li><p><a class="reference internal" href="#new-playbooks" id="id106">New Playbooks</a></p></li>
+<li><p><a class="reference internal" href="#new-roles" id="id107">New Roles</a></p></li>
+</ul>
+</li>
+<li><p><a class="reference internal" href="#v1-4-1" id="id108">v1.4.1</a></p>
+<ul>
+<li><p><a class="reference internal" href="#id28" id="id109">Release Summary</a></p></li>
+<li><p><a class="reference internal" href="#id29" id="id110">Bugfixes</a></p></li>
+</ul>
+</li>
+<li><p><a class="reference internal" href="#v1-4-0" id="id111">v1.4.0</a></p>
+<ul>
+<li><p><a class="reference internal" href="#id30" id="id112">Release Summary</a></p></li>
+<li><p><a class="reference internal" href="#id31" id="id113">Minor Changes</a></p></li>
+</ul>
+</li>
+<li><p><a class="reference internal" href="#v1-3-0" id="id114">v1.3.0</a></p>
+<ul>
+<li><p><a class="reference internal" href="#id32" id="id115">Release Summary</a></p></li>
+<li><p><a class="reference internal" href="#id33" id="id116">Minor Changes</a></p></li>
+</ul>
+</li>
+<li><p><a class="reference internal" href="#v1-2-3" id="id117">v1.2.3</a></p>
+<ul>
+<li><p><a class="reference internal" href="#id34" id="id118">Release Summary</a></p></li>
+</ul>
+</li>
+<li><p><a class="reference internal" href="#v1-2-2" id="id119">v1.2.2</a></p>
+<ul>
+<li><p><a class="reference internal" href="#id35" id="id120">Release Summary</a></p></li>
+<li><p><a class="reference internal" href="#id36" id="id121">Bugfixes</a></p></li>
+</ul>
+</li>
+<li><p><a class="reference internal" href="#v1-2-1" id="id122">v1.2.1</a></p>
+<ul>
+<li><p><a class="reference internal" href="#id37" id="id123">Release Summary</a></p></li>
+</ul>
+</li>
+<li><p><a class="reference internal" href="#v1-2-0" id="id124">v1.2.0</a></p>
+<ul>
+<li><p><a class="reference internal" href="#id38" id="id125">Release Summary</a></p></li>
+<li><p><a class="reference internal" href="#id39" id="id126">Minor Changes</a></p></li>
+<li><p><a class="reference internal" href="#id40" id="id127">Bugfixes</a></p></li>
+</ul>
+</li>
+<li><p><a class="reference internal" href="#v1-1-0" id="id128">v1.1.0</a></p>
+<ul>
+<li><p><a class="reference internal" href="#id41" id="id129">Release Summary</a></p></li>
+<li><p><a class="reference internal" href="#id42" id="id130">Minor Changes</a></p></li>
+<li><p><a class="reference internal" href="#new-plugins" id="id131">New Plugins</a></p>
+<ul>
+<li><p><a class="reference internal" href="#filter" id="id132">Filter</a></p></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p><a class="reference internal" href="#v1-0-6" id="id133">v1.0.6</a></p>
+<ul>
+<li><p><a class="reference internal" href="#id43" id="id134">Release Summary</a></p></li>
+<li><p><a class="reference internal" href="#id44" id="id135">Bugfixes</a></p></li>
+</ul>
+</li>
+<li><p><a class="reference internal" href="#v1-0-5" id="id136">v1.0.5</a></p>
+<ul>
+<li><p><a class="reference internal" href="#id45" id="id137">Release Summary</a></p></li>
+<li><p><a class="reference internal" href="#id46" id="id138">Bugfixes</a></p></li>
+</ul>
+</li>
+<li><p><a class="reference internal" href="#v1-0-4" id="id139">v1.0.4</a></p>
+<ul>
+<li><p><a class="reference internal" href="#id47" id="id140">Release Summary</a></p></li>
+<li><p><a class="reference internal" href="#security-fixes" id="id141">Security Fixes</a></p></li>
+</ul>
+</li>
+<li><p><a class="reference internal" href="#v1-0-3" id="id142">v1.0.3</a></p>
+<ul>
+<li><p><a class="reference internal" href="#id48" id="id143">Release Summary</a></p></li>
+<li><p><a class="reference internal" href="#id49" id="id144">Bugfixes</a></p></li>
+</ul>
+</li>
+<li><p><a class="reference internal" href="#v1-0-2" id="id145">v1.0.2</a></p>
+<ul>
+<li><p><a class="reference internal" href="#id50" id="id146">Release Summary</a></p></li>
+</ul>
+</li>
+<li><p><a class="reference internal" href="#v1-0-1" id="id147">v1.0.1</a></p>
+<ul>
+<li><p><a class="reference internal" href="#id51" id="id148">Release Summary</a></p></li>
+</ul>
+</li>
+<li><p><a class="reference internal" href="#v1-0-0" id="id149">v1.0.0</a></p>
+<ul>
+<li><p><a class="reference internal" href="#id52" id="id150">Release Summary</a></p></li>
+<li><p><a class="reference internal" href="#id53" id="id151">Minor Changes</a></p></li>
+</ul>
+</li>
+<li><p><a class="reference internal" href="#v0-2-0" id="id152">v0.2.0</a></p>
+<ul>
+<li><p><a class="reference internal" href="#id54" id="id153">Release Summary</a></p></li>
+<li><p><a class="reference internal" href="#id55" id="id154">Minor Changes</a></p></li>
+</ul>
+</li>
+<li><p><a class="reference internal" href="#v0-1-0" id="id155">v0.1.0</a></p>
+<ul>
+<li><p><a class="reference internal" href="#id56" id="id156">Release Summary</a></p></li>
+<li><p><a class="reference internal" href="#id57" id="id157">New Plugins</a></p>
+<ul>
+<li><p><a class="reference internal" href="#lookup" id="id158">Lookup</a></p></li>
+<li><p><a class="reference internal" href="#vars" id="id159">Vars</a></p></li>
+</ul>
+</li>
+<li><p><a class="reference internal" href="#new-modules" id="id160">New Modules</a></p></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</nav>
+<section id="v1-9-1">
+<h2><a class="toc-backref" href="#id59" role="doc-backlink">v1.9.1</a><a class="headerlink" href="#v1-9-1" title="Link to this heading"></a></h2>
+<section id="release-summary">
+<h3><a class="toc-backref" href="#id60" role="doc-backlink">Release Summary</a><a class="headerlink" href="#release-summary" title="Link to this heading"></a></h3>
+<p>Bugfix release.</p>
+</section>
+<section id="bugfixes">
+<h3><a class="toc-backref" href="#id61" role="doc-backlink">Bugfixes</a><a class="headerlink" href="#bugfixes" title="Link to this heading"></a></h3>
+<ul class="simple">
+<li><p>sops_encrypt - pass absolute paths to <code class="docutils literal notranslate"><span class="pre">module.atomic_move()</span></code> (<a class="reference external" href="https://github.com/ansible/ansible/issues/83950">https://github.com/ansible/ansible/issues/83950</a>, <a class="reference external" href="https://github.com/ansible-collections/community.sops/pull/208">https://github.com/ansible-collections/community.sops/pull/208</a>).</p></li>
+</ul>
+</section>
+</section>
+<section id="v1-9-0">
+<h2><a class="toc-backref" href="#id62" role="doc-backlink">v1.9.0</a><a class="headerlink" href="#v1-9-0" title="Link to this heading"></a></h2>
+<section id="id1">
+<h3><a class="toc-backref" href="#id63" role="doc-backlink">Release Summary</a><a class="headerlink" href="#id1" title="Link to this heading"></a></h3>
+<p>Feature release.</p>
+</section>
+<section id="minor-changes">
+<h3><a class="toc-backref" href="#id64" role="doc-backlink">Minor Changes</a><a class="headerlink" href="#minor-changes" title="Link to this heading"></a></h3>
+<ul class="simple">
+<li><p>decrypt filter plugin - now supports the input and output type <code class="docutils literal notranslate"><span class="pre">ini</span></code> (<a class="reference external" href="https://github.com/ansible-collections/community.sops/pull/204">https://github.com/ansible-collections/community.sops/pull/204</a>).</p></li>
+<li><p>sops lookup plugin - new option <code class="docutils literal notranslate"><span class="pre">extract</span></code> allows extracting a single key out of a JSON or YAML file, equivalent to sops’ <code class="docutils literal notranslate"><span class="pre">decrypt</span> <span class="pre">--extract</span></code> (<a class="reference external" href="https://github.com/ansible-collections/community.sops/pull/200">https://github.com/ansible-collections/community.sops/pull/200</a>).</p></li>
+<li><p>sops lookup plugin - now supports the input and output type <code class="docutils literal notranslate"><span class="pre">ini</span></code> (<a class="reference external" href="https://github.com/ansible-collections/community.sops/pull/204">https://github.com/ansible-collections/community.sops/pull/204</a>).</p></li>
+</ul>
+</section>
+</section>
+<section id="v1-8-2">
+<h2><a class="toc-backref" href="#id65" role="doc-backlink">v1.8.2</a><a class="headerlink" href="#v1-8-2" title="Link to this heading"></a></h2>
+<section id="id2">
+<h3><a class="toc-backref" href="#id66" role="doc-backlink">Release Summary</a><a class="headerlink" href="#id2" title="Link to this heading"></a></h3>
+<p>Maintenance release with updated documentation and changelog.</p>
+</section>
+<section id="deprecated-features">
+<h3><a class="toc-backref" href="#id67" role="doc-backlink">Deprecated Features</a><a class="headerlink" href="#deprecated-features" title="Link to this heading"></a></h3>
+<ul class="simple">
+<li><p>The collection deprecates support for all Ansible/ansible-base/ansible-core versions that are currently End of Life, <a class="reference external" href="https://docs.ansible.com/ansible-core/devel/reference_appendices/release_and_maintenance.html#ansible-core-support-matrix">according to the ansible-core support matrix</a>. This means that the next major release of the collection will no longer support Ansible 2.9, ansible-base 2.10, ansible-core 2.11, ansible-core 2.12, ansible-core 2.13, and ansible-core 2.14.</p></li>
+</ul>
+</section>
+</section>
+<section id="v1-8-1">
+<h2><a class="toc-backref" href="#id68" role="doc-backlink">v1.8.1</a><a class="headerlink" href="#v1-8-1" title="Link to this heading"></a></h2>
+<section id="id3">
+<h3><a class="toc-backref" href="#id69" role="doc-backlink">Release Summary</a><a class="headerlink" href="#id3" title="Link to this heading"></a></h3>
+<p>Bugfix release.</p>
+</section>
+<section id="id4">
+<h3><a class="toc-backref" href="#id70" role="doc-backlink">Bugfixes</a><a class="headerlink" href="#id4" title="Link to this heading"></a></h3>
+<ul class="simple">
+<li><p>Pass <code class="docutils literal notranslate"><span class="pre">config_path</span></code> on SOPS 3.9.0 before the subcommand instead of after it (<a class="reference external" href="https://github.com/ansible-collections/community.sops/issues/195">https://github.com/ansible-collections/community.sops/issues/195</a>, <a class="reference external" href="https://github.com/ansible-collections/community.sops/pull/197">https://github.com/ansible-collections/community.sops/pull/197</a>).</p></li>
+</ul>
+</section>
+</section>
+<section id="v1-8-0">
+<h2><a class="toc-backref" href="#id71" role="doc-backlink">v1.8.0</a><a class="headerlink" href="#v1-8-0" title="Link to this heading"></a></h2>
+<section id="id5">
+<h3><a class="toc-backref" href="#id72" role="doc-backlink">Release Summary</a><a class="headerlink" href="#id5" title="Link to this heading"></a></h3>
+<p>Feature release for supporting improvements coming with SOPS 3.9.0.</p>
+</section>
+<section id="id6">
+<h3><a class="toc-backref" href="#id73" role="doc-backlink">Minor Changes</a><a class="headerlink" href="#id6" title="Link to this heading"></a></h3>
+<ul class="simple">
+<li><p>Detect SOPS 3.9.0 and use new <code class="docutils literal notranslate"><span class="pre">decrypt</span></code> and <code class="docutils literal notranslate"><span class="pre">encrypt</span></code> subcommands (<a class="reference external" href="https://github.com/ansible-collections/community.sops/pull/190">https://github.com/ansible-collections/community.sops/pull/190</a>).</p></li>
+<li><p>sops vars plugin - new option <code class="docutils literal notranslate"><span class="pre">handle_unencrypted_files</span></code> allows to control behavior when encountering unencrypted files with SOPS 3.9.0+ (<a class="reference external" href="https://github.com/ansible-collections/community.sops/pull/190">https://github.com/ansible-collections/community.sops/pull/190</a>).</p></li>
+</ul>
+</section>
+<section id="id7">
+<h3><a class="toc-backref" href="#id74" role="doc-backlink">Bugfixes</a><a class="headerlink" href="#id7" title="Link to this heading"></a></h3>
+<ul class="simple">
+<li><p>sops_encrypt - properly support <code class="docutils literal notranslate"><span class="pre">path_regex</span></code> in <code class="docutils literal notranslate"><span class="pre">.sops.yaml</span></code> when SOPS 3.9.0 or later is used (<a class="reference external" href="https://github.com/ansible-collections/community.sops/issues/153">https://github.com/ansible-collections/community.sops/issues/153</a>, <a class="reference external" href="https://github.com/ansible-collections/community.sops/pull/190">https://github.com/ansible-collections/community.sops/pull/190</a>).</p></li>
+</ul>
+</section>
+</section>
+<section id="v1-7-0">
+<h2><a class="toc-backref" href="#id75" role="doc-backlink">v1.7.0</a><a class="headerlink" href="#v1-7-0" title="Link to this heading"></a></h2>
+<section id="id8">
+<h3><a class="toc-backref" href="#id76" role="doc-backlink">Release Summary</a><a class="headerlink" href="#id8" title="Link to this heading"></a></h3>
+<p>Bugfix and feature release to fix installation issues with SOPS 3.9.0.</p>
+</section>
+<section id="id9">
+<h3><a class="toc-backref" href="#id77" role="doc-backlink">Minor Changes</a><a class="headerlink" href="#id9" title="Link to this heading"></a></h3>
+<ul class="simple">
+<li><p>sops vars plugin - allow to configure the valid extensions with an <code class="docutils literal notranslate"><span class="pre">ansible.cfg</span></code> entry or with an environment variable (<a class="reference external" href="https://github.com/ansible-collections/community.sops/pull/185">https://github.com/ansible-collections/community.sops/pull/185</a>).</p></li>
+</ul>
+</section>
+<section id="id10">
+<h3><a class="toc-backref" href="#id78" role="doc-backlink">Bugfixes</a><a class="headerlink" href="#id10" title="Link to this heading"></a></h3>
+<ul class="simple">
+<li><p>Fix RPM URL for the 3.9.0 release (<a class="reference external" href="https://github.com/ansible-collections/community.sops/pull/188">https://github.com/ansible-collections/community.sops/pull/188</a>).</p></li>
+</ul>
+</section>
+</section>
+<section id="v1-6-7">
+<h2><a class="toc-backref" href="#id79" role="doc-backlink">v1.6.7</a><a class="headerlink" href="#v1-6-7" title="Link to this heading"></a></h2>
+<section id="id11">
+<h3><a class="toc-backref" href="#id80" role="doc-backlink">Release Summary</a><a class="headerlink" href="#id11" title="Link to this heading"></a></h3>
+<p>Bugfix release.</p>
+</section>
+<section id="id12">
+<h3><a class="toc-backref" href="#id81" role="doc-backlink">Bugfixes</a><a class="headerlink" href="#id12" title="Link to this heading"></a></h3>
+<ul class="simple">
+<li><p>sops_encrypt - ensure that output-type is set to <code class="docutils literal notranslate"><span class="pre">yaml</span></code> when the file extension <code class="docutils literal notranslate"><span class="pre">.yml</span></code> is used. Now both <code class="docutils literal notranslate"><span class="pre">.yaml</span></code> and <code class="docutils literal notranslate"><span class="pre">.yml</span></code> files use the SOPS <code class="docutils literal notranslate"><span class="pre">--output-type=yaml</span></code> formatting (<a class="reference external" href="https://github.com/ansible-collections/community.sops/issues/164">https://github.com/ansible-collections/community.sops/issues/164</a>).</p></li>
+</ul>
+</section>
+</section>
+<section id="v1-6-6">
+<h2><a class="toc-backref" href="#id82" role="doc-backlink">v1.6.6</a><a class="headerlink" href="#v1-6-6" title="Link to this heading"></a></h2>
+<section id="id13">
+<h3><a class="toc-backref" href="#id83" role="doc-backlink">Release Summary</a><a class="headerlink" href="#id13" title="Link to this heading"></a></h3>
+<p>Make fully compatible with and test against sops 3.8.0.</p>
+</section>
+<section id="id14">
+<h3><a class="toc-backref" href="#id84" role="doc-backlink">Bugfixes</a><a class="headerlink" href="#id14" title="Link to this heading"></a></h3>
+<ul class="simple">
+<li><p>Fix RPM URL for the 3.8.0 release (<a class="reference external" href="https://github.com/ansible-collections/community.sops/pull/161">https://github.com/ansible-collections/community.sops/pull/161</a>).</p></li>
+</ul>
+</section>
+</section>
+<section id="v1-6-5">
+<h2><a class="toc-backref" href="#id85" role="doc-backlink">v1.6.5</a><a class="headerlink" href="#v1-6-5" title="Link to this heading"></a></h2>
+<section id="id15">
+<h3><a class="toc-backref" href="#id86" role="doc-backlink">Release Summary</a><a class="headerlink" href="#id15" title="Link to this heading"></a></h3>
+<p>Make compatible with and test against sops 3.8.0-rc.1.</p>
+</section>
+<section id="id16">
+<h3><a class="toc-backref" href="#id87" role="doc-backlink">Bugfixes</a><a class="headerlink" href="#id16" title="Link to this heading"></a></h3>
+<ul class="simple">
+<li><p>Avoid pre-releases when picking the latest version when using the GitHub API method (<a class="reference external" href="https://github.com/ansible-collections/community.sops/pull/159">https://github.com/ansible-collections/community.sops/pull/159</a>).</p></li>
+<li><p>Fix changed DEB and RPM URLs for 3.8.0 and its prerelease(s) (<a class="reference external" href="https://github.com/ansible-collections/community.sops/pull/159">https://github.com/ansible-collections/community.sops/pull/159</a>).</p></li>
+</ul>
+</section>
+</section>
+<section id="v1-6-4">
+<h2><a class="toc-backref" href="#id88" role="doc-backlink">v1.6.4</a><a class="headerlink" href="#v1-6-4" title="Link to this heading"></a></h2>
+<section id="id17">
+<h3><a class="toc-backref" href="#id89" role="doc-backlink">Release Summary</a><a class="headerlink" href="#id17" title="Link to this heading"></a></h3>
+<p>Maintenance/bugfix release for the move of sops to the new <a class="reference external" href="https://github.com/getsops">getsops GitHub organization</a>.</p>
+</section>
+<section id="id18">
+<h3><a class="toc-backref" href="#id90" role="doc-backlink">Bugfixes</a><a class="headerlink" href="#id18" title="Link to this heading"></a></h3>
+<ul class="simple">
+<li><p>install role - fix <code class="docutils literal notranslate"><span class="pre">sops_github_latest_detection=latest-release</span></code>, which broke due to sops moving to another GitHub organization (<a class="reference external" href="https://github.com/ansible-collections/community.sops/pull/151">https://github.com/ansible-collections/community.sops/pull/151</a>).</p></li>
+</ul>
+</section>
+</section>
+<section id="v1-6-3">
+<h2><a class="toc-backref" href="#id91" role="doc-backlink">v1.6.3</a><a class="headerlink" href="#v1-6-3" title="Link to this heading"></a></h2>
+<section id="id19">
+<h3><a class="toc-backref" href="#id92" role="doc-backlink">Release Summary</a><a class="headerlink" href="#id19" title="Link to this heading"></a></h3>
+<p>Maintenance release with updated documentation.</p>
+<p>From this version on, community.sops is using the new <a class="reference external" href="https://docs.ansible.com/ansible/devel/dev_guide/developing_modules_documenting.html#semantic-markup-within-module-documentation">Ansible semantic markup</a>
+in its documentation. If you look at documentation with the ansible-doc CLI tool
+from ansible-core before 2.15, please note that it does not render the markup
+correctly. You should be still able to read it in most cases, but you need
+ansible-core 2.15 or later to see it as it is intended. Alternatively you can
+look at <a class="reference external" href="https://docs.ansible.com/ansible/devel/collections/community/sops/">the devel docsite</a>
+for the rendered HTML version of the documentation of the latest release.</p>
+</section>
+<section id="known-issues">
+<h3><a class="toc-backref" href="#id93" role="doc-backlink">Known Issues</a><a class="headerlink" href="#known-issues" title="Link to this heading"></a></h3>
+<ul class="simple">
+<li><p>Ansible markup will show up in raw form on ansible-doc text output for ansible-core before 2.15. If you have trouble deciphering the documentation markup, please upgrade to ansible-core 2.15 (or newer), or read the HTML documentation on <a class="reference external" href="https://docs.ansible.com/ansible/devel/collections/community/sops/">https://docs.ansible.com/ansible/devel/collections/community/sops/</a>.</p></li>
+</ul>
+</section>
+</section>
+<section id="v1-6-2">
+<h2><a class="toc-backref" href="#id94" role="doc-backlink">v1.6.2</a><a class="headerlink" href="#v1-6-2" title="Link to this heading"></a></h2>
+<section id="id20">
+<h3><a class="toc-backref" href="#id95" role="doc-backlink">Release Summary</a><a class="headerlink" href="#id20" title="Link to this heading"></a></h3>
+<p>Maintenance release.</p>
+</section>
+<section id="id21">
+<h3><a class="toc-backref" href="#id96" role="doc-backlink">Bugfixes</a><a class="headerlink" href="#id21" title="Link to this heading"></a></h3>
+<ul class="simple">
+<li><p>install role - make sure that the <code class="docutils literal notranslate"><span class="pre">pkg_mgr</span></code> fact is definitely available when installing on <code class="docutils literal notranslate"><span class="pre">localhost</span></code>. This can improve error messages in some cases (<a class="reference external" href="https://github.com/ansible-collections/community.sops/issues/145">https://github.com/ansible-collections/community.sops/issues/145</a>, <a class="reference external" href="https://github.com/ansible-collections/community.sops/pull/146">https://github.com/ansible-collections/community.sops/pull/146</a>).</p></li>
+</ul>
+</section>
+</section>
+<section id="v1-6-1">
+<h2><a class="toc-backref" href="#id97" role="doc-backlink">v1.6.1</a><a class="headerlink" href="#v1-6-1" title="Link to this heading"></a></h2>
+<section id="id22">
+<h3><a class="toc-backref" href="#id98" role="doc-backlink">Release Summary</a><a class="headerlink" href="#id22" title="Link to this heading"></a></h3>
+<p>Maintenance release.</p>
+</section>
+<section id="id23">
+<h3><a class="toc-backref" href="#id99" role="doc-backlink">Bugfixes</a><a class="headerlink" href="#id23" title="Link to this heading"></a></h3>
+<ul class="simple">
+<li><p>action plugin helper - fix handling of deprecations for ansible-core 2.14.2 (<a class="reference external" href="https://github.com/ansible-collections/community.sops/pull/136">https://github.com/ansible-collections/community.sops/pull/136</a>).</p></li>
+<li><p>various plugins - remove unnecessary imports (<a class="reference external" href="https://github.com/ansible-collections/community.sops/pull/133">https://github.com/ansible-collections/community.sops/pull/133</a>).</p></li>
+</ul>
+</section>
+</section>
+<section id="v1-6-0">
+<h2><a class="toc-backref" href="#id100" role="doc-backlink">v1.6.0</a><a class="headerlink" href="#v1-6-0" title="Link to this heading"></a></h2>
+<section id="id24">
+<h3><a class="toc-backref" href="#id101" role="doc-backlink">Release Summary</a><a class="headerlink" href="#id24" title="Link to this heading"></a></h3>
+<p>Feature release improving the installation role.</p>
+</section>
+<section id="id25">
+<h3><a class="toc-backref" href="#id102" role="doc-backlink">Minor Changes</a><a class="headerlink" href="#id25" title="Link to this heading"></a></h3>
+<ul class="simple">
+<li><p>install role - add <code class="docutils literal notranslate"><span class="pre">sops_github_latest_detection</span></code> option that allows to configure which method to use for detecting the latest release on GitHub. By default (<code class="docutils literal notranslate"><span class="pre">auto</span></code>) first tries to retrieve a list of recent releases using the API, and if that fails due to rate limiting, tries to obtain the latest GitHub release from a semi-documented URL (<a class="reference external" href="https://github.com/ansible-collections/community.sops/pull/133">https://github.com/ansible-collections/community.sops/pull/133</a>).</p></li>
+<li><p>install role - add <code class="docutils literal notranslate"><span class="pre">sops_github_token</span></code> option to allow passing a GitHub token. This can for example be used to avoid rate limits when using the role in GitHub Actions (<a class="reference external" href="https://github.com/ansible-collections/community.sops/pull/132">https://github.com/ansible-collections/community.sops/pull/132</a>).</p></li>
+<li><p>install role - implement another method to determine the latest release on GitHub than using the GitHub API, which can make installation fail due to rate-limiting (<a class="reference external" href="https://github.com/ansible-collections/community.sops/pull/131">https://github.com/ansible-collections/community.sops/pull/131</a>).</p></li>
+</ul>
+</section>
+</section>
+<section id="v1-5-0">
+<h2><a class="toc-backref" href="#id103" role="doc-backlink">v1.5.0</a><a class="headerlink" href="#v1-5-0" title="Link to this heading"></a></h2>
+<section id="id26">
+<h3><a class="toc-backref" href="#id104" role="doc-backlink">Release Summary</a><a class="headerlink" href="#id26" title="Link to this heading"></a></h3>
+<p>Feature release.</p>
+</section>
+<section id="id27">
+<h3><a class="toc-backref" href="#id105" role="doc-backlink">Minor Changes</a><a class="headerlink" href="#id27" title="Link to this heading"></a></h3>
+<ul class="simple">
+<li><p>Automatically install GNU Privacy Guard (GPG) in execution environments. To install Mozilla sops a manual step needs to be added to the EE definition, see the collection’s documentation for details (<a class="reference external" href="https://github.com/ansible-collections/community.sops/pull/98">https://github.com/ansible-collections/community.sops/pull/98</a>).</p></li>
+</ul>
+</section>
+<section id="new-playbooks">
+<h3><a class="toc-backref" href="#id106" role="doc-backlink">New Playbooks</a><a class="headerlink" href="#new-playbooks" title="Link to this heading"></a></h3>
+<ul class="simple">
+<li><p>community.sops.install - Installs sops and GNU Privacy Guard on all remote hosts</p></li>
+<li><p>community.sops.install_localhost - Installs sops and GNU Privacy Guard on localhost</p></li>
+</ul>
+</section>
+<section id="new-roles">
+<h3><a class="toc-backref" href="#id107" role="doc-backlink">New Roles</a><a class="headerlink" href="#new-roles" title="Link to this heading"></a></h3>
+<ul class="simple">
+<li><p>community.sops.install - Install Mozilla sops</p></li>
+</ul>
+</section>
+</section>
+<section id="v1-4-1">
+<h2><a class="toc-backref" href="#id108" role="doc-backlink">v1.4.1</a><a class="headerlink" href="#v1-4-1" title="Link to this heading"></a></h2>
+<section id="id28">
+<h3><a class="toc-backref" href="#id109" role="doc-backlink">Release Summary</a><a class="headerlink" href="#id28" title="Link to this heading"></a></h3>
+<p>Maintenance release to improve compatibility with future ansible-core releases.</p>
+</section>
+<section id="id29">
+<h3><a class="toc-backref" href="#id110" role="doc-backlink">Bugfixes</a><a class="headerlink" href="#id29" title="Link to this heading"></a></h3>
+<ul class="simple">
+<li><p>load_vars - ensure compatibility with newer versions of ansible-core (<a class="reference external" href="https://github.com/ansible-collections/community.sops/pull/121">https://github.com/ansible-collections/community.sops/pull/121</a>).</p></li>
+</ul>
+</section>
+</section>
+<section id="v1-4-0">
+<h2><a class="toc-backref" href="#id111" role="doc-backlink">v1.4.0</a><a class="headerlink" href="#v1-4-0" title="Link to this heading"></a></h2>
+<section id="id30">
+<h3><a class="toc-backref" href="#id112" role="doc-backlink">Release Summary</a><a class="headerlink" href="#id30" title="Link to this heading"></a></h3>
+<p>Feature release.</p>
+</section>
+<section id="id31">
+<h3><a class="toc-backref" href="#id113" role="doc-backlink">Minor Changes</a><a class="headerlink" href="#id31" title="Link to this heading"></a></h3>
+<ul class="simple">
+<li><p>Allow to specify age keys as <code class="docutils literal notranslate"><span class="pre">age_key</span></code>, or age keyfiles as <code class="docutils literal notranslate"><span class="pre">age_keyfile</span></code> (<a class="reference external" href="https://github.com/ansible-collections/community.sops/issues/116">https://github.com/ansible-collections/community.sops/issues/116</a>, <a class="reference external" href="https://github.com/ansible-collections/community.sops/pull/117">https://github.com/ansible-collections/community.sops/pull/117</a>).</p></li>
+<li><p>sops_encrypt - allow to specify age recipients (<a class="reference external" href="https://github.com/ansible-collections/community.sops/issues/116">https://github.com/ansible-collections/community.sops/issues/116</a>, <a class="reference external" href="https://github.com/ansible-collections/community.sops/pull/117">https://github.com/ansible-collections/community.sops/pull/117</a>).</p></li>
+</ul>
+</section>
+</section>
+<section id="v1-3-0">
+<h2><a class="toc-backref" href="#id114" role="doc-backlink">v1.3.0</a><a class="headerlink" href="#v1-3-0" title="Link to this heading"></a></h2>
+<section id="id32">
+<h3><a class="toc-backref" href="#id115" role="doc-backlink">Release Summary</a><a class="headerlink" href="#id32" title="Link to this heading"></a></h3>
+<p>Feature release.</p>
+</section>
+<section id="id33">
+<h3><a class="toc-backref" href="#id116" role="doc-backlink">Minor Changes</a><a class="headerlink" href="#id33" title="Link to this heading"></a></h3>
+<ul class="simple">
+<li><p>All software licenses are now in the <code class="docutils literal notranslate"><span class="pre">LICENSES/</span></code> directory of the collection root, and the collection repository conforms to the <a class="reference external" href="https://reuse.software/spec/">REUSE specification</a> except for the changelog fragments (<a class="reference external" href="https://github.com/ansible-collections/community.crypto/sops/108">https://github.com/ansible-collections/community.crypto/sops/108</a>, <a class="reference external" href="https://github.com/ansible-collections/community.sops/pull/113">https://github.com/ansible-collections/community.sops/pull/113</a>).</p></li>
+<li><p>sops vars plugin - added a configuration option to temporarily disable the vars plugin (<a class="reference external" href="https://github.com/ansible-collections/community.sops/pull/114">https://github.com/ansible-collections/community.sops/pull/114</a>).</p></li>
+</ul>
+</section>
+</section>
+<section id="v1-2-3">
+<h2><a class="toc-backref" href="#id117" role="doc-backlink">v1.2.3</a><a class="headerlink" href="#v1-2-3" title="Link to this heading"></a></h2>
+<section id="id34">
+<h3><a class="toc-backref" href="#id118" role="doc-backlink">Release Summary</a><a class="headerlink" href="#id34" title="Link to this heading"></a></h3>
+<p>Fix formatting bug in documentation. No code changes.</p>
+</section>
+</section>
+<section id="v1-2-2">
+<h2><a class="toc-backref" href="#id119" role="doc-backlink">v1.2.2</a><a class="headerlink" href="#v1-2-2" title="Link to this heading"></a></h2>
+<section id="id35">
+<h3><a class="toc-backref" href="#id120" role="doc-backlink">Release Summary</a><a class="headerlink" href="#id35" title="Link to this heading"></a></h3>
+<p>Maintenance release.</p>
+</section>
+<section id="id36">
+<h3><a class="toc-backref" href="#id121" role="doc-backlink">Bugfixes</a><a class="headerlink" href="#id36" title="Link to this heading"></a></h3>
+<ul class="simple">
+<li><p>Include <code class="docutils literal notranslate"><span class="pre">simplified_bsd.txt</span></code> license file for the <code class="docutils literal notranslate"><span class="pre">sops</span></code> module utils.</p></li>
+</ul>
+</section>
+</section>
+<section id="v1-2-1">
+<h2><a class="toc-backref" href="#id122" role="doc-backlink">v1.2.1</a><a class="headerlink" href="#v1-2-1" title="Link to this heading"></a></h2>
+<section id="id37">
+<h3><a class="toc-backref" href="#id123" role="doc-backlink">Release Summary</a><a class="headerlink" href="#id37" title="Link to this heading"></a></h3>
+<p>Maintenance release with updated documentation.</p>
+</section>
+</section>
+<section id="v1-2-0">
+<h2><a class="toc-backref" href="#id124" role="doc-backlink">v1.2.0</a><a class="headerlink" href="#v1-2-0" title="Link to this heading"></a></h2>
+<section id="id38">
+<h3><a class="toc-backref" href="#id125" role="doc-backlink">Release Summary</a><a class="headerlink" href="#id38" title="Link to this heading"></a></h3>
+<p>Collection release for inclusion in Ansible 4.9.0 and 5.1.0.</p>
+<p>This release contains a change allowing to configure generic plugin options with ansible.cfg keys and env variables.</p>
+</section>
+<section id="id39">
+<h3><a class="toc-backref" href="#id126" role="doc-backlink">Minor Changes</a><a class="headerlink" href="#id39" title="Link to this heading"></a></h3>
+<ul class="simple">
+<li><p>sops lookup and vars plugin - allow to configure almost all generic options by ansible.cfg entries and environment variables (<a class="reference external" href="https://github.com/ansible-collections/community.sops/pull/81">https://github.com/ansible-collections/community.sops/pull/81</a>).</p></li>
+</ul>
+</section>
+<section id="id40">
+<h3><a class="toc-backref" href="#id127" role="doc-backlink">Bugfixes</a><a class="headerlink" href="#id40" title="Link to this heading"></a></h3>
+<ul class="simple">
+<li><p>Fix error handling in calls of the <code class="docutils literal notranslate"><span class="pre">sops</span></code> binary when negative errors are returned (<a class="reference external" href="https://github.com/ansible-collections/community.sops/issues/82">https://github.com/ansible-collections/community.sops/issues/82</a>, <a class="reference external" href="https://github.com/ansible-collections/community.sops/pull/83">https://github.com/ansible-collections/community.sops/pull/83</a>).</p></li>
+</ul>
+</section>
+</section>
+<section id="v1-1-0">
+<h2><a class="toc-backref" href="#id128" role="doc-backlink">v1.1.0</a><a class="headerlink" href="#v1-1-0" title="Link to this heading"></a></h2>
+<section id="id41">
+<h3><a class="toc-backref" href="#id129" role="doc-backlink">Release Summary</a><a class="headerlink" href="#id41" title="Link to this heading"></a></h3>
+<p>A minor release for inclusion in Ansible 4.2.0.</p>
+</section>
+<section id="id42">
+<h3><a class="toc-backref" href="#id130" role="doc-backlink">Minor Changes</a><a class="headerlink" href="#id42" title="Link to this heading"></a></h3>
+<ul class="simple">
+<li><p>Avoid internal ansible-core module_utils in favor of equivalent public API available since at least Ansible 2.9 (<a class="reference external" href="https://github.com/ansible-collections/community.sops/pull/73">https://github.com/ansible-collections/community.sops/pull/73</a>).</p></li>
+</ul>
+</section>
+<section id="new-plugins">
+<h3><a class="toc-backref" href="#id131" role="doc-backlink">New Plugins</a><a class="headerlink" href="#new-plugins" title="Link to this heading"></a></h3>
+<section id="filter">
+<h4><a class="toc-backref" href="#id132" role="doc-backlink">Filter</a><a class="headerlink" href="#filter" title="Link to this heading"></a></h4>
+<ul class="simple">
+<li><p>community.sops.decrypt - Decrypt sops-encrypted data</p></li>
+</ul>
+</section>
+</section>
+</section>
+<section id="v1-0-6">
+<h2><a class="toc-backref" href="#id133" role="doc-backlink">v1.0.6</a><a class="headerlink" href="#v1-0-6" title="Link to this heading"></a></h2>
+<section id="id43">
+<h3><a class="toc-backref" href="#id134" role="doc-backlink">Release Summary</a><a class="headerlink" href="#id43" title="Link to this heading"></a></h3>
+<p>This release makes the collection compatible to the latest beta release of ansible-core 2.11.</p>
+</section>
+<section id="id44">
+<h3><a class="toc-backref" href="#id135" role="doc-backlink">Bugfixes</a><a class="headerlink" href="#id44" title="Link to this heading"></a></h3>
+<ul class="simple">
+<li><p>action_module plugin helper - make compatible with latest changes in ansible-core 2.11.0b3 (<a class="reference external" href="https://github.com/ansible-collections/community.sops/pull/58">https://github.com/ansible-collections/community.sops/pull/58</a>).</p></li>
+<li><p>community.sops.load_vars - make compatible with latest changes in ansible-core 2.11.0b3 (<a class="reference external" href="https://github.com/ansible-collections/community.sops/pull/58">https://github.com/ansible-collections/community.sops/pull/58</a>).</p></li>
+</ul>
+</section>
+</section>
+<section id="v1-0-5">
+<h2><a class="toc-backref" href="#id136" role="doc-backlink">v1.0.5</a><a class="headerlink" href="#v1-0-5" title="Link to this heading"></a></h2>
+<section id="id45">
+<h3><a class="toc-backref" href="#id137" role="doc-backlink">Release Summary</a><a class="headerlink" href="#id45" title="Link to this heading"></a></h3>
+<p>This release fixes a bug that prevented correct YAML file to be created when the output was ending in <code class="docutils literal notranslate"><span class="pre">.yaml</span></code>.</p>
+</section>
+<section id="id46">
+<h3><a class="toc-backref" href="#id138" role="doc-backlink">Bugfixes</a><a class="headerlink" href="#id46" title="Link to this heading"></a></h3>
+<ul class="simple">
+<li><p>community.sops.sops_encrypt - use output type <code class="docutils literal notranslate"><span class="pre">yaml</span></code> when path ends with <code class="docutils literal notranslate"><span class="pre">.yaml</span></code> (<a class="reference external" href="https://github.com/ansible-collections/community.sops/pull/56">https://github.com/ansible-collections/community.sops/pull/56</a>).</p></li>
+</ul>
+</section>
+</section>
+<section id="v1-0-4">
+<h2><a class="toc-backref" href="#id139" role="doc-backlink">v1.0.4</a><a class="headerlink" href="#v1-0-4" title="Link to this heading"></a></h2>
+<section id="id47">
+<h3><a class="toc-backref" href="#id140" role="doc-backlink">Release Summary</a><a class="headerlink" href="#id47" title="Link to this heading"></a></h3>
+<p>This is a security release, fixing a potential information leak in the <code class="docutils literal notranslate"><span class="pre">community.sops.sops_encrypt</span></code> module.</p>
+</section>
+<section id="security-fixes">
+<h3><a class="toc-backref" href="#id141" role="doc-backlink">Security Fixes</a><a class="headerlink" href="#security-fixes" title="Link to this heading"></a></h3>
+<ul class="simple">
+<li><p>community.sops.sops_encrypt - mark the <code class="docutils literal notranslate"><span class="pre">aws_secret_access_key</span></code> and <code class="docutils literal notranslate"><span class="pre">aws_session_token</span></code> parameters as <code class="docutils literal notranslate"><span class="pre">no_log</span></code> to avoid leakage of secrets (<a class="reference external" href="https://github.com/ansible-collections/community.sops/pull/54">https://github.com/ansible-collections/community.sops/pull/54</a>).</p></li>
+</ul>
+</section>
+</section>
+<section id="v1-0-3">
+<h2><a class="toc-backref" href="#id142" role="doc-backlink">v1.0.3</a><a class="headerlink" href="#v1-0-3" title="Link to this heading"></a></h2>
+<section id="id48">
+<h3><a class="toc-backref" href="#id143" role="doc-backlink">Release Summary</a><a class="headerlink" href="#id48" title="Link to this heading"></a></h3>
+<p>This release include some fixes to Ansible docs and required changes for inclusion in Ansible.</p>
+</section>
+<section id="id49">
+<h3><a class="toc-backref" href="#id144" role="doc-backlink">Bugfixes</a><a class="headerlink" href="#id49" title="Link to this heading"></a></h3>
+<ul class="simple">
+<li><p>community.sops.sops lookup plugins - fix wrong format of Ansible variables so that these are actually used (<a class="reference external" href="https://github.com/ansible-collections/community.sops/pull/51">https://github.com/ansible-collections/community.sops/pull/51</a>).</p></li>
+<li><p>community.sops.sops vars plugins - remove non-working Ansible variables (<a class="reference external" href="https://github.com/ansible-collections/community.sops/pull/51">https://github.com/ansible-collections/community.sops/pull/51</a>).</p></li>
+</ul>
+</section>
+</section>
+<section id="v1-0-2">
+<h2><a class="toc-backref" href="#id145" role="doc-backlink">v1.0.2</a><a class="headerlink" href="#v1-0-2" title="Link to this heading"></a></h2>
+<section id="id50">
+<h3><a class="toc-backref" href="#id146" role="doc-backlink">Release Summary</a><a class="headerlink" href="#id50" title="Link to this heading"></a></h3>
+<p>Fix of 1.0.1 release which had no changelog entry.</p>
+</section>
+</section>
+<section id="v1-0-1">
+<h2><a class="toc-backref" href="#id147" role="doc-backlink">v1.0.1</a><a class="headerlink" href="#v1-0-1" title="Link to this heading"></a></h2>
+<section id="id51">
+<h3><a class="toc-backref" href="#id148" role="doc-backlink">Release Summary</a><a class="headerlink" href="#id51" title="Link to this heading"></a></h3>
+<p>Re-release of 1.0.0 to counteract error during release.</p>
+</section>
+</section>
+<section id="v1-0-0">
+<h2><a class="toc-backref" href="#id149" role="doc-backlink">v1.0.0</a><a class="headerlink" href="#v1-0-0" title="Link to this heading"></a></h2>
+<section id="id52">
+<h3><a class="toc-backref" href="#id150" role="doc-backlink">Release Summary</a><a class="headerlink" href="#id52" title="Link to this heading"></a></h3>
+<p>First stable release. This release is expected to be included in Ansible 3.0.0.</p>
+</section>
+<section id="id53">
+<h3><a class="toc-backref" href="#id151" role="doc-backlink">Minor Changes</a><a class="headerlink" href="#id53" title="Link to this heading"></a></h3>
+<ul class="simple">
+<li><p>All plugins and modules: allow to pass generic sops options with new options <code class="docutils literal notranslate"><span class="pre">config_path</span></code>, <code class="docutils literal notranslate"><span class="pre">enable_local_keyservice</span></code>, <code class="docutils literal notranslate"><span class="pre">keyservice</span></code>. Also allow to pass AWS parameters with options <code class="docutils literal notranslate"><span class="pre">aws_profile</span></code>, <code class="docutils literal notranslate"><span class="pre">aws_access_key_id</span></code>, <code class="docutils literal notranslate"><span class="pre">aws_secret_access_key</span></code>, and <code class="docutils literal notranslate"><span class="pre">aws_session_token</span></code> (<a class="reference external" href="https://github.com/ansible-collections/community.sops/pull/47">https://github.com/ansible-collections/community.sops/pull/47</a>).</p></li>
+<li><p>community.sops.sops_encrypt - allow to pass encryption-specific options <code class="docutils literal notranslate"><span class="pre">kms</span></code>, <code class="docutils literal notranslate"><span class="pre">gcp_kms</span></code>, <code class="docutils literal notranslate"><span class="pre">azure_kv</span></code>, <code class="docutils literal notranslate"><span class="pre">hc_vault_transit</span></code>, <code class="docutils literal notranslate"><span class="pre">pgp</span></code>, <code class="docutils literal notranslate"><span class="pre">unencrypted_suffix</span></code>, <code class="docutils literal notranslate"><span class="pre">encrypted_suffix</span></code>, <code class="docutils literal notranslate"><span class="pre">unencrypted_regex</span></code>, <code class="docutils literal notranslate"><span class="pre">encrypted_regex</span></code>, <code class="docutils literal notranslate"><span class="pre">encryption_context</span></code>, and <code class="docutils literal notranslate"><span class="pre">shamir_secret_sharing_threshold</span></code> to sops (<a class="reference external" href="https://github.com/ansible-collections/community.sops/pull/47">https://github.com/ansible-collections/community.sops/pull/47</a>).</p></li>
+</ul>
+</section>
+</section>
+<section id="v0-2-0">
+<h2><a class="toc-backref" href="#id152" role="doc-backlink">v0.2.0</a><a class="headerlink" href="#v0-2-0" title="Link to this heading"></a></h2>
+<section id="id54">
+<h3><a class="toc-backref" href="#id153" role="doc-backlink">Release Summary</a><a class="headerlink" href="#id54" title="Link to this heading"></a></h3>
+<p>This release adds features for the lookup and vars plugins.</p>
+</section>
+<section id="id55">
+<h3><a class="toc-backref" href="#id154" role="doc-backlink">Minor Changes</a><a class="headerlink" href="#id55" title="Link to this heading"></a></h3>
+<ul class="simple">
+<li><p>community.sops.sops lookup plugin - add <code class="docutils literal notranslate"><span class="pre">empty_on_not_exist</span></code> option which allows to return an empty string instead of an error when the file does not exist (<a class="reference external" href="https://github.com/ansible-collections/community.sops/pull/33">https://github.com/ansible-collections/community.sops/pull/33</a>).</p></li>
+<li><p>community.sops.sops vars plugin - add option to control caching (<a class="reference external" href="https://github.com/ansible-collections/community.sops/pull/32">https://github.com/ansible-collections/community.sops/pull/32</a>).</p></li>
+<li><p>community.sops.sops vars plugin - add option to determine when vars are loaded (<a class="reference external" href="https://github.com/ansible-collections/community.sops/pull/32">https://github.com/ansible-collections/community.sops/pull/32</a>).</p></li>
+</ul>
+</section>
+</section>
+<section id="v0-1-0">
+<h2><a class="toc-backref" href="#id155" role="doc-backlink">v0.1.0</a><a class="headerlink" href="#v0-1-0" title="Link to this heading"></a></h2>
+<section id="id56">
+<h3><a class="toc-backref" href="#id156" role="doc-backlink">Release Summary</a><a class="headerlink" href="#id56" title="Link to this heading"></a></h3>
+<p>First release of the <code class="docutils literal notranslate"><span class="pre">community.sops</span></code> collection!
+This release includes multiple plugins: an <code class="docutils literal notranslate"><span class="pre">action</span></code> plugin, a <code class="docutils literal notranslate"><span class="pre">lookup</span></code> plugin and a <code class="docutils literal notranslate"><span class="pre">vars</span></code> plugin.</p>
+</section>
+<section id="id57">
+<h3><a class="toc-backref" href="#id157" role="doc-backlink">New Plugins</a><a class="headerlink" href="#id57" title="Link to this heading"></a></h3>
+<section id="lookup">
+<h4><a class="toc-backref" href="#id158" role="doc-backlink">Lookup</a><a class="headerlink" href="#lookup" title="Link to this heading"></a></h4>
+<ul class="simple">
+<li><p>community.sops.sops - Read sops encrypted file contents</p></li>
+</ul>
+</section>
+<section id="vars">
+<h4><a class="toc-backref" href="#id159" role="doc-backlink">Vars</a><a class="headerlink" href="#vars" title="Link to this heading"></a></h4>
+<ul class="simple">
+<li><p>community.sops.sops - Loading sops-encrypted vars files</p></li>
+</ul>
+</section>
+</section>
+<section id="new-modules">
+<h3><a class="toc-backref" href="#id160" role="doc-backlink">New Modules</a><a class="headerlink" href="#new-modules" title="Link to this heading"></a></h3>
+<ul class="simple">
+<li><p>community.sops.load_vars - Load sops-encrypted variables from files, dynamically within a task</p></li>
+<li><p>community.sops.sops_encrypt - Encrypt data with sops</p></li>
+</ul>
+</section>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          
+
+<footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="index.html" class="btn btn-neutral float-left" title="Community.Sops" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="docsite/guide.html" class="btn btn-neutral float-right" title="Protecting Ansible secrets with SOPS" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright Community.Sops Contributors.</p>
+  </div>
+
+  
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script><!-- extra footer elements for Ansible beyond RTD Sphinx Theme -->
+
+</body>
+</html>
