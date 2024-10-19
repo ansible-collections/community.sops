@@ -21,7 +21,7 @@ The following table shows which versions of SOPS were tested with which versions
 
 |`community.sops` version|SOPS versions|
 |---|---|
-|`main` branch|`3.5.0`, `3.6.0`, `3.6.1`, `3.7.0`, `3.7.3`, `3.8.0`, `3.8.1`, `3.9.0`, `3.9.1`|
+|`stable-1` branch|`3.5.0`, `3.6.0`, `3.6.1`, `3.7.0`, `3.7.3`, `3.8.0`, `3.8.1`, `3.9.0`, `3.9.1`|
 
 ## Code of Conduct
 
@@ -60,7 +60,7 @@ Browsing the [**latest** collection documentation](https://docs.ansible.com/ansi
 
 Browsing the [**devel** collection documentation](https://docs.ansible.com/ansible/devel/collections/community/sops) shows docs for the _latest version released on Galaxy_.
 
-We also separately publish [**latest commit** collection documentation](https://ansible-collections.github.io/community.sops/branch/main/) which shows docs for the _latest commit in the `main` branch_.
+We also separately publish [**latest commit** collection documentation](https://ansible-collections.github.io/community.sops/branch/stable-1/) which shows docs for the _latest commit in the `stable-1` branch_.
 
 If you use the Ansible package and do not update collections independently, use **latest**. If you install or update this collection directly from Galaxy, use **devel**. If you are looking to contribute, use **latest commit**.
 
@@ -327,11 +327,11 @@ This is a limitation of gpg-agent which can be fixed by adding `auto-expand-secm
 
 <!--Describe how the community can contribute to your collection. At a minimum, include how and where users can create issues to report problems or request features for this collection.  List contribution requirements, including preferred workflows and necessary testing, so you can benefit from community PRs. If you are following general Ansible contributor guidelines, you can link to - [Ansible Community Guide](https://docs.ansible.com/ansible/latest/community/index.html). -->
 
-See [CONTRIBUTING.md](https://github.com/ansible-collections/community.sops/blob/main/CONTRIBUTING.md)
+See [CONTRIBUTING.md](https://github.com/ansible-collections/community.sops/blob/stable-1/CONTRIBUTING.md)
 
 ## Release notes
 
-See [CHANGELOG.md](https://github.com/ansible-collections/community.sops/blob/main/CHANGELOG.md).
+See [CHANGELOG.md](https://github.com/ansible-collections/community.sops/blob/stable-1/CHANGELOG.md).
 
 ## Releasing, Versioning and Deprecation
 
@@ -355,8 +355,8 @@ We currently are not planning any deprecations or new major releases like 2.0.0 
 
 This collection is primarily licensed and distributed as a whole under the GNU General Public License v3.0 or later.
 
-See [LICENSES/GPL-3.0-or-later.txt](https://github.com/ansible-collections/community.sops/blob/main/COPYING) for the full text.
+See [LICENSES/GPL-3.0-or-later.txt](https://github.com/ansible-collections/community.sops/blob/stable-1/COPYING) for the full text.
 
-Parts of the collection are licensed under the [BSD 2-Clause license](https://github.com/ansible-collections/community.sops/blob/main/LICENSES/BSD-2-Clause.txt).
+Parts of the collection are licensed under the [BSD 2-Clause license](https://github.com/ansible-collections/community.sops/blob/stable-1/LICENSES/BSD-2-Clause.txt).
 
 All files have a machine readable `SDPX-License-Identifier:` comment denoting its respective license(s) or an equivalent entry in an accompanying `.license` file. Only changelog fragments (which will not be part of a release) are covered by a blanket statement in `.reuse/dep5`. This conforms to the [REUSE specification](https://reuse.software/spec/).
