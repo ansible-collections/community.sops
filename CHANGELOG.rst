@@ -4,6 +4,19 @@ Community SOPS Release Notes
 
 .. contents:: Topics
 
+v2.0.0
+======
+
+Release Summary
+---------------
+
+Major verison that drops support for End of Life Ansible/ansible-base/ansible-core versions.
+
+Removed Features (previously deprecated)
+----------------------------------------
+
+- The collection no longer supports Ansible 2.9, ansible-base 2.10, ansible-core 2.11, ansible-core 2.12, ansible-core 2.13, and ansible-core 2.14. If you need to continue using End of Life versions of Ansible/ansible-base/ansible-core, please use community.sops 1.x.y (https://github.com/ansible-collections/community.sops/pull/206).
+
 v1.9.1
 ======
 
