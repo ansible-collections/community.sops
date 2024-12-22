@@ -118,7 +118,7 @@ jobs:
             sops_version: 3.9.1
           - ansible: devel
             docker_container: quay.io/ansible-community/test-image:archlinux
-            python_version: '3.12'
+            python_version: '3.13'
             sops_version: latest
           - ansible: devel
             docker_container: quay.io/ansible-community/test-image:debian-bookworm
@@ -207,7 +207,7 @@ jobs:
           # Install latest sops
           - ansible: devel
             docker_container: quay.io/ansible-community/test-image:archlinux
-            python_version: '3.12'
+            python_version: '3.13'
             target: gha/install/3/
             github_latest_detection: auto
             test-deps: git+https://github.com/ansible-collections/community.general.git,main
