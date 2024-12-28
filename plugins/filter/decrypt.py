@@ -63,7 +63,7 @@ options:
     decode_output:
         description:
             - Whether to decode the output to bytes.
-            - When O(output_type=binary), and the file isn't known to contain UTF-8 encoded text,
+            - When O(output_type=binary), and the file is not known to contain UTF-8 encoded text,
               this should better be set to V(false) to prevent mangling the data with UTF-8 decoding.
         type: bool
         default: true
