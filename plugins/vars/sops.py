@@ -7,102 +7,101 @@
 from __future__ import (absolute_import, division, print_function)
 __metaclass__ = type
 
-DOCUMENTATION = '''
-    name: sops
-    author: Edoardo Tenani (@endorama) <e.tenani@arduino.cc>
-    short_description: Loading SOPS-encrypted vars files
-    version_added: '0.1.0'
+DOCUMENTATION = r"""
+name: sops
+author: Edoardo Tenani (@endorama) <e.tenani@arduino.cc>
+short_description: Loading SOPS-encrypted vars files
+version_added: '0.1.0'
+description:
+  - Load encrypted YAML files into corresponding groups/hosts in C(group_vars/) and C(host_vars/) directories.
+  - Files are encrypted prior to reading, making this plugin an effective companion to P(ansible.builtin.host_group_vars#vars)
+    plugin.
+  - Files are restricted to V(.sops.yaml), V(.sops.yml), V(.sops.json) extensions, unless configured otherwise with O(valid_extensions).
+  - Hidden files are ignored.
+options:
+  valid_extensions:
+    default: [".sops.yml", ".sops.yaml", ".sops.json"]
     description:
-        - Load encrypted YAML files into corresponding groups/hosts in C(group_vars/) and C(host_vars/) directories.
-        - Files are encrypted prior to reading, making this plugin an effective companion to P(ansible.builtin.host_group_vars#vars) plugin.
-        - Files are restricted to V(.sops.yaml), V(.sops.yml), V(.sops.json) extensions, unless configured otherwise
-          with O(valid_extensions).
-        - Hidden files are ignored.
-    options:
-      valid_extensions:
-        default: [".sops.yml", ".sops.yaml", ".sops.json"]
-        description:
-          - Check all of these extensions when looking for 'variable' files.
-          - These files must be SOPS encrypted YAML or JSON files.
-          - By default the plugin will produce errors when encountering files matching these extensions that are not SOPS encrypted.
-            This behavior can be controlled with the O(handle_unencrypted_files) option.
-        type: list
-        elements: string
-        ini:
-          - key: valid_extensions
-            section: community.sops
-            version_added: 1.7.0
-        env:
-          - name: ANSIBLE_VARS_SOPS_PLUGIN_VALID_EXTENSIONS
-            version_added: 1.7.0
-      stage:
-        version_added: 0.2.0
-        ini:
-          - key: vars_stage
-            section: community.sops
-        env:
-          - name: ANSIBLE_VARS_SOPS_PLUGIN_STAGE
-      cache:
-        description:
-          - Whether to cache decrypted files or not.
-          - If the cache is disabled, the files will be decrypted for almost every task. This is very slow!
-          - Only disable caching if you modify the variable files during a playbook run and want the updated
-            result to be available from the next task on.
-          - "Note that setting O(stage=inventory) has the same effect as setting O(cache=true):
-             the variables will be loaded only once (during inventory loading) and the vars plugin will not
-             be called for every task."
-        type: bool
-        default: true
-        version_added: 0.2.0
-        ini:
-          - key: vars_cache
-            section: community.sops
-        env:
-          - name: ANSIBLE_VARS_SOPS_PLUGIN_CACHE
-      disable_vars_plugin_temporarily:
-        description:
-          - Temporarily disable this plugin.
-          - Useful if ansible-inventory is supposed to be run without decrypting secrets (in AWX for instance).
-        type: bool
-        default: false
-        version_added: 1.3.0
-        env:
-          - name: SOPS_ANSIBLE_AWX_DISABLE_VARS_PLUGIN_TEMPORARILY
-      handle_unencrypted_files:
-        description:
-          - How to handle files that match the extensions in O(valid_extensions) that are not SOPS encrypted.
-          - The default value V(error) will produce an error.
-          - The value V(skip) will simply skip these files. This requires SOPS 3.9.0 or later.
-          - The value V(warn) will skip these files and emit a warning. This requires SOPS 3.9.0 or later.
-          - B(Note) that this will not help if the store SOPS uses cannot parse the file, for example because it is
-            no valid JSON/YAML/... file despite its file extension. For extensions other than the default ones SOPS
-            uses the binary store, which tries to parse the file as JSON.
-        type: string
-        choices:
-          - skip
-          - warn
-          - error
-        default: error
-        version_added: 1.8.0
-        ini:
-          - key: handle_unencrypted_files
-            section: community.sops
-        env:
-          - name: ANSIBLE_VARS_SOPS_PLUGIN_HANDLE_UNENCRYPTED_FILES
-    extends_documentation_fragment:
-        - ansible.builtin.vars_plugin_staging
-        - community.sops.sops
-        - community.sops.sops.ansible_env
-        - community.sops.sops.ansible_ini
-    seealso:
-        - plugin: community.sops.sops
-          plugin_type: lookup
-          description: The sops lookup can be used decrypt SOPS-encrypted files.
-        - plugin: community.sops.decrypt
-          plugin_type: filter
-          description: The decrypt filter can be used to decrypt SOPS-encrypted in-memory data.
-        - module: community.sops.load_vars
-'''
+      - Check all of these extensions when looking for 'variable' files.
+      - These files must be SOPS encrypted YAML or JSON files.
+      - By default the plugin will produce errors when encountering files matching these extensions that are not SOPS encrypted.
+        This behavior can be controlled with the O(handle_unencrypted_files) option.
+    type: list
+    elements: string
+    ini:
+      - key: valid_extensions
+        section: community.sops
+        version_added: 1.7.0
+    env:
+      - name: ANSIBLE_VARS_SOPS_PLUGIN_VALID_EXTENSIONS
+        version_added: 1.7.0
+  stage:
+    version_added: 0.2.0
+    ini:
+      - key: vars_stage
+        section: community.sops
+    env:
+      - name: ANSIBLE_VARS_SOPS_PLUGIN_STAGE
+  cache:
+    description:
+      - Whether to cache decrypted files or not.
+      - If the cache is disabled, the files will be decrypted for almost every task. This is very slow!
+      - Only disable caching if you modify the variable files during a playbook run and want the updated result to be available
+        from the next task on.
+      - 'Note that setting O(stage=inventory) has the same effect as setting O(cache=true): the variables will be loaded only
+        once (during inventory loading) and the vars plugin will not be called for every task.'
+    type: bool
+    default: true
+    version_added: 0.2.0
+    ini:
+      - key: vars_cache
+        section: community.sops
+    env:
+      - name: ANSIBLE_VARS_SOPS_PLUGIN_CACHE
+  disable_vars_plugin_temporarily:
+    description:
+      - Temporarily disable this plugin.
+      - Useful if ansible-inventory is supposed to be run without decrypting secrets (in AWX for instance).
+    type: bool
+    default: false
+    version_added: 1.3.0
+    env:
+      - name: SOPS_ANSIBLE_AWX_DISABLE_VARS_PLUGIN_TEMPORARILY
+  handle_unencrypted_files:
+    description:
+      - How to handle files that match the extensions in O(valid_extensions) that are not SOPS encrypted.
+      - The default value V(error) will produce an error.
+      - The value V(skip) will simply skip these files. This requires SOPS 3.9.0 or later.
+      - The value V(warn) will skip these files and emit a warning. This requires SOPS 3.9.0 or later.
+      - B(Note) that this will not help if the store SOPS uses cannot parse the file, for example because it is no valid JSON/YAML/...
+        file despite its file extension. For extensions other than the default ones SOPS uses the binary store, which tries
+        to parse the file as JSON.
+    type: string
+    choices:
+      - skip
+      - warn
+      - error
+    default: error
+    version_added: 1.8.0
+    ini:
+      - key: handle_unencrypted_files
+        section: community.sops
+    env:
+      - name: ANSIBLE_VARS_SOPS_PLUGIN_HANDLE_UNENCRYPTED_FILES
+extends_documentation_fragment:
+  - ansible.builtin.vars_plugin_staging
+  - community.sops.sops
+  - community.sops.sops.ansible_env
+  - community.sops.sops.ansible_ini
+seealso:
+  - plugin: community.sops.sops
+    plugin_type: lookup
+    description: The sops lookup can be used decrypt SOPS-encrypted files.
+  - plugin: community.sops.decrypt
+    plugin_type: filter
+    description: The decrypt filter can be used to decrypt SOPS-encrypted in-memory data.
+  - module: community.sops.load_vars
+"""
 
 import os
 from ansible.errors import AnsibleParserError

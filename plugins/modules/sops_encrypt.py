@@ -9,8 +9,7 @@ from __future__ import absolute_import, division, print_function
 __metaclass__ = type
 
 
-DOCUMENTATION = r'''
----
+DOCUMENTATION = r"""
 author: Felix Fontein (@felixfontein)
 module: sops_encrypt
 short_description: Encrypt data with SOPS
@@ -68,9 +67,9 @@ seealso:
   - plugin: community.sops.sops
     plugin_type: lookup
     description: The sops lookup can be used decrypt SOPS-encrypted files.
-'''
+"""
 
-EXAMPLES = r'''
+EXAMPLES = r"""
 - name: Encrypt a secret text
   community.sops.sops_encrypt:
     path: text-data.sops
@@ -85,9 +84,9 @@ EXAMPLES = r'''
   community.sops.sops_encrypt:
     path: stuff.sops.yaml
     content_yaml: "{{ result }}"
-'''
+"""
 
-RETURN = r''' # '''
+RETURN = r""" # """
 
 
 import base64

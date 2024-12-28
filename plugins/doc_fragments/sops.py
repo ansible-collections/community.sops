@@ -9,83 +9,78 @@ __metaclass__ = type
 
 
 class ModuleDocFragment(object):
-    DOCUMENTATION = r'''
+    DOCUMENTATION = r"""
 requirements:
-  - A binary executable C(sops) (U(https://github.com/getsops/sops)) must exist either in E(PATH) or configured as
-    O(sops_binary).
+  - A binary executable C(sops) (U(https://github.com/getsops/sops)) must exist either in E(PATH) or configured as O(sops_binary).
 options:
-    sops_binary:
-        description:
-            - Path to the SOPS binary.
-            - By default uses C(sops).
-        type: path
-        version_added: 1.0.0
-    age_key:
-        description:
-            - One or more age private keys that can be used to decrypt encrypted files.
-            - Will be set as the E(SOPS_AGE_KEY) environment variable when calling SOPS.
-            - Requires SOPS 3.7.1+.
-        type: str
-        version_added: 1.4.0
-    age_keyfile:
-        description:
-            - The file containing the age private keys that SOPS can use to decrypt
-              encrypted files.
-            - Will be set as the E(SOPS_AGE_KEY_FILE) environment variable when calling SOPS.
-            - By default, SOPS looks for C(sops/age/keys.txt) inside your user configuration
-              directory.
-            - Requires SOPS 3.7.0+.
-        type: path
-        version_added: 1.4.0
-    aws_profile:
-        description:
-            - The AWS profile to use for requests to AWS.
-            - This corresponds to the SOPS C(--aws-profile) option.
-        type: str
-        version_added: 1.0.0
-    aws_access_key_id:
-        description:
-            - The AWS access key ID to use for requests to AWS.
-            - Sets the environment variable E(AWS_ACCESS_KEY_ID) for the SOPS call.
-        type: str
-        version_added: 1.0.0
-    aws_secret_access_key:
-        description:
-            - The AWS secret access key to use for requests to AWS.
-            - Sets the environment variable E(AWS_SECRET_ACCESS_KEY) for the SOPS call.
-        type: str
-        version_added: 1.0.0
-    aws_session_token:
-        description:
-            - The AWS session token to use for requests to AWS.
-            - Sets the environment variable E(AWS_SESSION_TOKEN) for the SOPS call.
-        type: str
-        version_added: 1.0.0
-    config_path:
-        description:
-            - Path to the SOPS configuration file.
-            - If not set, SOPS will recursively search for the config file starting at
-              the file that is encrypted or decrypted.
-            - This corresponds to the SOPS C(--config) option.
-        type: path
-        version_added: 1.0.0
-    enable_local_keyservice:
-        description:
-            - Tell SOPS to use local key service.
-            - This corresponds to the SOPS C(--enable-local-keyservice) option.
-        type: bool
-        default: false
-        version_added: 1.0.0
-    keyservice:
-        description:
-            - Specify key services to use next to the local one.
-            - A key service must be specified in the form C(protocol://address), for
-              example C(tcp://myserver.com:5000).
-            - This corresponds to the SOPS C(--keyservice) option.
-        type: list
-        elements: str
-        version_added: 1.0.0
-'''
+  sops_binary:
+    description:
+      - Path to the SOPS binary.
+      - By default uses C(sops).
+    type: path
+    version_added: 1.0.0
+  age_key:
+    description:
+      - One or more age private keys that can be used to decrypt encrypted files.
+      - Will be set as the E(SOPS_AGE_KEY) environment variable when calling SOPS.
+      - Requires SOPS 3.7.1+.
+    type: str
+    version_added: 1.4.0
+  age_keyfile:
+    description:
+      - The file containing the age private keys that SOPS can use to decrypt encrypted files.
+      - Will be set as the E(SOPS_AGE_KEY_FILE) environment variable when calling SOPS.
+      - By default, SOPS looks for C(sops/age/keys.txt) inside your user configuration directory.
+      - Requires SOPS 3.7.0+.
+    type: path
+    version_added: 1.4.0
+  aws_profile:
+    description:
+      - The AWS profile to use for requests to AWS.
+      - This corresponds to the SOPS C(--aws-profile) option.
+    type: str
+    version_added: 1.0.0
+  aws_access_key_id:
+    description:
+      - The AWS access key ID to use for requests to AWS.
+      - Sets the environment variable E(AWS_ACCESS_KEY_ID) for the SOPS call.
+    type: str
+    version_added: 1.0.0
+  aws_secret_access_key:
+    description:
+      - The AWS secret access key to use for requests to AWS.
+      - Sets the environment variable E(AWS_SECRET_ACCESS_KEY) for the SOPS call.
+    type: str
+    version_added: 1.0.0
+  aws_session_token:
+    description:
+      - The AWS session token to use for requests to AWS.
+      - Sets the environment variable E(AWS_SESSION_TOKEN) for the SOPS call.
+    type: str
+    version_added: 1.0.0
+  config_path:
+    description:
+      - Path to the SOPS configuration file.
+      - If not set, SOPS will recursively search for the config file starting at the file that is encrypted or decrypted.
+      - This corresponds to the SOPS C(--config) option.
+    type: path
+    version_added: 1.0.0
+  enable_local_keyservice:
+    description:
+      - Tell SOPS to use local key service.
+      - This corresponds to the SOPS C(--enable-local-keyservice) option.
+    type: bool
+    default: false
+    version_added: 1.0.0
+  keyservice:
+    description:
+      - Specify key services to use next to the local one.
+      - A key service must be specified in the form C(protocol://address), for example C(tcp://myserver.com:5000).
+      - This corresponds to the SOPS C(--keyservice) option.
+    type: list
+    elements: str
+    version_added: 1.0.0
+"""
 
     ANSIBLE_VARIABLES = r'''
 options:

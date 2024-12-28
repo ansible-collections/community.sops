@@ -7,16 +7,15 @@
 from __future__ import absolute_import, division, print_function
 __metaclass__ = type
 
-DOCUMENTATION = '''
+DOCUMENTATION = r"""
 name: _latest_version
 short_description: "[INTERNAL] Get latest version from a list of versions"
 version_added: 1.4.0
 author:
   - Felix Fontein (@felixfontein)
 description:
-  - B(This is an internal tool and must only be used from roles in this collection!)
-    If you use it from outside this collection, be warned that its behavior can change
-    and it can be removed at any time, even in bugfix releases!
+  - B(This is an internal tool and must only be used from roles in this collection!) If you use it from outside this collection,
+    be warned that its behavior can change and it can be removed at any time, even in bugfix releases!
   - Given a list of version numbers, returns the largest of them.
 options:
   _input:
@@ -25,9 +24,9 @@ options:
     type: list
     elements: string
     required: true
-'''
+"""
 
-EXAMPLES = '''
+EXAMPLES = r"""
 - name: Print latest version
   ansible.builtin.debug:
     msg: "{{ versions | community.sops._latest_version }}"
@@ -36,15 +35,15 @@ EXAMPLES = '''
       - 1.0.0
       - 1.0.0rc1
       - 1.1.0
-'''
+"""
 
-RETURN = '''
+RETURN = r"""
 _value:
-    description:
-      - The latest version from the input.
-      - Returns the empty string if the input was empty.
-    type: string
-'''
+  description:
+    - The latest version from the input.
+    - Returns the empty string if the input was empty.
+  type: string
+"""
 
 from ansible.module_utils.compat.version import LooseVersion
 

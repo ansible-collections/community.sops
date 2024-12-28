@@ -7,90 +7,86 @@
 from __future__ import (absolute_import, division, print_function)
 __metaclass__ = type
 
-DOCUMENTATION = """
-    name: sops
-    author: Edoardo Tenani (@endorama) <e.tenani@arduino.cc>
-    short_description: Read SOPS-encrypted file contents
-    version_added: '0.1.0'
+DOCUMENTATION = r"""
+name: sops
+author: Edoardo Tenani (@endorama) <e.tenani@arduino.cc>
+short_description: Read SOPS-encrypted file contents
+version_added: '0.1.0'
+description:
+  - This lookup returns the contents from a file on the Ansible controller's file system.
+  - This lookup requires the C(sops) executable to be available in the controller PATH.
+options:
+  _terms:
+    description: Path(s) of files to read.
+    required: true
+    type: list
+    elements: str
+  rstrip:
+    description: Whether to remove trailing newlines and spaces.
+    type: bool
+    default: true
+  base64:
     description:
-        - This lookup returns the contents from a file on the Ansible controller's file system.
-        - This lookup requires the C(sops) executable to be available in the controller PATH.
-    options:
-        _terms:
-            description: Path(s) of files to read.
-            required: true
-            type: list
-            elements: str
-        rstrip:
-            description: Whether to remove trailing newlines and spaces.
-            type: bool
-            default: true
-        base64:
-            description:
-                - Base64-encodes the parsed result.
-                - Use this if you want to store binary data in Ansible variables.
-            type: bool
-            default: false
-        input_type:
-            description:
-                - Tell SOPS how to interpret the encrypted file.
-                - By default, SOPS will chose the input type from the file extension.
-                  If it detects the wrong type for a file, this could result in decryption
-                  failing.
-                - The value V(ini) is available since community.sops 1.9.0.
-            type: str
-            choices:
-                - binary
-                - json
-                - yaml
-                - dotenv
-                - ini
-        output_type:
-            description:
-                - Tell SOPS how to interpret the decrypted file.
-                - By default, SOPS will chose the output type from the file extension.
-                  If it detects the wrong type for a file, this could result in decryption
-                  failing.
-                - The value V(ini) is available since community.sops 1.9.0.
-            type: str
-            choices:
-                - binary
-                - json
-                - yaml
-                - dotenv
-                - ini
-        empty_on_not_exist:
-            description:
-                - When set to V(true), will not raise an error when a file cannot be found,
-                  but return an empty string instead.
-            type: bool
-            default: false
-        extract:
-            description:
-                - Tell SOPS to extract a specific key from a JSON or YAML file.
-                - Expects a string with the same 'querystring' syntax as SOPS' C(--encrypt)
-                  option, for example V(["somekey"][0]).
-                - B(Note:) Escape quotes appropriately.
-            type: str
-            version_added: 1.9.0
-    extends_documentation_fragment:
-        - community.sops.sops
-        - community.sops.sops.ansible_variables
-        - community.sops.sops.ansible_env
-        - community.sops.sops.ansible_ini
-    notes:
-        - This lookup does not understand 'globbing' - use the P(ansible.builtin.fileglob#lookup) lookup instead.
-    seealso:
-        - plugin: community.sops.decrypt
-          plugin_type: filter
-          description: The decrypt filter can be used to descrypt SOPS-encrypted in-memory data.
-        - plugin: community.sops.sops
-          plugin_type: vars
-          description: The sops vars plugin can be used to load SOPS-encrypted host or group variables.
-        - module: community.sops.load_vars
+      - Base64-encodes the parsed result.
+      - Use this if you want to store binary data in Ansible variables.
+    type: bool
+    default: false
+  input_type:
+    description:
+      - Tell SOPS how to interpret the encrypted file.
+      - By default, SOPS will chose the input type from the file extension. If it detects the wrong type for a file, this
+        could result in decryption failing.
+      - The value V(ini) is available since community.sops 1.9.0.
+    type: str
+    choices:
+      - binary
+      - json
+      - yaml
+      - dotenv
+      - ini
+  output_type:
+    description:
+      - Tell SOPS how to interpret the decrypted file.
+      - By default, SOPS will chose the output type from the file extension. If it detects the wrong type for a file, this
+        could result in decryption failing.
+      - The value V(ini) is available since community.sops 1.9.0.
+    type: str
+    choices:
+      - binary
+      - json
+      - yaml
+      - dotenv
+      - ini
+  empty_on_not_exist:
+    description:
+      - When set to V(true), will not raise an error when a file cannot be found, but return an empty string instead.
+    type: bool
+    default: false
+  extract:
+    description:
+      - Tell SOPS to extract a specific key from a JSON or YAML file.
+      - Expects a string with the same 'querystring' syntax as SOPS' C(--encrypt) option, for example V(["somekey"][0]).
+      - B(Note:) Escape quotes appropriately.
+    type: str
+    version_added: 1.9.0
+extends_documentation_fragment:
+  - community.sops.sops
+  - community.sops.sops.ansible_variables
+  - community.sops.sops.ansible_env
+  - community.sops.sops.ansible_ini
+notes:
+  - This lookup does not understand 'globbing' - use the P(ansible.builtin.fileglob#lookup) lookup instead.
+seealso:
+  - plugin: community.sops.decrypt
+    plugin_type: filter
+    description: The decrypt filter can be used to descrypt SOPS-encrypted in-memory data.
+  - plugin: community.sops.sops
+    plugin_type: vars
+    description: The sops vars plugin can be used to load SOPS-encrypted host or group variables.
+  - module: community.sops.load_vars
 """
 
-EXAMPLES = """
+EXAMPLES = r"""
 - name: Output secrets to screen (BAD IDEA!)
   ansible.builtin.debug:
     msg: "Content: {{ lookup('community.sops.sops', item) }}"
@@ -99,25 +95,24 @@ EXAMPLES = """
 
 - name: Add SSH private key
   ansible.builtin.copy:
-    # Note that rstrip=false is necessary for some SSH versions to be able to use the key
+  # Note that rstrip=false is necessary for some SSH versions to be able to use the key
     content: "{{ lookup('community.sops.sops', user + '-id_rsa', rstrip=false) }}"
     dest: /home/{{ user }}/.ssh/id_rsa
     owner: "{{ user }}"
     group: "{{ user }}"
     mode: 0600
-  no_log: true  # avoid content to be written to log
+  no_log: true # avoid content to be written to log
 
 - name: The file file.json is a YAML file, which contains the encryption of binary data
   ansible.builtin.debug:
     msg: "Content: {{ lookup('community.sops.sops', 'file.json', input_type='yaml', output_type='binary') }}"
-
 """
 
-RETURN = """
-    _raw:
-        description: Decrypted file content.
-        type: list
-        elements: str
+RETURN = r"""
+_raw:
+  description: Decrypted file content.
+  type: list
+  elements: str
 """
 
 import base64
