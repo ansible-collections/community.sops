@@ -404,13 +404,13 @@ see <a class="reference internal" href="#ansible-collections-community-sops-load
 <span class="w">  </span><span class="nt">community.sops.load_vars</span><span class="p">:</span>
 <span class="w">    </span><span class="nt">file</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">stuff.sops.yaml</span>
 <span class="w">    </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">stuff</span>
-<span class="w">    </span><span class="nt">expressions</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">evaluate-on-load</span><span class="w">  </span><span class="c1"># interpret Jinja2 expressions in stuf.sops.yaml on load-time!</span>
+<span class="w">    </span><span class="nt">expressions</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">evaluate-on-load</span><span class="w"> </span><span class="c1"># interpret Jinja2 expressions in stuf.sops.yaml on load-time!</span>
 
 <span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Conditionally decide to load in variables into &#39;plans&#39; when x is 0, otherwise do not</span>
 <span class="w">  </span><span class="nt">community.sops.load_vars</span><span class="p">:</span>
 <span class="w">    </span><span class="nt">file</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">contingency_plan.sops.yaml</span>
 <span class="w">    </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">plans</span>
-<span class="w">    </span><span class="nt">expressions</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">ignore</span><span class="w">  </span><span class="c1"># do not interpret possible Jinja2 expressions</span>
+<span class="w">    </span><span class="nt">expressions</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">ignore</span><span class="w"> </span><span class="c1"># do not interpret possible Jinja2 expressions</span>
 <span class="w">  </span><span class="nt">when</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">x == 0</span>
 
 <span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Load variables into the global namespace</span>
@@ -433,7 +433,7 @@ see <a class="reference internal" href="#ansible-collections-community-sops-load
 <div class="ansibleOptionAnchor" id="return-ansible_included_var_files"></div><p class="ansible-option-title" id="ansible-collections-community-sops-load-vars-module-return-ansible-included-var-files"><strong>ansible_included_var_files</strong></p>
 <a class="ansibleOptionLink" href="#return-ansible_included_var_files" title="Permalink to this return value"></a><p class="ansible-option-type-line"><span class="ansible-option-type">list</span> / <span class="ansible-option-elements">elements=string</span></p>
 </div></td>
-<td><div class="ansible-option-cell"><p>A list of files that were successfully included</p>
+<td><div class="ansible-option-cell"><p>A list of files that were successfully included.</p>
 <p class="ansible-option-line"><strong class="ansible-option-returned-bold">Returned:</strong> success</p>
 <p class="ansible-option-line ansible-option-sample"><strong class="ansible-option-sample-bold">Sample:</strong> <code class="ansible-option-sample docutils literal notranslate"><span class="pre">[&quot;/path/to/file.sops.yaml&quot;]</span></code></p>
 </div></td>

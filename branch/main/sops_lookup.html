@@ -551,13 +551,13 @@ examples: <code class="docutils literal notranslate"><span class="pre">lookup('c
 
 <span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Add SSH private key</span>
 <span class="w">  </span><span class="nt">ansible.builtin.copy</span><span class="p">:</span>
-<span class="w">    </span><span class="c1"># Note that rstrip=false is necessary for some SSH versions to be able to use the key</span>
+<span class="w">  </span><span class="c1"># Note that rstrip=false is necessary for some SSH versions to be able to use the key</span>
 <span class="w">    </span><span class="nt">content</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;</span><span class="cp">{{</span> <span class="nv">lookup</span><span class="o">(</span><span class="s1">&#39;community.sops.sops&#39;</span><span class="o">,</span> <span class="nv">user</span> <span class="o">+</span> <span class="s1">&#39;-id_rsa&#39;</span><span class="o">,</span> <span class="nv">rstrip</span><span class="o">=</span><span class="kp">false</span><span class="o">)</span> <span class="cp">}}</span><span class="s">&quot;</span>
 <span class="w">    </span><span class="nt">dest</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">/home/</span><span class="cp">{{</span> <span class="nv">user</span> <span class="cp">}}</span><span class="l l-Scalar l-Scalar-Plain">/.ssh/id_rsa</span>
 <span class="w">    </span><span class="nt">owner</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;</span><span class="cp">{{</span> <span class="nv">user</span> <span class="cp">}}</span><span class="s">&quot;</span>
 <span class="w">    </span><span class="nt">group</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;</span><span class="cp">{{</span> <span class="nv">user</span> <span class="cp">}}</span><span class="s">&quot;</span>
 <span class="w">    </span><span class="nt">mode</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">0600</span>
-<span class="w">  </span><span class="nt">no_log</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span><span class="w">  </span><span class="c1"># avoid content to be written to log</span>
+<span class="w">  </span><span class="nt">no_log</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span><span class="w"> </span><span class="c1"># avoid content to be written to log</span>
 
 <span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">The file file.json is a YAML file, which contains the encryption of binary data</span>
 <span class="w">  </span><span class="nt">ansible.builtin.debug</span><span class="p">:</span>
