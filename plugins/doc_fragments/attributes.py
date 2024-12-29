@@ -24,14 +24,14 @@ attributes:
     INFO_MODULE = r'''
 options: {}
 attributes:
-    check_mode:
-      support: full
-      details:
-        - This action does not modify state.
-    diff_mode:
-      support: N/A
-      details:
-        - This action does not modify state.
+  check_mode:
+    support: full
+    details:
+      - This action does not modify state.
+  diff_mode:
+    support: N/A
+    details:
+      - This action does not modify state.
 '''
 
     FACTS = r"""
@@ -45,16 +45,16 @@ attributes:
     FACTS_MODULE = r'''
 options: {}
 attributes:
-    check_mode:
-      support: full
-      details:
-        - This action does not modify state.
-    diff_mode:
-      support: N/A
-      details:
-        - This action does not modify state.
-    facts:
-      support: full
+  check_mode:
+    support: full
+    details:
+      - This action does not modify state.
+  diff_mode:
+    support: N/A
+    details:
+      - This action does not modify state.
+  facts:
+    support: full
 '''
 
     FILES = r"""
