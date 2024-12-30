@@ -291,7 +291,7 @@ To check whether it is installed, run <code class="code docutils literal notrans
 <p>The role is idempotent if the <a class="reference external" href="https://docs.ansible.com/ansible/devel/collections/ansible/builtin/package_module.html#ansible-collections-ansible-builtin-package-module" title="(in Ansible vdevel)"><span class="xref std std-ref">ansible.builtin.package</span></a> action for the system is idempotent.</p>
 <p>This is usually the case, but if packages need to be installed from GitHub (that is, through an URL), idempotence might not hold.</p>
 </div></td>
-<td><div class="ansible-option-cell"><p>When run twice in a row with the same arguments, the second invocation indicates no change.</p>
+<td><div class="ansible-option-cell"><p>When run twice in a row outside check mode, with the same arguments, the second invocation indicates no change.</p>
 <p>This assumes that the system controlled/queried by the module has not changed in a relevant way.</p>
 </div></td>
 </tr>
