@@ -62,6 +62,10 @@ attributes:
       - This action does not modify state.
   facts:
     support: full
+  idempotent:
+    support: N/A
+    details:
+      - The action has no C(changed) state.
 seealso:
   - module: ansible.builtin.set_fact
   - module: ansible.builtin.include_vars

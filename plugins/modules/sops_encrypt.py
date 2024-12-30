@@ -63,6 +63,8 @@ attributes:
     support: none
   safe_file_operations:
     support: full
+  idempotent:
+    support: full
 seealso:
   - plugin: community.sops.sops
     plugin_type: lookup
