@@ -442,3 +442,9 @@ releases:
     fragments:
       - 2.0.0.yml
     release_date: '2024-10-20'
+  2.0.1:
+    changes:
+      release_summary: Maintenance release with updated documentation.
+    fragments:
+      - 2.0.1.yml
+    release_date: '2024-12-31'
