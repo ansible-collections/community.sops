@@ -74,7 +74,7 @@ jobs:
         docker_container:
           - ubuntu2204
           - ubuntu2404
-          - fedora40
+          - fedora41
         sops_version:
           - 3.5.0
           - 3.6.1
@@ -128,7 +128,7 @@ jobs:
             sops_version: 3.9.0
           # 2.18
           - ansible: stable-2.18
-            docker_container: ubuntu2404
+            docker_container: fedora40
             sops_version: 3.9.0
           # devel
           - ansible: devel
@@ -140,9 +140,6 @@ jobs:
           - ansible: devel
             docker_container: ubuntu2404
             sops_version: 3.8.0
-          - ansible: devel
-            docker_container: fedora40
-            sops_version: 3.9.0
           - ansible: devel
             docker_container: quay.io/ansible-community/test-image:archlinux
             python_version: '3.13'
@@ -250,7 +247,7 @@ jobs:
             target: gha/install/3/
             github_latest_detection: auto
           - ansible: devel
-            docker_container: fedora40
+            docker_container: fedora41
             python_version: ''
             target: gha/install/3/
             github_latest_detection: auto
@@ -264,14 +261,12 @@ jobs:
             python_version: ''
             target: gha/install/3/
             github_latest_detection: latest-release
-          # - ansible: devel
-          #   docker_container: alpine3.19  -- so far only alpine3 edge supports sops
-          #   python_version: ''
-          #   target: gha/install/3/
-          #   github_latest_detection: auto
-          #   # NOTE: we're installing with git to work around Galaxy being a huge PITA (https://github.com/ansible/galaxy/issues/2429)
-          #   pre-test-cmd: |-
-          #     git clone --depth=1 --single-branch https://github.com/ansible-collections/community.general.git ../../community/general
+          - ansible: devel
+            docker_container: alpine321
+            python_version: ''
+            target: gha/install/3/
+            github_latest_detection: auto
+            test-deps: git+https://github.com/ansible-collections/community.general.git,main
     steps:
       - name: >-
           Perform sops installation integration testing against
