@@ -198,6 +198,8 @@ jobs:
           - ''
         target:
           - gha/install/
+        test-deps:
+          - ''
         pre-test-cmd:
           - ''
         github_latest_detection:
@@ -286,5 +288,6 @@ jobs:
             echo 'github_latest_detection: ${{ matrix.github_latest_detection || 'auto' }}' >> tests/integration/integration_config.yml
             ${{ matrix.pre-test-cmd || 'echo' }}
           testing-type: integration
+          test-deps: ${{ matrix.test-deps }}
           target-python-version: ${{ matrix.python_version }}
           target: ${{ matrix.target }}
