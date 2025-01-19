@@ -70,6 +70,7 @@ If you use the Ansible package and do not update collections independently, use 
 This collection provides:
 
 - a [lookup plugin](https://docs.ansible.com/ansible/latest/user_guide/playbooks_lookups.html#playbooks-lookups) `community.sops.sops` that allows looking up a SOPS-encrypted file content;
+- a [filter plugin](https://docs.ansible.com/ansible/latest/playbook_guide/playbooks_filters.html) `community.sops.decrypt` that allows decrypting SOPS-encrypted data;
 - a [vars plugin](https://docs.ansible.com/ansible/latest/plugins/vars.html) `community.sops.sops` that allows loading Ansible vars from SOPS-encrypted files for hosts and groups;
 - an [action plugin](https://docs.ansible.com/ansible/latest/plugins/action.html) `community.sops.load_vars` that allows loading Ansible vars from a SOPS-encrypted file dynamically during a playbook or role;
 - a [module](https://docs.ansible.com/ansible/latest/user_guide/basic_concepts.html#modules) `community.sops.sops_encrypt` which allows to encrypt data with SOPS.
