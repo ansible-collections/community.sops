@@ -3,56 +3,69 @@
 # GNU General Public License v3.0+ (see LICENSES/GPL-3.0-or-later.txt or https://www.gnu.org/licenses/gpl-3.0.txt)
 # SPDX-License-Identifier: GPL-3.0-or-later
 
-- name: Install sops 3.7.3
-  include_role:
-    name: community.sops.install
-  vars:
-    sops_version: 3.7.3
-    sops_github_token: "{{ github_token | default('') | string }}"
+- name: Show some basic system info
+  debug:
+    msg: |
+      Architecture: {{ ansible_architecture }}
+      OS family: {{ ansible_os_family }}
+      Distribution: {{ ansible_distribution }}
+      Distribution version: {{ ansible_distribution_version }}
 
-- name: Figure out sops version
-  command:
-    cmd: sops --version
-  register: output
+- vars:
+    sops_version_1: "{{ '3.7.3' if ansible_architecture == 'x86_64' else '3.9.2' }}"
+    sops_version_2: "{{ '3.7.0' if ansible_architecture == 'x86_64' else '3.8.1' }}"
+    sops_version_3: 3.8.0-rc.1
+  block:
+    - name: Install sops {{ sops_version_1 }}
+      include_role:
+        name: community.sops.install
+      vars:
+        sops_version: "{{ sops_version_1 }}"
+        sops_github_token: "{{ github_token | default('') | string }}"
 
-- name: Check sops version
-  assert:
-    that:
-      - >-
-        'sops 3.7.3' in output.stdout
+    - name: Figure out sops version
+      command:
+        cmd: sops --version
+      register: output
 
-- name: Install sops 3.7.0
-  include_role:
-    name: community.sops.install
-  vars:
-    sops_version: 3.7.0
-    sops_github_token: "{{ github_token | default('') | string }}"
+    - name: Check sops version
+      assert:
+        that:
+          - >-
+            ('sops ' ~ sops_version_1) in output.stdout
 
-- name: Figure out sops version
-  command:
-    cmd: sops --version
-  register: output
+    - name: Install sops {{ sops_version_2 }}
+      include_role:
+        name: community.sops.install
+      vars:
+        sops_version: "{{ sops_version_2 }}"
+        sops_github_token: "{{ github_token | default('') | string }}"
 
-- name: Check sops version
-  assert:
-    that:
-      - >-
-        'sops 3.7.0' in output.stdout
+    - name: Figure out sops version
+      command:
+        cmd: sops --version
+      register: output
 
-- name: Install sops 3.8.0-rc.1
-  include_role:
-    name: community.sops.install
-  vars:
-    sops_version: 3.8.0-rc.1
-    sops_github_token: "{{ github_token | default('') | string }}"
+    - name: Check sops version
+      assert:
+        that:
+          - >-
+            ('sops ' ~ sops_version_2) in output.stdout
 
-- name: Figure out sops version
-  command:
-    cmd: sops --version --disable-version-check
-  register: output
+    - name: Install sops {{ sops_version_3 }}
+      include_role:
+        name: community.sops.install
+      vars:
+        sops_version: "{{ sops_version_3 }}"
+        sops_github_token: "{{ github_token | default('') | string }}"
 
-- name: Check sops version
-  assert:
-    that:
-      - >-
-        'sops 3.8.0-rc.1' == output.stdout
+    - name: Figure out sops version
+      command:
+        cmd: sops --version --disable-version-check
+      register: output
+
+    - name: Check sops version
+      assert:
+        that:
+          - >-
+            ('sops ' ~ sops_version_3) == output.stdout
