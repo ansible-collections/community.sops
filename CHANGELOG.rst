@@ -4,6 +4,19 @@ Community SOPS Release Notes
 
 .. contents:: Topics
 
+v2.0.2
+======
+
+Release Summary
+---------------
+
+Bugfix release.
+
+Bugfixes
+--------
+
+- install role - when used with Debian on ARM architecture, the architecture name is now correctly translated from ``aarch64`` to ``arm64`` (https://github.com/ansible-collections/community.sops/issues/220, https://github.com/ansible-collections/community.sops/pull/221).
+
 v2.0.1
 ======
 
