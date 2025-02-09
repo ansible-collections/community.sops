@@ -11,37 +11,41 @@
       Distribution: {{ ansible_distribution }}
       Distribution version: {{ ansible_distribution_version }}
 
-- name: Install sops 3.7.3 on localhost
-  include_role:
-    name: community.sops.install
-  vars:
-    sops_version: 3.7.3
-    sops_install_on_localhost: true
-    sops_github_token: "{{ github_token | default('') | string }}"
+- vars:
+    sops_version_1: "{{ '3.7.3' if ansible_architecture == 'x86_64' else '3.9.2' }}"
+    sops_version_2: "{{ '3.7.0' if ansible_architecture == 'x86_64' else '3.8.1' }}"
+  block:
+    - name: Install sops {{ sops_version_1 }} on localhost
+      include_role:
+        name: community.sops.install
+      vars:
+        sops_version: "{{ sops_version_1 }}"
+        sops_install_on_localhost: true
+        sops_github_token: "{{ github_token | default('') | string }}"
 
-- name: Install sops 3.7.0 on remote
-  include_role:
-    name: community.sops.install
-  vars:
-    sops_version: 3.7.0
-    sops_install_on_localhost: false
-    sops_github_token: "{{ github_token | default('') | string }}"
+    - name: Install sops {{ sops_version_2 }} on remote
+      include_role:
+        name: community.sops.install
+      vars:
+        sops_version: "{{ sops_version_2 }}"
+        sops_install_on_localhost: false
+        sops_github_token: "{{ github_token | default('') | string }}"
 
-- name: Figure out sops version on localhost
-  command:
-    cmd: sops --version
-  delegate_to: localhost
-  register: output_localhost
+    - name: Figure out sops version on localhost
+      command:
+        cmd: sops --version
+      delegate_to: localhost
+      register: output_localhost
 
-- name: Figure out sops version on remote host
-  command:
-    cmd: sops --version
-  register: output_remote
+    - name: Figure out sops version on remote host
+      command:
+        cmd: sops --version
+      register: output_remote
 
-- name: Check sops version
-  assert:
-    that:
-      - >-
-        'sops 3.7.3' in output_localhost.stdout
-      - >-
-        'sops 3.7.0' in output_remote.stdout
+    - name: Check sops version
+      assert:
+        that:
+          - >-
+            ('sops ' ~ sops_version_1) in output_localhost.stdout
+          - >-
+            ('sops ' ~ sops_version_2) in output_remote.stdout
