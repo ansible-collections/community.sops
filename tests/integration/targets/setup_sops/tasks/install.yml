@@ -21,7 +21,7 @@
 
 - name: Install age on localhost
   include_role:
-    name: community.sops._install_age
+    name: community.sops.internal.install_age
   vars:
     sops_install_on_localhost: true
 
@@ -47,7 +47,7 @@
 
 - name: Install age on remote
   include_role:
-    name: community.sops._install_age
+    name: community.sops.internal.install_age
 
 - name: Download sops test GPG key on remote
   get_url:
