@@ -459,3 +459,14 @@ releases:
       - 2.0.2.yml
       - 221-install-architecture.yml
     release_date: '2025-02-09'
+  2.0.3:
+    changes:
+      bugfixes:
+        - install role - ``sops_install_on_localhost=false`` was not working properly
+          if the role was running on more than one host due to a bug in ansible-core
+          (https://github.com/ansible-collections/community.sops/issues/223, https://github.com/ansible-collections/community.sops/pull/224).
+      release_summary: Bugfix release.
+    fragments:
+      - 2.0.3.yml
+      - 224-install.yml
+    release_date: '2025-03-03'
