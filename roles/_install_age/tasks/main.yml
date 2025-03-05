@@ -54,7 +54,7 @@
         name: '{{ _community_sops_install_age_system_packages }}'
       become: '{{ sops_become_on_install }}'
       delegate_to: '{{ "localhost" if sops_install_on_localhost else omit }}'
-      run_once: '{{ sops_install_on_localhost or omit }}'
+      run_once: '{{ sops_install_on_localhost }}'
       when: _community_sops_install_age_system_packages | length > 0
 
     - name: Set results
