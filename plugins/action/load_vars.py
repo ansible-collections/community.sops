@@ -55,19 +55,33 @@ class ActionModule(ActionModuleBase):
             return dict((k, self._evaluate(v)) for k, v in iteritems(value))
         return value
 
+    def _make_safe(self, value):
+        if isinstance(value, string_types):
+            # must come *before* Sequence, as strings are also instances of Sequence
+            return _make_safe(value)
+        if isinstance(value, Sequence):
+            return [self._make_safe(v) for v in value]
+        if isinstance(value, Mapping):
+            return dict((k, self._make_safe(v)) for k, v in iteritems(value))
+        return value
+
     @staticmethod
     def setup_module():
         argument_spec = ArgumentSpec(
             argument_spec=dict(
                 file=dict(type='path', required=True),
                 name=dict(type='str'),
-                expressions=dict(type='str', default='ignore', choices=['ignore', 'evaluate-on-load']),
+                expressions=dict(type='str', default='ignore', choices=['ignore', 'evaluate-on-load', 'lazy-evaluation']),
             ),
         )
         argument_spec.argument_spec.update(get_sops_argument_spec())
         return argument_spec, {}
 
     def run_module(self, module):
+        expressions = module.params['expressions']
+        if expressions == 'lazy-evaluation' and not HAS_DATATAGGING:
+            module.fail_json(msg='expressions=lazy-evaluation requires ansible-core 2.19+ with Data Tagging support.')
+
         data = dict()
         files = []
         try:
@@ -84,9 +98,11 @@ class ActionModule(ActionModuleBase):
             value = dict()
             value[name] = data
 
-        expressions = module.params['expressions']
         if expressions == 'evaluate-on-load':
             value = self._evaluate(value)
+
+        if expressions == 'lazy-evaluation':
+            value = self._make_safe(value)
 
         module.exit_json(
             ansible_included_var_files=files,
