@@ -409,7 +409,7 @@
       register: slurp
     - set_fact:
         value_1: "{{ slurp.content | b64decode | community.sops.decrypt(rstrip=False, output_type='json') | from_json }}"
-        value_2: "{{ slurp.content | b64decode }}"
+        value_2: "{{ slurp.content | b64decode | from_json }}"
 
     - name: Create text file with output type JSON (idempotency)
       community.sops.sops_encrypt:
