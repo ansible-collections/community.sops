@@ -30,7 +30,8 @@ jobs:
           - stable-2.16
           - stable-2.17
           - stable-2.18
-          - devel
+          # - devel
+          - refs/pull/84621/head
     runs-on: ubuntu-latest
     steps:
       - name: Perform sanity testing
@@ -48,7 +49,8 @@ jobs:
     strategy:
       matrix:
         ansible:
-          - devel
+          # - devel
+          - refs/pull/84621/head
         docker_container:
           - ubuntu2204
           - ubuntu2404
@@ -94,20 +96,20 @@ jobs:
             docker_container: fedora40
             sops_version: 3.9.2
           # devel
-          - ansible: devel
+          - ansible: refs/pull/84621/head
             docker_container: ubuntu2204
             sops_version: 3.6.0
-          - ansible: devel
+          - ansible: refs/pull/84621/head
             docker_container: ubuntu2204
             sops_version: 3.7.0
-          - ansible: devel
+          - ansible: refs/pull/84621/head
             docker_container: ubuntu2404
             sops_version: 3.9.1
-          - ansible: devel
+          - ansible: refs/pull/84621/head
             docker_container: quay.io/ansible-community/test-image:archlinux
             python_version: '3.13'
             sops_version: latest
-          - ansible: devel
+          - ansible: refs/pull/84621/head
             docker_container: quay.io/ansible-community/test-image:debian-bookworm
             python_version: '3.11'
             sops_version: latest
@@ -116,7 +118,7 @@ jobs:
             python_version: '3.9'
             sops_version: latest
           # ARM 64
-          - ansible: devel
+          - ansible: refs/pull/84621/head
             docker_container: ubuntu2404
             sops_version: latest
             gha_container: ubuntu-24.04-arm
@@ -152,7 +154,8 @@ jobs:
     strategy:
       matrix:
         ansible:
-          - devel
+          # - devel
+          - refs/pull/84621/head
         docker_container:
           - ''
         python_version:
@@ -186,18 +189,18 @@ jobs:
             python_version: ''
             target: gha/install/1/
           # Install on localhost vs. remote host
-          - ansible: devel
+          - ansible: refs/pull/84621/head
             docker_container: ubuntu2204
             python_version: ''
             target: gha/install/2/
           # Install latest sops
-          - ansible: devel
+          - ansible: refs/pull/84621/head
             docker_container: quay.io/ansible-community/test-image:archlinux
             python_version: '3.13'
             target: gha/install/3/
             github_latest_detection: auto
             test-deps: git+https://github.com/ansible-collections/community.general.git,main
-          - ansible: devel
+          - ansible: refs/pull/84621/head
             docker_container: quay.io/ansible-community/test-image:debian-bookworm
             python_version: '3.11'
             target: gha/install/3/
@@ -207,39 +210,39 @@ jobs:
             python_version: '3.9'
             target: gha/install/3/
             github_latest_detection: auto
-          - ansible: devel
+          - ansible: refs/pull/84621/head
             docker_container: fedora41
             python_version: ''
             target: gha/install/3/
             github_latest_detection: auto
-          - ansible: devel
+          - ansible: refs/pull/84621/head
             docker_container: ubuntu2204
             python_version: ''
             target: gha/install/3/
             github_latest_detection: api
-          - ansible: devel
+          - ansible: refs/pull/84621/head
             docker_container: ubuntu2404
             python_version: ''
             target: gha/install/3/
             github_latest_detection: latest-release
-          - ansible: devel
+          - ansible: refs/pull/84621/head
             docker_container: alpine321
             python_version: ''
             target: gha/install/3/
             github_latest_detection: auto
             test-deps: git+https://github.com/ansible-collections/community.general.git,main
           # ARM 64
-          - ansible: devel
+          - ansible: refs/pull/84621/head
             docker_container: fedora41
             python_version: ''
             target: gha/install/1/
             gha_container: ubuntu-24.04-arm
-          - ansible: devel
+          - ansible: refs/pull/84621/head
             docker_container: ubuntu2204
             python_version: ''
             target: gha/install/2/
             gha_container: ubuntu-24.04-arm
-          - ansible: devel
+          - ansible: refs/pull/84621/head
             docker_container: alpine321
             python_version: ''
             target: gha/install/3/

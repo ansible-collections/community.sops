@@ -14,7 +14,19 @@ from ansible_collections.community.sops.plugins.module_utils.sops import Sops, g
 
 from ansible_collections.community.sops.plugins.plugin_utils.action_module import ActionModuleBase, ArgumentSpec
 
+try:
+    from ansible.template import trust_as_template as _trust_as_template
+    HAS_DATATAGGING = True
+except ImportError:
+    HAS_DATATAGGING = False
+
 display = Display()
+
+
+def _make_safe(value):
+    if HAS_DATATAGGING and isinstance(value, str):
+        return _trust_as_template(value)
+    return value
 
 
 class ActionModule(ActionModuleBase):
@@ -36,11 +48,21 @@ class ActionModule(ActionModuleBase):
     def _evaluate(self, value):
         if isinstance(value, string_types):
             # must come *before* Sequence, as strings are also instances of Sequence
-            return self._templar.template(value)
+            return self._templar.template(_make_safe(value))
         if isinstance(value, Sequence):
             return [self._evaluate(v) for v in value]
         if isinstance(value, Mapping):
             return dict((k, self._evaluate(v)) for k, v in iteritems(value))
+        return value
+
+    def _make_safe(self, value):
+        if isinstance(value, string_types):
+            # must come *before* Sequence, as strings are also instances of Sequence
+            return _make_safe(value)
+        if isinstance(value, Sequence):
+            return [self._make_safe(v) for v in value]
+        if isinstance(value, Mapping):
+            return dict((k, self._make_safe(v)) for k, v in iteritems(value))
         return value
 
     @staticmethod
@@ -49,13 +71,17 @@ class ActionModule(ActionModuleBase):
             argument_spec=dict(
                 file=dict(type='path', required=True),
                 name=dict(type='str'),
-                expressions=dict(type='str', default='ignore', choices=['ignore', 'evaluate-on-load']),
+                expressions=dict(type='str', default='ignore', choices=['ignore', 'evaluate-on-load', 'lazy-evaluation']),
             ),
         )
         argument_spec.argument_spec.update(get_sops_argument_spec())
         return argument_spec, {}
 
     def run_module(self, module):
+        expressions = module.params['expressions']
+        if expressions == 'lazy-evaluation' and not HAS_DATATAGGING:
+            module.fail_json(msg='expressions=lazy-evaluation requires ansible-core 2.19+ with Data Tagging support.')
+
         data = dict()
         files = []
         try:
@@ -72,9 +98,11 @@ class ActionModule(ActionModuleBase):
             value = dict()
             value[name] = data
 
-        expressions = module.params['expressions']
         if expressions == 'evaluate-on-load':
             value = self._evaluate(value)
+
+        if expressions == 'lazy-evaluation':
+            value = self._make_safe(value)
 
         module.exit_json(
             ansible_included_var_files=files,
