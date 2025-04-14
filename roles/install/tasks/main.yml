@@ -73,7 +73,7 @@
         allow_downgrade: '{{ true if _community_sops_install_allow_downgrade and sops_version != "latest" else omit }}'
       become: '{{ sops_become_on_install }}'
       delegate_to: '{{ "localhost" if sops_install_on_localhost else omit }}'
-      run_once: '{{ sops_install_on_localhost or omit }}'
+      run_once: '{{ sops_install_on_localhost }}'
       when: _community_sops_install_system_packages_actual | length > 0
 
     - name: Install unsigned system packages
@@ -83,7 +83,7 @@
         disable_gpg_check: true
       become: '{{ sops_become_on_install }}'
       delegate_to: '{{ "localhost" if sops_install_on_localhost else omit }}'
-      run_once: '{{ sops_install_on_localhost or omit }}'
+      run_once: '{{ sops_install_on_localhost }}'
       when: _community_sops_install_system_packages_unsigned_actual | length > 0
 
     - name: Install packages from URL/path (Debian)
@@ -92,7 +92,7 @@
         allow_downgrade: '{{ true if _community_sops_install_allow_downgrade and sops_version != "latest" else omit }}'
       become: '{{ sops_become_on_install }}'
       delegate_to: '{{ "localhost" if sops_install_on_localhost else omit }}'
-      run_once: '{{ sops_install_on_localhost or omit }}'
+      run_once: '{{ sops_install_on_localhost }}'
       when: _community_sops_install_system_package_deb_actual is string
 
     - name: Set results

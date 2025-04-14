@@ -14,7 +14,19 @@ from ansible_collections.community.sops.plugins.module_utils.sops import Sops, g
 
 from ansible_collections.community.sops.plugins.plugin_utils.action_module import ActionModuleBase, ArgumentSpec
 
+try:
+    from ansible.template import trust_as_template as _trust_as_template
+    HAS_DATATAGGING = True
+except ImportError:
+    HAS_DATATAGGING = False
+
 display = Display()
+
+
+def _make_safe(value):
+    if HAS_DATATAGGING and isinstance(value, str):
+        return _trust_as_template(value)
+    return value
 
 
 class ActionModule(ActionModuleBase):
@@ -36,7 +48,7 @@ class ActionModule(ActionModuleBase):
     def _evaluate(self, value):
         if isinstance(value, string_types):
             # must come *before* Sequence, as strings are also instances of Sequence
-            return self._templar.template(value)
+            return self._templar.template(_make_safe(value))
         if isinstance(value, Sequence):
             return [self._evaluate(v) for v in value]
         if isinstance(value, Mapping):

@@ -15,6 +15,7 @@ _community_sops_install_system_packages_unsigned: []
 
 _community_sops_install_arch_transform:
   x86_64: amd64
+  aarch64: arm64
 _community_sops_install_system_package_deb_github: >-
   https://github.com/getsops/sops/releases/download/v{{
     _community_sops_install_effective_sops_version
