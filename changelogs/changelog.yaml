@@ -430,3 +430,21 @@ releases:
       - 1.9.1.yml
       - 208-atomic.yml
     release_date: '2024-10-04'
+  1.9.2:
+    changes:
+      bugfixes:
+        - install role - ``sops_install_on_localhost=false`` was not working properly
+          if the role was running on more than one host due to a bug in ansible-core
+          (https://github.com/ansible-collections/community.sops/issues/223, https://github.com/ansible-collections/community.sops/pull/224).
+        - install role - when used with Debian on ARM architecture, the architecture
+          name is now correctly translated from ``aarch64`` to ``arm64`` (https://github.com/ansible-collections/community.sops/issues/220,
+          https://github.com/ansible-collections/community.sops/pull/221).
+        - load_vars - make evaluation compatible with Data Tagging in upcoming ansible-core
+          release (https://github.com/ansible-collections/community.sops/pull/225).
+      release_summary: Maintenance release with Data Tagging support.
+    fragments:
+      - 1.9.2.yml
+      - 221-install-architecture.yml
+      - 224-install.yml
+      - 225-data-tagging.yml
+    release_date: '2025-04-14'

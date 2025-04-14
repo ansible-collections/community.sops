@@ -1,2 +1,0 @@
-bugfixes:
-  - "load_vars - make evaluation compatible with Data Tagging in upcoming ansible-core release (https://github.com/ansible-collections/community.sops/pull/225)."
