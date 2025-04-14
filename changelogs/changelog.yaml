@@ -470,3 +470,13 @@ releases:
       - 2.0.3.yml
       - 224-install.yml
     release_date: '2025-03-03'
+  2.0.4:
+    changes:
+      bugfixes:
+        - load_vars - make evaluation compatible with Data Tagging in upcoming ansible-core
+          release (https://github.com/ansible-collections/community.sops/pull/225).
+      release_summary: Maintenance release with Data Tagging support.
+    fragments:
+      - 2.0.4.yml
+      - 225-data-tagging.yml
+    release_date: '2025-04-14'

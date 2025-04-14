@@ -4,6 +4,19 @@ Community SOPS Release Notes
 
 .. contents:: Topics
 
+v2.0.4
+======
+
+Release Summary
+---------------
+
+Maintenance release with Data Tagging support.
+
+Bugfixes
+--------
+
+- load_vars - make evaluation compatible with Data Tagging in upcoming ansible-core release (https://github.com/ansible-collections/community.sops/pull/225).
+
 v2.0.3
 ======
 
