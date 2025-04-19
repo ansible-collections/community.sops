@@ -1,3 +1,4 @@
+noxfile.py pylint:unsupported-binary-operation
 plugins/modules/load_vars.py validate-modules:invalid-documentation
 plugins/modules/sops_encrypt.py validate-modules:invalid-documentation
 tests/integration/targets/filter_decrypt/files/hidden-binary.yaml yamllint:error

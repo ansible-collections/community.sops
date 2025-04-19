@@ -1,4 +1,10 @@
 docs/docsite/rst/guide.rst rstcheck
+noxfile.py compile-2.6!skip # Uses Python 3.6+ syntax
+noxfile.py compile-2.7!skip # Uses Python 3.6+ syntax
+noxfile.py compile-3.5!skip # Uses Python 3.6+ syntax
+noxfile.py future-import-boilerplate
+noxfile.py metaclass-boilerplate
+noxfile.py pylint:bad-whitespace
 plugins/modules/load_vars.py validate-modules:invalid-documentation
 plugins/modules/sops_encrypt.py validate-modules:invalid-documentation
 tests/integration/targets/filter_decrypt/files/hidden-binary.yaml yamllint:error
