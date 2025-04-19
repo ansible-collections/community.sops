@@ -93,6 +93,12 @@ def add_target(
     if sops_version:
         descr.append(f"SOPS {sops_version}")
     # Add task
+    extra_data = {
+        "display-name": "+".join(display_name),
+        "gha-container": gha_container,
+    }
+    if target.startswith("gha/install/"):
+        extra_data["has-coverage"] = "false"
     antsibull_nox.add_ansible_test_session(
         name=name,
         description=f"Run integration tests with {', '.join(descr)}",
@@ -101,10 +107,7 @@ def add_target(
         default=False,
         ansible_core_version=core_version,
         register_name="integration",
-        register_extra_data={
-            "display-name": "+".join(display_name),
-            "gha-container": gha_container,
-        },
+        register_extra_data=extra_data,
         callback_before=create_setup_callback(
             sops_version=sops_version,
             github_latest_detection=github_latest_detection,
