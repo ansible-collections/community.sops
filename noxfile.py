@@ -82,6 +82,8 @@ def add_target(
     display_name.append(docker_container_short)
     if python_version:
         display_name.append(f"py{python_version}")
+    if 'arm' in gha_container:
+        display_name.append('ARM')
     # Compose description
     descr = [
         f"ansible-core {core_version}",
