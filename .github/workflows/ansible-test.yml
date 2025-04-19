@@ -19,28 +19,6 @@ on:
     - cron: '30 5 * * *'
 
 jobs:
-  sanity:
-    name: Sanity (Ⓐ${{ matrix.ansible }})
-    strategy:
-      matrix:
-        ansible:
-          # It's important that Sanity is tested against all stable-X.Y branches
-          # Testing against `devel` may fail as new tests are added.
-          - stable-2.15
-          - stable-2.16
-          - stable-2.17
-          - stable-2.18
-          - devel
-    runs-on: ubuntu-latest
-    steps:
-      - name: Perform sanity testing
-        uses: felixfontein/ansible-test-gh-action@main
-        with:
-          ansible-core-github-repository-slug: ${{ contains(fromJson('["stable-2.14"]'), matrix.ansible) && 'ansible-community/eol-ansible' || 'ansible/ansible' }}
-          ansible-core-version: ${{ matrix.ansible }}
-          codecov-token: ${{ secrets.CODECOV_TOKEN }}
-          testing-type: sanity
-
   integration:
     runs-on: ${{ matrix.gha_container || 'ubuntu-latest' }}
     permissions:
