@@ -480,3 +480,9 @@ releases:
       - 2.0.4.yml
       - 225-data-tagging.yml
     release_date: '2025-04-14'
+  2.0.5:
+    changes:
+      release_summary: Maintenance release with updated SOPS version test coverage.
+    fragments:
+      - 2.0.5.yml
+    release_date: '2025-04-21'

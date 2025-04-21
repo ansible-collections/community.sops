@@ -4,6 +4,14 @@ Community SOPS Release Notes
 
 .. contents:: Topics
 
+v2.0.5
+======
+
+Release Summary
+---------------
+
+Maintenance release with updated SOPS version test coverage.
+
 v2.0.4
 ======
 
