@@ -83,6 +83,7 @@ seealso:
 """
 
 EXAMPLES = r"""
+---
 - name: Include variables of stuff.sops.yaml into the 'stuff' variable
   community.sops.load_vars:
     file: stuff.sops.yaml

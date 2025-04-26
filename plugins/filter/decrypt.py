@@ -75,6 +75,7 @@ seealso:
 """
 
 EXAMPLES = r"""
+---
 - name: Decrypt file fetched from URL
   hosts: localhost
   gather_facts: false

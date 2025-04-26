@@ -67,7 +67,7 @@
           - "simple_json_with_extract == 'baz'"
           - "nested_yaml_with_extract == 'zab'"
           - "nested_json_with_extract == 'oof'"
-          
+
     - name: Test rstrip
       set_fact:
         with_rstrip: "{{ lookup('community.sops.sops', 'rstrip.sops', rstrip=true) }}"
