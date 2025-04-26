@@ -543,7 +543,8 @@ examples: <code class="docutils literal notranslate"><span class="pre">lookup('c
 </section>
 <section id="examples">
 <h2><a class="toc-backref" href="#id7" role="doc-backlink">Examples</a><a class="headerlink" href="#examples" title="Link to this heading"></a></h2>
-<div class="highlight-yaml+jinja notranslate"><div class="highlight"><pre><span></span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Output secrets to screen (BAD IDEA!)</span>
+<div class="highlight-yaml+jinja notranslate"><div class="highlight"><pre><span></span><span class="nn">---</span>
+<span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Output secrets to screen (BAD IDEA!)</span>
 <span class="w">  </span><span class="nt">ansible.builtin.debug</span><span class="p">:</span>
 <span class="w">    </span><span class="nt">msg</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;Content:</span><span class="nv"> </span><span class="cp">{{</span> <span class="nv">lookup</span><span class="o">(</span><span class="s1">&#39;community.sops.sops&#39;</span><span class="o">,</span> <span class="nv">item</span><span class="o">)</span> <span class="cp">}}</span><span class="s">&quot;</span>
 <span class="w">  </span><span class="nt">loop</span><span class="p">:</span>
@@ -556,7 +557,7 @@ examples: <code class="docutils literal notranslate"><span class="pre">lookup('c
 <span class="w">    </span><span class="nt">dest</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">/home/</span><span class="cp">{{</span> <span class="nv">user</span> <span class="cp">}}</span><span class="l l-Scalar l-Scalar-Plain">/.ssh/id_rsa</span>
 <span class="w">    </span><span class="nt">owner</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;</span><span class="cp">{{</span> <span class="nv">user</span> <span class="cp">}}</span><span class="s">&quot;</span>
 <span class="w">    </span><span class="nt">group</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;</span><span class="cp">{{</span> <span class="nv">user</span> <span class="cp">}}</span><span class="s">&quot;</span>
-<span class="w">    </span><span class="nt">mode</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">0600</span>
+<span class="w">    </span><span class="nt">mode</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;0600&quot;</span>
 <span class="w">  </span><span class="nt">no_log</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span><span class="w"> </span><span class="c1"># avoid content to be written to log</span>
 
 <span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">The file file.json is a YAML file, which contains the encryption of binary data</span>
