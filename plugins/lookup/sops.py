@@ -87,6 +87,7 @@ seealso:
 """
 
 EXAMPLES = r"""
+---
 - name: Output secrets to screen (BAD IDEA!)
   ansible.builtin.debug:
     msg: "Content: {{ lookup('community.sops.sops', item) }}"
@@ -100,7 +101,7 @@ EXAMPLES = r"""
     dest: /home/{{ user }}/.ssh/id_rsa
     owner: "{{ user }}"
     group: "{{ user }}"
-    mode: 0600
+    mode: "0600"
   no_log: true # avoid content to be written to log
 
 - name: The file file.json is a YAML file, which contains the encryption of binary data

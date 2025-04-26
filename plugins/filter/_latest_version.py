@@ -27,6 +27,7 @@ options:
 """
 
 EXAMPLES = r"""
+---
 - name: Print latest version
   ansible.builtin.debug:
     msg: "{{ versions | community.sops._latest_version }}"

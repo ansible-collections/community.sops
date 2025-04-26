@@ -72,6 +72,7 @@ seealso:
 """
 
 EXAMPLES = r"""
+---
 - name: Encrypt a secret text
   community.sops.sops_encrypt:
     path: text-data.sops
@@ -88,7 +89,7 @@ EXAMPLES = r"""
     content_yaml: "{{ result }}"
 """
 
-RETURN = r""" # """
+RETURN = r"""#"""
 
 
 import base64
