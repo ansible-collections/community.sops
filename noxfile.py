@@ -71,7 +71,7 @@ def add_target(
     if sops_version:
         name = f"{name}-{sops_version}"
     # Compose command
-    command = ["integration", "-v", "--docker", docker_container]
+    command = ["integration", "-v", "--color", "--docker", docker_container]
     if python_version:
         command.extend(["--python", python_version])
     command.append(target)
