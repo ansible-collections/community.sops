@@ -1,0 +1,264 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="./">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+<meta content="2.17.0" name="antsibull-docs" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Community.Sops &mdash; Community.Sops Collection  documentation</title>
+      <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=41de9001" />
+      <link rel="stylesheet" type="text/css" href="_static/css/ansible.css?v=c5b67dd2" />
+      <link rel="stylesheet" type="text/css" href="_static/antsibull-minimal.css" />
+      <link rel="stylesheet" type="text/css" href="_static/css/rtd-ethical-ads.css?v=289b023e" />
+
+  
+    <link rel="shortcut icon" href="_static/images/Ansible-Mark-RGB_Black.png"/>
+      <script src="_static/jquery.js?v=5d32c60e"></script>
+      <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="_static/documentation_options.js?v=7f41d439"></script>
+      <script src="_static/doctools.js?v=9bcbadda"></script>
+      <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Community.Sops Release Notes" href="changelog.html" /><!-- extra head elements for Ansible beyond RTD Sphinx Theme -->
+
+
+
+
+</head>
+
+<body class="wy-body-for-nav"><!-- extra body elements for Ansible beyond RTD Sphinx Theme -->
+
+<div class="DocSite-globalNav ansibleNav">
+  <ul>
+    <li><a href="https://www.ansible.com/blog" target="_blank">Blog</a></li>
+    <li><a href="https://forum.ansible.com/" target="_blank">Ansible community forum</a></li>
+    <li><a href="https://docs.ansible.com/" target="_blank">Documentation</a></li>
+  </ul>
+</div>
+
+<a class="DocSite-nav" href="https://ansible-collections.github.io/community.sops/branch/main/" style="padding-bottom: 30px;">
+
+  <img class="DocSiteNav-logo"
+    src="_static/images/Ansible-Mark-RGB_White.png"
+    alt="Ansible Logo">
+  <div class="DocSiteNav-title">Community.Sops Collection Docs</div>
+</a>
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="#" class="icon icon-home">
+            Community.Sops Collection
+          </a><!--- Based on https://github.com/rtfd/sphinx_rtd_theme/pull/438/files -->
+
+<div class="version">
+  
+    
+  
+</div>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <label class="sr-only" for="q">Search docs:</label>
+    <input type="text" class="st-default-search-input" id="q" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+  
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="changelog.html">Community.Sops Release Notes</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="docsite/guide.html">Protecting Ansible secrets with SOPS</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="load_vars_module.html">community.sops.load_vars module – Load SOPS-encrypted variables from files, dynamically within a task</a></li>
+<li class="toctree-l1"><a class="reference internal" href="sops_encrypt_module.html">community.sops.sops_encrypt module – Encrypt data with SOPS</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="_latest_version_filter.html">community.sops._latest_version filter – [INTERNAL] Get latest version from a list of versions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="decrypt_filter.html">community.sops.decrypt filter – Decrypt SOPS-encrypted data</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="sops_lookup.html">community.sops.sops lookup – Read SOPS-encrypted file contents</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="sops_vars.html">community.sops.sops vars – Loading SOPS-encrypted vars files</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="install_role.html">community.sops.install role – Install SOPS</a></li>
+</ul>
+<!-- extra nav elements for Ansible beyond RTD Sphinx Theme -->
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="#">Community.Sops Collection</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="#" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">Community.Sops</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+
+  
+           <div itemprop="articleBody">
+             
+  <section id="community-sops">
+<span id="plugins-in-community-sops"></span><h1>Community.Sops<a class="headerlink" href="#community-sops" title="Link to this heading"></a></h1>
+<p>Collection version 2.0.5</p>
+<nav class="contents local" id="contents">
+<ul class="simple">
+<li><p><a class="reference internal" href="#description" id="id1">Description</a></p></li>
+<li><p><a class="reference internal" href="#communication" id="id2">Communication</a></p></li>
+<li><p><a class="reference internal" href="#changelog" id="id3">Changelog</a></p></li>
+<li><p><a class="reference internal" href="#scenario-guide" id="id4">Scenario Guide</a></p></li>
+<li><p><a class="reference internal" href="#plugin-index" id="id5">Plugin Index</a></p></li>
+<li><p><a class="reference internal" href="#role-index" id="id6">Role Index</a></p></li>
+</ul>
+</nav>
+<section id="description">
+<h2><a class="toc-backref" href="#id1" role="doc-backlink">Description</a><a class="headerlink" href="#description" title="Link to this heading"></a></h2>
+<p>Support usage of SOPS (getsops/sops) from your Ansible playbooks</p>
+<p><strong>Author:</strong></p>
+<ul class="simple">
+<li><p>Edoardo Tenani</p></li>
+</ul>
+<p><strong>Supported ansible-core versions:</strong></p>
+<ul class="simple">
+<li><p>2.15.0 or newer</p></li>
+</ul>
+<ul class="ansible-links">
+<li><span><a aria-role="button" class="ansible-link reference external" href="https://github.com/ansible-collections/community.sops/issues" rel="noopener external" target="_blank">Issue Tracker</a></span></li>
+<li><span><a aria-role="button" class="ansible-link reference external" href="https://github.com/ansible-collections/community.sops" rel="noopener external" target="_blank">Repository (Sources)</a></span></li>
+<li><span><a aria-role="button" class="ansible-link reference external" href="https://forum.ansible.com/tags/c/help/6/none/sops" rel="noopener external" target="_blank">Ask for help (SOPS)</a></span></li>
+<li><span><a aria-role="button" class="ansible-link reference external" href="https://github.com/ansible-collections/community.sops/issues/new?assignees=&amp;labels=&amp;template=bug_report.md" rel="noopener external" target="_blank">Submit a bug report</a></span></li>
+<li><span><a aria-role="button" class="ansible-link reference external" href="https://github.com/ansible-collections/community.sops/issues/new?assignees=&amp;labels=&amp;template=feature_request.md" rel="noopener external" target="_blank">Request a feature</a></span></li>
+</ul>
+</section>
+<section id="communication">
+<span id="communication-for-community-sops"></span><h2><a class="toc-backref" href="#id2" role="doc-backlink">Communication</a><a class="headerlink" href="#communication" title="Link to this heading"></a></h2>
+<ul class="simple">
+<li><p>Forum: <a class="reference external" href="https://forum.ansible.com/c/help/6/none">Ansible Forum: General usage and support questions</a>.</p></li>
+<li><p>Forum: <a class="reference external" href="https://forum.ansible.com/tag/sops">Ansible Forum: Discussions about SOPS</a>.</p></li>
+<li><p>Matrix room <code class="docutils literal notranslate"><span class="pre">#users:ansible.im</span></code>: <a class="reference external" href="https://matrix.to/#/#users:ansible.im">General usage and support questions</a>.</p></li>
+<li><p>IRC channel <code class="docutils literal notranslate"><span class="pre">#ansible</span></code> (Libera network):
+<a class="reference external" href="https://web.libera.chat/?channel=#ansible">General usage and support questions</a>.</p></li>
+</ul>
+<div class="toctree-wrapper compound">
+</div>
+</section>
+<section id="changelog">
+<h2><a class="toc-backref" href="#id3" role="doc-backlink">Changelog</a><a class="headerlink" href="#changelog" title="Link to this heading"></a></h2>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="changelog.html">Community.Sops Release Notes</a></li>
+</ul>
+</div>
+</section>
+<section id="scenario-guide">
+<h2><a class="toc-backref" href="#id4" role="doc-backlink">Scenario Guide</a><a class="headerlink" href="#scenario-guide" title="Link to this heading"></a></h2>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="docsite/guide.html">Protecting Ansible secrets with SOPS</a></li>
+</ul>
+</div>
+</section>
+<section id="plugin-index">
+<h2><a class="toc-backref" href="#id5" role="doc-backlink">Plugin Index</a><a class="headerlink" href="#plugin-index" title="Link to this heading"></a></h2>
+<p>These are the plugins in the community.sops collection:</p>
+<section id="modules">
+<h3>Modules<a class="headerlink" href="#modules" title="Link to this heading"></a></h3>
+<ul class="simple">
+<li><p><a class="reference internal" href="load_vars_module.html#ansible-collections-community-sops-load-vars-module"><span class="std std-ref">load_vars module</span></a> – Load SOPS-encrypted variables from files, dynamically within a task</p></li>
+<li><p><a class="reference internal" href="sops_encrypt_module.html#ansible-collections-community-sops-sops-encrypt-module"><span class="std std-ref">sops_encrypt module</span></a> – Encrypt data with SOPS</p></li>
+</ul>
+<div class="toctree-wrapper compound">
+</div>
+</section>
+<section id="filter-plugins">
+<h3>Filter Plugins<a class="headerlink" href="#filter-plugins" title="Link to this heading"></a></h3>
+<ul class="simple">
+<li><p><a class="reference internal" href="_latest_version_filter.html#ansible-collections-community-sops-latest-version-filter"><span class="std std-ref">_latest_version filter</span></a> – [INTERNAL] Get latest version from a list of versions</p></li>
+<li><p><a class="reference internal" href="decrypt_filter.html#ansible-collections-community-sops-decrypt-filter"><span class="std std-ref">decrypt filter</span></a> – Decrypt SOPS-encrypted data</p></li>
+</ul>
+<div class="toctree-wrapper compound">
+</div>
+</section>
+<section id="lookup-plugins">
+<h3>Lookup Plugins<a class="headerlink" href="#lookup-plugins" title="Link to this heading"></a></h3>
+<ul class="simple">
+<li><p><a class="reference internal" href="sops_lookup.html#ansible-collections-community-sops-sops-lookup"><span class="std std-ref">sops lookup</span></a> – Read SOPS-encrypted file contents</p></li>
+</ul>
+<div class="toctree-wrapper compound">
+</div>
+</section>
+<section id="vars-plugins">
+<h3>Vars Plugins<a class="headerlink" href="#vars-plugins" title="Link to this heading"></a></h3>
+<ul class="simple">
+<li><p><a class="reference internal" href="sops_vars.html#ansible-collections-community-sops-sops-vars"><span class="std std-ref">sops vars</span></a> – Loading SOPS-encrypted vars files</p></li>
+</ul>
+<div class="toctree-wrapper compound">
+</div>
+</section>
+</section>
+<section id="role-index">
+<h2><a class="toc-backref" href="#id6" role="doc-backlink">Role Index</a><a class="headerlink" href="#role-index" title="Link to this heading"></a></h2>
+<p>These are the roles in the community.sops collection:</p>
+<ul class="simple">
+<li><p><a class="reference internal" href="install_role.html#ansible-collections-community-sops-install-role"><span class="std std-ref">install role</span></a> – Install SOPS</p></li>
+</ul>
+<div class="toctree-wrapper compound">
+</div>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          
+
+<footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="changelog.html" class="btn btn-neutral float-right" title="Community.Sops Release Notes" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright Community.Sops Contributors.</p>
+  </div>
+
+  
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script><!-- extra footer elements for Ansible beyond RTD Sphinx Theme -->
+
+</body>
+</html>
