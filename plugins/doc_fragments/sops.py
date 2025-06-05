@@ -34,7 +34,7 @@ options:
       - Requires SOPS 3.7.0+.
     type: path
     version_added: 1.4.0
-  age_ssh_private_keyfile: 
+  age_ssh_private_keyfile:
     description:
       - The file containing the SSH private key that SOPS can use to decrypt encrypted files.
       - Will be set as the E(SOPS_AGE_SSH_PRIVATE_KEY_FILE) environment variable when calling SOPS.
