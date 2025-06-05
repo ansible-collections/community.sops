@@ -188,7 +188,7 @@ options:
     ini:
       - section: community.sops
         key: age_keyfile
-  age_ssh_privatekeyfile:
+  age_ssh_private_keyfile:
     ini:
       - section: community.sops
         key: age_ssh_private_keyfile
