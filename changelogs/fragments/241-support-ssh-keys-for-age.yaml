@@ -1,0 +1,2 @@
+minor_changes:
+  - "now supports ssh keys for age (https://github.com/ansible-collections/community.sops/pull/241)."
