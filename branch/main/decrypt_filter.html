@@ -230,6 +230,17 @@ example: <code class="docutils literal notranslate"><span class="pre">input</spa
 </div></td>
 </tr>
 <tr class="row-even"><td><div class="ansible-option-cell">
+<div class="ansibleOptionAnchor" id="parameter-age_ssh_private_keyfile"></div><p class="ansible-option-title" id="ansible-collections-community-sops-decrypt-filter-parameter-age-ssh-private-keyfile"><strong>age_ssh_private_keyfile</strong></p>
+<a class="ansibleOptionLink" href="#parameter-age_ssh_private_keyfile" title="Permalink to this option"></a><p class="ansible-option-type-line"><span class="ansible-option-type">path</span></p>
+<p><em class="ansible-option-versionadded">added in community.sops 1.4.0</em></p>
+</div></td>
+<td><div class="ansible-option-cell"><p>The file containing the SSH private key that SOPS can use to decrypt encrypted files.</p>
+<p>Will be set as the <code class="xref std std-envvar docutils literal notranslate"><span class="pre">SOPS_AGE_SSH_PRIVATE_KEY_FILE</span></code> environment variable when calling SOPS.</p>
+<p>By default, SOPS looks for <code class="docutils literal notranslate"><span class="pre">~/.ssh/id_ed25519</span></code> and falls back to <code class="docutils literal notranslate"><span class="pre">~/.ssh/id_rsa</span></code>.</p>
+<p>Requires SOPS 3.10.0+.</p>
+</div></td>
+</tr>
+<tr class="row-odd"><td><div class="ansible-option-cell">
 <div class="ansibleOptionAnchor" id="parameter-aws_access_key_id"></div><p class="ansible-option-title" id="ansible-collections-community-sops-decrypt-filter-parameter-aws-access-key-id"><strong>aws_access_key_id</strong></p>
 <a class="ansibleOptionLink" href="#parameter-aws_access_key_id" title="Permalink to this option"></a><p class="ansible-option-type-line"><span class="ansible-option-type">string</span></p>
 <p><em class="ansible-option-versionadded">added in community.sops 1.0.0</em></p>
@@ -238,7 +249,7 @@ example: <code class="docutils literal notranslate"><span class="pre">input</spa
 <p>Sets the environment variable <code class="xref std std-envvar docutils literal notranslate"><span class="pre">AWS_ACCESS_KEY_ID</span></code> for the SOPS call.</p>
 </div></td>
 </tr>
-<tr class="row-odd"><td><div class="ansible-option-cell">
+<tr class="row-even"><td><div class="ansible-option-cell">
 <div class="ansibleOptionAnchor" id="parameter-aws_profile"></div><p class="ansible-option-title" id="ansible-collections-community-sops-decrypt-filter-parameter-aws-profile"><strong>aws_profile</strong></p>
 <a class="ansibleOptionLink" href="#parameter-aws_profile" title="Permalink to this option"></a><p class="ansible-option-type-line"><span class="ansible-option-type">string</span></p>
 <p><em class="ansible-option-versionadded">added in community.sops 1.0.0</em></p>
@@ -247,7 +258,7 @@ example: <code class="docutils literal notranslate"><span class="pre">input</spa
 <p>This corresponds to the SOPS <code class="docutils literal notranslate"><span class="pre">--aws-profile</span></code> option.</p>
 </div></td>
 </tr>
-<tr class="row-even"><td><div class="ansible-option-cell">
+<tr class="row-odd"><td><div class="ansible-option-cell">
 <div class="ansibleOptionAnchor" id="parameter-aws_secret_access_key"></div><p class="ansible-option-title" id="ansible-collections-community-sops-decrypt-filter-parameter-aws-secret-access-key"><strong>aws_secret_access_key</strong></p>
 <a class="ansibleOptionLink" href="#parameter-aws_secret_access_key" title="Permalink to this option"></a><p class="ansible-option-type-line"><span class="ansible-option-type">string</span></p>
 <p><em class="ansible-option-versionadded">added in community.sops 1.0.0</em></p>
@@ -256,7 +267,7 @@ example: <code class="docutils literal notranslate"><span class="pre">input</spa
 <p>Sets the environment variable <code class="xref std std-envvar docutils literal notranslate"><span class="pre">AWS_SECRET_ACCESS_KEY</span></code> for the SOPS call.</p>
 </div></td>
 </tr>
-<tr class="row-odd"><td><div class="ansible-option-cell">
+<tr class="row-even"><td><div class="ansible-option-cell">
 <div class="ansibleOptionAnchor" id="parameter-aws_session_token"></div><p class="ansible-option-title" id="ansible-collections-community-sops-decrypt-filter-parameter-aws-session-token"><strong>aws_session_token</strong></p>
 <a class="ansibleOptionLink" href="#parameter-aws_session_token" title="Permalink to this option"></a><p class="ansible-option-type-line"><span class="ansible-option-type">string</span></p>
 <p><em class="ansible-option-versionadded">added in community.sops 1.0.0</em></p>
@@ -265,7 +276,7 @@ example: <code class="docutils literal notranslate"><span class="pre">input</spa
 <p>Sets the environment variable <code class="xref std std-envvar docutils literal notranslate"><span class="pre">AWS_SESSION_TOKEN</span></code> for the SOPS call.</p>
 </div></td>
 </tr>
-<tr class="row-even"><td><div class="ansible-option-cell">
+<tr class="row-odd"><td><div class="ansible-option-cell">
 <div class="ansibleOptionAnchor" id="parameter-config_path"></div><p class="ansible-option-title" id="ansible-collections-community-sops-decrypt-filter-parameter-config-path"><strong>config_path</strong></p>
 <a class="ansibleOptionLink" href="#parameter-config_path" title="Permalink to this option"></a><p class="ansible-option-type-line"><span class="ansible-option-type">path</span></p>
 <p><em class="ansible-option-versionadded">added in community.sops 1.0.0</em></p>
@@ -275,7 +286,7 @@ example: <code class="docutils literal notranslate"><span class="pre">input</spa
 <p>This corresponds to the SOPS <code class="docutils literal notranslate"><span class="pre">--config</span></code> option.</p>
 </div></td>
 </tr>
-<tr class="row-odd"><td><div class="ansible-option-cell">
+<tr class="row-even"><td><div class="ansible-option-cell">
 <div class="ansibleOptionAnchor" id="parameter-decode_output"></div><p class="ansible-option-title" id="ansible-collections-community-sops-decrypt-filter-parameter-decode-output"><strong>decode_output</strong></p>
 <a class="ansibleOptionLink" href="#parameter-decode_output" title="Permalink to this option"></a><p class="ansible-option-type-line"><span class="ansible-option-type">boolean</span></p>
 </div></td>
@@ -288,7 +299,7 @@ example: <code class="docutils literal notranslate"><span class="pre">input</spa
 </ul>
 </div></td>
 </tr>
-<tr class="row-even"><td><div class="ansible-option-cell">
+<tr class="row-odd"><td><div class="ansible-option-cell">
 <div class="ansibleOptionAnchor" id="parameter-enable_local_keyservice"></div><p class="ansible-option-title" id="ansible-collections-community-sops-decrypt-filter-parameter-enable-local-keyservice"><strong>enable_local_keyservice</strong></p>
 <a class="ansibleOptionLink" href="#parameter-enable_local_keyservice" title="Permalink to this option"></a><p class="ansible-option-type-line"><span class="ansible-option-type">boolean</span></p>
 <p><em class="ansible-option-versionadded">added in community.sops 1.0.0</em></p>
@@ -302,7 +313,7 @@ example: <code class="docutils literal notranslate"><span class="pre">input</spa
 </ul>
 </div></td>
 </tr>
-<tr class="row-odd"><td><div class="ansible-option-cell">
+<tr class="row-even"><td><div class="ansible-option-cell">
 <div class="ansibleOptionAnchor" id="parameter-input_type"></div><p class="ansible-option-title" id="ansible-collections-community-sops-decrypt-filter-parameter-input-type"><strong>input_type</strong></p>
 <a class="ansibleOptionLink" href="#parameter-input_type" title="Permalink to this option"></a><p class="ansible-option-type-line"><span class="ansible-option-type">string</span></p>
 </div></td>
@@ -319,7 +330,7 @@ example: <code class="docutils literal notranslate"><span class="pre">input</spa
 </ul>
 </div></td>
 </tr>
-<tr class="row-even"><td><div class="ansible-option-cell">
+<tr class="row-odd"><td><div class="ansible-option-cell">
 <div class="ansibleOptionAnchor" id="parameter-keyservice"></div><p class="ansible-option-title" id="ansible-collections-community-sops-decrypt-filter-parameter-keyservice"><strong>keyservice</strong></p>
 <a class="ansibleOptionLink" href="#parameter-keyservice" title="Permalink to this option"></a><p class="ansible-option-type-line"><span class="ansible-option-type">list</span> / <span class="ansible-option-elements">elements=string</span></p>
 <p><em class="ansible-option-versionadded">added in community.sops 1.0.0</em></p>
@@ -329,7 +340,7 @@ example: <code class="docutils literal notranslate"><span class="pre">input</spa
 <p>This corresponds to the SOPS <code class="docutils literal notranslate"><span class="pre">--keyservice</span></code> option.</p>
 </div></td>
 </tr>
-<tr class="row-odd"><td><div class="ansible-option-cell">
+<tr class="row-even"><td><div class="ansible-option-cell">
 <div class="ansibleOptionAnchor" id="parameter-output_type"></div><p class="ansible-option-title" id="ansible-collections-community-sops-decrypt-filter-parameter-output-type"><strong>output_type</strong></p>
 <a class="ansibleOptionLink" href="#parameter-output_type" title="Permalink to this option"></a><p class="ansible-option-type-line"><span class="ansible-option-type">string</span></p>
 </div></td>
@@ -346,7 +357,7 @@ example: <code class="docutils literal notranslate"><span class="pre">input</spa
 </ul>
 </div></td>
 </tr>
-<tr class="row-even"><td><div class="ansible-option-cell">
+<tr class="row-odd"><td><div class="ansible-option-cell">
 <div class="ansibleOptionAnchor" id="parameter-rstrip"></div><p class="ansible-option-title" id="ansible-collections-community-sops-decrypt-filter-parameter-rstrip"><strong>rstrip</strong></p>
 <a class="ansibleOptionLink" href="#parameter-rstrip" title="Permalink to this option"></a><p class="ansible-option-type-line"><span class="ansible-option-type">boolean</span></p>
 </div></td>
@@ -358,7 +369,7 @@ example: <code class="docutils literal notranslate"><span class="pre">input</spa
 </ul>
 </div></td>
 </tr>
-<tr class="row-odd"><td><div class="ansible-option-cell">
+<tr class="row-even"><td><div class="ansible-option-cell">
 <div class="ansibleOptionAnchor" id="parameter-sops_binary"></div><p class="ansible-option-title" id="ansible-collections-community-sops-decrypt-filter-parameter-sops-binary"><strong>sops_binary</strong></p>
 <a class="ansibleOptionLink" href="#parameter-sops_binary" title="Permalink to this option"></a><p class="ansible-option-type-line"><span class="ansible-option-type">path</span></p>
 <p><em class="ansible-option-versionadded">added in community.sops 1.0.0</em></p>
