@@ -34,6 +34,14 @@ options:
       - Requires SOPS 3.7.0+.
     type: path
     version_added: 1.4.0
+  age_ssh_private_keyfile:
+    description:
+      - The file containing the SSH private key that SOPS can use to decrypt encrypted files.
+      - Will be set as the E(SOPS_AGE_SSH_PRIVATE_KEY_FILE) environment variable when calling SOPS.
+      - By default, SOPS looks for C(~/.ssh/id_ed25519) and falls back to C(~/.ssh/id_rsa).
+      - Requires SOPS 3.10.0+.
+    type: path
+    version_added: 1.4.0
   aws_profile:
     description:
       - The AWS profile to use for requests to AWS.
@@ -93,6 +101,9 @@ options:
   age_keyfile:
     vars:
       - name: sops_age_keyfile
+  age_ssh_private_keyfile:
+    vars:
+      - name: sops_age_ssh_private_keyfile
   aws_profile:
     vars:
       - name: sops_aws_profile
@@ -130,6 +141,9 @@ options:
   age_keyfile:
     env:
       - name: ANSIBLE_SOPS_AGE_KEYFILE
+  age_ssh_private_keyfile:
+    env:
+      - name: ANSIBLE_SOPS_AGE_SSH_PRIVATE_KEYFILE
   aws_profile:
     env:
       - name: ANSIBLE_SOPS_AWS_PROFILE
@@ -174,6 +188,10 @@ options:
     ini:
       - section: community.sops
         key: age_keyfile
+  age_ssh_private_keyfile:
+    ini:
+      - section: community.sops
+        key: age_ssh_private_keyfile
   aws_profile:
     ini:
       - section: community.sops
