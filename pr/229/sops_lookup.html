@@ -4,7 +4,7 @@
 <html class="writer-html5" lang="en" data-content_root="./">
 <head>
   <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
-<meta content="2.16.3" name="antsibull-docs" />
+<meta content="2.17.0" name="antsibull-docs" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>community.sops.sops lookup – Read SOPS-encrypted file contents &mdash; Community.Sops Collection  documentation</title>
@@ -143,7 +143,7 @@
 <h1>community.sops.sops lookup – Read SOPS-encrypted file contents<a class="headerlink" href="#community-sops-sops-lookup-read-sops-encrypted-file-contents" title="Link to this heading"></a></h1>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
-<p>This lookup plugin is part of the <a class="reference external" href="https://galaxy.ansible.com/ui/repo/published/community/sops/">community.sops collection</a> (version 2.0.5).</p>
+<p>This lookup plugin is part of the <a class="reference external" href="https://galaxy.ansible.com/ui/repo/published/community/sops/">community.sops collection</a> (version 2.1.0).</p>
 <p>It is not included in <code class="docutils literal notranslate"><span class="pre">ansible-core</span></code>.
 To check whether it is installed, run <code class="code docutils literal notranslate"><span class="pre">ansible-galaxy</span> <span class="pre">collection</span> <span class="pre">list</span></code>.</p>
 <p>To install it, use: <code class="code docutils literal notranslate"><span class="pre">ansible-galaxy</span> <span class="pre">collection</span> <span class="pre">install</span> <span class="pre">community.sops</span></code>.
@@ -246,6 +246,28 @@ examples: <code class="docutils literal notranslate"><span class="pre">lookup('c
 </div></td>
 </tr>
 <tr class="row-even"><td><div class="ansible-option-cell">
+<div class="ansibleOptionAnchor" id="parameter-age_ssh_private_keyfile"></div><p class="ansible-option-title" id="ansible-collections-community-sops-sops-lookup-parameter-age-ssh-private-keyfile"><strong>age_ssh_private_keyfile</strong></p>
+<a class="ansibleOptionLink" href="#parameter-age_ssh_private_keyfile" title="Permalink to this option"></a><p class="ansible-option-type-line"><span class="ansible-option-type">path</span></p>
+<p><em class="ansible-option-versionadded">added in community.sops 1.4.0</em></p>
+</div></td>
+<td><div class="ansible-option-cell"><p>The file containing the SSH private key that SOPS can use to decrypt encrypted files.</p>
+<p>Will be set as the <code class="xref std std-envvar docutils literal notranslate"><span class="pre">SOPS_AGE_SSH_PRIVATE_KEY_FILE</span></code> environment variable when calling SOPS.</p>
+<p>By default, SOPS looks for <code class="docutils literal notranslate"><span class="pre">~/.ssh/id_ed25519</span></code> and falls back to <code class="docutils literal notranslate"><span class="pre">~/.ssh/id_rsa</span></code>.</p>
+<p>Requires SOPS 3.10.0+.</p>
+<p class="ansible-option-line"><strong class="ansible-option-configuration">Configuration:</strong></p>
+<ul>
+<li><p>INI entry:</p>
+<div class="highlight-ini notranslate"><div class="highlight"><pre><span></span><span class="k">[community.sops]</span>
+<span class="na">age_ssh_private_keyfile</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">VALUE</span>
+</pre></div>
+</div>
+</li>
+<li><p>Environment variable: <span class="target" id="index-2"></span><a class="reference internal" href="environment_variables.html#envvar-ANSIBLE_SOPS_AGE_SSH_PRIVATE_KEYFILE"><code class="xref std std-envvar docutils literal notranslate"><span class="pre">ANSIBLE_SOPS_AGE_SSH_PRIVATE_KEYFILE</span></code></a></p></li>
+<li><p>Variable: sops_age_ssh_private_keyfile</p></li>
+</ul>
+</div></td>
+</tr>
+<tr class="row-odd"><td><div class="ansible-option-cell">
 <div class="ansibleOptionAnchor" id="parameter-aws_access_key_id"></div><p class="ansible-option-title" id="ansible-collections-community-sops-sops-lookup-parameter-aws-access-key-id"><strong>aws_access_key_id</strong></p>
 <a class="ansibleOptionLink" href="#parameter-aws_access_key_id" title="Permalink to this option"></a><p class="ansible-option-type-line"><span class="ansible-option-type">string</span></p>
 <p><em class="ansible-option-versionadded">added in community.sops 1.0.0</em></p>
@@ -261,14 +283,14 @@ examples: <code class="docutils literal notranslate"><span class="pre">lookup('c
 </div>
 <p><em class="ansible-option-versionadded">added in community.sops 1.2.0</em></p>
 </li>
-<li><p>Environment variable: <span class="target" id="index-2"></span><a class="reference internal" href="environment_variables.html#envvar-ANSIBLE_SOPS_AWS_ACCESS_KEY_ID"><code class="xref std std-envvar docutils literal notranslate"><span class="pre">ANSIBLE_SOPS_AWS_ACCESS_KEY_ID</span></code></a></p>
+<li><p>Environment variable: <span class="target" id="index-3"></span><a class="reference internal" href="environment_variables.html#envvar-ANSIBLE_SOPS_AWS_ACCESS_KEY_ID"><code class="xref std std-envvar docutils literal notranslate"><span class="pre">ANSIBLE_SOPS_AWS_ACCESS_KEY_ID</span></code></a></p>
 <p><em class="ansible-option-versionadded">added in community.sops 1.2.0</em></p>
 </li>
 <li><p>Variable: sops_aws_access_key_id</p></li>
 </ul>
 </div></td>
 </tr>
-<tr class="row-odd"><td><div class="ansible-option-cell">
+<tr class="row-even"><td><div class="ansible-option-cell">
 <div class="ansibleOptionAnchor" id="parameter-aws_profile"></div><p class="ansible-option-title" id="ansible-collections-community-sops-sops-lookup-parameter-aws-profile"><strong>aws_profile</strong></p>
 <a class="ansibleOptionLink" href="#parameter-aws_profile" title="Permalink to this option"></a><p class="ansible-option-type-line"><span class="ansible-option-type">string</span></p>
 <p><em class="ansible-option-versionadded">added in community.sops 1.0.0</em></p>
@@ -284,14 +306,14 @@ examples: <code class="docutils literal notranslate"><span class="pre">lookup('c
 </div>
 <p><em class="ansible-option-versionadded">added in community.sops 1.2.0</em></p>
 </li>
-<li><p>Environment variable: <span class="target" id="index-3"></span><a class="reference internal" href="environment_variables.html#envvar-ANSIBLE_SOPS_AWS_PROFILE"><code class="xref std std-envvar docutils literal notranslate"><span class="pre">ANSIBLE_SOPS_AWS_PROFILE</span></code></a></p>
+<li><p>Environment variable: <span class="target" id="index-4"></span><a class="reference internal" href="environment_variables.html#envvar-ANSIBLE_SOPS_AWS_PROFILE"><code class="xref std std-envvar docutils literal notranslate"><span class="pre">ANSIBLE_SOPS_AWS_PROFILE</span></code></a></p>
 <p><em class="ansible-option-versionadded">added in community.sops 1.2.0</em></p>
 </li>
 <li><p>Variable: sops_aws_profile</p></li>
 </ul>
 </div></td>
 </tr>
-<tr class="row-even"><td><div class="ansible-option-cell">
+<tr class="row-odd"><td><div class="ansible-option-cell">
 <div class="ansibleOptionAnchor" id="parameter-aws_secret_access_key"></div><p class="ansible-option-title" id="ansible-collections-community-sops-sops-lookup-parameter-aws-secret-access-key"><strong>aws_secret_access_key</strong></p>
 <a class="ansibleOptionLink" href="#parameter-aws_secret_access_key" title="Permalink to this option"></a><p class="ansible-option-type-line"><span class="ansible-option-type">string</span></p>
 <p><em class="ansible-option-versionadded">added in community.sops 1.0.0</em></p>
@@ -300,14 +322,14 @@ examples: <code class="docutils literal notranslate"><span class="pre">lookup('c
 <p>Sets the environment variable <code class="xref std std-envvar docutils literal notranslate"><span class="pre">AWS_SECRET_ACCESS_KEY</span></code> for the SOPS call.</p>
 <p class="ansible-option-line"><strong class="ansible-option-configuration">Configuration:</strong></p>
 <ul>
-<li><p>Environment variable: <span class="target" id="index-4"></span><a class="reference internal" href="environment_variables.html#envvar-ANSIBLE_SOPS_AWS_SECRET_ACCESS_KEY"><code class="xref std std-envvar docutils literal notranslate"><span class="pre">ANSIBLE_SOPS_AWS_SECRET_ACCESS_KEY</span></code></a></p>
+<li><p>Environment variable: <span class="target" id="index-5"></span><a class="reference internal" href="environment_variables.html#envvar-ANSIBLE_SOPS_AWS_SECRET_ACCESS_KEY"><code class="xref std std-envvar docutils literal notranslate"><span class="pre">ANSIBLE_SOPS_AWS_SECRET_ACCESS_KEY</span></code></a></p>
 <p><em class="ansible-option-versionadded">added in community.sops 1.2.0</em></p>
 </li>
 <li><p>Variable: sops_aws_secret_access_key</p></li>
 </ul>
 </div></td>
 </tr>
-<tr class="row-odd"><td><div class="ansible-option-cell">
+<tr class="row-even"><td><div class="ansible-option-cell">
 <div class="ansibleOptionAnchor" id="parameter-aws_session_token"></div><p class="ansible-option-title" id="ansible-collections-community-sops-sops-lookup-parameter-aws-session-token"><strong>aws_session_token</strong></p>
 <a class="ansibleOptionLink" href="#parameter-aws_session_token" title="Permalink to this option"></a><p class="ansible-option-type-line"><span class="ansible-option-type">string</span></p>
 <p><em class="ansible-option-versionadded">added in community.sops 1.0.0</em></p>
@@ -323,7 +345,7 @@ examples: <code class="docutils literal notranslate"><span class="pre">lookup('c
 </div>
 <p><em class="ansible-option-versionadded">added in community.sops 1.2.0</em></p>
 </li>
-<li><p>Environment variable: <span class="target" id="index-5"></span><a class="reference internal" href="environment_variables.html#envvar-ANSIBLE_SOPS_AWS_SESSION_TOKEN"><code class="xref std std-envvar docutils literal notranslate"><span class="pre">ANSIBLE_SOPS_AWS_SESSION_TOKEN</span></code></a></p>
+<li><p>Environment variable: <span class="target" id="index-6"></span><a class="reference internal" href="environment_variables.html#envvar-ANSIBLE_SOPS_AWS_SESSION_TOKEN"><code class="xref std std-envvar docutils literal notranslate"><span class="pre">ANSIBLE_SOPS_AWS_SESSION_TOKEN</span></code></a></p>
 <p><em class="ansible-option-versionadded">added in community.sops 1.2.0</em></p>
 </li>
 <li><p>Variable: sops_session_token</p></li>
@@ -333,7 +355,7 @@ examples: <code class="docutils literal notranslate"><span class="pre">lookup('c
 </ul>
 </div></td>
 </tr>
-<tr class="row-even"><td><div class="ansible-option-cell">
+<tr class="row-odd"><td><div class="ansible-option-cell">
 <div class="ansibleOptionAnchor" id="parameter-base64"></div><p class="ansible-option-title" id="ansible-collections-community-sops-sops-lookup-parameter-base64"><strong>base64</strong></p>
 <a class="ansibleOptionLink" href="#parameter-base64" title="Permalink to this option"></a><p class="ansible-option-type-line"><span class="ansible-option-type">boolean</span></p>
 </div></td>
@@ -346,7 +368,7 @@ examples: <code class="docutils literal notranslate"><span class="pre">lookup('c
 </ul>
 </div></td>
 </tr>
-<tr class="row-odd"><td><div class="ansible-option-cell">
+<tr class="row-even"><td><div class="ansible-option-cell">
 <div class="ansibleOptionAnchor" id="parameter-config_path"></div><p class="ansible-option-title" id="ansible-collections-community-sops-sops-lookup-parameter-config-path"><strong>config_path</strong></p>
 <a class="ansibleOptionLink" href="#parameter-config_path" title="Permalink to this option"></a><p class="ansible-option-type-line"><span class="ansible-option-type">path</span></p>
 <p><em class="ansible-option-versionadded">added in community.sops 1.0.0</em></p>
@@ -363,14 +385,14 @@ examples: <code class="docutils literal notranslate"><span class="pre">lookup('c
 </div>
 <p><em class="ansible-option-versionadded">added in community.sops 1.2.0</em></p>
 </li>
-<li><p>Environment variable: <span class="target" id="index-6"></span><a class="reference internal" href="environment_variables.html#envvar-ANSIBLE_SOPS_CONFIG_PATH"><code class="xref std std-envvar docutils literal notranslate"><span class="pre">ANSIBLE_SOPS_CONFIG_PATH</span></code></a></p>
+<li><p>Environment variable: <span class="target" id="index-7"></span><a class="reference internal" href="environment_variables.html#envvar-ANSIBLE_SOPS_CONFIG_PATH"><code class="xref std std-envvar docutils literal notranslate"><span class="pre">ANSIBLE_SOPS_CONFIG_PATH</span></code></a></p>
 <p><em class="ansible-option-versionadded">added in community.sops 1.2.0</em></p>
 </li>
 <li><p>Variable: sops_config_path</p></li>
 </ul>
 </div></td>
 </tr>
-<tr class="row-even"><td><div class="ansible-option-cell">
+<tr class="row-odd"><td><div class="ansible-option-cell">
 <div class="ansibleOptionAnchor" id="parameter-empty_on_not_exist"></div><p class="ansible-option-title" id="ansible-collections-community-sops-sops-lookup-parameter-empty-on-not-exist"><strong>empty_on_not_exist</strong></p>
 <a class="ansibleOptionLink" href="#parameter-empty_on_not_exist" title="Permalink to this option"></a><p class="ansible-option-type-line"><span class="ansible-option-type">boolean</span></p>
 </div></td>
@@ -382,7 +404,7 @@ examples: <code class="docutils literal notranslate"><span class="pre">lookup('c
 </ul>
 </div></td>
 </tr>
-<tr class="row-odd"><td><div class="ansible-option-cell">
+<tr class="row-even"><td><div class="ansible-option-cell">
 <div class="ansibleOptionAnchor" id="parameter-enable_local_keyservice"></div><p class="ansible-option-title" id="ansible-collections-community-sops-sops-lookup-parameter-enable-local-keyservice"><strong>enable_local_keyservice</strong></p>
 <a class="ansibleOptionLink" href="#parameter-enable_local_keyservice" title="Permalink to this option"></a><p class="ansible-option-type-line"><span class="ansible-option-type">boolean</span></p>
 <p><em class="ansible-option-versionadded">added in community.sops 1.0.0</em></p>
@@ -403,14 +425,14 @@ examples: <code class="docutils literal notranslate"><span class="pre">lookup('c
 </div>
 <p><em class="ansible-option-versionadded">added in community.sops 1.2.0</em></p>
 </li>
-<li><p>Environment variable: <span class="target" id="index-7"></span><a class="reference internal" href="environment_variables.html#envvar-ANSIBLE_SOPS_ENABLE_LOCAL_KEYSERVICE"><code class="xref std std-envvar docutils literal notranslate"><span class="pre">ANSIBLE_SOPS_ENABLE_LOCAL_KEYSERVICE</span></code></a></p>
+<li><p>Environment variable: <span class="target" id="index-8"></span><a class="reference internal" href="environment_variables.html#envvar-ANSIBLE_SOPS_ENABLE_LOCAL_KEYSERVICE"><code class="xref std std-envvar docutils literal notranslate"><span class="pre">ANSIBLE_SOPS_ENABLE_LOCAL_KEYSERVICE</span></code></a></p>
 <p><em class="ansible-option-versionadded">added in community.sops 1.2.0</em></p>
 </li>
 <li><p>Variable: sops_enable_local_keyservice</p></li>
 </ul>
 </div></td>
 </tr>
-<tr class="row-even"><td><div class="ansible-option-cell">
+<tr class="row-odd"><td><div class="ansible-option-cell">
 <div class="ansibleOptionAnchor" id="parameter-extract"></div><p class="ansible-option-title" id="ansible-collections-community-sops-sops-lookup-parameter-extract"><strong>extract</strong></p>
 <a class="ansibleOptionLink" href="#parameter-extract" title="Permalink to this option"></a><p class="ansible-option-type-line"><span class="ansible-option-type">string</span></p>
 <p><em class="ansible-option-versionadded">added in community.sops 1.9.0</em></p>
@@ -420,7 +442,7 @@ examples: <code class="docutils literal notranslate"><span class="pre">lookup('c
 <p><strong>Note:</strong> Escape quotes appropriately.</p>
 </div></td>
 </tr>
-<tr class="row-odd"><td><div class="ansible-option-cell">
+<tr class="row-even"><td><div class="ansible-option-cell">
 <div class="ansibleOptionAnchor" id="parameter-input_type"></div><p class="ansible-option-title" id="ansible-collections-community-sops-sops-lookup-parameter-input-type"><strong>input_type</strong></p>
 <a class="ansibleOptionLink" href="#parameter-input_type" title="Permalink to this option"></a><p class="ansible-option-type-line"><span class="ansible-option-type">string</span></p>
 </div></td>
@@ -437,7 +459,7 @@ examples: <code class="docutils literal notranslate"><span class="pre">lookup('c
 </ul>
 </div></td>
 </tr>
-<tr class="row-even"><td><div class="ansible-option-cell">
+<tr class="row-odd"><td><div class="ansible-option-cell">
 <div class="ansibleOptionAnchor" id="parameter-keyservice"></div><p class="ansible-option-title" id="ansible-collections-community-sops-sops-lookup-parameter-keyservice"><strong>keyservice</strong></p>
 <a class="ansibleOptionLink" href="#parameter-keyservice" title="Permalink to this option"></a><p class="ansible-option-type-line"><span class="ansible-option-type">list</span> / <span class="ansible-option-elements">elements=string</span></p>
 <p><em class="ansible-option-versionadded">added in community.sops 1.0.0</em></p>
@@ -454,14 +476,14 @@ examples: <code class="docutils literal notranslate"><span class="pre">lookup('c
 </div>
 <p><em class="ansible-option-versionadded">added in community.sops 1.2.0</em></p>
 </li>
-<li><p>Environment variable: <span class="target" id="index-8"></span><a class="reference internal" href="environment_variables.html#envvar-ANSIBLE_SOPS_KEYSERVICE"><code class="xref std std-envvar docutils literal notranslate"><span class="pre">ANSIBLE_SOPS_KEYSERVICE</span></code></a></p>
+<li><p>Environment variable: <span class="target" id="index-9"></span><a class="reference internal" href="environment_variables.html#envvar-ANSIBLE_SOPS_KEYSERVICE"><code class="xref std std-envvar docutils literal notranslate"><span class="pre">ANSIBLE_SOPS_KEYSERVICE</span></code></a></p>
 <p><em class="ansible-option-versionadded">added in community.sops 1.2.0</em></p>
 </li>
 <li><p>Variable: sops_keyservice</p></li>
 </ul>
 </div></td>
 </tr>
-<tr class="row-odd"><td><div class="ansible-option-cell">
+<tr class="row-even"><td><div class="ansible-option-cell">
 <div class="ansibleOptionAnchor" id="parameter-output_type"></div><p class="ansible-option-title" id="ansible-collections-community-sops-sops-lookup-parameter-output-type"><strong>output_type</strong></p>
 <a class="ansibleOptionLink" href="#parameter-output_type" title="Permalink to this option"></a><p class="ansible-option-type-line"><span class="ansible-option-type">string</span></p>
 </div></td>
@@ -478,7 +500,7 @@ examples: <code class="docutils literal notranslate"><span class="pre">lookup('c
 </ul>
 </div></td>
 </tr>
-<tr class="row-even"><td><div class="ansible-option-cell">
+<tr class="row-odd"><td><div class="ansible-option-cell">
 <div class="ansibleOptionAnchor" id="parameter-rstrip"></div><p class="ansible-option-title" id="ansible-collections-community-sops-sops-lookup-parameter-rstrip"><strong>rstrip</strong></p>
 <a class="ansibleOptionLink" href="#parameter-rstrip" title="Permalink to this option"></a><p class="ansible-option-type-line"><span class="ansible-option-type">boolean</span></p>
 </div></td>
@@ -490,7 +512,7 @@ examples: <code class="docutils literal notranslate"><span class="pre">lookup('c
 </ul>
 </div></td>
 </tr>
-<tr class="row-odd"><td><div class="ansible-option-cell">
+<tr class="row-even"><td><div class="ansible-option-cell">
 <div class="ansibleOptionAnchor" id="parameter-sops_binary"></div><p class="ansible-option-title" id="ansible-collections-community-sops-sops-lookup-parameter-sops-binary"><strong>sops_binary</strong></p>
 <a class="ansibleOptionLink" href="#parameter-sops_binary" title="Permalink to this option"></a><p class="ansible-option-type-line"><span class="ansible-option-type">path</span></p>
 <p><em class="ansible-option-versionadded">added in community.sops 1.0.0</em></p>
@@ -506,7 +528,7 @@ examples: <code class="docutils literal notranslate"><span class="pre">lookup('c
 </div>
 <p><em class="ansible-option-versionadded">added in community.sops 1.2.0</em></p>
 </li>
-<li><p>Environment variable: <span class="target" id="index-9"></span><a class="reference internal" href="environment_variables.html#envvar-ANSIBLE_SOPS_BINARY"><code class="xref std std-envvar docutils literal notranslate"><span class="pre">ANSIBLE_SOPS_BINARY</span></code></a></p>
+<li><p>Environment variable: <span class="target" id="index-10"></span><a class="reference internal" href="environment_variables.html#envvar-ANSIBLE_SOPS_BINARY"><code class="xref std std-envvar docutils literal notranslate"><span class="pre">ANSIBLE_SOPS_BINARY</span></code></a></p>
 <p><em class="ansible-option-versionadded">added in community.sops 1.2.0</em></p>
 </li>
 <li><p>Variable: sops_binary</p></li>
