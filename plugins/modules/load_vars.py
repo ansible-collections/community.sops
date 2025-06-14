@@ -35,7 +35,7 @@ options:
       - If set to V(evaluate-on-load), expressions will be evaluated on execution of this module, in other words, when the
         file is loaded.
       - If set to V(lazy-evaluation), expressions will be lazily evaluated. This requires ansible-core 2.19 or newer
-        and is the same behavior than M(ansible.builtin.include_vars). V(lazy-evaluation) has been added in community.sops 2.1.0.
+        and is the same behavior than M(ansible.builtin.include_vars). V(lazy-evaluation) has been added in community.sops 2.2.0.
     type: str
     default: ignore
     choices:
