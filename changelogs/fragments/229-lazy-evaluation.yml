@@ -1,0 +1,2 @@
+minor_changes:
+  - "load_vars - expressions can now be lazily evaluated when using ansible-core 2.19 or newer (https://github.com/ansible-collections/community.sops/pull/229)."
