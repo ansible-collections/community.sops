@@ -486,3 +486,13 @@ releases:
     fragments:
       - 2.0.5.yml
     release_date: '2025-04-21'
+  2.1.0:
+    changes:
+      minor_changes:
+        - Now supports specifying SSH private keys for age with the new ``age_ssh_private_keyfile``
+          option (https://github.com/ansible-collections/community.sops/pull/241).
+      release_summary: Feature release.
+    fragments:
+      - 2.1.0.yml
+      - 241-support-ssh-keys-for-age.yaml
+    release_date: '2025-06-14'

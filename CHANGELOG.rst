@@ -4,6 +4,19 @@ Community SOPS Release Notes
 
 .. contents:: Topics
 
+v2.1.0
+======
+
+Release Summary
+---------------
+
+Feature release.
+
+Minor Changes
+-------------
+
+- Now supports specifying SSH private keys for age with the new ``age_ssh_private_keyfile`` option (https://github.com/ansible-collections/community.sops/pull/241).
+
 v2.0.5
 ======
 
