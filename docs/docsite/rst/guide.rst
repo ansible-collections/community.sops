@@ -45,7 +45,7 @@ This collection provides a :ansplugin:`role community.sops.install <community.so
 
 When using ansible-core 2.11 or later, you can also use two convenience playbooks:
 
-.. code-block:: bash
+.. code-block:: console
 
     # Install SOPS on Ansible controller
     $ ansible-playbook community.sops.install_localhost
@@ -103,7 +103,7 @@ For simplicity, you can work with GPG keys. If you do not have one, or do not wa
 
 Here, ``FBC7B9E2A4F9289AC0C1D4843D16CEE4A27381B4`` is the 40 hex-digit key ID. With this file you can create a SOPS-encrypted file by running the following in the directory where ``.sops.yaml`` was placed, or a subdirectory of it:
 
-.. code-block:: bash
+.. code-block:: console
 
     $ sops test.sops.yaml
 
@@ -164,7 +164,7 @@ You can decrypt SOPS-encrypted files with the :ansplugin:`community.sops.sops lo
 
 Assume that you have an encrypted private key ``keys/private_key.pem.sops``, which was in PEM format before being encrypted by SOPS:
 
-.. code-block:: bash
+.. code-block:: console
 
     $ openssl genrsa -out keys/private_key.pem 2048
     $ sops --encrypt keys/private_key.pem > keys/private_key.pem.sops
