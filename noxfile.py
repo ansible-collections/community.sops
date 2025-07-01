@@ -136,7 +136,7 @@ add_target(core_version="2.17", docker_container="fedora39", sops_version="3.10.
 add_target(core_version="2.18", docker_container="ubuntu2404", sops_version="3.9.0")
 add_target(core_version="2.18", docker_container="fedora40", sops_version="3.9.2")
 add_target(core_version="2.19", docker_container="ubuntu2404", sops_version="3.10.0")
-add_target(core_version="2.19", docker_container="fedora40", sops_version="3.10.2")
+add_target(core_version="2.19", docker_container="fedora41", sops_version="3.10.2")
 add_target(core_version="devel", docker_container="ubuntu2204", sops_version="3.6.0")
 add_target(core_version="devel", docker_container="ubuntu2204", sops_version="3.7.0")
 add_target(core_version="devel", docker_container="ubuntu2404", sops_version="3.9.1")
