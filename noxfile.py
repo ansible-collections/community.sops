@@ -122,7 +122,7 @@ archlinux = "quay.io/ansible-community/test-image:archlinux"
 debian_bullseye = "quay.io/ansible-community/test-image:debian-bullseye"
 debian_bookworm = "quay.io/ansible-community/test-image:debian-bookworm"
 
-for core_version in ["devel"]:
+for core_version in ["2.19"]:
     for docker_container in ["ubuntu2204", "ubuntu2404", "fedora41"]:
         for sops_version in ["3.5.0", "3.6.1", "3.7.3", "3.8.1", "3.9.1"]:
             add_target(core_version=core_version, docker_container=docker_container, sops_version=sops_version)
@@ -140,11 +140,11 @@ add_target(core_version="2.16", docker_container="ubuntu2204", sops_version="3.8
 add_target(core_version="2.17", docker_container="ubuntu2204", sops_version="3.8.1")
 add_target(core_version="2.17", docker_container="fedora39", sops_version="3.9.0")
 add_target(core_version="2.18", docker_container="fedora40", sops_version="3.9.0")
-add_target(core_version="devel", docker_container="ubuntu2204", sops_version="3.6.0")
-add_target(core_version="devel", docker_container="ubuntu2204", sops_version="3.7.0")
-add_target(core_version="devel", docker_container="ubuntu2404", sops_version="3.8.0")
-add_target(core_version="devel", docker_container=archlinux, python_version="3.13", sops_version="latest")
-add_target(core_version="devel", docker_container=debian_bookworm, python_version="3.11", sops_version="latest")
+add_target(core_version="2.19", docker_container="ubuntu2204", sops_version="3.6.0")
+add_target(core_version="2.19", docker_container="ubuntu2204", sops_version="3.7.0")
+add_target(core_version="2.19", docker_container="ubuntu2404", sops_version="3.8.0")
+add_target(core_version="2.19", docker_container=archlinux, python_version="3.13", sops_version="latest")
+add_target(core_version="2.19", docker_container=debian_bookworm, python_version="3.11", sops_version="latest")
 
 # Install specific sops
 add_target(core_version="2.17", docker_container="ubuntu2204", target="gha/install/1/")
@@ -152,15 +152,15 @@ add_target(core_version="2.17", docker_container="fedora39", target="gha/install
 add_target(core_version="2.18", docker_container="ubuntu2404", target="gha/install/1/")
 add_target(core_version="2.18", docker_container="fedora40", target="gha/install/1/")
 # Install on localhost vs. remote host
-add_target(core_version="devel", docker_container="ubuntu2204", target="gha/install/2/")
+add_target(core_version="2.19", docker_container="ubuntu2204", target="gha/install/2/")
 # Install latest sops
-add_target(core_version="devel", docker_container=archlinux, python_version="3.13", target="gha/install/3/", github_latest_detection="auto")
-add_target(core_version="devel", docker_container=debian_bookworm, python_version="3.11", target="gha/install/3/", github_latest_detection="auto")
+add_target(core_version="2.19", docker_container=archlinux, python_version="3.13", target="gha/install/3/", github_latest_detection="auto")
+add_target(core_version="2.19", docker_container=debian_bookworm, python_version="3.11", target="gha/install/3/", github_latest_detection="auto")
 add_target(core_version="2.16", docker_container=debian_bullseye, python_version="3.9", target="gha/install/3/", github_latest_detection="auto")
-add_target(core_version="devel", docker_container="fedora41", target="gha/install/3/", github_latest_detection="auto")
-add_target(core_version="devel", docker_container="ubuntu2204", target="gha/install/3/", github_latest_detection="api")
-add_target(core_version="devel", docker_container="ubuntu2404", target="gha/install/3/", github_latest_detection="latest-release")
-add_target(core_version="devel", docker_container="alpine321", target="gha/install/3/", github_latest_detection="auto")
+add_target(core_version="2.19", docker_container="fedora41", target="gha/install/3/", github_latest_detection="auto")
+add_target(core_version="2.19", docker_container="ubuntu2204", target="gha/install/3/", github_latest_detection="api")
+add_target(core_version="2.19", docker_container="ubuntu2404", target="gha/install/3/", github_latest_detection="latest-release")
+add_target(core_version="2.19", docker_container="alpine321", target="gha/install/3/", github_latest_detection="auto")
 
 
 @nox.session(name="ansible-test-integration", default=False, python=False, requires=session_names)
