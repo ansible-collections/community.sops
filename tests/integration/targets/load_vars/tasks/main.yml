@@ -23,7 +23,7 @@
 
     - assert:
         that:
-          - '"value of expressions must be one of: ignore, evaluate-on-load, got: invalid value" in load_vars_invalid_value.msg'
+          - '"value of expressions must be one of: ignore, evaluate-on-load, lazy-evaluation, got: invalid value" in load_vars_invalid_value.msg'
 
     - name: Test load_vars with missing file
       community.sops.load_vars:
@@ -124,3 +124,35 @@
         that:
           - load_vars_expr_evaluated_now_2 is success
           - test2_2 == 'something_else'
+
+    - when: ansible_version.full is version('2.19', '>=')
+      block:
+        - set_fact:
+            to_be_defined_earlier: something_defined_before
+            bar_2: baz
+
+        - name: Test load_vars with expressions evaluated lazily
+          community.sops.load_vars:
+            file: proper-vars-2.sops.yaml
+            expressions: lazy-evaluation
+          register: load_vars_expr_lazy_evaluated
+
+        - assert:
+            that:
+              - load_vars_expr_lazy_evaluated is success
+              - test1_2 == 'baz'
+              - test2_2 == 'something_defined_before'
+              - test3_2[0] == 'baz'
+              - test4_2.test_4_2_1 == 'bazbaz'
+
+        - set_fact:
+            to_be_defined_earlier: something_else
+            bar_2: buzz
+
+        - assert:
+            that:
+              - load_vars_expr_lazy_evaluated is success
+              - test1_2 == 'buzz'
+              - test2_2 == 'something_else'
+              - test3_2[0] == 'buzz'
+              - test4_2.test_4_2_1 == 'buzzbuzz'
