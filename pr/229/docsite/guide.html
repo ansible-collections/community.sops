@@ -147,7 +147,7 @@
 <section id="installing-sops">
 <h2><a class="toc-backref" href="#id1" role="doc-backlink">Installing SOPS</a><a class="headerlink" href="#installing-sops" title="Link to this heading"></a></h2>
 <p>You can find binaries and packages <a class="reference external" href="https://github.com/getsops/sops/releases">on the project’s release page</a>. Depending on your operating system, you might also be able to install it with your system’s package manager.</p>
-<p>This collection provides a <a class="reference internal" href="../install_role.html#ansible-collections-community-sops-install-role"><span class="std std-ref">role community.sops.install</span></a> which allows to install SOPS and <a class="reference external" href="https://en.wikipedia.org/wiki/GNU_Privacy_Guard">GNU Privacy Guard (GPG)</a>. The role allows to install SOPS from the system’s package manager or from GitHub. Both SOPS and GPG can be installed on the remote hosts or the Ansible controller.</p>
+<p>This collection provides a <a class="reference internal" href="../install_role.html#ansible-collections-community-sops-install-role"><span class="std std-ref">role community.sops.install</span></a> which allows to install SOPS and <a class="reference external" href="https://en.wikipedia.org/wiki/GNU_Privacy_Guard">GNU Privacy Guard (GPG)</a>. The role allows to install SOPS from the system’s package manager or from GitHub; see <code class="ansible-option docutils literal notranslate"><strong><a class="reference internal" href="../install_role.html#ansible-collections-community-sops-install-role-parameter-main-sops-source"><span class="std std-ref"><span class="pre">sops_source</span></span></a></strong></code> for details. Both SOPS and GPG can be installed on the remote hosts or the Ansible controller; see <code class="ansible-option docutils literal notranslate"><strong><a class="reference internal" href="../install_role.html#ansible-collections-community-sops-install-role-parameter-main-sops-install-on-localhost"><span class="std std-ref"><span class="pre">sops_install_on_localhost</span></span></a></strong></code> for details.</p>
 <div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Playbook to install SOPS</span>
 <span class="w">  </span><span class="nt">hosts</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">all</span>
 <span class="w">  </span><span class="nt">tasks</span><span class="p">:</span>
@@ -168,11 +168,11 @@
 </pre></div>
 </div>
 <p>When using ansible-core 2.11 or later, you can also use two convenience playbooks:</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># Install SOPS on Ansible controller</span>
-$<span class="w"> </span>ansible-playbook<span class="w"> </span>community.sops.install_localhost
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp"># </span>Install<span class="w"> </span>SOPS<span class="w"> </span>on<span class="w"> </span>Ansible<span class="w"> </span>controller
+<span class="gp">$ </span>ansible-playbook<span class="w"> </span>community.sops.install_localhost
 
-<span class="c1"># Install SOPS on remote servers</span>
-$<span class="w"> </span>ansible-playbook<span class="w"> </span>community.sops.install<span class="w"> </span>--inventory<span class="w"> </span>/path/to/inventory
+<span class="gp"># </span>Install<span class="w"> </span>SOPS<span class="w"> </span>on<span class="w"> </span>remote<span class="w"> </span>servers
+<span class="gp">$ </span>ansible-playbook<span class="w"> </span>community.sops.install<span class="w"> </span>--inventory<span class="w"> </span>/path/to/inventory
 </pre></div>
 </div>
 </section>
@@ -215,7 +215,7 @@ $<span class="w"> </span>ansible-playbook<span class="w"> </span>community.sops.
 </pre></div>
 </div>
 <p>Here, <code class="docutils literal notranslate"><span class="pre">FBC7B9E2A4F9289AC0C1D4843D16CEE4A27381B4</span></code> is the 40 hex-digit key ID. With this file you can create a SOPS-encrypted file by running the following in the directory where <code class="docutils literal notranslate"><span class="pre">.sops.yaml</span></code> was placed, or a subdirectory of it:</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$<span class="w"> </span>sops<span class="w"> </span>test.sops.yaml
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>sops<span class="w"> </span>test.sops.yaml
 </pre></div>
 </div>
 <p>This will open an editor window with an example YAML file. Put the following content in:</p>
@@ -267,9 +267,9 @@ $<span class="w"> </span>ansible-playbook<span class="w"> </span>community.sops.
 <h2><a class="toc-backref" href="#id4" role="doc-backlink">Working with encrypted files</a><a class="headerlink" href="#working-with-encrypted-files" title="Link to this heading"></a></h2>
 <p>You can decrypt SOPS-encrypted files with the <a class="reference internal" href="../sops_lookup.html#ansible-collections-community-sops-sops-lookup"><span class="std std-ref">community.sops.sops lookup plugin</span></a>, and dynamically encrypt data with the <a class="reference internal" href="../sops_encrypt_module.html#ansible-collections-community-sops-sops-encrypt-module"><span class="std std-ref">community.sops.sops_encrypt module</span></a>. Being able to encrypt is useful when you create or update secrets in your Ansible playbooks.</p>
 <p>Assume that you have an encrypted private key <code class="docutils literal notranslate"><span class="pre">keys/private_key.pem.sops</span></code>, which was in PEM format before being encrypted by SOPS:</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$<span class="w"> </span>openssl<span class="w"> </span>genrsa<span class="w"> </span>-out<span class="w"> </span>keys/private_key.pem<span class="w"> </span><span class="m">2048</span>
-$<span class="w"> </span>sops<span class="w"> </span>--encrypt<span class="w"> </span>keys/private_key.pem<span class="w"> </span>&gt;<span class="w"> </span>keys/private_key.pem.sops
-$<span class="w"> </span>wipe<span class="w"> </span>keys/private_key.pem
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>openssl<span class="w"> </span>genrsa<span class="w"> </span>-out<span class="w"> </span>keys/private_key.pem<span class="w"> </span><span class="m">2048</span>
+<span class="gp">$ </span>sops<span class="w"> </span>--encrypt<span class="w"> </span>keys/private_key.pem<span class="w"> </span>&gt;<span class="w"> </span>keys/private_key.pem.sops
+<span class="gp">$ </span>wipe<span class="w"> </span>keys/private_key.pem
 </pre></div>
 </div>
 <p>To use it in a playbook, for example to pass it to the <a class="reference external" href="https://docs.ansible.com/ansible/devel/collections/community/crypto/openssl_csr_module.html#ansible-collections-community-crypto-openssl-csr-module" title="(in Ansible vdevel)"><span>community.crypto.openssl_csr module</span></a> to create a certificate signing request (CSR), you can use the <a class="reference internal" href="../sops_lookup.html#ansible-collections-community-sops-sops-lookup"><span class="std std-ref">community.sops.sops lookup plugin</span></a> to load it:</p>
