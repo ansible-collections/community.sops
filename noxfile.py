@@ -135,6 +135,8 @@ add_target(core_version="2.17", docker_container="ubuntu2204", sops_version="3.8
 add_target(core_version="2.17", docker_container="fedora39", sops_version="3.10.1")
 add_target(core_version="2.18", docker_container="ubuntu2404", sops_version="3.9.0")
 add_target(core_version="2.18", docker_container="fedora40", sops_version="3.9.2")
+add_target(core_version="2.19", docker_container="ubuntu2404", sops_version="3.10.0")
+add_target(core_version="2.19", docker_container="fedora41", sops_version="3.10.2")
 add_target(core_version="devel", docker_container="ubuntu2204", sops_version="3.6.0")
 add_target(core_version="devel", docker_container="ubuntu2204", sops_version="3.7.0")
 add_target(core_version="devel", docker_container="ubuntu2404", sops_version="3.9.1")
@@ -147,6 +149,8 @@ add_target(core_version="2.17", docker_container="ubuntu2204", target="gha/insta
 add_target(core_version="2.17", docker_container="fedora39", target="gha/install/1/")
 add_target(core_version="2.18", docker_container="ubuntu2404", target="gha/install/1/")
 add_target(core_version="2.18", docker_container="fedora40", target="gha/install/1/")
+add_target(core_version="2.19", docker_container="ubuntu2404", target="gha/install/1/")
+add_target(core_version="2.19", docker_container="fedora41", target="gha/install/1/")
 # Install on localhost vs. remote host
 add_target(core_version="devel", docker_container="ubuntu2204", target="gha/install/2/")
 # Install latest sops
