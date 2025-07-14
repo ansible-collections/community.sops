@@ -252,7 +252,7 @@
             '"key1": "value1"' in slurp.content | b64decode
           - >-
             '"unencrypted_regex": "^key1$"' in slurp.content | b64decode
-      when: sops_version_controller is version('3.9.0', '>=')
+      when: sops_version_remote is version('3.9.0', '>=')
     - name: "SOPS before 3.9.0: check whether path_regex in .sops.yaml did not work"
       assert:
         that:
@@ -260,7 +260,7 @@
             '"key1": "value1"' not in slurp.content | b64decode
           - >-
             '"unencrypted_regex": "^key1$"' not in slurp.content | b64decode
-      when: sops_version_controller is version('3.9.0', '<')
+      when: sops_version_remote is version('3.9.0', '<')
 
     - name: Create JSON file (idempotency, check mode)
       community.sops.sops_encrypt:
