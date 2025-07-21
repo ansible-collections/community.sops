@@ -4,6 +4,19 @@ Community SOPS Release Notes
 
 .. contents:: Topics
 
+v2.2.0
+======
+
+Release Summary
+---------------
+
+Feature release.
+
+Minor Changes
+-------------
+
+- load_vars - expressions can now be lazily evaluated when using ansible-core 2.19 or newer (https://github.com/ansible-collections/community.sops/pull/229).
+
 v2.1.0
 ======
 

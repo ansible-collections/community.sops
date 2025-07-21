@@ -496,3 +496,13 @@ releases:
       - 2.1.0.yml
       - 241-support-ssh-keys-for-age.yaml
     release_date: '2025-06-14'
+  2.2.0:
+    changes:
+      minor_changes:
+        - load_vars - expressions can now be lazily evaluated when using ansible-core
+          2.19 or newer (https://github.com/ansible-collections/community.sops/pull/229).
+      release_summary: Feature release.
+    fragments:
+      - 2.2.0.yml
+      - 229-lazy-evaluation.yml
+    release_date: '2025-07-21'
