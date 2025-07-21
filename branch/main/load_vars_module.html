@@ -288,11 +288,12 @@ see <a class="reference internal" href="#ansible-collections-community-sops-load
 <td><div class="ansible-option-cell"><p>This option controls how Jinja2 expressions in values in the loaded file are handled.</p>
 <p>If set to <code class="ansible-value docutils literal notranslate"><span class="pre">ignore</span></code>, expressions will not be evaluated, but treated as regular strings.</p>
 <p>If set to <code class="ansible-value docutils literal notranslate"><span class="pre">evaluate-on-load</span></code>, expressions will be evaluated on execution of this module, in other words, when the file is loaded.</p>
-<p>Unfortunately, there is no way for non-core modules to handle expressions “unsafe”, in other words, evaluate them only on use. This can only achieved by <a class="reference external" href="https://docs.ansible.com/ansible/devel/collections/ansible/builtin/include_vars_module.html#ansible-collections-ansible-builtin-include-vars-module" title="(in Ansible vdevel)"><span class="xref std std-ref">ansible.builtin.include_vars</span></a>, which unfortunately cannot handle SOPS-encrypted files.</p>
+<p>If set to <code class="ansible-value docutils literal notranslate"><span class="pre">lazy-evaluation</span></code>, expressions will be lazily evaluated. This requires ansible-core 2.19 or newer and is the same behavior than <a class="reference external" href="https://docs.ansible.com/ansible/devel/collections/ansible/builtin/include_vars_module.html#ansible-collections-ansible-builtin-include-vars-module" title="(in Ansible vdevel)"><span class="xref std std-ref">ansible.builtin.include_vars</span></a>. <code class="ansible-value docutils literal notranslate"><span class="pre">lazy-evaluation</span></code> has been added in community.sops 2.2.0.</p>
 <p class="ansible-option-line"><strong class="ansible-option-choices">Choices:</strong></p>
 <ul class="simple">
 <li><p><code class="ansible-option-default-bold docutils literal notranslate"><strong><span class="pre">&quot;ignore&quot;</span></strong></code> <span class="ansible-option-choices-default-mark">← (default)</span></p></li>
 <li><p><code class="ansible-option-choices-entry docutils literal notranslate"><span class="pre">&quot;evaluate-on-load&quot;</span></code></p></li>
+<li><p><code class="ansible-option-choices-entry docutils literal notranslate"><span class="pre">&quot;lazy-evaluation&quot;</span></code></p></li>
 </ul>
 </div></td>
 </tr>
