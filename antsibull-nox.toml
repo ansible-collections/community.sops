@@ -60,3 +60,29 @@ run_galaxy_importer = true
 
 [sessions.ansible_test_sanity]
 include_devel = true
+
+[[sessions.ee_check.execution_environments]]
+name = "devel-ubi-9"
+description = "ansible-core devel @ RHEL UBI 9"
+test_playbooks = ["tests/ee/all.yml"]
+config.images.base_image.name = "docker.io/redhat/ubi9:latest"
+config.dependencies.ansible_core.package_pip = "https://github.com/ansible/ansible/archive/devel.tar.gz"
+config.dependencies.ansible_runner.package_pip = "ansible-runner"
+config.dependencies.python_interpreter.package_system = "python3.11 python3.11-pip python3.11-wheel python3.11-cryptography"
+config.dependencies.python_interpreter.python_path = "/usr/bin/python3.11"
+config.additional_build_steps.append_final = [
+    "RUN ansible-playbook -v community.sops.install_localhost",
+]
+runtime_environment = {"ANSIBLE_PRIVATE_ROLE_VARS" = "true"}
+
+[[sessions.ee_check.execution_environments]]
+name = "2.15-rocky-9"
+description = "ansible-core 2.15 @ Rocky Linux 9"
+test_playbooks = ["tests/ee/all.yml"]
+config.images.base_image.name = "quay.io/rockylinux/rockylinux:9"
+config.dependencies.ansible_core.package_pip = "https://github.com/ansible/ansible/archive/stable-2.15.tar.gz"
+config.dependencies.ansible_runner.package_pip = "ansible-runner"
+config.additional_build_steps.append_final = [
+    "RUN ansible-playbook -v community.sops.install_localhost",
+]
+runtime_environment = {"ANSIBLE_PRIVATE_ROLE_VARS" = "true"}
