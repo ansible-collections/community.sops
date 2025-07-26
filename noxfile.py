@@ -157,9 +157,11 @@ add_target(core_version="devel", docker_container="ubuntu2204", target="gha/inst
 add_target(core_version="devel", docker_container=archlinux, python_version="3.13", target="gha/install/3/", github_latest_detection="auto")
 add_target(core_version="devel", docker_container=debian_bookworm, python_version="3.11", target="gha/install/3/", github_latest_detection="auto")
 add_target(core_version="2.16", docker_container=debian_bullseye, python_version="3.9", target="gha/install/3/", github_latest_detection="auto")
+add_target(core_version="2.19", docker_container="fedora41", target="gha/install/3/", github_latest_detection="auto")
 add_target(core_version="devel", docker_container="fedora42", target="gha/install/3/", github_latest_detection="auto")
 add_target(core_version="devel", docker_container="ubuntu2204", target="gha/install/3/", github_latest_detection="api")
 add_target(core_version="devel", docker_container="ubuntu2404", target="gha/install/3/", github_latest_detection="latest-release")
+add_target(core_version="2.19", docker_container="alpine321", target="gha/install/3/", github_latest_detection="auto")
 add_target(core_version="devel", docker_container="alpine322", target="gha/install/3/", github_latest_detection="auto")
 # ARM 64
 add_target(core_version="devel", docker_container="fedora42", target="gha/install/1/", github_latest_detection="auto", gha_container="ubuntu-24.04-arm")
