@@ -5,7 +5,7 @@
 
 - name: Fetch the latest release from GitHub
   ansible.builtin.uri:
-    follow_redirects: false
+    follow_redirects: "none"
     status_code:
       - 302
       - 307
