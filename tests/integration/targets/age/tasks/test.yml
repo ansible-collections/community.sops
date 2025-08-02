@@ -90,7 +90,7 @@
       - decrypt_3 == decrypt_3_4
 
 - when: >-
-    {{ sops_version_controller is version('3.7.1', '>=') }}
+    sops_version_controller is version('3.7.1', '>=')
   block:
     - name: Decrypt some data (3.7.1+)
       set_fact:
