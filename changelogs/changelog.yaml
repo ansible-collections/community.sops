@@ -448,3 +448,13 @@ releases:
       - 224-install.yml
       - 225-data-tagging.yml
     release_date: '2025-04-14'
+  1.9.3:
+    changes:
+      bugfixes:
+        - install role - avoid deprecated parameter value for the ``ansible.builtin.uri``
+          module (https://github.com/ansible-collections/community.sops/pull/255).
+      release_summary: Bugfix release.
+    fragments:
+      - 1.9.3.yml
+      - 255-install-redirects.yml
+    release_date: '2025-08-03'
