@@ -506,3 +506,13 @@ releases:
       - 2.2.0.yml
       - 229-lazy-evaluation.yml
     release_date: '2025-07-21'
+  2.2.1:
+    changes:
+      bugfixes:
+        - install role - avoid deprecated parameter value for the ``ansible.builtin.uri``
+          module (https://github.com/ansible-collections/community.sops/pull/255).
+      release_summary: Bugfix release.
+    fragments:
+      - 2.2.1.yml
+      - 255-install-redirects.yml
+    release_date: '2025-08-03'

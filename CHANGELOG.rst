@@ -4,6 +4,19 @@ Community SOPS Release Notes
 
 .. contents:: Topics
 
+v2.2.1
+======
+
+Release Summary
+---------------
+
+Bugfix release.
+
+Bugfixes
+--------
+
+- install role - avoid deprecated parameter value for the ``ansible.builtin.uri`` module (https://github.com/ansible-collections/community.sops/pull/255).
+
 v2.2.0
 ======
 
