@@ -62,9 +62,11 @@ def add_target(
     gha_container: str = "ubuntu-latest",
     target: str = "gha/main/",
 ) -> None:
-    docker_container_short = docker_container
-    if docker_container_short.startswith("quay.io/ansible-community/test-image:"):
-        docker_container_short = docker_container_short[len("quay.io/ansible-community/test-image:"):]
+    docker_container_short = (
+        docker_container
+        .removeprefix("quay.io/ansible-community/test-image:")
+        .removeprefix("localhost/test-image:")
+    )
     target_name = target.split("/", 1)[1].rstrip("/").replace("/", "-")
     # Compose name
     name = f"ansible-test-integration-{target_name}-{core_version}-{docker_container_short}"
@@ -121,6 +123,7 @@ def add_target(
 archlinux = "quay.io/ansible-community/test-image:archlinux"
 debian_bullseye = "quay.io/ansible-community/test-image:debian-bullseye"
 debian_bookworm = "quay.io/ansible-community/test-image:debian-bookworm"
+debian_13_trixie = "quay.io/ansible-community/test-image:debian-13-trixie"
 
 for core_version in ["devel"]:
     for docker_container in ["ubuntu2204", "ubuntu2404", "fedora42"]:
@@ -142,6 +145,7 @@ add_target(core_version="devel", docker_container="ubuntu2204", sops_version="3.
 add_target(core_version="devel", docker_container="ubuntu2404", sops_version="3.9.1")
 add_target(core_version="devel", docker_container=archlinux, python_version="3.13", sops_version="latest")
 add_target(core_version="devel", docker_container=debian_bookworm, python_version="3.11", sops_version="latest")
+add_target(core_version="devel", docker_container=debian_13_trixie, python_version="3.13", sops_version="latest")
 add_target(core_version="devel", docker_container="ubuntu2404", sops_version="latest", gha_container="ubuntu-24.04-arm")
 
 # Install specific sops
@@ -156,6 +160,7 @@ add_target(core_version="devel", docker_container="ubuntu2204", target="gha/inst
 # Install latest sops
 add_target(core_version="devel", docker_container=archlinux, python_version="3.13", target="gha/install/3/", github_latest_detection="auto")
 add_target(core_version="devel", docker_container=debian_bookworm, python_version="3.11", target="gha/install/3/", github_latest_detection="auto")
+add_target(core_version="devel", docker_container=debian_13_trixie, python_version="3.13", target="gha/install/3/", github_latest_detection="auto")
 add_target(core_version="2.16", docker_container=debian_bullseye, python_version="3.9", target="gha/install/3/", github_latest_detection="auto")
 add_target(core_version="2.19", docker_container="fedora41", target="gha/install/3/", github_latest_detection="auto")
 add_target(core_version="devel", docker_container="fedora42", target="gha/install/3/", github_latest_detection="auto")
