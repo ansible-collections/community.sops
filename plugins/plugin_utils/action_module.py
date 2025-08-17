@@ -23,7 +23,7 @@ import traceback
 from ansible.errors import AnsibleError
 from ansible.module_utils import six
 from ansible.module_utils.basic import SEQUENCETYPE, remove_values
-from ansible.module_utils.common._collections_compat import (
+from collections.abc import (
     Mapping
 )
 from ansible.module_utils.common.validation import (
