@@ -4,6 +4,20 @@ Community SOPS Release Notes
 
 .. contents:: Topics
 
+v2.2.2
+======
+
+Release Summary
+---------------
+
+Bugfix release.
+
+Bugfixes
+--------
+
+- Avoid deprecated functionality in ansible-core 2.20 (https://github.com/ansible-collections/community.sops/pull/260).
+- all modules and plugins - the default of ``enable_local_keyservice`` changed from ``false`` to ``true``, and explicitly setting it to ``false`` now passes ``--enable-local-keyservice=false``. SOPS' default has always been ``true``, and when setting this option to ``true`` so far it resulted in passing ``--enable-local-keyservice``, which is equivalent to ``--enable-local-keyservice=true`` and had no effect. This means that from now on, setting ``enable_local_keyservice`` explicitly to ``false`` has an effect. If ``enable_local_keyservice`` was not set before, or was set to ``true``, nothing will change (https://github.com/ansible-collections/community.sops/issues/261, https://github.com/ansible-collections/community.sops/pull/262).
+
 v2.2.1
 ======
 
