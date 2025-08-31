@@ -120,7 +120,7 @@ _VALID_TYPES = set(['binary', 'json', 'yaml', 'dotenv', 'ini'])
 
 def decrypt_filter(data, input_type='yaml', output_type='yaml', sops_binary='sops', rstrip=True, decode_output=True,
                    aws_profile=None, aws_access_key_id=None, aws_secret_access_key=None, aws_session_token=None,
-                   config_path=None, enable_local_keyservice=False, keyservice=None, age_key=None, age_keyfile=None):
+                   config_path=None, enable_local_keyservice=True, keyservice=None, age_key=None, age_keyfile=None):
     '''Decrypt sops-encrypted data.'''
 
     # Check parameters

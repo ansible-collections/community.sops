@@ -78,9 +78,9 @@ def _create_repeated(argument_name, pre=False):
     return f
 
 
-def _create_boolean(argument_name, pre=False):
+def _create_boolean(argument_name, pre=False, invert=False):
     def f(value, arguments_pre, arguments_post, env, version):
-        if value:
+        if value ^ invert:
             _add_argument(arguments_pre, arguments_post, argument_name, pre=pre)
 
     return f
@@ -101,7 +101,7 @@ GENERAL_OPTIONS = {
     'aws_secret_access_key': _create_env_variable('AWS_SECRET_ACCESS_KEY'),
     'aws_session_token': _create_env_variable('AWS_SESSION_TOKEN'),
     'config_path': _create_single_arg('--config', pre=True),
-    'enable_local_keyservice': _create_boolean('--enable-local-keyservice'),
+    'enable_local_keyservice': _create_boolean('--enable-local-keyservice=false', invert=True),
     'keyservice': _create_repeated('--keyservice'),
 }
 
@@ -375,7 +375,7 @@ def get_sops_argument_spec(add_encrypt_specific=False):
         },
         'enable_local_keyservice': {
             'type': 'bool',
-            'default': False,
+            'default': True,
         },
         'keyservice': {
             'type': 'list',
