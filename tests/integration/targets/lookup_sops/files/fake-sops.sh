@@ -3,7 +3,7 @@
 # GNU General Public License v3.0+ (see LICENSES/GPL-3.0-or-later.txt or https://www.gnu.org/licenses/gpl-3.0.txt)
 # SPDX-License-Identifier: GPL-3.0-or-later
 
-if [ "$1" != "--enable-local-keyservice" ] || [ "$2" != "--decrypt" ] || [ "$(basename "$3")" != "simple.sops.yaml" ] || [ "$4" != "" ]; then
+if [ "$1" != "--enable-local-keyservice=false" ] || [ "$2" != "--decrypt" ] || [ "$(basename "$3")" != "simple.sops.yaml" ] || [ "$4" != "" ]; then
     echo "Command (fake-sops): $*" > /dev/stderr
     exit 1
 fi
