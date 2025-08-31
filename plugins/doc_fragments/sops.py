@@ -76,9 +76,9 @@ options:
   enable_local_keyservice:
     description:
       - Tell SOPS to use local key service.
-      - This corresponds to the SOPS C(--enable-local-keyservice) option.
+      - When set to V(false), this corresponds to the SOPS C(--enable-local-keyservice=false) option.
     type: bool
-    default: false
+    default: true
     version_added: 1.0.0
   keyservice:
     description:

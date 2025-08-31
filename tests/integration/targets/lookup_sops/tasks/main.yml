@@ -142,7 +142,7 @@
 
     - name: Test fake sops binary (lookup parameters)
       set_fact:
-        fake_sops_output: "{{ lookup('community.sops.sops', 'simple.sops.yaml', sops_binary=role_path ~ '/files/fake-sops.sh', enable_local_keyservice=True, aws_access_key_id='xxx') }}"
+        fake_sops_output: "{{ lookup('community.sops.sops', 'simple.sops.yaml', sops_binary=role_path ~ '/files/fake-sops.sh', enable_local_keyservice=False, aws_access_key_id='xxx') }}"
         fake_sops_output_2: "{{ lookup('community.sops.sops', 'simple.sops.yaml', sops_binary=role_path ~ '/files/fake-sops-val.sh', config_path='/path/to/asdf', aws_secret_access_key='yyy') }}"
         fake_sops_output_3: "{{ lookup('community.sops.sops', 'simple.sops.yaml', sops_binary=role_path ~ '/files/fake-sops-rep.sh', keyservice=['a', 'b'], aws_session_token='zzz') }}"
 
@@ -161,7 +161,7 @@
         fake_sops_output: "{{ lookup('community.sops.sops', 'simple.sops.yaml') }}"
       vars:
         # sops_binary: "{{ role_path }}/files/fake-sops.sh"
-        sops_enable_local_keyservice: true
+        sops_enable_local_keyservice: false
         sops_aws_access_key_id: xxx
 
     - name: Work around Ansible bug for next test
