@@ -22,7 +22,7 @@ The following table shows which versions of SOPS were tested with which versions
 
 |`community.sops` version|SOPS versions|
 |---|---|
-|`main` branch|`3.5.0`, `3.6.0`, `3.6.1`, `3.7.0`, `3.7.3`, `3.8.0`, `3.8.1`, `3.9.0`, `3.9.1`, `3.9.2`, `3.9.3`, `3.10.0`, `3.10.1`, `3.10.2`|
+|`main` branch|`3.5.0`, `3.6.0`, `3.6.1`, `3.7.0`, `3.7.3`, `3.8.0`, `3.8.1`, `3.9.0`, `3.9.1`, `3.9.2`, `3.9.3`, `3.10.0`, `3.10.1`, `3.10.2`, `3.11.0`|
 
 ## Code of Conduct
 
