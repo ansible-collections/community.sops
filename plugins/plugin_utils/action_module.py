@@ -18,10 +18,10 @@ __metaclass__ = type
 
 import abc
 import copy
+import sys
 import traceback
 
 from ansible.errors import AnsibleError
-from ansible.module_utils import six
 from ansible.module_utils.basic import SEQUENCETYPE, remove_values
 from collections.abc import (
     Mapping
@@ -29,12 +29,17 @@ from collections.abc import (
 from ansible.module_utils.common.validation import (
     safe_eval,
 )
-from ansible.module_utils.six import string_types
 from ansible.plugins.action import ActionBase
-
 
 from ansible.module_utils.common.arg_spec import ArgumentSpecValidator
 from ansible.module_utils.errors import UnsupportedError
+
+from ansible_collections.community.sops.plugins.module_utils._six import add_metaclass
+
+if sys.version_info[0] == 2:
+    string_types = (str, unicode)  # noqa: F821, pylint: disable=undefined-variable
+else:
+    string_types = (bytes, str)
 
 
 class _ModuleExitException(Exception):
@@ -187,7 +192,7 @@ class AnsibleActionModule(object):
         self._return_formatted(result)
 
 
-@six.add_metaclass(abc.ABCMeta)
+@add_metaclass(abc.ABCMeta)
 class ActionModuleBase(ActionBase):
     @abc.abstractmethod
     def setup_module(self):
