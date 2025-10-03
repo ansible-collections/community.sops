@@ -5,7 +5,7 @@
 
 namespace: community
 name: sops
-version: 2.2.2
+version: 2.2.3
 readme: README.md
 authors:
   - Edoardo Tenani
