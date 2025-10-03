@@ -4,6 +4,24 @@ Community SOPS Release Notes
 
 .. contents:: Topics
 
+v2.2.3
+======
+
+Release Summary
+---------------
+
+Maintenance release.
+
+Minor Changes
+-------------
+
+- Note that some new code in ``plugins/module_utils/_six.py`` is MIT licensed (https://github.com/ansible-collections/community.sops/pull/268).
+
+Bugfixes
+--------
+
+- Avoid using ``ansible.module_utils.six`` to avoid deprecation warnings with ansible-core 2.20 (https://github.com/ansible-collections/community.sops/pull/268).
+
 v2.2.2
 ======
 
