@@ -5,14 +5,20 @@
 from __future__ import (absolute_import, division, print_function)
 __metaclass__ = type
 
+import sys
+
 from ansible.module_utils.common._collections_compat import Sequence, Mapping
-from ansible.module_utils.six import iteritems, string_types
 from ansible.module_utils.common.text.converters import to_native
 from ansible.utils.display import Display
 
 from ansible_collections.community.sops.plugins.module_utils.sops import Sops, get_sops_argument_spec
 
 from ansible_collections.community.sops.plugins.plugin_utils.action_module import ActionModuleBase, ArgumentSpec
+
+if sys.version_info[0] == 2:
+    string_types = (str, unicode)  # noqa: F821, pylint: disable=undefined-variable
+else:
+    string_types = (bytes, str)
 
 try:
     from ansible.template import trust_as_template as _trust_as_template
@@ -52,7 +58,7 @@ class ActionModule(ActionModuleBase):
         if isinstance(value, Sequence):
             return [self._evaluate(v) for v in value]
         if isinstance(value, Mapping):
-            return dict((k, self._evaluate(v)) for k, v in iteritems(value))
+            return dict((k, self._evaluate(v)) for k, v in value.items())
         return value
 
     def _make_safe(self, value):
@@ -62,7 +68,7 @@ class ActionModule(ActionModuleBase):
         if isinstance(value, Sequence):
             return [self._make_safe(v) for v in value]
         if isinstance(value, Mapping):
-            return dict((k, self._make_safe(v)) for k, v in iteritems(value))
+            return dict((k, self._make_safe(v)) for k, v in value.items())
         return value
 
     @staticmethod
