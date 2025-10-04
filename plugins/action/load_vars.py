@@ -16,9 +16,9 @@ from ansible_collections.community.sops.plugins.module_utils.sops import Sops, g
 from ansible_collections.community.sops.plugins.plugin_utils.action_module import ActionModuleBase, ArgumentSpec
 
 if sys.version_info[0] == 2:
-    string_types = (str, unicode)  # noqa: F821, pylint: disable=undefined-variable
+    string_types = (basestring,)  # noqa: F821, pylint: disable=undefined-variable
 else:
-    string_types = (bytes, str)
+    string_types = (str,)
 
 try:
     from ansible.template import trust_as_template as _trust_as_template

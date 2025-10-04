@@ -37,9 +37,9 @@ from ansible.module_utils.errors import UnsupportedError
 from ansible_collections.community.sops.plugins.module_utils._six import add_metaclass
 
 if sys.version_info[0] == 2:
-    string_types = (str, unicode)  # noqa: F821, pylint: disable=undefined-variable
+    string_types = (basestring,)  # noqa: F821, pylint: disable=undefined-variable
 else:
-    string_types = (bytes, str)
+    string_types = (str,)
 
 
 class _ModuleExitException(Exception):
