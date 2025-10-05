@@ -4,6 +4,19 @@ Community SOPS Release Notes
 
 .. contents:: Topics
 
+v2.2.4
+======
+
+Release Summary
+---------------
+
+Maintenance release.
+
+Bugfixes
+--------
+
+- Fix accidental type extensions (https://github.com/ansible-collections/community.sops/pull/269).
+
 v2.2.3
 ======
 

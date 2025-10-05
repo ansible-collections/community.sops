@@ -548,3 +548,12 @@ releases:
       - 2.2.3.yml
       - 268-six.yml
     release_date: '2025-10-03'
+  2.2.4:
+    changes:
+      bugfixes:
+        - Fix accidental type extensions (https://github.com/ansible-collections/community.sops/pull/269).
+      release_summary: Maintenance release.
+    fragments:
+      - 2.2.4.yml
+      - 269-fix.yml
+    release_date: '2025-10-05'
