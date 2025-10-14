@@ -6,8 +6,8 @@ from __future__ import (absolute_import, division, print_function)
 __metaclass__ = type
 
 import sys
+from collections.abc import Sequence, Mapping
 
-from ansible.module_utils.common._collections_compat import Sequence, Mapping
 from ansible.module_utils.common.text.converters import to_native
 from ansible.utils.display import Display
 
