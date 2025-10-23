@@ -26,9 +26,6 @@ from ansible.module_utils.basic import SEQUENCETYPE, remove_values
 from collections.abc import (
     Mapping
 )
-from ansible.module_utils.common.validation import (
-    safe_eval,
-)
 from ansible.plugins.action import ActionBase
 
 from ansible.module_utils.common.arg_spec import ArgumentSpecValidator
@@ -40,6 +37,13 @@ if sys.version_info[0] == 2:
     string_types = (basestring,)  # noqa: F821, pylint: disable=undefined-variable
 else:
     string_types = (str,)
+
+try:
+    from ansible.module_utils.common.validation import (
+        safe_eval,
+    )
+except ImportError:
+    safe_eval = None
 
 
 class _ModuleExitException(Exception):
@@ -122,6 +126,8 @@ class AnsibleActionModule(object):
             self.fail_json(msg=msg)
 
     def safe_eval(self, value, locals=None, include_exceptions=False):
+        if safe_eval is None:
+            raise ValueError("safe_eval is not available since ansible-core 2.21")
         return safe_eval(value, locals, include_exceptions)
 
     def warn(self, warning):
