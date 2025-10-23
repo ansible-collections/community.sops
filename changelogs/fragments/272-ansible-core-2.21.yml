@@ -1,0 +1,2 @@
+bugfixes:
+  - load_vars action - avoid deprecated import from ansible-core that will be removed in ansible-core 2.21 (https://github.com/ansible-collections/community.sops/pull/272).
