@@ -357,6 +357,6 @@ This collection is primarily licensed and distributed as a whole under the GNU G
 
 See [LICENSES/GPL-3.0-or-later.txt](https://github.com/ansible-collections/community.sops/blob/main/COPYING) for the full text.
 
-Parts of the collection are licensed under the [BSD 2-Clause license](https://github.com/ansible-collections/community.sops/blob/main/LICENSES/BSD-2-Clause.txt) and the [MIT license](https://github.com/ansible-collections/community.sops/blob/main/LICENSES/MIT.txt).
+Parts of the collection are licensed under the [BSD 2-Clause license](https://github.com/ansible-collections/community.sops/blob/main/LICENSES/BSD-2-Clause.txt).
 
 All files have a machine readable `SDPX-License-Identifier:` comment denoting its respective license(s) or an equivalent entry in an accompanying `.license` file. Only changelog fragments (which will not be part of a release) are covered by a blanket statement in `REUSE.toml`. This conforms to the [REUSE specification](https://reuse.software/spec/).

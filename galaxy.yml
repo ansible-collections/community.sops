@@ -13,7 +13,6 @@ description: "Support usage of SOPS (getsops/sops) from your Ansible playbooks"
 license:
   - GPL-3.0-or-later
   - BSD-2-Clause
-  - MIT
 # license_file: COPYING
 tags:
   - sops

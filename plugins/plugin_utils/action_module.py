@@ -25,8 +25,6 @@ from ansible.plugins.action import ActionBase
 from ansible.module_utils.common.arg_spec import ArgumentSpecValidator
 from ansible.module_utils.errors import UnsupportedError
 
-from ansible_collections.community.sops.plugins.module_utils._six import add_metaclass
-
 try:
     from ansible.module_utils.common.validation import (
         safe_eval,
@@ -187,8 +185,7 @@ class AnsibleActionModule:
         self._return_formatted(result)
 
 
-@add_metaclass(abc.ABCMeta)
-class ActionModuleBase(ActionBase):
+class ActionModuleBase(ActionBase, metaclass=abc.ABCMeta):
     @abc.abstractmethod
     def setup_module(self):
         """Return pair (ArgumentSpec, kwargs)."""
