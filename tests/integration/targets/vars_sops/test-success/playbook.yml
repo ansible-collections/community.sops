@@ -12,3 +12,10 @@
     - name: Make sure group_vars/all/test.sops.yaml was found
       debug:
         msg: '{{ bar }}'
+    - name: Make sure group_vars/all/test-template.sops.yml was found
+      debug:
+        msg: '{{ var_with_template }}'
+    - name: Ensure that templates group_vars/all/test-template.sops.yml were evaluated
+      assert:
+        that:
+          - (var_with_template | int) == 2

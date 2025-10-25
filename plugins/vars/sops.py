@@ -104,20 +104,46 @@ seealso:
 """
 
 import os
+import sys
+
 from ansible.errors import AnsibleParserError
-from ansible.module_utils.common.text.converters import to_bytes, to_native, to_text
-from ansible.plugins.vars import BaseVarsPlugin
 from ansible.inventory.host import Host
 from ansible.inventory.group import Group
+from ansible.module_utils.common.text.converters import to_bytes, to_native, to_text
+from ansible.plugins.vars import BaseVarsPlugin
+from ansible.utils.display import Display
 from ansible.utils.vars import combine_vars
 from ansible_collections.community.sops.plugins.module_utils.sops import Sops, SopsError
 
-from ansible.utils.display import Display
-display = Display()
+if sys.version_info[0] == 2:
+    string_types = (basestring,)  # noqa: F821, pylint: disable=undefined-variable
+else:
+    string_types = (str,)
 
+try:
+    from ansible.template import trust_as_template as _trust_as_template
+    HAS_DATATAGGING = True
+except ImportError:
+    HAS_DATATAGGING = False
+
+
+display = Display()
 
 FOUND = {}
 DECRYPTED = {}
+
+
+def _make_safe(value):
+    if isinstance(value, string_types):
+        # must come *before* Sequence, as strings are also instances of Sequence
+        if HAS_DATATAGGING and isinstance(value, str):
+            return _trust_as_template(value)
+        return value
+    if isinstance(value, (list, tuple)):
+        return [_make_safe(v) for v in value]
+    if isinstance(value, dict):
+        return dict((k, _make_safe(v)) for k, v in value.items())
+    return value
 
 
 class VarsModule(BaseVarsPlugin):
@@ -214,7 +240,7 @@ class VarsModule(BaseVarsPlugin):
                                     continue
                                 raise
                             DECRYPTED[found] = file_content
-                        new_data = loader.load(file_content)
+                        new_data = _make_safe(loader.load(file_content))
                         if new_data:  # ignore empty files
                             data = combine_vars(data, new_data)
 
