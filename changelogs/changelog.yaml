@@ -475,3 +475,13 @@ releases:
       - 1.9.4.yml
       - 262-local-keyservice.yml
     release_date: '2025-08-31'
+  1.9.5:
+    changes:
+      bugfixes:
+        - sops vars plugin - ensure that loaded vars are evaluated also with ansible-core
+          2.19+ (https://github.com/ansible-collections/community.sops/pull/273).
+      release_summary: Bugfix release.
+    fragments:
+      - 1.9.5.yml
+      - 273-vars-eval.yml
+    release_date: '2025-10-25'
