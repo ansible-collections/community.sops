@@ -1,0 +1,2 @@
+bugfixes:
+  - "sops vars plugin - ensure that loaded vars are evaluated also with ansible-core 2.19+ (https://github.com/ansible-collections/community.sops/pull/273)."
