@@ -1,11 +1,8 @@
-# -*- coding: utf-8 -*-
-#
 # Copyright (c) 2018 Edoardo Tenani <e.tenani@arduino.cc> (@endorama)
 # GNU General Public License v3.0+ (see LICENSES/GPL-3.0-or-later.txt or https://www.gnu.org/licenses/gpl-3.0.txt)
 # SPDX-License-Identifier: GPL-3.0-or-later
 
-from __future__ import (absolute_import, division, print_function)
-__metaclass__ = type
+from __future__ import annotations
 
 DOCUMENTATION = r"""
 name: sops
@@ -149,7 +146,7 @@ class VarsModule(BaseVarsPlugin):
         if not isinstance(entities, list):
             entities = [entities]
 
-        super(VarsModule, self).get_vars(loader, path, entities)
+        super().get_vars(loader, path, entities)
 
         def get_option_value(argument_name):
             return self.get_option(argument_name)

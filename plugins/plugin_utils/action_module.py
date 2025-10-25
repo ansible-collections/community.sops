@@ -1,5 +1,3 @@
-# -*- coding: utf-8 -*-
-#
 # Copyright (c) 2012-2013 Michael DeHaan <michael.dehaan@gmail.com>
 # Copyright (c) 2016 Toshio Kuratomi <tkuratomi@ansible.com>
 # Copyright (c) 2019 Ansible Project
@@ -12,8 +10,7 @@
 
 # NOTE: THIS IS ONLY FOR ACTION PLUGINS!
 
-from __future__ import absolute_import, division, print_function
-__metaclass__ = type
+from __future__ import annotations
 
 
 import abc
@@ -40,11 +37,11 @@ except ImportError:
 
 class _ModuleExitException(Exception):
     def __init__(self, result):
-        super(_ModuleExitException, self).__init__()
+        super().__init__()
         self.result = result
 
 
-class AnsibleActionModule(object):
+class AnsibleActionModule:
     def __init__(self, action_plugin, argument_spec, bypass_checks=False,
                  mutually_exclusive=None, required_together=None,
                  required_one_of=None, supports_check_mode=False,
@@ -206,7 +203,7 @@ class ActionModuleBase(ActionBase):
         if task_vars is None:
             task_vars = dict()
 
-        result = super(ActionModuleBase, self).run(tmp, task_vars)
+        result = super().run(tmp, task_vars)
         del tmp  # tmp no longer has any effect
 
         try:
