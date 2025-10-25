@@ -2,10 +2,8 @@
 # GNU General Public License v3.0+ (see LICENSES/GPL-3.0-or-later.txt or https://www.gnu.org/licenses/gpl-3.0.txt)
 # SPDX-License-Identifier: GPL-3.0-or-later
 
-from __future__ import (absolute_import, division, print_function)
-__metaclass__ = type
+from __future__ import annotations
 
-import sys
 from collections.abc import Sequence, Mapping
 
 from ansible.module_utils.common.text.converters import to_native
@@ -14,11 +12,6 @@ from ansible.utils.display import Display
 from ansible_collections.community.sops.plugins.module_utils.sops import Sops, get_sops_argument_spec
 
 from ansible_collections.community.sops.plugins.plugin_utils.action_module import ActionModuleBase, ArgumentSpec
-
-if sys.version_info[0] == 2:
-    string_types = (basestring,)  # noqa: F821, pylint: disable=undefined-variable
-else:
-    string_types = (str,)
 
 try:
     from ansible.template import trust_as_template as _trust_as_template
@@ -52,7 +45,7 @@ class ActionModule(ActionModuleBase):
         return data
 
     def _evaluate(self, value):
-        if isinstance(value, string_types):
+        if isinstance(value, str):
             # must come *before* Sequence, as strings are also instances of Sequence
             return self._templar.template(_make_safe(value))
         if isinstance(value, Sequence):
@@ -62,7 +55,7 @@ class ActionModule(ActionModuleBase):
         return value
 
     def _make_safe(self, value):
-        if isinstance(value, string_types):
+        if isinstance(value, str):
             # must come *before* Sequence, as strings are also instances of Sequence
             return _make_safe(value)
         if isinstance(value, Sequence):
