@@ -4,6 +4,20 @@ Community SOPS Release Notes
 
 .. contents:: Topics
 
+v2.2.5
+======
+
+Release Summary
+---------------
+
+Maintenance release.
+
+Bugfixes
+--------
+
+- load_vars action - avoid another deprecated module utils from ansible-core (https://github.com/ansible-collections/community.sops/pull/270).
+- load_vars action - avoid deprecated import from ansible-core that will be removed in ansible-core 2.21 (https://github.com/ansible-collections/community.sops/pull/272).
+
 v2.2.4
 ======
 

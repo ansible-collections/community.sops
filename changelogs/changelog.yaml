@@ -557,3 +557,16 @@ releases:
       - 2.2.4.yml
       - 269-fix.yml
     release_date: '2025-10-05'
+  2.2.5:
+    changes:
+      bugfixes:
+        - load_vars action - avoid another deprecated module utils from ansible-core
+          (https://github.com/ansible-collections/community.sops/pull/270).
+        - load_vars action - avoid deprecated import from ansible-core that will be
+          removed in ansible-core 2.21 (https://github.com/ansible-collections/community.sops/pull/272).
+      release_summary: Maintenance release.
+    fragments:
+      - 2.2.5.yml
+      - 270-deprecate.yml
+      - 272-ansible-core-2.21.yml
+    release_date: '2025-10-25'

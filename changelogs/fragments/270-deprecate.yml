@@ -1,2 +1,0 @@
-bugfixes:
-  - load_vars action - avoid another deprecated module utils from ansible-core (https://github.com/ansible-collections/community.sops/pull/270).
