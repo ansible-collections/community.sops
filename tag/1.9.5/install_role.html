@@ -1,0 +1,307 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="./">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+<meta content="2.21.0" name="antsibull-docs" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>community.sops.install role – Install SOPS &mdash; Community.Sops Collection  documentation</title>
+      <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=41de9001" />
+      <link rel="stylesheet" type="text/css" href="_static/css/ansible.css?v=c5b67dd2" />
+      <link rel="stylesheet" type="text/css" href="_static/antsibull-minimal.css" />
+      <link rel="stylesheet" type="text/css" href="_static/css/rtd-ethical-ads.css?v=289b023e" />
+
+  
+    <link rel="shortcut icon" href="_static/images/Ansible-Mark-RGB_Black.png"/>
+      <script src="_static/jquery.js?v=5d32c60e"></script>
+      <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="_static/documentation_options.js?v=7f41d439"></script>
+      <script src="_static/doctools.js?v=9bcbadda"></script>
+      <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="prev" title="community.sops.sops vars – Loading SOPS-encrypted vars files" href="sops_vars.html" /><!-- extra head elements for Ansible beyond RTD Sphinx Theme -->
+
+
+
+
+</head>
+
+<body class="wy-body-for-nav"><!-- extra body elements for Ansible beyond RTD Sphinx Theme -->
+
+<div class="DocSite-globalNav ansibleNav">
+  <ul>
+    <li><a href="https://www.ansible.com/blog" target="_blank">Blog</a></li>
+    <li><a href="https://forum.ansible.com/" target="_blank">Ansible community forum</a></li>
+    <li><a href="https://docs.ansible.com/" target="_blank">Documentation</a></li>
+  </ul>
+</div>
+
+<a class="DocSite-nav" href="https://ansible-collections.github.io/community.sops/branch/main/" style="padding-bottom: 30px;">
+
+  <img class="DocSiteNav-logo"
+    src="_static/images/Ansible-Mark-RGB_White.png"
+    alt="Ansible Logo">
+  <div class="DocSiteNav-title">Community.Sops Collection Docs</div>
+</a>
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="index.html" class="icon icon-home">
+            Community.Sops Collection
+          </a><!--- Based on https://github.com/rtfd/sphinx_rtd_theme/pull/438/files -->
+
+<div class="version">
+  
+    
+  
+</div>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <label class="sr-only" for="q">Search docs:</label>
+    <input type="text" class="st-default-search-input" id="q" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+  
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="changelog.html">Community.Sops Release Notes</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="docsite/guide.html">Protecting Ansible secrets with SOPS</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="load_vars_module.html">community.sops.load_vars module – Load SOPS-encrypted variables from files, dynamically within a task</a></li>
+<li class="toctree-l1"><a class="reference internal" href="sops_encrypt_module.html">community.sops.sops_encrypt module – Encrypt data with SOPS</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="_latest_version_filter.html">community.sops._latest_version filter – [INTERNAL] Get latest version from a list of versions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="decrypt_filter.html">community.sops.decrypt filter – Decrypt SOPS-encrypted data</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="sops_lookup.html">community.sops.sops lookup – Read SOPS-encrypted file contents</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="sops_vars.html">community.sops.sops vars – Loading SOPS-encrypted vars files</a></li>
+</ul>
+<ul class="current">
+<li class="toctree-l1 current"><a class="current reference internal" href="#">community.sops.install role – Install SOPS</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#entry-point-main-install-sops">Entry point <code class="docutils literal notranslate"><span class="pre">main</span></code> – Install SOPS</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#synopsis">Synopsis</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#parameters">Parameters</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#authors">Authors</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#collection-links">Collection links</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<!-- extra nav elements for Ansible beyond RTD Sphinx Theme -->
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">Community.Sops Collection</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">community.sops.install role – Install SOPS</li>
+      <li class="wy-breadcrumbs-aside">
+              <!-- User defined GitHub URL -->
+              <a href="https://github.com/ansible-collections/community.sops/edit/main/roles/install/meta/argument_specs.yml?description=%23%23%23%23%23%20SUMMARY%0A%3C!—%20Your%20description%20here%20–%3E%0A%0A%0A%23%23%23%23%23%20ISSUE%20TYPE%0A-%20Docs%20Pull%20Request%0A%0A%2Blabel:%20docsite_pr" class="fa fa-github"> Edit on GitHub</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+
+  
+           <div itemprop="articleBody">
+             
+  <span class="target" id="ansible-collections-community-sops-install-role"></span><section id="community-sops-install-role-install-sops">
+<h1>community.sops.install role – Install SOPS<a class="headerlink" href="#community-sops-install-role-install-sops" title="Link to this heading"></a></h1>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>This role is part of the <a class="reference external" href="https://galaxy.ansible.com/ui/repo/published/community/sops/">community.sops collection</a> (version 1.9.5).</p>
+<p>It is not included in <code class="docutils literal notranslate"><span class="pre">ansible-core</span></code>.
+To check whether it is installed, run <code class="code docutils literal notranslate"><span class="pre">ansible-galaxy</span> <span class="pre">collection</span> <span class="pre">list</span></code>.</p>
+<p>To install it use: <code class="code docutils literal notranslate"><span class="pre">ansible-galaxy</span> <span class="pre">collection</span> <span class="pre">install</span> <span class="pre">community.sops</span></code>.</p>
+<p>To use it in a playbook, specify: <code class="code docutils literal notranslate"><span class="pre">community.sops.install</span></code>.</p>
+</div>
+<nav class="contents local" id="contents">
+<ul class="simple">
+<li><p><a class="reference internal" href="#entry-point-main-install-sops" id="id1">Entry point <code class="docutils literal notranslate"><span class="pre">main</span></code> – Install SOPS</a></p>
+<ul>
+<li><p><a class="reference internal" href="#synopsis" id="id2">Synopsis</a></p></li>
+<li><p><a class="reference internal" href="#parameters" id="id3">Parameters</a></p></li>
+<li><p><a class="reference internal" href="#authors" id="id4">Authors</a></p></li>
+</ul>
+</li>
+</ul>
+</nav>
+<span class="target" id="ansible-collections-community-sops-install-role-entrypoint-main"></span><section id="entry-point-main-install-sops">
+<h2><a class="toc-backref" href="#id1" role="doc-backlink">Entry point <code class="docutils literal notranslate"><span class="pre">main</span></code> – Install SOPS</a><a class="headerlink" href="#entry-point-main-install-sops" title="Link to this heading"></a></h2>
+<p class="ansible-version-added">New in community.sops 1.5.0</p>
+<section id="synopsis">
+<h3><a class="toc-backref" href="#id2" role="doc-backlink">Synopsis</a><a class="headerlink" href="#synopsis" title="Link to this heading"></a></h3>
+<ul class="simple">
+<li><p>This role installs <a class="reference external" href="https://github.com/getsops/sops">SOPS</a> and GNU Privacy Guard (GPG).</p></li>
+<li><p>This role supports the following operating systems: Alpine (new enough), Arch Linux, CentOS 7, Stream 8, or newer, Debian 10 (Buster) or newer, Fedora (new enough), RHEL 7 or newer, Ubuntu 16.04 or newer LTS versions</p></li>
+<li><p>The Ansible facts <code class="docutils literal notranslate"><span class="pre">ansible_facts.architecture</span></code>, <code class="docutils literal notranslate"><span class="pre">ansible_facts.distribution</span></code>, <code class="docutils literal notranslate"><span class="pre">ansible_facts.distribution_major_version</span></code>, <code class="docutils literal notranslate"><span class="pre">ansible_facts.distribution_version</span></code>, and <code class="docutils literal notranslate"><span class="pre">ansible_facts.os_family</span></code> are expected to be present if <code class="ansible-option docutils literal notranslate"><strong><a class="reference internal" href="#ansible-collections-community-sops-install-role-parameter-main-sops-install-on-localhost"><span class="std std-ref"><span class="pre">sops_install_on_localhost</span></span></a></strong></code> is <code class="ansible-value docutils literal notranslate"><span class="pre">false</span></code>.</p></li>
+</ul>
+</section>
+<section id="parameters">
+<h3><a class="toc-backref" href="#id3" role="doc-backlink">Parameters</a><a class="headerlink" href="#parameters" title="Link to this heading"></a></h3>
+<table class="longtable ansible-option-table docutils align-default" style="width: 100%">
+<thead>
+<tr class="row-odd"><th class="head"><p>Parameter</p></th>
+<th class="head"><p>Comments</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><div class="ansible-option-cell">
+<div class="ansibleOptionAnchor" id="parameter-main--sops_become_on_install"></div><p class="ansible-option-title" id="ansible-collections-community-sops-install-role-parameter-main-sops-become-on-install"><strong>sops_become_on_install</strong></p>
+<a class="ansibleOptionLink" href="#parameter-main--sops_become_on_install" title="Permalink to this option"></a><p class="ansible-option-type-line"><span class="ansible-option-type">boolean</span></p>
+</div></td>
+<td><div class="ansible-option-cell"><p>Whether the role should use <code class="docutils literal notranslate"><span class="pre">become:</span> <span class="pre">true</span></code> when installing packages.</p>
+<p class="ansible-option-line"><strong class="ansible-option-choices">Choices:</strong></p>
+<ul class="simple">
+<li><p><code class="ansible-option-choices-entry docutils literal notranslate"><span class="pre">false</span></code></p></li>
+<li><p><code class="ansible-option-default-bold docutils literal notranslate"><strong><span class="pre">true</span></strong></code> <span class="ansible-option-choices-default-mark">← (default)</span></p></li>
+</ul>
+</div></td>
+</tr>
+<tr class="row-odd"><td><div class="ansible-option-cell">
+<div class="ansibleOptionAnchor" id="parameter-main--sops_github_latest_detection"></div><p class="ansible-option-title" id="ansible-collections-community-sops-install-role-parameter-main-sops-github-latest-detection"><strong>sops_github_latest_detection</strong></p>
+<a class="ansibleOptionLink" href="#parameter-main--sops_github_latest_detection" title="Permalink to this option"></a><p class="ansible-option-type-line"><span class="ansible-option-type">string</span></p>
+<p><em class="ansible-option-versionadded">added in community.sops 1.6.0</em></p>
+</div></td>
+<td><div class="ansible-option-cell"><p>When installing the latest SOPS version from GitHub, configures how the latest release is detected.</p>
+<p><code class="ansible-value docutils literal notranslate"><span class="pre">auto</span></code> tries <code class="ansible-value docutils literal notranslate"><span class="pre">api</span></code> first and then uses <code class="ansible-value docutils literal notranslate"><span class="pre">latest-release</span></code>.</p>
+<p><code class="ansible-value docutils literal notranslate"><span class="pre">api</span></code> asks the GitHub API for a list of recent releases and picks the highest version. Pre-releases are avoided.</p>
+<p><code class="ansible-value docutils literal notranslate"><span class="pre">latest-release</span></code> uses a not fully documented URL to retrieve the release marked as “latest” by the repository maintainers.</p>
+<p class="ansible-option-line"><strong class="ansible-option-choices">Choices:</strong></p>
+<ul class="simple">
+<li><p><code class="ansible-option-choices-entry docutils literal notranslate"><span class="pre">&quot;auto&quot;</span></code></p></li>
+<li><p><code class="ansible-option-choices-entry docutils literal notranslate"><span class="pre">&quot;api&quot;</span></code></p></li>
+<li><p><code class="ansible-option-choices-entry docutils literal notranslate"><span class="pre">&quot;latest-release&quot;</span></code></p></li>
+</ul>
+</div></td>
+</tr>
+<tr class="row-even"><td><div class="ansible-option-cell">
+<div class="ansibleOptionAnchor" id="parameter-main--sops_github_token"></div><p class="ansible-option-title" id="ansible-collections-community-sops-install-role-parameter-main-sops-github-token"><strong>sops_github_token</strong></p>
+<a class="ansibleOptionLink" href="#parameter-main--sops_github_token" title="Permalink to this option"></a><p class="ansible-option-type-line"><span class="ansible-option-type">string</span></p>
+<p><em class="ansible-option-versionadded">added in community.sops 1.6.0</em></p>
+</div></td>
+<td><div class="ansible-option-cell"><p>Token to provide when querying the GitHub API for the latest release. Without the token there are rather strict rate limits.</p>
+<p>Should mainly be used in GitHub Actions.</p>
+</div></td>
+</tr>
+<tr class="row-odd"><td><div class="ansible-option-cell">
+<div class="ansibleOptionAnchor" id="parameter-main--sops_install_on_localhost"></div><p class="ansible-option-title" id="ansible-collections-community-sops-install-role-parameter-main-sops-install-on-localhost"><strong>sops_install_on_localhost</strong></p>
+<a class="ansibleOptionLink" href="#parameter-main--sops_install_on_localhost" title="Permalink to this option"></a><p class="ansible-option-type-line"><span class="ansible-option-type">boolean</span></p>
+</div></td>
+<td><div class="ansible-option-cell"><p>Installs SOPS on the Ansible controller (<code class="docutils literal notranslate"><span class="pre">localhost</span></code>) instead of the remote host.</p>
+<p class="ansible-option-line"><strong class="ansible-option-choices">Choices:</strong></p>
+<ul class="simple">
+<li><p><code class="ansible-option-default-bold docutils literal notranslate"><strong><span class="pre">false</span></strong></code> <span class="ansible-option-choices-default-mark">← (default)</span></p></li>
+<li><p><code class="ansible-option-choices-entry docutils literal notranslate"><span class="pre">true</span></code></p></li>
+</ul>
+</div></td>
+</tr>
+<tr class="row-even"><td><div class="ansible-option-cell">
+<div class="ansibleOptionAnchor" id="parameter-main--sops_source"></div><p class="ansible-option-title" id="ansible-collections-community-sops-install-role-parameter-main-sops-source"><strong>sops_source</strong></p>
+<a class="ansibleOptionLink" href="#parameter-main--sops_source" title="Permalink to this option"></a><p class="ansible-option-type-line"><span class="ansible-option-type">string</span></p>
+</div></td>
+<td><div class="ansible-option-cell"><p>Determines the source from where SOPS is installed.</p>
+<p>The value <code class="ansible-value docutils literal notranslate"><span class="pre">github</span></code> will install SOPS from the SOPS releases on GitHub (<a class="reference external" href="https://github.com/getsops/sops/releases/">https://github.com/getsops/sops/releases/</a>).</p>
+<p>The value <code class="ansible-value docutils literal notranslate"><span class="pre">system</span></code> will install SOPS from the system packages. Note that not all system package repositories support SOPS.</p>
+<p>The value <code class="ansible-value docutils literal notranslate"><span class="pre">auto</span></code> will determine the best source to install SOPS from. Here, system package repositories are preferred over GitHub.</p>
+<p class="ansible-option-line"><strong class="ansible-option-choices">Choices:</strong></p>
+<ul class="simple">
+<li><p><code class="ansible-option-default-bold docutils literal notranslate"><strong><span class="pre">&quot;auto&quot;</span></strong></code> <span class="ansible-option-choices-default-mark">← (default)</span></p></li>
+<li><p><code class="ansible-option-choices-entry docutils literal notranslate"><span class="pre">&quot;github&quot;</span></code></p></li>
+<li><p><code class="ansible-option-choices-entry docutils literal notranslate"><span class="pre">&quot;system&quot;</span></code></p></li>
+</ul>
+</div></td>
+</tr>
+<tr class="row-odd"><td><div class="ansible-option-cell">
+<div class="ansibleOptionAnchor" id="parameter-main--sops_version"></div><p class="ansible-option-title" id="ansible-collections-community-sops-install-role-parameter-main-sops-version"><strong>sops_version</strong></p>
+<a class="ansibleOptionLink" href="#parameter-main--sops_version" title="Permalink to this option"></a><p class="ansible-option-type-line"><span class="ansible-option-type">string</span></p>
+</div></td>
+<td><div class="ansible-option-cell"><p>The version of SOPS to install.</p>
+<p>Should be a version like <code class="ansible-value docutils literal notranslate"><span class="pre">3.7.2</span></code>. The special value <code class="ansible-value docutils literal notranslate"><span class="pre">latest</span></code> will select the latest version available form the given source.</p>
+<p class="ansible-option-line"><strong class="ansible-option-default-bold">Default:</strong> <code class="ansible-option-default docutils literal notranslate"><span class="pre">&quot;latest&quot;</span></code></p>
+</div></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="authors">
+<h3><a class="toc-backref" href="#id4" role="doc-backlink">Authors</a><a class="headerlink" href="#authors" title="Link to this heading"></a></h3>
+<ul class="simple">
+<li><p>Felix Fontein (&#64;felixfontein)</p></li>
+</ul>
+<section id="collection-links">
+<h4>Collection links<a class="headerlink" href="#collection-links" title="Link to this heading"></a></h4>
+<ul class="ansible-links">
+<li><span><a aria-role="button" class="ansible-link reference external" href="https://github.com/ansible-collections/community.sops/issues" rel="noopener external" target="_blank">Issue Tracker</a></span></li>
+<li><span><a aria-role="button" class="ansible-link reference external" href="https://github.com/ansible-collections/community.sops" rel="noopener external" target="_blank">Repository (Sources)</a></span></li>
+<li><span><a aria-role="button" class="ansible-link reference external" href="https://forum.ansible.com/tags/c/help/6/none/sops" rel="noopener external" target="_blank">Ask for help (SOPS)</a></span></li>
+<li><span><a aria-role="button" class="ansible-link reference external" href="https://github.com/ansible-collections/community.sops/issues/new?assignees=&amp;labels=&amp;template=bug_report.md" rel="noopener external" target="_blank">Submit a bug report</a></span></li>
+<li><span><a aria-role="button" class="ansible-link reference external" href="https://github.com/ansible-collections/community.sops/issues/new?assignees=&amp;labels=&amp;template=feature_request.md" rel="noopener external" target="_blank">Request a feature</a></span></li>
+<li><span><a class="reference internal" href="index.html#communication-for-community-sops"><span class="std std-ref">Communication</span></a></span></li>
+</ul>
+</section>
+</section>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          
+
+<footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="sops_vars.html" class="btn btn-neutral float-left" title="community.sops.sops vars – Loading SOPS-encrypted vars files" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright Community.Sops Contributors.</p>
+  </div>
+
+  
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script><!-- extra footer elements for Ansible beyond RTD Sphinx Theme -->
+
+</body>
+</html>
