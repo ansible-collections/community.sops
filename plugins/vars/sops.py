@@ -104,7 +104,7 @@ seealso:
 """
 
 import os
-import sys
+from collections.abc import Sequence, Mapping
 
 from ansible.errors import AnsibleParserError
 from ansible.inventory.host import Host
@@ -114,11 +114,6 @@ from ansible.plugins.vars import BaseVarsPlugin
 from ansible.utils.display import Display
 from ansible.utils.vars import combine_vars
 from ansible_collections.community.sops.plugins.module_utils.sops import Sops, SopsError
-
-if sys.version_info[0] == 2:
-    string_types = (basestring,)  # noqa: F821, pylint: disable=undefined-variable
-else:
-    string_types = (str,)
 
 try:
     from ansible.template import trust_as_template as _trust_as_template
@@ -134,14 +129,14 @@ DECRYPTED = {}
 
 
 def _make_safe(value):
-    if isinstance(value, string_types):
+    if isinstance(value, str):
         # must come *before* Sequence, as strings are also instances of Sequence
         if HAS_DATATAGGING and isinstance(value, str):
             return _trust_as_template(value)
         return value
-    if isinstance(value, (list, tuple)):
+    if isinstance(value, Sequence):
         return [_make_safe(v) for v in value]
-    if isinstance(value, dict):
+    if isinstance(value, Mapping):
         return dict((k, _make_safe(v)) for k, v in value.items())
     return value
 

@@ -18,25 +18,17 @@ __metaclass__ = type
 
 import abc
 import copy
-import sys
 import traceback
 
 from ansible.errors import AnsibleError
 from ansible.module_utils.basic import SEQUENCETYPE, remove_values
-from collections.abc import (
-    Mapping
-)
+from collections.abc import Mapping
 from ansible.plugins.action import ActionBase
 
 from ansible.module_utils.common.arg_spec import ArgumentSpecValidator
 from ansible.module_utils.errors import UnsupportedError
 
 from ansible_collections.community.sops.plugins.module_utils._six import add_metaclass
-
-if sys.version_info[0] == 2:
-    string_types = (basestring,)  # noqa: F821, pylint: disable=undefined-variable
-else:
-    string_types = (str,)
 
 try:
     from ansible.module_utils.common.validation import (
@@ -132,7 +124,7 @@ class AnsibleActionModule(object):
 
     def warn(self, warning):
         # Copied from ansible.module_utils.common.warnings:
-        if isinstance(warning, string_types):
+        if isinstance(warning, str):
             self.__warnings.append(warning)
         else:
             raise TypeError("warn requires a string not a %s" % type(warning))
@@ -142,7 +134,7 @@ class AnsibleActionModule(object):
             raise AssertionError("implementation error -- version and date must not both be set")
 
         # Copied from ansible.module_utils.common.warnings:
-        if isinstance(msg, string_types):
+        if isinstance(msg, str):
             # For compatibility, we accept that neither version nor date is set,
             # and treat that the same as if version would haven been set
             if date is not None:
