@@ -1,3 +1,0 @@
-bugfixes:
-  - "Clean up plugin code that does not run on the target (https://github.com/ansible-collections/community.sops/pull/275)."
-  - "Note that the MIT licenced code in ``plugins/module_utils/_six.py`` has been removed (https://github.com/ansible-collections/community.sops/pull/275)."

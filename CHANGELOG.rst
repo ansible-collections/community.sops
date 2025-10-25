@@ -4,6 +4,21 @@ Community SOPS Release Notes
 
 .. contents:: Topics
 
+v2.2.6
+======
+
+Release Summary
+---------------
+
+Bugfix and maintenance release.
+
+Bugfixes
+--------
+
+- Clean up plugin code that does not run on the target (https://github.com/ansible-collections/community.sops/pull/275).
+- Note that the MIT licenced code in ``plugins/module_utils/_six.py`` has been removed (https://github.com/ansible-collections/community.sops/pull/275).
+- sops vars plugin - ensure that loaded vars are evaluated also with ansible-core 2.19+ (https://github.com/ansible-collections/community.sops/pull/273).
+
 v2.2.5
 ======
 

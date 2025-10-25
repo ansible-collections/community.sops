@@ -570,3 +570,17 @@ releases:
       - 270-deprecate.yml
       - 272-ansible-core-2.21.yml
     release_date: '2025-10-25'
+  2.2.6:
+    changes:
+      bugfixes:
+        - Clean up plugin code that does not run on the target (https://github.com/ansible-collections/community.sops/pull/275).
+        - Note that the MIT licenced code in ``plugins/module_utils/_six.py`` has
+          been removed (https://github.com/ansible-collections/community.sops/pull/275).
+        - sops vars plugin - ensure that loaded vars are evaluated also with ansible-core
+          2.19+ (https://github.com/ansible-collections/community.sops/pull/273).
+      release_summary: Bugfix and maintenance release.
+    fragments:
+      - 2.2.6.yml
+      - 273-vars-eval.yml
+      - 275-py3.yml
+    release_date: '2025-10-25'
