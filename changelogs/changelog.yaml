@@ -584,3 +584,23 @@ releases:
       - 273-vars-eval.yml
       - 275-py3.yml
     release_date: '2025-10-25'
+  2.2.7:
+    changes:
+      known_issues:
+        - When using the ``community.sops.load_vars`` with ansible-core 2.20, note
+          that the deprecation of ``INJECT_FACTS_AS_VARS`` causes deprecation warnings
+          to be shown every time a variable loaded with ``community.sops.load_vars``
+          is used. This is due to ansible-core deprecating ``INJECT_FACTS_AS_VARS``
+          without providing an alternative for modules like ``community.sops.load_vars``
+          to use. If you do not like these deprecation warnings, you have to explicitly
+          set ``INJECT_FACTS_AS_VARS`` to ``true``. **DO NOT** change the use of SOPS
+          encrypted variables to ``ansible_facts``. The situation will hopefully improve
+          in ansible-core 2.21 through the promised API that allows action plugins
+          to set variables; community.sops will adapt to use it, which will make the
+          warning go away. (The API was originally promised for ansible-core 2.20,
+          but then delayed.)
+      release_summary: Maintenance release.
+    fragments:
+      - 2.2.7.yml
+      - ansible-core-2.20-warning.yml
+    release_date: '2025-11-02'
