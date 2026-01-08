@@ -328,13 +328,18 @@ docker = "alpine321"
 ansible_vars = { github_latest_detection = "auto" }
 
 [[sessions.ansible_test_integration.groups.sessions]]
-ansible_core = "devel"
+ansible_core = "2.20"
 docker = "alpine322"
 ansible_vars = { github_latest_detection = "auto" }
 
 [[sessions.ansible_test_integration.groups.sessions]]
 ansible_core = "devel"
-docker = "alpine322"
+docker = "alpine323"
+ansible_vars = { github_latest_detection = "auto" }
+
+[[sessions.ansible_test_integration.groups.sessions]]
+ansible_core = "devel"
+docker = "alpine323"
 gha_container = "ubuntu-24.04-arm"
 ansible_vars = { github_latest_detection = "auto" }
 
