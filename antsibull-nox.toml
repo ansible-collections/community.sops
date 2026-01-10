@@ -90,12 +90,14 @@ gha_container = "ubuntu-latest"
 
 [[sessions.ansible_test_integration.groups.sessions]]
 ansible_core = "devel"
-docker = ["ubuntu2204", "ubuntu2404", "fedora43"]
+docker = ["ubuntu2204", "ubuntu2404"]
+# Cannot install 3.5.0 on Fedora 43 (digest algorithm used for RPM isn't accepted anymore)
 ansible_vars = { override_sops_version = "3.5.0" }
 
 [[sessions.ansible_test_integration.groups.sessions]]
 ansible_core = "devel"
-docker = ["ubuntu2204", "ubuntu2404", "fedora43"]
+docker = ["ubuntu2204", "ubuntu2404"]
+# Cannot install 3.6.1 on Fedora 43 (digest algorithm used for RPM isn't accepted anymore)
 ansible_vars = { override_sops_version = "3.6.1" }
 
 [[sessions.ansible_test_integration.groups.sessions]]
