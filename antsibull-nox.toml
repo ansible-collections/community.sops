@@ -199,7 +199,7 @@ ansible_vars = { override_sops_version = "3.9.1" }
 [[sessions.ansible_test_integration.groups.sessions]]
 ansible_core = "devel"
 docker = "quay.io/ansible-community/test-image:archlinux"
-python_version = "3.13"
+python_version = "3.14"
 ansible_vars = { override_sops_version = "latest" }
 
 [[sessions.ansible_test_integration.groups.sessions]]
@@ -278,7 +278,7 @@ gha_container = "ubuntu-latest"
 [[sessions.ansible_test_integration.groups.sessions]]
 ansible_core = "devel"
 docker = "quay.io/ansible-community/test-image:archlinux"
-python_version = "3.13"
+python_version = "3.14"
 ansible_vars = { github_latest_detection = "auto" }
 
 [[sessions.ansible_test_integration.groups.sessions]]
