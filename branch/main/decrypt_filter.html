@@ -18,8 +18,8 @@
       <script src="_static/jquery.js?v=5d32c60e"></script>
       <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
       <script src="_static/documentation_options.js?v=7f41d439"></script>
-      <script src="_static/doctools.js?v=9bcbadda"></script>
-      <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+      <script src="_static/doctools.js?v=fd6eb6e6"></script>
+      <script src="_static/sphinx_highlight.js?v=6ffebe34"></script>
     <script src="_static/js/theme.js"></script>
     <link rel="search" title="Search" href="search.html" />
     <link rel="next" title="community.sops.sops lookup – Read SOPS-encrypted file contents" href="sops_lookup.html" />
@@ -167,7 +167,7 @@ see <a class="reference internal" href="#ansible-collections-community-sops-decr
 <ul class="simple">
 <li><p>Decrypt SOPS-encrypted data.</p></li>
 <li><p>Allows to decrypt data that has been provided by an arbitrary source.</p></li>
-<li><p>Note that due to Ansible lazy-evaluating expressions, it is better to use <a class="reference external" href="https://docs.ansible.com/projects/ansible/devel/collections/ansible/builtin/set_fact_module.html#ansible-collections-ansible-builtin-set-fact-module" title="(in Ansible vdevel)"><span class="xref std std-ref">ansible.builtin.set_fact</span></a> to store the result of an evaluation in a fact to avoid recomputing the value every time the expression is used.</p></li>
+<li><p>Note that due to Ansible lazy-evaluating expressions, it is better to use <a class="reference external" href="https://docs.ansible.com/projects/ansible/devel/collections/ansible/builtin/set_fact_module.html#ansible-collections-ansible-builtin-set-fact-module" title="(in Ansible devel)"><span class="xref std std-ref">ansible.builtin.set_fact</span></a> to store the result of an evaluation in a fact to avoid recomputing the value every time the expression is used.</p></li>
 </ul>
 </section>
 <section id="requirements">
@@ -345,7 +345,7 @@ example: <code class="docutils literal notranslate"><span class="pre">input</spa
 <a class="ansibleOptionLink" href="#parameter-output_type" title="Permalink to this option"></a><p class="ansible-option-type-line"><span class="ansible-option-type">string</span></p>
 </div></td>
 <td><div class="ansible-option-cell"><p>Tell SOPS how to interpret the decrypted file.</p>
-<p>Please note that the output is always text or bytes, depending on the value of <code class="ansible-option docutils literal notranslate"><strong><a class="reference internal" href="#ansible-collections-community-sops-decrypt-filter-parameter-decode-output"><span class="std std-ref"><span class="pre">decode_output</span></span></a></strong></code>. To parse the resulting JSON or YAML, use corresponding filters such as <a class="reference external" href="https://docs.ansible.com/projects/ansible/devel/collections/ansible/builtin/from_json_filter.html#ansible-collections-ansible-builtin-from-json-filter" title="(in Ansible vdevel)"><span class="xref std std-ref">ansible.builtin.from_json</span></a> and <a class="reference external" href="https://docs.ansible.com/projects/ansible/devel/collections/ansible/builtin/from_yaml_filter.html#ansible-collections-ansible-builtin-from-yaml-filter" title="(in Ansible vdevel)"><span class="xref std std-ref">ansible.builtin.from_yaml</span></a>.</p>
+<p>Please note that the output is always text or bytes, depending on the value of <code class="ansible-option docutils literal notranslate"><strong><a class="reference internal" href="#ansible-collections-community-sops-decrypt-filter-parameter-decode-output"><span class="std std-ref"><span class="pre">decode_output</span></span></a></strong></code>. To parse the resulting JSON or YAML, use corresponding filters such as <a class="reference external" href="https://docs.ansible.com/projects/ansible/devel/collections/ansible/builtin/from_json_filter.html#ansible-collections-ansible-builtin-from-json-filter" title="(in Ansible devel)"><span class="xref std std-ref">ansible.builtin.from_json</span></a> and <a class="reference external" href="https://docs.ansible.com/projects/ansible/devel/collections/ansible/builtin/from_yaml_filter.html#ansible-collections-ansible-builtin-from-yaml-filter" title="(in Ansible devel)"><span class="xref std std-ref">ansible.builtin.from_yaml</span></a>.</p>
 <p>The value <code class="ansible-value docutils literal notranslate"><span class="pre">ini</span></code> is available since community.sops 1.9.0.</p>
 <p class="ansible-option-line"><strong class="ansible-option-choices">Choices:</strong></p>
 <ul class="simple">

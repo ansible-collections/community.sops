@@ -18,8 +18,8 @@
       <script src="_static/jquery.js?v=5d32c60e"></script>
       <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
       <script src="_static/documentation_options.js?v=7f41d439"></script>
-      <script src="_static/doctools.js?v=9bcbadda"></script>
-      <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+      <script src="_static/doctools.js?v=fd6eb6e6"></script>
+      <script src="_static/sphinx_highlight.js?v=6ffebe34"></script>
     <script src="_static/js/theme.js"></script>
     <link rel="search" title="Search" href="search.html" />
     <link rel="prev" title="community.sops.sops vars – Loading SOPS-encrypted vars files" href="sops_vars.html" /><!-- extra head elements for Ansible beyond RTD Sphinx Theme -->
@@ -279,7 +279,7 @@ To check whether it is installed, run <code class="code docutils literal notrans
 <div class="ansibleOptionAnchor" id="attribute-diff_mode"></div><p class="ansible-option-title" id="ansible-collections-community-sops-install-role-attribute-main-diff-mode"><strong>diff_mode</strong></p>
 <a class="ansibleOptionLink" href="#attribute-diff_mode" title="Permalink to this attribute"></a></div></td>
 <td><div class="ansible-option-cell"><p><strong class="ansible-attribute-support-label">Support: </strong><strong class="ansible-attribute-support-partial">partial</strong></p>
-<p>The role supports diff mode if the <a class="reference external" href="https://docs.ansible.com/projects/ansible/devel/collections/ansible/builtin/package_module.html#ansible-collections-ansible-builtin-package-module" title="(in Ansible vdevel)"><span class="xref std std-ref">ansible.builtin.package</span></a> action for the system supports it.</p>
+<p>The role supports diff mode if the <a class="reference external" href="https://docs.ansible.com/projects/ansible/devel/collections/ansible/builtin/package_module.html#ansible-collections-ansible-builtin-package-module" title="(in Ansible devel)"><span class="xref std std-ref">ansible.builtin.package</span></a> action for the system supports it.</p>
 </div></td>
 <td><div class="ansible-option-cell"><p>Will return details on what has changed (or possibly needs changing in <code class="docutils literal notranslate"><span class="pre">check_mode</span></code>), when in diff mode.</p>
 </div></td>
@@ -288,7 +288,7 @@ To check whether it is installed, run <code class="code docutils literal notrans
 <div class="ansibleOptionAnchor" id="attribute-idempotent"></div><p class="ansible-option-title" id="ansible-collections-community-sops-install-role-attribute-main-idempotent"><strong>idempotent</strong></p>
 <a class="ansibleOptionLink" href="#attribute-idempotent" title="Permalink to this attribute"></a></div></td>
 <td><div class="ansible-option-cell"><p><strong class="ansible-attribute-support-label">Support: </strong><strong class="ansible-attribute-support-partial">partial</strong></p>
-<p>The role is idempotent if the <a class="reference external" href="https://docs.ansible.com/projects/ansible/devel/collections/ansible/builtin/package_module.html#ansible-collections-ansible-builtin-package-module" title="(in Ansible vdevel)"><span class="xref std std-ref">ansible.builtin.package</span></a> action for the system is idempotent.</p>
+<p>The role is idempotent if the <a class="reference external" href="https://docs.ansible.com/projects/ansible/devel/collections/ansible/builtin/package_module.html#ansible-collections-ansible-builtin-package-module" title="(in Ansible devel)"><span class="xref std std-ref">ansible.builtin.package</span></a> action for the system is idempotent.</p>
 <p>This is usually the case, but if packages need to be installed from GitHub (that is, through an URL), idempotence might not hold.</p>
 </div></td>
 <td><div class="ansible-option-cell"><p>When run twice in a row outside check mode, with the same arguments, the second invocation indicates no change.</p>
