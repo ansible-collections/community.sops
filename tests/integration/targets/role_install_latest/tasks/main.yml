@@ -7,9 +7,9 @@
   debug:
     msg: |
       Architecture: {{ ansible_facts.architecture }}
-      OS family: {{ ansible_facts['os_family'] }}
-      Distribution: {{ ansible_facts['distribution'] }}
-      Distribution version: {{ ansible_facts['distribution_version }}
+      OS family: {{ ansible_facts.os_family }}
+      Distribution: {{ ansible_facts.distribution }}
+      Distribution version: {{ ansible_facts.distribution_version }}
 
 - name: Install latest sops
   include_role:
