@@ -6,10 +6,10 @@
 - name: Show some basic system info
   debug:
     msg: |
-      Architecture: {{ ansible_architecture }}
-      OS family: {{ ansible_os_family }}
-      Distribution: {{ ansible_distribution }}
-      Distribution version: {{ ansible_distribution_version }}
+      Architecture: {{ ansible_facts.architecture }}
+      OS family: {{ ansible_facts.os_family }}
+      Distribution: {{ ansible_facts.distribution }}
+      Distribution version: {{ ansible_facts.distribution_version }}
 
 - name: Install SOPS on localhost
   include_role:
