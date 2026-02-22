@@ -18,11 +18,18 @@ Please note that this collection does **not** support Windows targets.
 
 ## SOPS version compatibility
 
-The following table shows which versions of SOPS were tested with which versions of the collection. Older (or newer) versions of SOPS can still work fine, it just means that we did not test them. In some cases, it could be that a minimal required version of SOPS is explicitly documented for a specific feature. This is the case from community.sops 1.8.0 on; from that version on the collection automatically detects the SOPS version to determine whether a feature is supported or not.
+The following table shows which versions of SOPS are tested with the latest version of the collection (for the current major release branch). Older (or newer) versions of SOPS can still work fine, it just means that we did not test them. In some cases, it could be that a minimal required version of SOPS is explicitly documented for a specific feature. This is the case from community.sops 1.8.0 on; from that version on the collection automatically detects the SOPS version to determine whether a feature is supported or not.
 
-|`community.sops` version|SOPS versions|
+|SOPS release train|SOPS versions|
 |---|---|
-|`main` branch|`3.5.0`, `3.6.0`, `3.6.1`, `3.7.0`, `3.7.3`, `3.8.0`, `3.8.1`, `3.9.0`, `3.9.1`, `3.9.2`, `3.9.3`, `3.10.0`, `3.10.1`, `3.10.2`, `3.11.0`, `3.12.1`|
+|`3.5.x`|`3.5.0` (latest)|
+|`3.6.x`|`3.6.0`, `3.6.1` (latest)|
+|`3.7.x`|`3.7.0`, `3.7.3` (latest)|
+|`3.8.x`|`3.8.0`, `3.8.1` (latest)|
+|`3.9.x`|`3.9.0`, `3.9.1`, `3.9.2`, `3.9.3`|
+|`3.10.x`|`3.10.0`, `3.10.1`, `3.10.2` (latest)|
+|`3.11.x`|`3.11.0` (latest)|
+|`3.12.x`|`3.12.1`|
 
 ## Code of Conduct
 
