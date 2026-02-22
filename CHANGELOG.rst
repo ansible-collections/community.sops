@@ -4,6 +4,19 @@ Community SOPS Release Notes
 
 .. contents:: Topics
 
+v1.9.6
+======
+
+Release Summary
+---------------
+
+This is the final community.sops 1.x.y release.
+From now on, community.sops 1.x.y is End of Life.
+There will be no further bugfix releases.
+Please upgrade to community.sops 2.x.y.
+
+Thanks to everyone who contributed to community.sops 1.x.y!
+
 v1.9.5
 ======
 

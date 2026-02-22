@@ -2,125 +2,140 @@
 
 **Topics**
 
-- <a href="#v1-9-5">v1\.9\.5</a>
+- <a href="#v1-9-6">v1\.9\.6</a>
     - <a href="#release-summary">Release Summary</a>
+- <a href="#v1-9-5">v1\.9\.5</a>
+    - <a href="#release-summary-1">Release Summary</a>
     - <a href="#bugfixes">Bugfixes</a>
 - <a href="#v1-9-4">v1\.9\.4</a>
-    - <a href="#release-summary-1">Release Summary</a>
+    - <a href="#release-summary-2">Release Summary</a>
     - <a href="#bugfixes-1">Bugfixes</a>
 - <a href="#v1-9-3">v1\.9\.3</a>
-    - <a href="#release-summary-2">Release Summary</a>
+    - <a href="#release-summary-3">Release Summary</a>
     - <a href="#bugfixes-2">Bugfixes</a>
 - <a href="#v1-9-2">v1\.9\.2</a>
-    - <a href="#release-summary-3">Release Summary</a>
+    - <a href="#release-summary-4">Release Summary</a>
     - <a href="#bugfixes-3">Bugfixes</a>
 - <a href="#v1-9-1">v1\.9\.1</a>
-    - <a href="#release-summary-4">Release Summary</a>
+    - <a href="#release-summary-5">Release Summary</a>
     - <a href="#bugfixes-4">Bugfixes</a>
 - <a href="#v1-9-0">v1\.9\.0</a>
-    - <a href="#release-summary-5">Release Summary</a>
+    - <a href="#release-summary-6">Release Summary</a>
     - <a href="#minor-changes">Minor Changes</a>
 - <a href="#v1-8-2">v1\.8\.2</a>
-    - <a href="#release-summary-6">Release Summary</a>
+    - <a href="#release-summary-7">Release Summary</a>
     - <a href="#deprecated-features">Deprecated Features</a>
 - <a href="#v1-8-1">v1\.8\.1</a>
-    - <a href="#release-summary-7">Release Summary</a>
+    - <a href="#release-summary-8">Release Summary</a>
     - <a href="#bugfixes-5">Bugfixes</a>
 - <a href="#v1-8-0">v1\.8\.0</a>
-    - <a href="#release-summary-8">Release Summary</a>
+    - <a href="#release-summary-9">Release Summary</a>
     - <a href="#minor-changes-1">Minor Changes</a>
     - <a href="#bugfixes-6">Bugfixes</a>
 - <a href="#v1-7-0">v1\.7\.0</a>
-    - <a href="#release-summary-9">Release Summary</a>
+    - <a href="#release-summary-10">Release Summary</a>
     - <a href="#minor-changes-2">Minor Changes</a>
     - <a href="#bugfixes-7">Bugfixes</a>
 - <a href="#v1-6-7">v1\.6\.7</a>
-    - <a href="#release-summary-10">Release Summary</a>
+    - <a href="#release-summary-11">Release Summary</a>
     - <a href="#bugfixes-8">Bugfixes</a>
 - <a href="#v1-6-6">v1\.6\.6</a>
-    - <a href="#release-summary-11">Release Summary</a>
+    - <a href="#release-summary-12">Release Summary</a>
     - <a href="#bugfixes-9">Bugfixes</a>
 - <a href="#v1-6-5">v1\.6\.5</a>
-    - <a href="#release-summary-12">Release Summary</a>
+    - <a href="#release-summary-13">Release Summary</a>
     - <a href="#bugfixes-10">Bugfixes</a>
 - <a href="#v1-6-4">v1\.6\.4</a>
-    - <a href="#release-summary-13">Release Summary</a>
+    - <a href="#release-summary-14">Release Summary</a>
     - <a href="#bugfixes-11">Bugfixes</a>
 - <a href="#v1-6-3">v1\.6\.3</a>
-    - <a href="#release-summary-14">Release Summary</a>
+    - <a href="#release-summary-15">Release Summary</a>
     - <a href="#known-issues">Known Issues</a>
 - <a href="#v1-6-2">v1\.6\.2</a>
-    - <a href="#release-summary-15">Release Summary</a>
+    - <a href="#release-summary-16">Release Summary</a>
     - <a href="#bugfixes-12">Bugfixes</a>
 - <a href="#v1-6-1">v1\.6\.1</a>
-    - <a href="#release-summary-16">Release Summary</a>
+    - <a href="#release-summary-17">Release Summary</a>
     - <a href="#bugfixes-13">Bugfixes</a>
 - <a href="#v1-6-0">v1\.6\.0</a>
-    - <a href="#release-summary-17">Release Summary</a>
+    - <a href="#release-summary-18">Release Summary</a>
     - <a href="#minor-changes-3">Minor Changes</a>
 - <a href="#v1-5-0">v1\.5\.0</a>
-    - <a href="#release-summary-18">Release Summary</a>
+    - <a href="#release-summary-19">Release Summary</a>
     - <a href="#minor-changes-4">Minor Changes</a>
     - <a href="#new-playbooks">New Playbooks</a>
     - <a href="#new-roles">New Roles</a>
 - <a href="#v1-4-1">v1\.4\.1</a>
-    - <a href="#release-summary-19">Release Summary</a>
+    - <a href="#release-summary-20">Release Summary</a>
     - <a href="#bugfixes-14">Bugfixes</a>
 - <a href="#v1-4-0">v1\.4\.0</a>
-    - <a href="#release-summary-20">Release Summary</a>
+    - <a href="#release-summary-21">Release Summary</a>
     - <a href="#minor-changes-5">Minor Changes</a>
 - <a href="#v1-3-0">v1\.3\.0</a>
-    - <a href="#release-summary-21">Release Summary</a>
+    - <a href="#release-summary-22">Release Summary</a>
     - <a href="#minor-changes-6">Minor Changes</a>
 - <a href="#v1-2-3">v1\.2\.3</a>
-    - <a href="#release-summary-22">Release Summary</a>
-- <a href="#v1-2-2">v1\.2\.2</a>
     - <a href="#release-summary-23">Release Summary</a>
+- <a href="#v1-2-2">v1\.2\.2</a>
+    - <a href="#release-summary-24">Release Summary</a>
     - <a href="#bugfixes-15">Bugfixes</a>
 - <a href="#v1-2-1">v1\.2\.1</a>
-    - <a href="#release-summary-24">Release Summary</a>
-- <a href="#v1-2-0">v1\.2\.0</a>
     - <a href="#release-summary-25">Release Summary</a>
+- <a href="#v1-2-0">v1\.2\.0</a>
+    - <a href="#release-summary-26">Release Summary</a>
     - <a href="#minor-changes-7">Minor Changes</a>
     - <a href="#bugfixes-16">Bugfixes</a>
 - <a href="#v1-1-0">v1\.1\.0</a>
-    - <a href="#release-summary-26">Release Summary</a>
+    - <a href="#release-summary-27">Release Summary</a>
     - <a href="#minor-changes-8">Minor Changes</a>
     - <a href="#new-plugins">New Plugins</a>
         - <a href="#filter">Filter</a>
 - <a href="#v1-0-6">v1\.0\.6</a>
-    - <a href="#release-summary-27">Release Summary</a>
+    - <a href="#release-summary-28">Release Summary</a>
     - <a href="#bugfixes-17">Bugfixes</a>
 - <a href="#v1-0-5">v1\.0\.5</a>
-    - <a href="#release-summary-28">Release Summary</a>
+    - <a href="#release-summary-29">Release Summary</a>
     - <a href="#bugfixes-18">Bugfixes</a>
 - <a href="#v1-0-4">v1\.0\.4</a>
-    - <a href="#release-summary-29">Release Summary</a>
+    - <a href="#release-summary-30">Release Summary</a>
     - <a href="#security-fixes">Security Fixes</a>
 - <a href="#v1-0-3">v1\.0\.3</a>
-    - <a href="#release-summary-30">Release Summary</a>
+    - <a href="#release-summary-31">Release Summary</a>
     - <a href="#bugfixes-19">Bugfixes</a>
 - <a href="#v1-0-2">v1\.0\.2</a>
-    - <a href="#release-summary-31">Release Summary</a>
-- <a href="#v1-0-1">v1\.0\.1</a>
     - <a href="#release-summary-32">Release Summary</a>
-- <a href="#v1-0-0">v1\.0\.0</a>
+- <a href="#v1-0-1">v1\.0\.1</a>
     - <a href="#release-summary-33">Release Summary</a>
+- <a href="#v1-0-0">v1\.0\.0</a>
+    - <a href="#release-summary-34">Release Summary</a>
     - <a href="#minor-changes-9">Minor Changes</a>
 - <a href="#v0-2-0">v0\.2\.0</a>
-    - <a href="#release-summary-34">Release Summary</a>
+    - <a href="#release-summary-35">Release Summary</a>
     - <a href="#minor-changes-10">Minor Changes</a>
 - <a href="#v0-1-0">v0\.1\.0</a>
-    - <a href="#release-summary-35">Release Summary</a>
+    - <a href="#release-summary-36">Release Summary</a>
     - <a href="#new-plugins-1">New Plugins</a>
         - <a href="#lookup">Lookup</a>
         - <a href="#vars">Vars</a>
     - <a href="#new-modules">New Modules</a>
 
+<a id="v1-9-6"></a>
+## v1\.9\.6
+
+<a id="release-summary"></a>
+### Release Summary
+
+This is the final community\.sops 1\.x\.y release\.
+From now on\, community\.sops 1\.x\.y is End of Life\.
+There will be no further bugfix releases\.
+Please upgrade to community\.sops 2\.x\.y\.
+
+Thanks to everyone who contributed to community\.sops 1\.x\.y\!
+
 <a id="v1-9-5"></a>
 ## v1\.9\.5
 
-<a id="release-summary"></a>
+<a id="release-summary-1"></a>
 ### Release Summary
 
 Bugfix release\.
@@ -133,7 +148,7 @@ Bugfix release\.
 <a id="v1-9-4"></a>
 ## v1\.9\.4
 
-<a id="release-summary-1"></a>
+<a id="release-summary-2"></a>
 ### Release Summary
 
 Bugfix release\.
@@ -146,7 +161,7 @@ Bugfix release\.
 <a id="v1-9-3"></a>
 ## v1\.9\.3
 
-<a id="release-summary-2"></a>
+<a id="release-summary-3"></a>
 ### Release Summary
 
 Bugfix release\.
@@ -159,7 +174,7 @@ Bugfix release\.
 <a id="v1-9-2"></a>
 ## v1\.9\.2
 
-<a id="release-summary-3"></a>
+<a id="release-summary-4"></a>
 ### Release Summary
 
 Maintenance release with Data Tagging support\.
@@ -174,7 +189,7 @@ Maintenance release with Data Tagging support\.
 <a id="v1-9-1"></a>
 ## v1\.9\.1
 
-<a id="release-summary-4"></a>
+<a id="release-summary-5"></a>
 ### Release Summary
 
 Bugfix release\.
@@ -187,7 +202,7 @@ Bugfix release\.
 <a id="v1-9-0"></a>
 ## v1\.9\.0
 
-<a id="release-summary-5"></a>
+<a id="release-summary-6"></a>
 ### Release Summary
 
 Feature release\.
@@ -202,7 +217,7 @@ Feature release\.
 <a id="v1-8-2"></a>
 ## v1\.8\.2
 
-<a id="release-summary-6"></a>
+<a id="release-summary-7"></a>
 ### Release Summary
 
 Maintenance release with updated documentation and changelog\.
@@ -215,7 +230,7 @@ Maintenance release with updated documentation and changelog\.
 <a id="v1-8-1"></a>
 ## v1\.8\.1
 
-<a id="release-summary-7"></a>
+<a id="release-summary-8"></a>
 ### Release Summary
 
 Bugfix release\.
@@ -228,7 +243,7 @@ Bugfix release\.
 <a id="v1-8-0"></a>
 ## v1\.8\.0
 
-<a id="release-summary-8"></a>
+<a id="release-summary-9"></a>
 ### Release Summary
 
 Feature release for supporting improvements coming with SOPS 3\.9\.0\.
@@ -247,7 +262,7 @@ Feature release for supporting improvements coming with SOPS 3\.9\.0\.
 <a id="v1-7-0"></a>
 ## v1\.7\.0
 
-<a id="release-summary-9"></a>
+<a id="release-summary-10"></a>
 ### Release Summary
 
 Bugfix and feature release to fix installation issues with SOPS 3\.9\.0\.
@@ -265,7 +280,7 @@ Bugfix and feature release to fix installation issues with SOPS 3\.9\.0\.
 <a id="v1-6-7"></a>
 ## v1\.6\.7
 
-<a id="release-summary-10"></a>
+<a id="release-summary-11"></a>
 ### Release Summary
 
 Bugfix release\.
@@ -278,7 +293,7 @@ Bugfix release\.
 <a id="v1-6-6"></a>
 ## v1\.6\.6
 
-<a id="release-summary-11"></a>
+<a id="release-summary-12"></a>
 ### Release Summary
 
 Make fully compatible with and test against sops 3\.8\.0\.
@@ -291,7 +306,7 @@ Make fully compatible with and test against sops 3\.8\.0\.
 <a id="v1-6-5"></a>
 ## v1\.6\.5
 
-<a id="release-summary-12"></a>
+<a id="release-summary-13"></a>
 ### Release Summary
 
 Make compatible with and test against sops 3\.8\.0\-rc\.1\.
@@ -305,7 +320,7 @@ Make compatible with and test against sops 3\.8\.0\-rc\.1\.
 <a id="v1-6-4"></a>
 ## v1\.6\.4
 
-<a id="release-summary-13"></a>
+<a id="release-summary-14"></a>
 ### Release Summary
 
 Maintenance/bugfix release for the move of sops to the new [getsops GitHub organization](https\://github\.com/getsops)\.
@@ -318,7 +333,7 @@ Maintenance/bugfix release for the move of sops to the new [getsops GitHub organ
 <a id="v1-6-3"></a>
 ## v1\.6\.3
 
-<a id="release-summary-14"></a>
+<a id="release-summary-15"></a>
 ### Release Summary
 
 Maintenance release with updated documentation\.
@@ -339,7 +354,7 @@ for the rendered HTML version of the documentation of the latest release\.
 <a id="v1-6-2"></a>
 ## v1\.6\.2
 
-<a id="release-summary-15"></a>
+<a id="release-summary-16"></a>
 ### Release Summary
 
 Maintenance release\.
@@ -352,7 +367,7 @@ Maintenance release\.
 <a id="v1-6-1"></a>
 ## v1\.6\.1
 
-<a id="release-summary-16"></a>
+<a id="release-summary-17"></a>
 ### Release Summary
 
 Maintenance release\.
@@ -366,7 +381,7 @@ Maintenance release\.
 <a id="v1-6-0"></a>
 ## v1\.6\.0
 
-<a id="release-summary-17"></a>
+<a id="release-summary-18"></a>
 ### Release Summary
 
 Feature release improving the installation role\.
@@ -381,7 +396,7 @@ Feature release improving the installation role\.
 <a id="v1-5-0"></a>
 ## v1\.5\.0
 
-<a id="release-summary-18"></a>
+<a id="release-summary-19"></a>
 ### Release Summary
 
 Feature release\.
@@ -405,7 +420,7 @@ Feature release\.
 <a id="v1-4-1"></a>
 ## v1\.4\.1
 
-<a id="release-summary-19"></a>
+<a id="release-summary-20"></a>
 ### Release Summary
 
 Maintenance release to improve compatibility with future ansible\-core releases\.
@@ -418,7 +433,7 @@ Maintenance release to improve compatibility with future ansible\-core releases\
 <a id="v1-4-0"></a>
 ## v1\.4\.0
 
-<a id="release-summary-20"></a>
+<a id="release-summary-21"></a>
 ### Release Summary
 
 Feature release\.
@@ -432,7 +447,7 @@ Feature release\.
 <a id="v1-3-0"></a>
 ## v1\.3\.0
 
-<a id="release-summary-21"></a>
+<a id="release-summary-22"></a>
 ### Release Summary
 
 Feature release\.
@@ -446,7 +461,7 @@ Feature release\.
 <a id="v1-2-3"></a>
 ## v1\.2\.3
 
-<a id="release-summary-22"></a>
+<a id="release-summary-23"></a>
 ### Release Summary
 
 Fix formatting bug in documentation\. No code changes\.
@@ -454,7 +469,7 @@ Fix formatting bug in documentation\. No code changes\.
 <a id="v1-2-2"></a>
 ## v1\.2\.2
 
-<a id="release-summary-23"></a>
+<a id="release-summary-24"></a>
 ### Release Summary
 
 Maintenance release\.
@@ -467,7 +482,7 @@ Maintenance release\.
 <a id="v1-2-1"></a>
 ## v1\.2\.1
 
-<a id="release-summary-24"></a>
+<a id="release-summary-25"></a>
 ### Release Summary
 
 Maintenance release with updated documentation\.
@@ -475,7 +490,7 @@ Maintenance release with updated documentation\.
 <a id="v1-2-0"></a>
 ## v1\.2\.0
 
-<a id="release-summary-25"></a>
+<a id="release-summary-26"></a>
 ### Release Summary
 
 Collection release for inclusion in Ansible 4\.9\.0 and 5\.1\.0\.
@@ -495,7 +510,7 @@ This release contains a change allowing to configure generic plugin options with
 <a id="v1-1-0"></a>
 ## v1\.1\.0
 
-<a id="release-summary-26"></a>
+<a id="release-summary-27"></a>
 ### Release Summary
 
 A minor release for inclusion in Ansible 4\.2\.0\.
@@ -516,7 +531,7 @@ A minor release for inclusion in Ansible 4\.2\.0\.
 <a id="v1-0-6"></a>
 ## v1\.0\.6
 
-<a id="release-summary-27"></a>
+<a id="release-summary-28"></a>
 ### Release Summary
 
 This release makes the collection compatible to the latest beta release of ansible\-core 2\.11\.
@@ -530,7 +545,7 @@ This release makes the collection compatible to the latest beta release of ansib
 <a id="v1-0-5"></a>
 ## v1\.0\.5
 
-<a id="release-summary-28"></a>
+<a id="release-summary-29"></a>
 ### Release Summary
 
 This release fixes a bug that prevented correct YAML file to be created when the output was ending in <code>\.yaml</code>\.
@@ -543,7 +558,7 @@ This release fixes a bug that prevented correct YAML file to be created when the
 <a id="v1-0-4"></a>
 ## v1\.0\.4
 
-<a id="release-summary-29"></a>
+<a id="release-summary-30"></a>
 ### Release Summary
 
 This is a security release\, fixing a potential information leak in the <code>community\.sops\.sops\_encrypt</code> module\.
@@ -556,7 +571,7 @@ This is a security release\, fixing a potential information leak in the <code>co
 <a id="v1-0-3"></a>
 ## v1\.0\.3
 
-<a id="release-summary-30"></a>
+<a id="release-summary-31"></a>
 ### Release Summary
 
 This release include some fixes to Ansible docs and required changes for inclusion in Ansible\.
@@ -570,7 +585,7 @@ This release include some fixes to Ansible docs and required changes for inclusi
 <a id="v1-0-2"></a>
 ## v1\.0\.2
 
-<a id="release-summary-31"></a>
+<a id="release-summary-32"></a>
 ### Release Summary
 
 Fix of 1\.0\.1 release which had no changelog entry\.
@@ -578,7 +593,7 @@ Fix of 1\.0\.1 release which had no changelog entry\.
 <a id="v1-0-1"></a>
 ## v1\.0\.1
 
-<a id="release-summary-32"></a>
+<a id="release-summary-33"></a>
 ### Release Summary
 
 Re\-release of 1\.0\.0 to counteract error during release\.
@@ -586,7 +601,7 @@ Re\-release of 1\.0\.0 to counteract error during release\.
 <a id="v1-0-0"></a>
 ## v1\.0\.0
 
-<a id="release-summary-33"></a>
+<a id="release-summary-34"></a>
 ### Release Summary
 
 First stable release\. This release is expected to be included in Ansible 3\.0\.0\.
@@ -600,7 +615,7 @@ First stable release\. This release is expected to be included in Ansible 3\.0\.
 <a id="v0-2-0"></a>
 ## v0\.2\.0
 
-<a id="release-summary-34"></a>
+<a id="release-summary-35"></a>
 ### Release Summary
 
 This release adds features for the lookup and vars plugins\.
@@ -615,7 +630,7 @@ This release adds features for the lookup and vars plugins\.
 <a id="v0-1-0"></a>
 ## v0\.1\.0
 
-<a id="release-summary-35"></a>
+<a id="release-summary-36"></a>
 ### Release Summary
 
 First release of the <code>community\.sops</code> collection\!
