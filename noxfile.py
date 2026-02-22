@@ -143,7 +143,7 @@ add_target(core_version="2.18", docker_container="fedora40", sops_version="3.9.0
 add_target(core_version="2.19", docker_container="ubuntu2204", sops_version="3.6.0")
 add_target(core_version="2.19", docker_container="ubuntu2204", sops_version="3.7.0")
 add_target(core_version="2.19", docker_container="ubuntu2404", sops_version="3.8.0")
-add_target(core_version="2.19", docker_container=archlinux, python_version="3.13", sops_version="latest")
+add_target(core_version="2.19", docker_container=archlinux, python_version="3.14", sops_version="latest")
 add_target(core_version="2.19", docker_container=debian_bookworm, python_version="3.11", sops_version="latest")
 
 # Install specific sops
@@ -154,7 +154,7 @@ add_target(core_version="2.18", docker_container="fedora40", target="gha/install
 # Install on localhost vs. remote host
 add_target(core_version="2.19", docker_container="ubuntu2204", target="gha/install/2/")
 # Install latest sops
-add_target(core_version="2.19", docker_container=archlinux, python_version="3.13", target="gha/install/3/", github_latest_detection="auto")
+add_target(core_version="2.19", docker_container=archlinux, python_version="3.14", target="gha/install/3/", github_latest_detection="auto")
 add_target(core_version="2.19", docker_container=debian_bookworm, python_version="3.11", target="gha/install/3/", github_latest_detection="auto")
 add_target(core_version="2.16", docker_container=debian_bullseye, python_version="3.9", target="gha/install/3/", github_latest_detection="auto")
 add_target(core_version="2.19", docker_container="fedora41", target="gha/install/3/", github_latest_detection="auto")
