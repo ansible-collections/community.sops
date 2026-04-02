@@ -19,6 +19,12 @@ try:
 except ImportError:
     HAS_DATATAGGING = False
 
+try:
+    from ansible.plugins.action import VariableLayer
+    HAS_REGISTER_HOST_VARIABLES = True
+except ImportError:
+    HAS_REGISTER_HOST_VARIABLES = False
+
 display = Display()
 
 
@@ -71,6 +77,7 @@ class ActionModule(ActionModuleBase):
                 file=dict(type='path', required=True),
                 name=dict(type='str'),
                 expressions=dict(type='str', default='ignore', choices=['ignore', 'evaluate-on-load', 'lazy-evaluation']),
+                return_method=dict(type='str', default='auto', choices=['auto', 'facts-only', 'vars-only']),
             ),
         )
         argument_spec.argument_spec.update(get_sops_argument_spec())
@@ -81,7 +88,15 @@ class ActionModule(ActionModuleBase):
         if expressions == 'lazy-evaluation' and not HAS_DATATAGGING:
             module.fail_json(msg='expressions=lazy-evaluation requires ansible-core 2.19+ with Data Tagging support.')
 
-        data = dict()
+        return_method_str = module.params['return_method']
+        if return_method_str == 'auto':
+            return_as_facts = not HAS_REGISTER_HOST_VARIABLES
+        else:
+            return_as_facts = return_method_str == 'facts-only'
+        if not HAS_REGISTER_HOST_VARIABLES and not return_as_facts:
+            module.fail_json(msg='return_method=vars-only requires ansible-core 2.21+')
+
+        data = {}
         files = []
         try:
             filename = self._find_needle('vars', module.params['file'])
@@ -94,8 +109,7 @@ class ActionModule(ActionModuleBase):
         if name is None:
             value = data
         else:
-            value = dict()
-            value[name] = data
+            value = {name: data}
 
         if expressions == 'evaluate-on-load':
             value = self._evaluate(value)
@@ -103,8 +117,14 @@ class ActionModule(ActionModuleBase):
         if expressions == 'lazy-evaluation':
             value = self._make_safe(value)
 
-        module.exit_json(
-            ansible_included_var_files=files,
-            ansible_facts=value,
-            _ansible_no_log=True,
-        )
+        result = {
+            'ansible_included_var_files': files,
+            '_ansible_no_log': True,
+        }
+
+        if return_as_facts:
+            result['ansible_facts'] = value
+        else:
+            self.register_host_variables(variables=value, layer=VariableLayer.INCLUDE_VARS)
+
+        module.exit_json(**result)

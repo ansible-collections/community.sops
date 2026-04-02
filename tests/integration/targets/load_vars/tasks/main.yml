@@ -46,7 +46,7 @@
         that:
           - "'sops metadata not found' in load_vars_wrong_file.msg"
 
-    - name: Test load_vars with simple file into variable
+    - name: Test load_vars with simple file into variable (1/3)
       community.sops.load_vars:
         file: simple.sops.yaml
         name: dest_variable
@@ -55,9 +55,64 @@
     - assert:
         that:
           - load_vars_simple is success
-          - "load_vars_simple.ansible_facts == {'dest_variable': {'foo': 'bar'}}"
+          - >-
+            ansible_version.full is version('2.21', '>=') or
+            load_vars_simple.ansible_facts == {'dest_variable': {'foo': 'bar'}}
+          - >-
+            ansible_version.full is version('2.21', '<') or
+            'ansible_facts' not in load_vars_simple
           - dest_variable.foo == 'bar'
           - foo is undefined
+
+    - name: Test load_vars with simple file into variable (2/3)
+      community.sops.load_vars:
+        file: simple.sops.yaml
+        name: dest_variable_2
+        return_method: facts-only
+      register: load_vars_simple_2
+
+    - assert:
+        that:
+          - load_vars_simple_2 is success
+          - >-
+            load_vars_simple_2.ansible_facts == {'dest_variable_2': {'foo': 'bar'}}
+          - ansible_facts.dest_variable_2.foo == 'bar'
+          - >-
+            ansible_version.full is version('2.24', '>=') or
+            dest_variable_2.foo == 'bar'
+      register: load_vars_simple_2_assert
+
+    - name: Show deprecations
+      debug:
+        msg: "{{ load_vars_simple_2_assert.deprecations | default([]) }}"
+
+    - when: ansible_version.full is version('2.20', '>=') and ansible_version.full is version('2.24', '<')
+      assert:
+        that:
+          - load_vars_simple_2_assert.deprecations | length > 0
+          - load_vars_simple_2_assert.deprecations | map(attribute='msg') | select('ansible.builtin.regex', 'INJECT_FACTS_AS_VARS') | length > 0
+
+    - name: Test load_vars with simple file into variable (3/3)
+      community.sops.load_vars:
+        file: simple.sops.yaml
+        name: dest_variable_3
+        return_method: vars-only
+      register: load_vars_simple_3
+      ignore_errors: true
+
+    - when: ansible_version.full is version('2.21', '>=')
+      assert:
+        that:
+          - load_vars_simple_3 is success
+          - >-
+            "ansible_facts" not in load_vars_simple_3
+          - dest_variable_3.foo == 'bar'
+
+    - when: ansible_version.full is version('2.21', '<')
+      assert:
+        that:
+          - load_vars_simple_3 is failed
+          - load_vars_simple_3.msg == "return_method=vars-only requires ansible-core 2.21+"
 
     - name: Test load_vars with empty file
       community.sops.load_vars:
@@ -67,7 +122,9 @@
     - assert:
         that:
           - load_vars_empty is success
-          - load_vars_empty.ansible_facts | length == 0
+          - >-
+            ansible_version.full is version('2.21', '>=') or
+            (load_vars_empty.ansible_facts | length == 0)
 
     - name: Test load_vars with simple file into global namespace
       community.sops.load_vars:
@@ -77,7 +134,9 @@
     - assert:
         that:
           - load_vars_simple_global is success
-          - "load_vars_simple_global.ansible_facts == {'foo': 'bar'}"
+          - >-
+            ansible_version.full is version('2.21', '>=') or
+            load_vars_simple_global.ansible_facts == {'foo': 'bar'}
           - foo == 'bar'
 
     - name: Test load_vars with expressions ignored

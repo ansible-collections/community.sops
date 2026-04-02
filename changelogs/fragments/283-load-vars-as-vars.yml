@@ -1,0 +1,6 @@
+minor_changes:
+  - "load_vars - now supports ansible-core 2.21's way of actually loading variables, instead of returning ``ansible_facts``.
+     The behavior for this can be controlled through the new ``return_method`` option, which is by default set to ``auto``.
+     On ansible-core 2.21+, ``auto`` behaves the same as ``vars-only`` (return proper variables),
+     and for ansible-core before 2.21 the same as ``facts-only`` (return ``ansible_facts``)
+     (https://github.com/ansible-collections/community.sops/pull/283)."

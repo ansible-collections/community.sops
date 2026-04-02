@@ -42,6 +42,23 @@ options:
       - ignore
       - evaluate-on-load
       - lazy-evaluation
+  return_method:
+    description:
+      - Determine how to return the results.
+      - Because of limitations of ansible-core < 2.21, the results were returned as Ansible facts.
+        Since ansible-core 2.21, it is possible to actually set variables, similar to how M(ansible.builtin.include_vars)
+        is working.
+    type: str
+    default: auto
+    choices:
+      auto:
+        - Return the results as facts for ansible-core < 2.21, and as variables for ansible-core >= 2.21.
+      facts-only:
+        - Return the results always as facts.
+      vars-only:
+        - Return the results always as variables.
+        - Fails for ansible-core < 2.21.
+    version_added: 2.3.0
 extends_documentation_fragment:
   - community.sops.sops
   - community.sops.attributes
@@ -61,7 +78,9 @@ attributes:
     details:
       - This action does not modify state.
   facts:
-    support: full
+    support: partial
+    details:
+      - Only returns facts if O(return_method=facts-only), or O(return_method=auto) for ansible-core < 2.21.
   idempotent:
     support: N/A
     details:
@@ -105,7 +124,7 @@ EXAMPLES = r"""
 RETURN = r"""
 ansible_facts:
   description: Variables that were included and their values.
-  returned: success
+  returned: success, and O(return_method=facts-only), or O(return_method=auto) for ansible-core < 2.21
   type: dict
   sample: {'variable': 'value'}
 ansible_included_var_files:
