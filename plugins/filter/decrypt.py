@@ -159,7 +159,7 @@ def decrypt_filter(data, input_type='yaml', output_type='yaml', sops_binary='sop
             return gcp_oauth_access_token
         if argument_name == 'gcp_kms_client_type':
             return gcp_kms_client_type
-        raise AssertionError('internal error: should not be reached')
+        raise AssertionError('internal error: should not be reached')  # pragma: no cover
 
     # Decode
     data = to_bytes(data)
