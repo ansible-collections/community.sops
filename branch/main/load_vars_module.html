@@ -324,6 +324,26 @@ see <a class="reference internal" href="#ansible-collections-community-sops-load
 </div></td>
 </tr>
 <tr class="row-odd"><td><div class="ansible-option-cell">
+<div class="ansibleOptionAnchor" id="parameter-return_method"></div><p class="ansible-option-title" id="ansible-collections-community-sops-load-vars-module-parameter-return-method"><strong>return_method</strong></p>
+<a class="ansibleOptionLink" href="#parameter-return_method" title="Permalink to this option"></a><p class="ansible-option-type-line"><span class="ansible-option-type">string</span></p>
+<p><em class="ansible-option-versionadded">added in community.sops 2.3.0</em></p>
+</div></td>
+<td><div class="ansible-option-cell"><p>Determine how to return the results.</p>
+<p>Because of limitations of ansible-core &lt; 2.21, the results were returned as Ansible facts. Since ansible-core 2.21, it is possible to actually set variables, similar to how <a class="reference external" href="https://docs.ansible.com/projects/ansible/devel/collections/ansible/builtin/include_vars_module.html#ansible-collections-ansible-builtin-include-vars-module" title="(in Ansible devel)"><span class="xref std std-ref">ansible.builtin.include_vars</span></a> is working.</p>
+<p class="ansible-option-line"><strong class="ansible-option-choices">Choices:</strong></p>
+<ul>
+<li><p><code class="ansible-option-default-bold docutils literal notranslate"><strong><span class="pre">&quot;auto&quot;</span></strong></code> <span class="ansible-option-choices-default-mark">(default)</span>:
+Return the results as facts for ansible-core &lt; 2.21, and as variables for ansible-core &gt;= 2.21.</p></li>
+<li><p><code class="ansible-option-choices-entry docutils literal notranslate"><span class="pre">&quot;facts-only&quot;</span></code>:
+Return the results always as facts.</p></li>
+<li><p><code class="ansible-option-choices-entry docutils literal notranslate"><span class="pre">&quot;vars-only&quot;</span></code>:
+Return the results always as variables.</p>
+<p>Fails for ansible-core &lt; 2.21.</p>
+</li>
+</ul>
+</div></td>
+</tr>
+<tr class="row-even"><td><div class="ansible-option-cell">
 <div class="ansibleOptionAnchor" id="parameter-sops_binary"></div><p class="ansible-option-title" id="ansible-collections-community-sops-load-vars-module-parameter-sops-binary"><strong>sops_binary</strong></p>
 <a class="ansibleOptionLink" href="#parameter-sops_binary" title="Permalink to this option"></a><p class="ansible-option-type-line"><span class="ansible-option-type">path</span></p>
 <p><em class="ansible-option-versionadded">added in community.sops 1.0.0</em></p>
@@ -382,7 +402,8 @@ see <a class="reference internal" href="#ansible-collections-community-sops-load
 <tr class="row-even"><td><div class="ansible-option-cell">
 <div class="ansibleOptionAnchor" id="attribute-facts"></div><p class="ansible-option-title" id="ansible-collections-community-sops-load-vars-module-attribute-facts"><strong>facts</strong></p>
 <a class="ansibleOptionLink" href="#attribute-facts" title="Permalink to this attribute"></a></div></td>
-<td><div class="ansible-option-cell"><p><strong class="ansible-attribute-support-label">Support: </strong><strong class="ansible-attribute-support-full">full</strong></p>
+<td><div class="ansible-option-cell"><p><strong class="ansible-attribute-support-label">Support: </strong><strong class="ansible-attribute-support-partial">partial</strong></p>
+<p>Only returns facts if <code class="ansible-option-value docutils literal notranslate"><a class="reference internal" href="#ansible-collections-community-sops-load-vars-module-parameter-return-method"><span class="std std-ref"><span class="pre">return_method=facts-only</span></span></a></code>, or <code class="ansible-option-value docutils literal notranslate"><a class="reference internal" href="#ansible-collections-community-sops-load-vars-module-parameter-return-method"><span class="std std-ref"><span class="pre">return_method=auto</span></span></a></code> for ansible-core &lt; 2.21.</p>
 </div></td>
 <td><div class="ansible-option-cell"><p>Action returns an <code class="docutils literal notranslate"><span class="pre">ansible_facts</span></code> dictionary that will update existing host facts.</p>
 </div></td>
