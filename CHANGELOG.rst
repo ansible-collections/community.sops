@@ -4,6 +4,26 @@ Community SOPS Release Notes
 
 .. contents:: Topics
 
+v2.3.0-b1
+=========
+
+Release Summary
+---------------
+
+This is a pre-release for community.sops 2.3.0.
+The main new feature of this release is ansible-core 2.21 support for ``community.sops.load_vars``.
+ansible-core 2.21 is the first version to explicitly allow action plugins to set variables,
+which finally allows ``community.sops.load_vars`` to set variables the same way as
+``ansible.builtin.include_vars``.
+
+Since this interface is brand-new and changes might still happen until the final ansible-core 2.21
+release, this is a pre-release.
+
+Minor Changes
+-------------
+
+- load_vars - now supports ansible-core 2.21's way of actually loading variables, instead of returning ``ansible_facts``. The behavior for this can be controlled through the new ``return_method`` option, which is by default set to ``auto``. On ansible-core 2.21+, ``auto`` behaves the same as ``vars-only`` (return proper variables), and for ansible-core before 2.21 the same as ``facts-only`` (return ``ansible_facts``) (https://github.com/ansible-collections/community.sops/pull/283).
+
 v2.2.7
 ======
 
