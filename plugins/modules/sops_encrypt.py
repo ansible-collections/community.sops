@@ -122,7 +122,7 @@ def get_data_type(module):
         return 'json'
     if module.params['content_yaml'] is not None:
         return 'yaml'
-    module.fail_json(msg='Internal error: unknown content type')
+    module.fail_json(msg='Internal error: unknown content type')  # pragma: no cover
 
 
 def compare_encoded_content(module, binary_data, content):
@@ -144,7 +144,7 @@ def compare_encoded_content(module, binary_data, content):
         except Exception:
             # Treat parsing errors as content not equal
             return False
-    module.fail_json(msg='Internal error: unknown content type')
+    module.fail_json(msg='Internal error: unknown content type')  # pragma: no cover
 
 
 def get_encoded_type_content(module, binary_data):
@@ -156,7 +156,7 @@ def get_encoded_type_content(module, binary_data):
         return 'json', json.dumps(module.params['content_json']).encode('utf-8')
     if module.params['content_yaml'] is not None:
         return 'yaml', yaml.safe_dump(module.params['content_yaml']).encode('utf-8')
-    module.fail_json(msg='Internal error: unknown content type')
+    module.fail_json(msg='Internal error: unknown content type')  # pragma: no cover
 
 
 def main():

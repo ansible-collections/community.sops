@@ -207,7 +207,7 @@ class ActionModuleBase(ActionBase, metaclass=abc.ABCMeta):
             argument_spec, kwargs = self.setup_module()
             module = argument_spec.create_ansible_module_helper(AnsibleActionModule, (self, ), **kwargs)
             self.run_module(module)
-            raise AnsibleError('Internal error: action module did not call module.exit_json()')
+            raise AnsibleError('Internal error: action module did not call module.exit_json()')  # pragma: no cover
         except _ModuleExitException as mee:
             result.update(mee.result)
             return result
