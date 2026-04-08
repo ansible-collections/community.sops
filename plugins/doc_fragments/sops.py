@@ -34,6 +34,15 @@ options:
       - Requires SOPS 3.7.0+.
     type: path
     version_added: 1.4.0
+  age_key_cmd:
+    description:
+      - A command that SOPS will execute to obtain an age private key that SOPS can use to decrypt encrypted files.
+      - Will be set as the E(SOPS_AGE_KEY_CMD) environment variable when calling SOPS.
+      - Requires SOPS 3.10.0+.
+      - When running this command and when SOPS 3.12.0+ is used, SOPS will set the E(SOPS_AGE_RECIPIENT) variable
+        to the identity of the key it wants to use to decrypt.
+    type: str
+    version_added: 2.3.0
   age_ssh_private_keyfile:
     description:
       - The file containing the SSH private key that SOPS can use to decrypt encrypted files.
@@ -42,6 +51,15 @@ options:
       - Requires SOPS 3.10.0+.
     type: path
     version_added: 1.4.0
+  age_ssh_private_key_cmd:
+    description:
+      - A command that SOPS will execute to obtain an SSH private key that SOPS can use to decrypt encrypted files.
+      - Will be set as the E(SOPS_AGE_SSH_PRIVATE_KEY_CMD) environment variable when calling SOPS.
+      - When running this command, SOPS will set the E(SOPS_AGE_RECIPIENT) variable to the identity of the key
+        it wants to use to decrypt.
+      - Requires SOPS 3.12.0+.
+    type: str
+    version_added: 2.3.0
   aws_profile:
     description:
       - The AWS profile to use for requests to AWS.
@@ -66,6 +84,23 @@ options:
       - Sets the environment variable E(AWS_SESSION_TOKEN) for the SOPS call.
     type: str
     version_added: 1.0.0
+  gcp_oauth_access_token:
+    description:
+      - Provide a Google Cloud OAauth token.
+      - Will be set as the E(GOOGLE_OAUTH_ACCESS_TOKEN) environment variable when calling SOPS.
+      - Requires SOPS 3.10.0+.
+    type: str
+    version_added: 3.2.0
+  gcp_kms_client_type:
+    description:
+      - Determine which client to use to communicate with Google Cloud Services.
+      - Will be set as the E(SOPS_GCP_KMS_CLIENT_TYPE) environment variable when calling SOPS.
+      - Requires SOPS 3.12.0+.
+    type: str
+    choices:
+      rest: Use REST client
+      grpc: Use gRPC client
+    version_added: 3.2.0
   config_path:
     description:
       - Path to the SOPS configuration file.
@@ -101,9 +136,15 @@ options:
   age_keyfile:
     vars:
       - name: sops_age_keyfile
+  age_key_cmd:
+    vars:
+      - name: sops_age_key_cmd
   age_ssh_private_keyfile:
     vars:
       - name: sops_age_ssh_private_keyfile
+  age_ssh_private_key_cmd:
+    vars:
+      - name: sops_age_ssh_private_key_cmd
   aws_profile:
     vars:
       - name: sops_aws_profile
@@ -118,6 +159,12 @@ options:
       - name: sops_session_token
       - name: sops_aws_session_token
         version_added: 1.2.0
+  gcp_oauth_access_token:
+    vars:
+      - name: sops_gcp_oauth_access_token
+  gcp_kms_client_type:
+    vars:
+      - name: sops_gcp_kms_client_type
   config_path:
     vars:
       - name: sops_config_path
@@ -141,9 +188,15 @@ options:
   age_keyfile:
     env:
       - name: ANSIBLE_SOPS_AGE_KEYFILE
+  age_key_cmd:
+    env:
+      - name: ANSIBLE_SOPS_AGE_KEY_CMD
   age_ssh_private_keyfile:
     env:
       - name: ANSIBLE_SOPS_AGE_SSH_PRIVATE_KEYFILE
+  age_ssh_private_key_cmd:
+    env:
+      - name: ANSIBLE_SOPS_AGE_SSH_PRIVATE_KEY_CMD
   aws_profile:
     env:
       - name: ANSIBLE_SOPS_AWS_PROFILE
@@ -160,6 +213,12 @@ options:
     env:
       - name: ANSIBLE_SOPS_AWS_SESSION_TOKEN
         version_added: 1.2.0
+  gcp_oauth_access_token:
+    env:
+      - name: ANSIBLE_SOPS_GCP_OAUTH_ACCESS_TOKEN
+  gcp_kms_client_type:
+    env:
+      - name: ANSIBLE_SOPS_GCP_KMS_CLIENT_TYPE
   config_path:
     env:
       - name: ANSIBLE_SOPS_CONFIG_PATH
@@ -188,10 +247,18 @@ options:
     ini:
       - section: community.sops
         key: age_keyfile
+  age_key_cmd:
+    ini:
+      - section: community.sops
+        key: age_key_cmd
   age_ssh_private_keyfile:
     ini:
       - section: community.sops
         key: age_ssh_private_keyfile
+  age_ssh_private_key_cmd:
+    ini:
+      - section: community.sops
+        key: age_ssh_private_key_cmd
   aws_profile:
     ini:
       - section: community.sops
@@ -210,6 +277,13 @@ options:
       - section: community.sops
         key: aws_session_token
         version_added: 1.2.0
+  # We do not provide an INI key for
+  #     gcp_oauth_access_token
+  # to make sure that secrets cannot be provided in ansible.ini. Use environment variables or another mechanism for that.
+  gcp_kms_client_type:
+    ini:
+      - section: community.sops
+        key: gcp_kms_client_type
   config_path:
     ini:
       - section: community.sops
@@ -272,6 +346,14 @@ options:
     type: list
     elements: str
     version_added: 1.0.0
+  huawei_cloud_kms:
+    description:
+      - HuaweiCloud KMS key IDs to use.
+      - This corresponds to the SOPS C(--hckms) option.
+      - Requires SOPS 3.12.0+.
+    type: list
+    elements: str
+    version_added: 3.2.0
   unencrypted_suffix:
     description:
       - Override the unencrypted key suffix.

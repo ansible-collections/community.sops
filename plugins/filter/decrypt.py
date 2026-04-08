@@ -115,7 +115,8 @@ _VALID_TYPES = set(['binary', 'json', 'yaml', 'dotenv', 'ini'])
 
 def decrypt_filter(data, input_type='yaml', output_type='yaml', sops_binary='sops', rstrip=True, decode_output=True,
                    aws_profile=None, aws_access_key_id=None, aws_secret_access_key=None, aws_session_token=None,
-                   config_path=None, enable_local_keyservice=True, keyservice=None, age_key=None, age_keyfile=None, age_ssh_private_keyfile=None):
+                   config_path=None, enable_local_keyservice=True, keyservice=None, age_key=None, age_keyfile=None, age_ssh_private_keyfile=None,
+                   age_key_cmd=None, age_ssh_private_key_cmd=None, gcp_oauth_access_token=None, gcp_kms_client_type=None):
     '''Decrypt sops-encrypted data.'''
 
     # Check parameters
@@ -150,6 +151,14 @@ def decrypt_filter(data, input_type='yaml', output_type='yaml', sops_binary='sop
             return enable_local_keyservice
         if argument_name == 'keyservice':
             return keyservice
+        if argument_name == 'age_key_cmd':
+            return age_key_cmd
+        if argument_name == 'age_ssh_private_key_cmd':
+            return age_ssh_private_key_cmd
+        if argument_name == 'gcp_oauth_access_token':
+            return gcp_oauth_access_token
+        if argument_name == 'gcp_kms_client_type':
+            return gcp_kms_client_type
         raise AssertionError('internal error: should not be reached')
 
     # Decode

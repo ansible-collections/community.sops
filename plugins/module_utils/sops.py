@@ -96,11 +96,15 @@ def _create_env_variable(argument_name):
 GENERAL_OPTIONS = {
     'age_key': _create_env_variable('SOPS_AGE_KEY'),
     'age_keyfile': _create_env_variable('SOPS_AGE_KEY_FILE'),
+    'age_key_cmd': _create_env_variable('SOPS_AGE_KEY_CMD'),
     'age_ssh_private_keyfile': _create_env_variable('SOPS_AGE_SSH_PRIVATE_KEY_FILE'),
+    'age_ssh_private_key_cmd': _create_env_variable('SOPS_AGE_SSH_PRIVATE_KEY_CMD'),
     'aws_profile': _create_single_arg('--aws-profile'),
     'aws_access_key_id': _create_env_variable('AWS_ACCESS_KEY_ID'),
     'aws_secret_access_key': _create_env_variable('AWS_SECRET_ACCESS_KEY'),
     'aws_session_token': _create_env_variable('AWS_SESSION_TOKEN'),
+    'gcp_oauth_access_token': _create_env_variable('GOOGLE_OAUTH_ACCESS_TOKEN'),
+    'gcp_kms_client_type': _create_env_variable('SOPS_GCP_KMS_CLIENT_TYPE'),
     'config_path': _create_single_arg('--config', pre=True),
     'enable_local_keyservice': _create_boolean('--enable-local-keyservice=false', invert=True),
     'keyservice': _create_repeated('--keyservice'),
@@ -114,6 +118,7 @@ ENCRYPT_OPTIONS = {
     'azure_kv': _create_comma_separated('--azure-kv'),
     'hc_vault_transit': _create_comma_separated('--hc-vault-transit'),
     'pgp': _create_comma_separated('--pgp'),
+    'huawei_cloud_kms': _create_comma_separated('--hckms'),
     'unencrypted_suffix': _create_single_arg('--unencrypted-suffix'),
     'encrypted_suffix': _create_single_arg('--encrypted-suffix'),
     'unencrypted_regex': _create_single_arg('--unencrypted-regex'),
@@ -357,8 +362,16 @@ def get_sops_argument_spec(add_encrypt_specific=False):
         'age_keyfile': {
             'type': 'path',
         },
+        'age_key_cmd': {
+            'type': 'str',
+            'no_log': False,
+        },
         'age_ssh_private_keyfile': {
             'type': 'path',
+        },
+        'age_ssh_private_key_cmd': {
+            'type': 'str',
+            'no_log': False,
         },
         'aws_profile': {
             'type': 'str',
@@ -373,6 +386,14 @@ def get_sops_argument_spec(add_encrypt_specific=False):
         'aws_session_token': {
             'type': 'str',
             'no_log': True,
+        },
+        'gcp_oauth_access_token': {
+            'type': 'str',
+            'no_log': True,
+        },
+        'gcp_kms_client_type': {
+            'type': 'str',
+            'choices': ['rest', 'grpc'],
         },
         'config_path': {
             'type': 'path',
@@ -409,6 +430,10 @@ def get_sops_argument_spec(add_encrypt_specific=False):
                 'elements': 'str',
             },
             'pgp': {
+                'type': 'list',
+                'elements': 'str',
+            },
+            'huawei_cloud_kms': {
                 'type': 'list',
                 'elements': 'str',
             },
