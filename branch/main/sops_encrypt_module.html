@@ -202,6 +202,17 @@ see <a class="reference internal" href="#ansible-collections-community-sops-sops
 </div></td>
 </tr>
 <tr class="row-even"><td><div class="ansible-option-cell">
+<div class="ansibleOptionAnchor" id="parameter-age_key_cmd"></div><p class="ansible-option-title" id="ansible-collections-community-sops-sops-encrypt-module-parameter-age-key-cmd"><strong>age_key_cmd</strong></p>
+<a class="ansibleOptionLink" href="#parameter-age_key_cmd" title="Permalink to this option"></a><p class="ansible-option-type-line"><span class="ansible-option-type">string</span></p>
+<p><em class="ansible-option-versionadded">added in community.sops 2.3.0</em></p>
+</div></td>
+<td><div class="ansible-option-cell"><p>A command that SOPS will execute to obtain an age private key that SOPS can use to decrypt encrypted files.</p>
+<p>Will be set as the <code class="xref std std-envvar docutils literal notranslate"><span class="pre">SOPS_AGE_KEY_CMD</span></code> environment variable when calling SOPS.</p>
+<p>Requires SOPS 3.10.0+.</p>
+<p>When running this command and when SOPS 3.12.0+ is used, SOPS will set the <code class="xref std std-envvar docutils literal notranslate"><span class="pre">SOPS_AGE_RECIPIENT</span></code> variable to the identity of the key it wants to use to decrypt.</p>
+</div></td>
+</tr>
+<tr class="row-odd"><td><div class="ansible-option-cell">
 <div class="ansibleOptionAnchor" id="parameter-age_keyfile"></div><p class="ansible-option-title" id="ansible-collections-community-sops-sops-encrypt-module-parameter-age-keyfile"><strong>age_keyfile</strong></p>
 <a class="ansibleOptionLink" href="#parameter-age_keyfile" title="Permalink to this option"></a><p class="ansible-option-type-line"><span class="ansible-option-type">path</span></p>
 <p><em class="ansible-option-versionadded">added in community.sops 1.4.0</em></p>
@@ -210,6 +221,17 @@ see <a class="reference internal" href="#ansible-collections-community-sops-sops
 <p>Will be set as the <code class="xref std std-envvar docutils literal notranslate"><span class="pre">SOPS_AGE_KEY_FILE</span></code> environment variable when calling SOPS.</p>
 <p>By default, SOPS looks for <code class="docutils literal notranslate"><span class="pre">sops/age/keys.txt</span></code> inside your user configuration directory.</p>
 <p>Requires SOPS 3.7.0+.</p>
+</div></td>
+</tr>
+<tr class="row-even"><td><div class="ansible-option-cell">
+<div class="ansibleOptionAnchor" id="parameter-age_ssh_private_key_cmd"></div><p class="ansible-option-title" id="ansible-collections-community-sops-sops-encrypt-module-parameter-age-ssh-private-key-cmd"><strong>age_ssh_private_key_cmd</strong></p>
+<a class="ansibleOptionLink" href="#parameter-age_ssh_private_key_cmd" title="Permalink to this option"></a><p class="ansible-option-type-line"><span class="ansible-option-type">string</span></p>
+<p><em class="ansible-option-versionadded">added in community.sops 2.3.0</em></p>
+</div></td>
+<td><div class="ansible-option-cell"><p>A command that SOPS will execute to obtain an SSH private key that SOPS can use to decrypt encrypted files.</p>
+<p>Will be set as the <code class="xref std std-envvar docutils literal notranslate"><span class="pre">SOPS_AGE_SSH_PRIVATE_KEY_CMD</span></code> environment variable when calling SOPS.</p>
+<p>When running this command, SOPS will set the <code class="xref std std-envvar docutils literal notranslate"><span class="pre">SOPS_AGE_RECIPIENT</span></code> variable to the identity of the key it wants to use to decrypt.</p>
+<p>Requires SOPS 3.12.0+.</p>
 </div></td>
 </tr>
 <tr class="row-odd"><td><div class="ansible-option-cell">
@@ -390,6 +412,33 @@ see <a class="reference internal" href="#ansible-collections-community-sops-sops
 </div></td>
 </tr>
 <tr class="row-odd"><td><div class="ansible-option-cell">
+<div class="ansibleOptionAnchor" id="parameter-gcp_kms_client_type"></div><p class="ansible-option-title" id="ansible-collections-community-sops-sops-encrypt-module-parameter-gcp-kms-client-type"><strong>gcp_kms_client_type</strong></p>
+<a class="ansibleOptionLink" href="#parameter-gcp_kms_client_type" title="Permalink to this option"></a><p class="ansible-option-type-line"><span class="ansible-option-type">string</span></p>
+<p><em class="ansible-option-versionadded">added in community.sops 3.2.0</em></p>
+</div></td>
+<td><div class="ansible-option-cell"><p>Determine which client to use to communicate with Google Cloud Services.</p>
+<p>Will be set as the <code class="xref std std-envvar docutils literal notranslate"><span class="pre">SOPS_GCP_KMS_CLIENT_TYPE</span></code> environment variable when calling SOPS.</p>
+<p>Requires SOPS 3.12.0+.</p>
+<p class="ansible-option-line"><strong class="ansible-option-choices">Choices:</strong></p>
+<ul class="simple">
+<li><p><code class="ansible-option-choices-entry docutils literal notranslate"><span class="pre">&quot;grpc&quot;</span></code>:
+Use gRPC client</p></li>
+<li><p><code class="ansible-option-choices-entry docutils literal notranslate"><span class="pre">&quot;rest&quot;</span></code>:
+Use REST client</p></li>
+</ul>
+</div></td>
+</tr>
+<tr class="row-even"><td><div class="ansible-option-cell">
+<div class="ansibleOptionAnchor" id="parameter-gcp_oauth_access_token"></div><p class="ansible-option-title" id="ansible-collections-community-sops-sops-encrypt-module-parameter-gcp-oauth-access-token"><strong>gcp_oauth_access_token</strong></p>
+<a class="ansibleOptionLink" href="#parameter-gcp_oauth_access_token" title="Permalink to this option"></a><p class="ansible-option-type-line"><span class="ansible-option-type">string</span></p>
+<p><em class="ansible-option-versionadded">added in community.sops 3.2.0</em></p>
+</div></td>
+<td><div class="ansible-option-cell"><p>Provide a Google Cloud OAauth token.</p>
+<p>Will be set as the <code class="xref std std-envvar docutils literal notranslate"><span class="pre">GOOGLE_OAUTH_ACCESS_TOKEN</span></code> environment variable when calling SOPS.</p>
+<p>Requires SOPS 3.10.0+.</p>
+</div></td>
+</tr>
+<tr class="row-odd"><td><div class="ansible-option-cell">
 <div class="ansibleOptionAnchor" id="parameter-group"></div><p class="ansible-option-title" id="ansible-collections-community-sops-sops-encrypt-module-parameter-group"><strong>group</strong></p>
 <a class="ansibleOptionLink" href="#parameter-group" title="Permalink to this option"></a><p class="ansible-option-type-line"><span class="ansible-option-type">string</span></p>
 </div></td>
@@ -408,6 +457,16 @@ see <a class="reference internal" href="#ansible-collections-community-sops-sops
 </div></td>
 </tr>
 <tr class="row-odd"><td><div class="ansible-option-cell">
+<div class="ansibleOptionAnchor" id="parameter-huawei_cloud_kms"></div><p class="ansible-option-title" id="ansible-collections-community-sops-sops-encrypt-module-parameter-huawei-cloud-kms"><strong>huawei_cloud_kms</strong></p>
+<a class="ansibleOptionLink" href="#parameter-huawei_cloud_kms" title="Permalink to this option"></a><p class="ansible-option-type-line"><span class="ansible-option-type">list</span> / <span class="ansible-option-elements">elements=string</span></p>
+<p><em class="ansible-option-versionadded">added in community.sops 3.2.0</em></p>
+</div></td>
+<td><div class="ansible-option-cell"><p>HuaweiCloud KMS key IDs to use.</p>
+<p>This corresponds to the SOPS <code class="docutils literal notranslate"><span class="pre">--hckms</span></code> option.</p>
+<p>Requires SOPS 3.12.0+.</p>
+</div></td>
+</tr>
+<tr class="row-even"><td><div class="ansible-option-cell">
 <div class="ansibleOptionAnchor" id="parameter-keyservice"></div><p class="ansible-option-title" id="ansible-collections-community-sops-sops-encrypt-module-parameter-keyservice"><strong>keyservice</strong></p>
 <a class="ansibleOptionLink" href="#parameter-keyservice" title="Permalink to this option"></a><p class="ansible-option-type-line"><span class="ansible-option-type">list</span> / <span class="ansible-option-elements">elements=string</span></p>
 <p><em class="ansible-option-versionadded">added in community.sops 1.0.0</em></p>
@@ -417,7 +476,7 @@ see <a class="reference internal" href="#ansible-collections-community-sops-sops
 <p>This corresponds to the SOPS <code class="docutils literal notranslate"><span class="pre">--keyservice</span></code> option.</p>
 </div></td>
 </tr>
-<tr class="row-even"><td><div class="ansible-option-cell">
+<tr class="row-odd"><td><div class="ansible-option-cell">
 <div class="ansibleOptionAnchor" id="parameter-kms"></div><p class="ansible-option-title" id="ansible-collections-community-sops-sops-encrypt-module-parameter-kms"><strong>kms</strong></p>
 <a class="ansibleOptionLink" href="#parameter-kms" title="Permalink to this option"></a><p class="ansible-option-type-line"><span class="ansible-option-type">list</span> / <span class="ansible-option-elements">elements=string</span></p>
 <p><em class="ansible-option-versionadded">added in community.sops 1.0.0</em></p>
@@ -426,7 +485,7 @@ see <a class="reference internal" href="#ansible-collections-community-sops-sops
 <p>This corresponds to the SOPS <code class="docutils literal notranslate"><span class="pre">--kms</span></code> option.</p>
 </div></td>
 </tr>
-<tr class="row-odd"><td><div class="ansible-option-cell">
+<tr class="row-even"><td><div class="ansible-option-cell">
 <div class="ansibleOptionAnchor" id="parameter-mode"></div><p class="ansible-option-title" id="ansible-collections-community-sops-sops-encrypt-module-parameter-mode"><strong>mode</strong></p>
 <a class="ansibleOptionLink" href="#parameter-mode" title="Permalink to this option"></a><p class="ansible-option-type-line"><span class="ansible-option-type">any</span></p>
 </div></td>
@@ -439,7 +498,7 @@ see <a class="reference internal" href="#ansible-collections-community-sops-sops
 <p>Specifying <code class="ansible-option docutils literal notranslate"><strong><a class="reference internal" href="#ansible-collections-community-sops-sops-encrypt-module-parameter-mode"><span class="std std-ref"><span class="pre">mode</span></span></a></strong></code> is the best way to ensure filesystem objects are created with the correct permissions. See CVE-2020-1736 for further details.</p>
 </div></td>
 </tr>
-<tr class="row-even"><td><div class="ansible-option-cell">
+<tr class="row-odd"><td><div class="ansible-option-cell">
 <div class="ansibleOptionAnchor" id="parameter-owner"></div><p class="ansible-option-title" id="ansible-collections-community-sops-sops-encrypt-module-parameter-owner"><strong>owner</strong></p>
 <a class="ansibleOptionLink" href="#parameter-owner" title="Permalink to this option"></a><p class="ansible-option-type-line"><span class="ansible-option-type">string</span></p>
 </div></td>
@@ -448,14 +507,14 @@ see <a class="reference internal" href="#ansible-collections-community-sops-sops
 <p>Specifying a numeric username will be assumed to be a user ID and not a username. Avoid numeric usernames to avoid this confusion.</p>
 </div></td>
 </tr>
-<tr class="row-odd"><td><div class="ansible-option-cell">
+<tr class="row-even"><td><div class="ansible-option-cell">
 <div class="ansibleOptionAnchor" id="parameter-path"></div><p class="ansible-option-title" id="ansible-collections-community-sops-sops-encrypt-module-parameter-path"><strong>path</strong></p>
 <a class="ansibleOptionLink" href="#parameter-path" title="Permalink to this option"></a><p class="ansible-option-type-line"><span class="ansible-option-type">path</span> / <span class="ansible-option-required">required</span></p>
 </div></td>
 <td><div class="ansible-option-cell"><p>The SOPS encrypt file.</p>
 </div></td>
 </tr>
-<tr class="row-even"><td><div class="ansible-option-cell">
+<tr class="row-odd"><td><div class="ansible-option-cell">
 <div class="ansibleOptionAnchor" id="parameter-pgp"></div><p class="ansible-option-title" id="ansible-collections-community-sops-sops-encrypt-module-parameter-pgp"><strong>pgp</strong></p>
 <a class="ansibleOptionLink" href="#parameter-pgp" title="Permalink to this option"></a><p class="ansible-option-type-line"><span class="ansible-option-type">list</span> / <span class="ansible-option-elements">elements=string</span></p>
 <p><em class="ansible-option-versionadded">added in community.sops 1.0.0</em></p>
@@ -464,7 +523,7 @@ see <a class="reference internal" href="#ansible-collections-community-sops-sops
 <p>This corresponds to the SOPS <code class="docutils literal notranslate"><span class="pre">--pgp</span></code> option.</p>
 </div></td>
 </tr>
-<tr class="row-odd"><td><div class="ansible-option-cell">
+<tr class="row-even"><td><div class="ansible-option-cell">
 <div class="ansibleOptionAnchor" id="parameter-selevel"></div><p class="ansible-option-title" id="ansible-collections-community-sops-sops-encrypt-module-parameter-selevel"><strong>selevel</strong></p>
 <a class="ansibleOptionLink" href="#parameter-selevel" title="Permalink to this option"></a><p class="ansible-option-type-line"><span class="ansible-option-type">string</span></p>
 </div></td>
@@ -473,7 +532,7 @@ see <a class="reference internal" href="#ansible-collections-community-sops-sops
 <p>When set to <code class="ansible-value docutils literal notranslate"><span class="pre">_default</span></code>, it will use the <code class="docutils literal notranslate"><span class="pre">level</span></code> portion of the policy if available.</p>
 </div></td>
 </tr>
-<tr class="row-even"><td><div class="ansible-option-cell">
+<tr class="row-odd"><td><div class="ansible-option-cell">
 <div class="ansibleOptionAnchor" id="parameter-serole"></div><p class="ansible-option-title" id="ansible-collections-community-sops-sops-encrypt-module-parameter-serole"><strong>serole</strong></p>
 <a class="ansibleOptionLink" href="#parameter-serole" title="Permalink to this option"></a><p class="ansible-option-type-line"><span class="ansible-option-type">string</span></p>
 </div></td>
@@ -481,7 +540,7 @@ see <a class="reference internal" href="#ansible-collections-community-sops-sops
 <p>When set to <code class="ansible-value docutils literal notranslate"><span class="pre">_default</span></code>, it will use the <code class="docutils literal notranslate"><span class="pre">role</span></code> portion of the policy if available.</p>
 </div></td>
 </tr>
-<tr class="row-odd"><td><div class="ansible-option-cell">
+<tr class="row-even"><td><div class="ansible-option-cell">
 <div class="ansibleOptionAnchor" id="parameter-setype"></div><p class="ansible-option-title" id="ansible-collections-community-sops-sops-encrypt-module-parameter-setype"><strong>setype</strong></p>
 <a class="ansibleOptionLink" href="#parameter-setype" title="Permalink to this option"></a><p class="ansible-option-type-line"><span class="ansible-option-type">string</span></p>
 </div></td>
@@ -489,7 +548,7 @@ see <a class="reference internal" href="#ansible-collections-community-sops-sops
 <p>When set to <code class="ansible-value docutils literal notranslate"><span class="pre">_default</span></code>, it will use the <code class="docutils literal notranslate"><span class="pre">type</span></code> portion of the policy if available.</p>
 </div></td>
 </tr>
-<tr class="row-even"><td><div class="ansible-option-cell">
+<tr class="row-odd"><td><div class="ansible-option-cell">
 <div class="ansibleOptionAnchor" id="parameter-seuser"></div><p class="ansible-option-title" id="ansible-collections-community-sops-sops-encrypt-module-parameter-seuser"><strong>seuser</strong></p>
 <a class="ansibleOptionLink" href="#parameter-seuser" title="Permalink to this option"></a><p class="ansible-option-type-line"><span class="ansible-option-type">string</span></p>
 </div></td>
@@ -498,7 +557,7 @@ see <a class="reference internal" href="#ansible-collections-community-sops-sops
 <p>When set to <code class="ansible-value docutils literal notranslate"><span class="pre">_default</span></code>, it will use the <code class="docutils literal notranslate"><span class="pre">user</span></code> portion of the policy if available.</p>
 </div></td>
 </tr>
-<tr class="row-odd"><td><div class="ansible-option-cell">
+<tr class="row-even"><td><div class="ansible-option-cell">
 <div class="ansibleOptionAnchor" id="parameter-shamir_secret_sharing_threshold"></div><p class="ansible-option-title" id="ansible-collections-community-sops-sops-encrypt-module-parameter-shamir-secret-sharing-threshold"><strong>shamir_secret_sharing_threshold</strong></p>
 <a class="ansibleOptionLink" href="#parameter-shamir_secret_sharing_threshold" title="Permalink to this option"></a><p class="ansible-option-type-line"><span class="ansible-option-type">integer</span></p>
 <p><em class="ansible-option-versionadded">added in community.sops 1.0.0</em></p>
@@ -508,7 +567,7 @@ see <a class="reference internal" href="#ansible-collections-community-sops-sops
 <p>This corresponds to the SOPS <code class="docutils literal notranslate"><span class="pre">--shamir-secret-sharing-threshold</span></code> option.</p>
 </div></td>
 </tr>
-<tr class="row-even"><td><div class="ansible-option-cell">
+<tr class="row-odd"><td><div class="ansible-option-cell">
 <div class="ansibleOptionAnchor" id="parameter-sops_binary"></div><p class="ansible-option-title" id="ansible-collections-community-sops-sops-encrypt-module-parameter-sops-binary"><strong>sops_binary</strong></p>
 <a class="ansibleOptionLink" href="#parameter-sops_binary" title="Permalink to this option"></a><p class="ansible-option-type-line"><span class="ansible-option-type">path</span></p>
 <p><em class="ansible-option-versionadded">added in community.sops 1.0.0</em></p>
@@ -517,7 +576,7 @@ see <a class="reference internal" href="#ansible-collections-community-sops-sops
 <p>By default uses <code class="docutils literal notranslate"><span class="pre">sops</span></code>.</p>
 </div></td>
 </tr>
-<tr class="row-odd"><td><div class="ansible-option-cell">
+<tr class="row-even"><td><div class="ansible-option-cell">
 <div class="ansibleOptionAnchor" id="parameter-unencrypted_regex"></div><p class="ansible-option-title" id="ansible-collections-community-sops-sops-encrypt-module-parameter-unencrypted-regex"><strong>unencrypted_regex</strong></p>
 <a class="ansibleOptionLink" href="#parameter-unencrypted_regex" title="Permalink to this option"></a><p class="ansible-option-type-line"><span class="ansible-option-type">string</span></p>
 <p><em class="ansible-option-versionadded">added in community.sops 1.0.0</em></p>
@@ -527,7 +586,7 @@ see <a class="reference internal" href="#ansible-collections-community-sops-sops
 <p>This corresponds to the SOPS <code class="docutils literal notranslate"><span class="pre">--unencrypted-regex</span></code> option.</p>
 </div></td>
 </tr>
-<tr class="row-even"><td><div class="ansible-option-cell">
+<tr class="row-odd"><td><div class="ansible-option-cell">
 <div class="ansibleOptionAnchor" id="parameter-unencrypted_suffix"></div><p class="ansible-option-title" id="ansible-collections-community-sops-sops-encrypt-module-parameter-unencrypted-suffix"><strong>unencrypted_suffix</strong></p>
 <a class="ansibleOptionLink" href="#parameter-unencrypted_suffix" title="Permalink to this option"></a><p class="ansible-option-type-line"><span class="ansible-option-type">string</span></p>
 <p><em class="ansible-option-versionadded">added in community.sops 1.0.0</em></p>
@@ -536,7 +595,7 @@ see <a class="reference internal" href="#ansible-collections-community-sops-sops
 <p>This corresponds to the SOPS <code class="docutils literal notranslate"><span class="pre">--unencrypted-suffix</span></code> option.</p>
 </div></td>
 </tr>
-<tr class="row-odd"><td><div class="ansible-option-cell">
+<tr class="row-even"><td><div class="ansible-option-cell">
 <div class="ansibleOptionAnchor" id="parameter-unsafe_writes"></div><p class="ansible-option-title" id="ansible-collections-community-sops-sops-encrypt-module-parameter-unsafe-writes"><strong>unsafe_writes</strong></p>
 <a class="ansibleOptionLink" href="#parameter-unsafe_writes" title="Permalink to this option"></a><p class="ansible-option-type-line"><span class="ansible-option-type">boolean</span></p>
 </div></td>

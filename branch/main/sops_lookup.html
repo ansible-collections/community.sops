@@ -224,6 +224,28 @@ examples: <code class="docutils literal notranslate"><span class="pre">lookup('c
 </div></td>
 </tr>
 <tr class="row-odd"><td><div class="ansible-option-cell">
+<div class="ansibleOptionAnchor" id="parameter-age_key_cmd"></div><p class="ansible-option-title" id="ansible-collections-community-sops-sops-lookup-parameter-age-key-cmd"><strong>age_key_cmd</strong></p>
+<a class="ansibleOptionLink" href="#parameter-age_key_cmd" title="Permalink to this option"></a><p class="ansible-option-type-line"><span class="ansible-option-type">string</span></p>
+<p><em class="ansible-option-versionadded">added in community.sops 2.3.0</em></p>
+</div></td>
+<td><div class="ansible-option-cell"><p>A command that SOPS will execute to obtain an age private key that SOPS can use to decrypt encrypted files.</p>
+<p>Will be set as the <code class="xref std std-envvar docutils literal notranslate"><span class="pre">SOPS_AGE_KEY_CMD</span></code> environment variable when calling SOPS.</p>
+<p>Requires SOPS 3.10.0+.</p>
+<p>When running this command and when SOPS 3.12.0+ is used, SOPS will set the <code class="xref std std-envvar docutils literal notranslate"><span class="pre">SOPS_AGE_RECIPIENT</span></code> variable to the identity of the key it wants to use to decrypt.</p>
+<p class="ansible-option-line"><strong class="ansible-option-configuration">Configuration:</strong></p>
+<ul>
+<li><p>INI entry:</p>
+<div class="highlight-ini notranslate"><div class="highlight"><pre><span></span><span class="k">[community.sops]</span>
+<span class="na">age_key_cmd</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">VALUE</span>
+</pre></div>
+</div>
+</li>
+<li><p>Environment variable: <span class="target" id="index-1"></span><a class="reference internal" href="environment_variables.html#envvar-ANSIBLE_SOPS_AGE_KEY_CMD"><code class="xref std std-envvar docutils literal notranslate"><span class="pre">ANSIBLE_SOPS_AGE_KEY_CMD</span></code></a></p></li>
+<li><p>Variable: sops_age_key_cmd</p></li>
+</ul>
+</div></td>
+</tr>
+<tr class="row-even"><td><div class="ansible-option-cell">
 <div class="ansibleOptionAnchor" id="parameter-age_keyfile"></div><p class="ansible-option-title" id="ansible-collections-community-sops-sops-lookup-parameter-age-keyfile"><strong>age_keyfile</strong></p>
 <a class="ansibleOptionLink" href="#parameter-age_keyfile" title="Permalink to this option"></a><p class="ansible-option-type-line"><span class="ansible-option-type">path</span></p>
 <p><em class="ansible-option-versionadded">added in community.sops 1.4.0</em></p>
@@ -240,8 +262,30 @@ examples: <code class="docutils literal notranslate"><span class="pre">lookup('c
 </pre></div>
 </div>
 </li>
-<li><p>Environment variable: <span class="target" id="index-1"></span><a class="reference internal" href="environment_variables.html#envvar-ANSIBLE_SOPS_AGE_KEYFILE"><code class="xref std std-envvar docutils literal notranslate"><span class="pre">ANSIBLE_SOPS_AGE_KEYFILE</span></code></a></p></li>
+<li><p>Environment variable: <span class="target" id="index-2"></span><a class="reference internal" href="environment_variables.html#envvar-ANSIBLE_SOPS_AGE_KEYFILE"><code class="xref std std-envvar docutils literal notranslate"><span class="pre">ANSIBLE_SOPS_AGE_KEYFILE</span></code></a></p></li>
 <li><p>Variable: sops_age_keyfile</p></li>
+</ul>
+</div></td>
+</tr>
+<tr class="row-odd"><td><div class="ansible-option-cell">
+<div class="ansibleOptionAnchor" id="parameter-age_ssh_private_key_cmd"></div><p class="ansible-option-title" id="ansible-collections-community-sops-sops-lookup-parameter-age-ssh-private-key-cmd"><strong>age_ssh_private_key_cmd</strong></p>
+<a class="ansibleOptionLink" href="#parameter-age_ssh_private_key_cmd" title="Permalink to this option"></a><p class="ansible-option-type-line"><span class="ansible-option-type">string</span></p>
+<p><em class="ansible-option-versionadded">added in community.sops 2.3.0</em></p>
+</div></td>
+<td><div class="ansible-option-cell"><p>A command that SOPS will execute to obtain an SSH private key that SOPS can use to decrypt encrypted files.</p>
+<p>Will be set as the <code class="xref std std-envvar docutils literal notranslate"><span class="pre">SOPS_AGE_SSH_PRIVATE_KEY_CMD</span></code> environment variable when calling SOPS.</p>
+<p>When running this command, SOPS will set the <code class="xref std std-envvar docutils literal notranslate"><span class="pre">SOPS_AGE_RECIPIENT</span></code> variable to the identity of the key it wants to use to decrypt.</p>
+<p>Requires SOPS 3.12.0+.</p>
+<p class="ansible-option-line"><strong class="ansible-option-configuration">Configuration:</strong></p>
+<ul>
+<li><p>INI entry:</p>
+<div class="highlight-ini notranslate"><div class="highlight"><pre><span></span><span class="k">[community.sops]</span>
+<span class="na">age_ssh_private_key_cmd</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">VALUE</span>
+</pre></div>
+</div>
+</li>
+<li><p>Environment variable: <span class="target" id="index-3"></span><a class="reference internal" href="environment_variables.html#envvar-ANSIBLE_SOPS_AGE_SSH_PRIVATE_KEY_CMD"><code class="xref std std-envvar docutils literal notranslate"><span class="pre">ANSIBLE_SOPS_AGE_SSH_PRIVATE_KEY_CMD</span></code></a></p></li>
+<li><p>Variable: sops_age_ssh_private_key_cmd</p></li>
 </ul>
 </div></td>
 </tr>
@@ -262,7 +306,7 @@ examples: <code class="docutils literal notranslate"><span class="pre">lookup('c
 </pre></div>
 </div>
 </li>
-<li><p>Environment variable: <span class="target" id="index-2"></span><a class="reference internal" href="environment_variables.html#envvar-ANSIBLE_SOPS_AGE_SSH_PRIVATE_KEYFILE"><code class="xref std std-envvar docutils literal notranslate"><span class="pre">ANSIBLE_SOPS_AGE_SSH_PRIVATE_KEYFILE</span></code></a></p></li>
+<li><p>Environment variable: <span class="target" id="index-4"></span><a class="reference internal" href="environment_variables.html#envvar-ANSIBLE_SOPS_AGE_SSH_PRIVATE_KEYFILE"><code class="xref std std-envvar docutils literal notranslate"><span class="pre">ANSIBLE_SOPS_AGE_SSH_PRIVATE_KEYFILE</span></code></a></p></li>
 <li><p>Variable: sops_age_ssh_private_keyfile</p></li>
 </ul>
 </div></td>
@@ -283,7 +327,7 @@ examples: <code class="docutils literal notranslate"><span class="pre">lookup('c
 </div>
 <p><em class="ansible-option-versionadded">added in community.sops 1.2.0</em></p>
 </li>
-<li><p>Environment variable: <span class="target" id="index-3"></span><a class="reference internal" href="environment_variables.html#envvar-ANSIBLE_SOPS_AWS_ACCESS_KEY_ID"><code class="xref std std-envvar docutils literal notranslate"><span class="pre">ANSIBLE_SOPS_AWS_ACCESS_KEY_ID</span></code></a></p>
+<li><p>Environment variable: <span class="target" id="index-5"></span><a class="reference internal" href="environment_variables.html#envvar-ANSIBLE_SOPS_AWS_ACCESS_KEY_ID"><code class="xref std std-envvar docutils literal notranslate"><span class="pre">ANSIBLE_SOPS_AWS_ACCESS_KEY_ID</span></code></a></p>
 <p><em class="ansible-option-versionadded">added in community.sops 1.2.0</em></p>
 </li>
 <li><p>Variable: sops_aws_access_key_id</p></li>
@@ -306,7 +350,7 @@ examples: <code class="docutils literal notranslate"><span class="pre">lookup('c
 </div>
 <p><em class="ansible-option-versionadded">added in community.sops 1.2.0</em></p>
 </li>
-<li><p>Environment variable: <span class="target" id="index-4"></span><a class="reference internal" href="environment_variables.html#envvar-ANSIBLE_SOPS_AWS_PROFILE"><code class="xref std std-envvar docutils literal notranslate"><span class="pre">ANSIBLE_SOPS_AWS_PROFILE</span></code></a></p>
+<li><p>Environment variable: <span class="target" id="index-6"></span><a class="reference internal" href="environment_variables.html#envvar-ANSIBLE_SOPS_AWS_PROFILE"><code class="xref std std-envvar docutils literal notranslate"><span class="pre">ANSIBLE_SOPS_AWS_PROFILE</span></code></a></p>
 <p><em class="ansible-option-versionadded">added in community.sops 1.2.0</em></p>
 </li>
 <li><p>Variable: sops_aws_profile</p></li>
@@ -322,7 +366,7 @@ examples: <code class="docutils literal notranslate"><span class="pre">lookup('c
 <p>Sets the environment variable <code class="xref std std-envvar docutils literal notranslate"><span class="pre">AWS_SECRET_ACCESS_KEY</span></code> for the SOPS call.</p>
 <p class="ansible-option-line"><strong class="ansible-option-configuration">Configuration:</strong></p>
 <ul>
-<li><p>Environment variable: <span class="target" id="index-5"></span><a class="reference internal" href="environment_variables.html#envvar-ANSIBLE_SOPS_AWS_SECRET_ACCESS_KEY"><code class="xref std std-envvar docutils literal notranslate"><span class="pre">ANSIBLE_SOPS_AWS_SECRET_ACCESS_KEY</span></code></a></p>
+<li><p>Environment variable: <span class="target" id="index-7"></span><a class="reference internal" href="environment_variables.html#envvar-ANSIBLE_SOPS_AWS_SECRET_ACCESS_KEY"><code class="xref std std-envvar docutils literal notranslate"><span class="pre">ANSIBLE_SOPS_AWS_SECRET_ACCESS_KEY</span></code></a></p>
 <p><em class="ansible-option-versionadded">added in community.sops 1.2.0</em></p>
 </li>
 <li><p>Variable: sops_aws_secret_access_key</p></li>
@@ -345,7 +389,7 @@ examples: <code class="docutils literal notranslate"><span class="pre">lookup('c
 </div>
 <p><em class="ansible-option-versionadded">added in community.sops 1.2.0</em></p>
 </li>
-<li><p>Environment variable: <span class="target" id="index-6"></span><a class="reference internal" href="environment_variables.html#envvar-ANSIBLE_SOPS_AWS_SESSION_TOKEN"><code class="xref std std-envvar docutils literal notranslate"><span class="pre">ANSIBLE_SOPS_AWS_SESSION_TOKEN</span></code></a></p>
+<li><p>Environment variable: <span class="target" id="index-8"></span><a class="reference internal" href="environment_variables.html#envvar-ANSIBLE_SOPS_AWS_SESSION_TOKEN"><code class="xref std std-envvar docutils literal notranslate"><span class="pre">ANSIBLE_SOPS_AWS_SESSION_TOKEN</span></code></a></p>
 <p><em class="ansible-option-versionadded">added in community.sops 1.2.0</em></p>
 </li>
 <li><p>Variable: sops_session_token</p></li>
@@ -385,7 +429,7 @@ examples: <code class="docutils literal notranslate"><span class="pre">lookup('c
 </div>
 <p><em class="ansible-option-versionadded">added in community.sops 1.2.0</em></p>
 </li>
-<li><p>Environment variable: <span class="target" id="index-7"></span><a class="reference internal" href="environment_variables.html#envvar-ANSIBLE_SOPS_CONFIG_PATH"><code class="xref std std-envvar docutils literal notranslate"><span class="pre">ANSIBLE_SOPS_CONFIG_PATH</span></code></a></p>
+<li><p>Environment variable: <span class="target" id="index-9"></span><a class="reference internal" href="environment_variables.html#envvar-ANSIBLE_SOPS_CONFIG_PATH"><code class="xref std std-envvar docutils literal notranslate"><span class="pre">ANSIBLE_SOPS_CONFIG_PATH</span></code></a></p>
 <p><em class="ansible-option-versionadded">added in community.sops 1.2.0</em></p>
 </li>
 <li><p>Variable: sops_config_path</p></li>
@@ -425,7 +469,7 @@ examples: <code class="docutils literal notranslate"><span class="pre">lookup('c
 </div>
 <p><em class="ansible-option-versionadded">added in community.sops 1.2.0</em></p>
 </li>
-<li><p>Environment variable: <span class="target" id="index-8"></span><a class="reference internal" href="environment_variables.html#envvar-ANSIBLE_SOPS_ENABLE_LOCAL_KEYSERVICE"><code class="xref std std-envvar docutils literal notranslate"><span class="pre">ANSIBLE_SOPS_ENABLE_LOCAL_KEYSERVICE</span></code></a></p>
+<li><p>Environment variable: <span class="target" id="index-10"></span><a class="reference internal" href="environment_variables.html#envvar-ANSIBLE_SOPS_ENABLE_LOCAL_KEYSERVICE"><code class="xref std std-envvar docutils literal notranslate"><span class="pre">ANSIBLE_SOPS_ENABLE_LOCAL_KEYSERVICE</span></code></a></p>
 <p><em class="ansible-option-versionadded">added in community.sops 1.2.0</em></p>
 </li>
 <li><p>Variable: sops_enable_local_keyservice</p></li>
@@ -440,6 +484,49 @@ examples: <code class="docutils literal notranslate"><span class="pre">lookup('c
 <td><div class="ansible-option-cell"><p>Tell SOPS to extract a specific key from a JSON or YAML file.</p>
 <p>Expects a string with the same ‘querystring’ syntax as SOPS’ <code class="docutils literal notranslate"><span class="pre">--encrypt</span></code> option, for example <code class="ansible-value docutils literal notranslate"><span class="pre">[&quot;somekey&quot;][0]</span></code>.</p>
 <p><strong>Note:</strong> Escape quotes appropriately.</p>
+</div></td>
+</tr>
+<tr class="row-even"><td><div class="ansible-option-cell">
+<div class="ansibleOptionAnchor" id="parameter-gcp_kms_client_type"></div><p class="ansible-option-title" id="ansible-collections-community-sops-sops-lookup-parameter-gcp-kms-client-type"><strong>gcp_kms_client_type</strong></p>
+<a class="ansibleOptionLink" href="#parameter-gcp_kms_client_type" title="Permalink to this option"></a><p class="ansible-option-type-line"><span class="ansible-option-type">string</span></p>
+<p><em class="ansible-option-versionadded">added in community.sops 3.2.0</em></p>
+</div></td>
+<td><div class="ansible-option-cell"><p>Determine which client to use to communicate with Google Cloud Services.</p>
+<p>Will be set as the <code class="xref std std-envvar docutils literal notranslate"><span class="pre">SOPS_GCP_KMS_CLIENT_TYPE</span></code> environment variable when calling SOPS.</p>
+<p>Requires SOPS 3.12.0+.</p>
+<p class="ansible-option-line"><strong class="ansible-option-choices">Choices:</strong></p>
+<ul class="simple">
+<li><p><code class="ansible-option-choices-entry docutils literal notranslate"><span class="pre">&quot;grpc&quot;</span></code>:
+Use gRPC client</p></li>
+<li><p><code class="ansible-option-choices-entry docutils literal notranslate"><span class="pre">&quot;rest&quot;</span></code>:
+Use REST client</p></li>
+</ul>
+<p class="ansible-option-line"><strong class="ansible-option-configuration">Configuration:</strong></p>
+<ul>
+<li><p>INI entry:</p>
+<div class="highlight-ini notranslate"><div class="highlight"><pre><span></span><span class="k">[community.sops]</span>
+<span class="na">gcp_kms_client_type</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">VALUE</span>
+</pre></div>
+</div>
+</li>
+<li><p>Environment variable: <span class="target" id="index-11"></span><a class="reference internal" href="environment_variables.html#envvar-ANSIBLE_SOPS_GCP_KMS_CLIENT_TYPE"><code class="xref std std-envvar docutils literal notranslate"><span class="pre">ANSIBLE_SOPS_GCP_KMS_CLIENT_TYPE</span></code></a></p></li>
+<li><p>Variable: sops_gcp_kms_client_type</p></li>
+</ul>
+</div></td>
+</tr>
+<tr class="row-odd"><td><div class="ansible-option-cell">
+<div class="ansibleOptionAnchor" id="parameter-gcp_oauth_access_token"></div><p class="ansible-option-title" id="ansible-collections-community-sops-sops-lookup-parameter-gcp-oauth-access-token"><strong>gcp_oauth_access_token</strong></p>
+<a class="ansibleOptionLink" href="#parameter-gcp_oauth_access_token" title="Permalink to this option"></a><p class="ansible-option-type-line"><span class="ansible-option-type">string</span></p>
+<p><em class="ansible-option-versionadded">added in community.sops 3.2.0</em></p>
+</div></td>
+<td><div class="ansible-option-cell"><p>Provide a Google Cloud OAauth token.</p>
+<p>Will be set as the <code class="xref std std-envvar docutils literal notranslate"><span class="pre">GOOGLE_OAUTH_ACCESS_TOKEN</span></code> environment variable when calling SOPS.</p>
+<p>Requires SOPS 3.10.0+.</p>
+<p class="ansible-option-line"><strong class="ansible-option-configuration">Configuration:</strong></p>
+<ul class="simple">
+<li><p>Environment variable: <span class="target" id="index-12"></span><a class="reference internal" href="environment_variables.html#envvar-ANSIBLE_SOPS_GCP_OAUTH_ACCESS_TOKEN"><code class="xref std std-envvar docutils literal notranslate"><span class="pre">ANSIBLE_SOPS_GCP_OAUTH_ACCESS_TOKEN</span></code></a></p></li>
+<li><p>Variable: sops_gcp_oauth_access_token</p></li>
+</ul>
 </div></td>
 </tr>
 <tr class="row-even"><td><div class="ansible-option-cell">
@@ -476,7 +563,7 @@ examples: <code class="docutils literal notranslate"><span class="pre">lookup('c
 </div>
 <p><em class="ansible-option-versionadded">added in community.sops 1.2.0</em></p>
 </li>
-<li><p>Environment variable: <span class="target" id="index-9"></span><a class="reference internal" href="environment_variables.html#envvar-ANSIBLE_SOPS_KEYSERVICE"><code class="xref std std-envvar docutils literal notranslate"><span class="pre">ANSIBLE_SOPS_KEYSERVICE</span></code></a></p>
+<li><p>Environment variable: <span class="target" id="index-13"></span><a class="reference internal" href="environment_variables.html#envvar-ANSIBLE_SOPS_KEYSERVICE"><code class="xref std std-envvar docutils literal notranslate"><span class="pre">ANSIBLE_SOPS_KEYSERVICE</span></code></a></p>
 <p><em class="ansible-option-versionadded">added in community.sops 1.2.0</em></p>
 </li>
 <li><p>Variable: sops_keyservice</p></li>
@@ -528,7 +615,7 @@ examples: <code class="docutils literal notranslate"><span class="pre">lookup('c
 </div>
 <p><em class="ansible-option-versionadded">added in community.sops 1.2.0</em></p>
 </li>
-<li><p>Environment variable: <span class="target" id="index-10"></span><a class="reference internal" href="environment_variables.html#envvar-ANSIBLE_SOPS_BINARY"><code class="xref std std-envvar docutils literal notranslate"><span class="pre">ANSIBLE_SOPS_BINARY</span></code></a></p>
+<li><p>Environment variable: <span class="target" id="index-14"></span><a class="reference internal" href="environment_variables.html#envvar-ANSIBLE_SOPS_BINARY"><code class="xref std std-envvar docutils literal notranslate"><span class="pre">ANSIBLE_SOPS_BINARY</span></code></a></p>
 <p><em class="ansible-option-versionadded">added in community.sops 1.2.0</em></p>
 </li>
 <li><p>Variable: sops_binary</p></li>

@@ -137,12 +137,36 @@ Environment variables used by the ansible-core configuration are documented in <
 </dd></dl>
 
 <dl class="std envvar">
+<dt class="sig sig-object std" id="envvar-ANSIBLE_SOPS_AGE_KEY_CMD">
+<span class="sig-name descname"><span class="pre">ANSIBLE_SOPS_AGE_KEY_CMD</span></span><a class="headerlink" href="#envvar-ANSIBLE_SOPS_AGE_KEY_CMD" title="Link to this definition"></a></dt>
+<dd><p>A command that SOPS will execute to obtain an age private key that SOPS can use to decrypt encrypted files.</p>
+<p>Will be set as the <code class="xref std std-envvar docutils literal notranslate"><span class="pre">SOPS_AGE_KEY_CMD</span></code> environment variable when calling SOPS.</p>
+<p>Requires SOPS 3.10.0+.</p>
+<p>When running this command and when SOPS 3.12.0+ is used, SOPS will set the <code class="xref std std-envvar docutils literal notranslate"><span class="pre">SOPS_AGE_RECIPIENT</span></code> variable to the identity of the key it wants to use to decrypt.</p>
+<p><em>Used by:</em>
+<a class="reference internal" href="sops_lookup.html#ansible-collections-community-sops-sops-lookup"><span class="std std-ref">community.sops.sops lookup plugin</span></a>,
+<a class="reference internal" href="sops_vars.html#ansible-collections-community-sops-sops-vars"><span class="std std-ref">community.sops.sops vars plugin</span></a></p>
+</dd></dl>
+
+<dl class="std envvar">
 <dt class="sig sig-object std" id="envvar-ANSIBLE_SOPS_AGE_KEYFILE">
 <span class="sig-name descname"><span class="pre">ANSIBLE_SOPS_AGE_KEYFILE</span></span><a class="headerlink" href="#envvar-ANSIBLE_SOPS_AGE_KEYFILE" title="Link to this definition"></a></dt>
 <dd><p>The file containing the age private keys that SOPS can use to decrypt encrypted files.</p>
 <p>Will be set as the <code class="xref std std-envvar docutils literal notranslate"><span class="pre">SOPS_AGE_KEY_FILE</span></code> environment variable when calling SOPS.</p>
 <p>By default, SOPS looks for <code class="docutils literal notranslate"><span class="pre">sops/age/keys.txt</span></code> inside your user configuration directory.</p>
 <p>Requires SOPS 3.7.0+.</p>
+<p><em>Used by:</em>
+<a class="reference internal" href="sops_lookup.html#ansible-collections-community-sops-sops-lookup"><span class="std std-ref">community.sops.sops lookup plugin</span></a>,
+<a class="reference internal" href="sops_vars.html#ansible-collections-community-sops-sops-vars"><span class="std std-ref">community.sops.sops vars plugin</span></a></p>
+</dd></dl>
+
+<dl class="std envvar">
+<dt class="sig sig-object std" id="envvar-ANSIBLE_SOPS_AGE_SSH_PRIVATE_KEY_CMD">
+<span class="sig-name descname"><span class="pre">ANSIBLE_SOPS_AGE_SSH_PRIVATE_KEY_CMD</span></span><a class="headerlink" href="#envvar-ANSIBLE_SOPS_AGE_SSH_PRIVATE_KEY_CMD" title="Link to this definition"></a></dt>
+<dd><p>A command that SOPS will execute to obtain an SSH private key that SOPS can use to decrypt encrypted files.</p>
+<p>Will be set as the <code class="xref std std-envvar docutils literal notranslate"><span class="pre">SOPS_AGE_SSH_PRIVATE_KEY_CMD</span></code> environment variable when calling SOPS.</p>
+<p>When running this command, SOPS will set the <code class="xref std std-envvar docutils literal notranslate"><span class="pre">SOPS_AGE_RECIPIENT</span></code> variable to the identity of the key it wants to use to decrypt.</p>
+<p>Requires SOPS 3.12.0+.</p>
 <p><em>Used by:</em>
 <a class="reference internal" href="sops_lookup.html#ansible-collections-community-sops-sops-lookup"><span class="std std-ref">community.sops.sops lookup plugin</span></a>,
 <a class="reference internal" href="sops_vars.html#ansible-collections-community-sops-sops-vars"><span class="std std-ref">community.sops.sops vars plugin</span></a></p>
@@ -226,6 +250,28 @@ Environment variables used by the ansible-core configuration are documented in <
 <span class="sig-name descname"><span class="pre">ANSIBLE_SOPS_ENABLE_LOCAL_KEYSERVICE</span></span><a class="headerlink" href="#envvar-ANSIBLE_SOPS_ENABLE_LOCAL_KEYSERVICE" title="Link to this definition"></a></dt>
 <dd><p>Tell SOPS to use local key service.</p>
 <p>When set to <code class="ansible-value docutils literal notranslate"><span class="pre">false</span></code>, this corresponds to the SOPS <code class="docutils literal notranslate"><span class="pre">--enable-local-keyservice=false</span></code> option.</p>
+<p><em>Used by:</em>
+<a class="reference internal" href="sops_lookup.html#ansible-collections-community-sops-sops-lookup"><span class="std std-ref">community.sops.sops lookup plugin</span></a>,
+<a class="reference internal" href="sops_vars.html#ansible-collections-community-sops-sops-vars"><span class="std std-ref">community.sops.sops vars plugin</span></a></p>
+</dd></dl>
+
+<dl class="std envvar">
+<dt class="sig sig-object std" id="envvar-ANSIBLE_SOPS_GCP_KMS_CLIENT_TYPE">
+<span class="sig-name descname"><span class="pre">ANSIBLE_SOPS_GCP_KMS_CLIENT_TYPE</span></span><a class="headerlink" href="#envvar-ANSIBLE_SOPS_GCP_KMS_CLIENT_TYPE" title="Link to this definition"></a></dt>
+<dd><p>Determine which client to use to communicate with Google Cloud Services.</p>
+<p>Will be set as the <code class="xref std std-envvar docutils literal notranslate"><span class="pre">SOPS_GCP_KMS_CLIENT_TYPE</span></code> environment variable when calling SOPS.</p>
+<p>Requires SOPS 3.12.0+.</p>
+<p><em>Used by:</em>
+<a class="reference internal" href="sops_lookup.html#ansible-collections-community-sops-sops-lookup"><span class="std std-ref">community.sops.sops lookup plugin</span></a>,
+<a class="reference internal" href="sops_vars.html#ansible-collections-community-sops-sops-vars"><span class="std std-ref">community.sops.sops vars plugin</span></a></p>
+</dd></dl>
+
+<dl class="std envvar">
+<dt class="sig sig-object std" id="envvar-ANSIBLE_SOPS_GCP_OAUTH_ACCESS_TOKEN">
+<span class="sig-name descname"><span class="pre">ANSIBLE_SOPS_GCP_OAUTH_ACCESS_TOKEN</span></span><a class="headerlink" href="#envvar-ANSIBLE_SOPS_GCP_OAUTH_ACCESS_TOKEN" title="Link to this definition"></a></dt>
+<dd><p>Provide a Google Cloud OAauth token.</p>
+<p>Will be set as the <code class="xref std std-envvar docutils literal notranslate"><span class="pre">GOOGLE_OAUTH_ACCESS_TOKEN</span></code> environment variable when calling SOPS.</p>
+<p>Requires SOPS 3.10.0+.</p>
 <p><em>Used by:</em>
 <a class="reference internal" href="sops_lookup.html#ansible-collections-community-sops-sops-lookup"><span class="std std-ref">community.sops.sops lookup plugin</span></a>,
 <a class="reference internal" href="sops_vars.html#ansible-collections-community-sops-sops-vars"><span class="std std-ref">community.sops.sops vars plugin</span></a></p>

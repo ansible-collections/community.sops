@@ -219,6 +219,17 @@ example: <code class="docutils literal notranslate"><span class="pre">input</spa
 </div></td>
 </tr>
 <tr class="row-odd"><td><div class="ansible-option-cell">
+<div class="ansibleOptionAnchor" id="parameter-age_key_cmd"></div><p class="ansible-option-title" id="ansible-collections-community-sops-decrypt-filter-parameter-age-key-cmd"><strong>age_key_cmd</strong></p>
+<a class="ansibleOptionLink" href="#parameter-age_key_cmd" title="Permalink to this option"></a><p class="ansible-option-type-line"><span class="ansible-option-type">string</span></p>
+<p><em class="ansible-option-versionadded">added in community.sops 2.3.0</em></p>
+</div></td>
+<td><div class="ansible-option-cell"><p>A command that SOPS will execute to obtain an age private key that SOPS can use to decrypt encrypted files.</p>
+<p>Will be set as the <code class="xref std std-envvar docutils literal notranslate"><span class="pre">SOPS_AGE_KEY_CMD</span></code> environment variable when calling SOPS.</p>
+<p>Requires SOPS 3.10.0+.</p>
+<p>When running this command and when SOPS 3.12.0+ is used, SOPS will set the <code class="xref std std-envvar docutils literal notranslate"><span class="pre">SOPS_AGE_RECIPIENT</span></code> variable to the identity of the key it wants to use to decrypt.</p>
+</div></td>
+</tr>
+<tr class="row-even"><td><div class="ansible-option-cell">
 <div class="ansibleOptionAnchor" id="parameter-age_keyfile"></div><p class="ansible-option-title" id="ansible-collections-community-sops-decrypt-filter-parameter-age-keyfile"><strong>age_keyfile</strong></p>
 <a class="ansibleOptionLink" href="#parameter-age_keyfile" title="Permalink to this option"></a><p class="ansible-option-type-line"><span class="ansible-option-type">path</span></p>
 <p><em class="ansible-option-versionadded">added in community.sops 1.4.0</em></p>
@@ -227,6 +238,17 @@ example: <code class="docutils literal notranslate"><span class="pre">input</spa
 <p>Will be set as the <code class="xref std std-envvar docutils literal notranslate"><span class="pre">SOPS_AGE_KEY_FILE</span></code> environment variable when calling SOPS.</p>
 <p>By default, SOPS looks for <code class="docutils literal notranslate"><span class="pre">sops/age/keys.txt</span></code> inside your user configuration directory.</p>
 <p>Requires SOPS 3.7.0+.</p>
+</div></td>
+</tr>
+<tr class="row-odd"><td><div class="ansible-option-cell">
+<div class="ansibleOptionAnchor" id="parameter-age_ssh_private_key_cmd"></div><p class="ansible-option-title" id="ansible-collections-community-sops-decrypt-filter-parameter-age-ssh-private-key-cmd"><strong>age_ssh_private_key_cmd</strong></p>
+<a class="ansibleOptionLink" href="#parameter-age_ssh_private_key_cmd" title="Permalink to this option"></a><p class="ansible-option-type-line"><span class="ansible-option-type">string</span></p>
+<p><em class="ansible-option-versionadded">added in community.sops 2.3.0</em></p>
+</div></td>
+<td><div class="ansible-option-cell"><p>A command that SOPS will execute to obtain an SSH private key that SOPS can use to decrypt encrypted files.</p>
+<p>Will be set as the <code class="xref std std-envvar docutils literal notranslate"><span class="pre">SOPS_AGE_SSH_PRIVATE_KEY_CMD</span></code> environment variable when calling SOPS.</p>
+<p>When running this command, SOPS will set the <code class="xref std std-envvar docutils literal notranslate"><span class="pre">SOPS_AGE_RECIPIENT</span></code> variable to the identity of the key it wants to use to decrypt.</p>
+<p>Requires SOPS 3.12.0+.</p>
 </div></td>
 </tr>
 <tr class="row-even"><td><div class="ansible-option-cell">
@@ -311,6 +333,33 @@ example: <code class="docutils literal notranslate"><span class="pre">input</spa
 <li><p><code class="ansible-option-choices-entry docutils literal notranslate"><span class="pre">false</span></code></p></li>
 <li><p><code class="ansible-option-default-bold docutils literal notranslate"><strong><span class="pre">true</span></strong></code> <span class="ansible-option-choices-default-mark">← (default)</span></p></li>
 </ul>
+</div></td>
+</tr>
+<tr class="row-even"><td><div class="ansible-option-cell">
+<div class="ansibleOptionAnchor" id="parameter-gcp_kms_client_type"></div><p class="ansible-option-title" id="ansible-collections-community-sops-decrypt-filter-parameter-gcp-kms-client-type"><strong>gcp_kms_client_type</strong></p>
+<a class="ansibleOptionLink" href="#parameter-gcp_kms_client_type" title="Permalink to this option"></a><p class="ansible-option-type-line"><span class="ansible-option-type">string</span></p>
+<p><em class="ansible-option-versionadded">added in community.sops 3.2.0</em></p>
+</div></td>
+<td><div class="ansible-option-cell"><p>Determine which client to use to communicate with Google Cloud Services.</p>
+<p>Will be set as the <code class="xref std std-envvar docutils literal notranslate"><span class="pre">SOPS_GCP_KMS_CLIENT_TYPE</span></code> environment variable when calling SOPS.</p>
+<p>Requires SOPS 3.12.0+.</p>
+<p class="ansible-option-line"><strong class="ansible-option-choices">Choices:</strong></p>
+<ul class="simple">
+<li><p><code class="ansible-option-choices-entry docutils literal notranslate"><span class="pre">&quot;grpc&quot;</span></code>:
+Use gRPC client</p></li>
+<li><p><code class="ansible-option-choices-entry docutils literal notranslate"><span class="pre">&quot;rest&quot;</span></code>:
+Use REST client</p></li>
+</ul>
+</div></td>
+</tr>
+<tr class="row-odd"><td><div class="ansible-option-cell">
+<div class="ansibleOptionAnchor" id="parameter-gcp_oauth_access_token"></div><p class="ansible-option-title" id="ansible-collections-community-sops-decrypt-filter-parameter-gcp-oauth-access-token"><strong>gcp_oauth_access_token</strong></p>
+<a class="ansibleOptionLink" href="#parameter-gcp_oauth_access_token" title="Permalink to this option"></a><p class="ansible-option-type-line"><span class="ansible-option-type">string</span></p>
+<p><em class="ansible-option-versionadded">added in community.sops 3.2.0</em></p>
+</div></td>
+<td><div class="ansible-option-cell"><p>Provide a Google Cloud OAauth token.</p>
+<p>Will be set as the <code class="xref std std-envvar docutils literal notranslate"><span class="pre">GOOGLE_OAUTH_ACCESS_TOKEN</span></code> environment variable when calling SOPS.</p>
+<p>Requires SOPS 3.10.0+.</p>
 </div></td>
 </tr>
 <tr class="row-even"><td><div class="ansible-option-cell">
