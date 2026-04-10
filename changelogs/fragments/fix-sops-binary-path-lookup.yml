@@ -1,0 +1,2 @@
+bugfixes:
+  - sops_binary - Fix that setting O(sops_binary) in C(ansible.cfg) to a bare command name did not search C(PATH) for the binary.
