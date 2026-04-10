@@ -17,7 +17,7 @@ options:
     description:
       - Path to the SOPS binary.
       - By default uses C(sops).
-    type: path
+    type: str
     version_added: 1.0.0
   age_key:
     description:
