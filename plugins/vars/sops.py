@@ -101,6 +101,7 @@ seealso:
 """
 
 import os
+import typing as t
 from collections.abc import Sequence, Mapping
 
 from ansible.errors import AnsibleParserError
@@ -121,11 +122,11 @@ except ImportError:
 
 display = Display()
 
-FOUND = {}
-DECRYPTED = {}
+FOUND: dict[str, list[str]] = {}
+DECRYPTED: dict[str, bytes] = {}
 
 
-def _make_safe(value):
+def _make_safe(value: t.Any) -> t.Any:
     if isinstance(value, str):
         # must come *before* Sequence, as strings are also instances of Sequence
         if HAS_DATATAGGING and isinstance(value, str):

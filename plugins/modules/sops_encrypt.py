@@ -110,7 +110,7 @@ try:
 except ImportError:
     YAML_IMP_ERR = traceback.format_exc()
     HAS_YAML = False
-    yaml = None
+    yaml = None  # type: ignore[assignment]  # use better type later...
 
 
 def get_data_type(module):

@@ -31,7 +31,12 @@ yamllint_config = ".yamllint"
 yamllint_config_plugins = ".yamllint-docs"
 yamllint_config_plugins_examples = ".yamllint-examples"
 yamllint_config_extra_docs = ".yamllint-extra-docs"
-run_mypy = false
+run_mypy = true
+mypy_config = ".mypy.ini"
+mypy_extra_deps = [
+    "types-mock",
+    "types-PyYAML",
+]
 
 [sessions.docs_check]
 validate_collection_refs="all"

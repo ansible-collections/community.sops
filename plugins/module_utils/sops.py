@@ -294,7 +294,7 @@ class SopsRunner(object):
             raise SopsError(path, 0, 'Cannot decode filestatus result: %s' % exc, operation='inspect')
 
 
-_SOPS_RUNNER_CACHE = dict()
+_SOPS_RUNNER_CACHE = dict()  # type: dict[str, SopsRunner]
 
 
 class Sops():
