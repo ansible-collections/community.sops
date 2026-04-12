@@ -4,6 +4,7 @@
 
 from __future__ import annotations
 
+import typing as t
 from collections.abc import Sequence, Mapping
 
 from ansible.module_utils.common.text.converters import to_native
@@ -20,15 +21,18 @@ except ImportError:
     HAS_DATATAGGING = False
 
 try:
-    from ansible.plugins.action import VariableLayer
+    from ansible.plugins.action import VariableLayer  # type: ignore[attr-defined]
     HAS_REGISTER_HOST_VARIABLES = True
 except ImportError:
     HAS_REGISTER_HOST_VARIABLES = False
 
+if t.TYPE_CHECKING:
+    from ansible_collections.community.sops.plugins.plugin_utils.action_module import AnsibleActionModule
+
 display = Display()
 
 
-def _make_safe(value):
+def _make_safe(value: t.Any) -> t.Any:
     if HAS_DATATAGGING and isinstance(value, str):
         return _trust_as_template(value)
     return value
@@ -36,7 +40,7 @@ def _make_safe(value):
 
 class ActionModule(ActionModuleBase):
 
-    def _load(self, filename, module):
+    def _load(self, filename: str, module: AnsibleActionModule) -> dict:
         def get_option_value(argument_name):
             return module.params.get(argument_name)
 
