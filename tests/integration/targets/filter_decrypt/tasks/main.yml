@@ -5,26 +5,39 @@
 
 - when: sops_installed
   block:
-    - name: Test bad parameter detection (1/2)
+    - name: Test bad parameter detection (1/3)
       set_fact:
         sops_bad_input_type: "{{ 'this-is-not: a sops file' | community.sops.decrypt(input_type='foo') }}"
       ignore_errors: true
       register: sops_bad_input_type
 
-    - name: Test bad parameter detection (2/2)
+    - name: Test bad parameter detection (2/3)
       set_fact:
         sops_bad_output_type: "{{ 'this-is-not: a sops file' | community.sops.decrypt(output_type=23) }}"
       ignore_errors: true
       register: sops_bad_output_type
 
+    - name: Test bad parameter detection (3/3)
+      set_fact:
+        sops_bad_output_type: "{{ 'this-is-not: a sops file' | community.sops.decrypt(sops_binary=42) }}"
+      ignore_errors: true
+      register: sops_bad_binary
+
     - assert:
         that:
           - "sops_bad_input_type is failed"
-          - "'input_type must be one of' in sops_bad_input_type.msg"
-          - "'; got \"foo\"' in sops_bad_input_type.msg"
+          - >-
+            'input_type must be one of' in sops_bad_input_type.msg
+          - >-
+            '; got "foo"' in sops_bad_input_type.msg
           - "sops_bad_output_type is failed"
-          - "'output_type must be one of' in sops_bad_output_type.msg"
-          - "'; got \"23\"' in sops_bad_output_type.msg"
+          - >-
+            'output_type must be one of' in sops_bad_output_type.msg
+          - >-
+            '; got "23"' in sops_bad_output_type.msg
+          - "sops_bad_binary is failed"
+          - >-
+            "Error in community.sops.decrypt filter: option sops_binary has invalid value: '42' is not a string and conversion is not allowed" in sops_bad_binary.msg
 
     - name: Test decrypt of non-sops file
       set_fact:

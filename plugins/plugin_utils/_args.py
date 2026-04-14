@@ -62,20 +62,18 @@ def wrap_get_option_value_plugin_path(
     return wrap_get_option_value(get_option_value, overrides=overrides)
 
 
+_TYPE_CHECKS = {
+    "dict": _check_type_dict,
+    "bool": _check_type_bool,
+    "int": _check_type_int,
+    "float": _check_type_float,
+    "str": lambda value: _check_type_str(value, allow_conversion=False),
+    "path": lambda value: _check_type_path(_check_type_str(value, allow_conversion=False)),
+}
+
+
 def _ensure_type_impl(value: t.Any, *, option_type: str) -> t.Any:
-    if option_type == "str":
-        return _check_type_str(value, allow_conversion=False)
-    if option_type == "dict":
-        return _check_type_dict(value)
-    if option_type == "bool":
-        return _check_type_bool(value)
-    if option_type == "int":
-        return _check_type_int(value)
-    if option_type == "float":
-        return _check_type_float(value)
-    if option_type == "path":
-        return _check_type_path(_check_type_str(value, allow_conversion=False))
-    raise AssertionError(f"Unknown option type {option_type!r}")  # pragma: no cover
+    return _TYPE_CHECKS[option_type](value)
 
 
 def _ensure_type(value: t.Any, *, option_type: str, elements_type: str | None, sensitive: bool) -> t.Any:
@@ -85,7 +83,9 @@ def _ensure_type(value: t.Any, *, option_type: str, elements_type: str | None, s
         return _ensure_type_impl(value, option_type=option_type)
     value = _check_type_list(value)
     if elements_type is None:
-        return value
+        # Our options do not have a list without 'elements', so this is unreachable.
+        # We still want to keep this code though...
+        return value  # pragma: no cover
     return [_ensure_type_impl(v, option_type=elements_type) for v in value]
 
 
