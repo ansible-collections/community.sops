@@ -23,17 +23,14 @@ from ansible.utils.path import unfrackpath as _unfrackpath
 from ansible_collections.community.sops.plugins.module_utils.sops import get_sops_argument_spec as _get_sops_argument_spec
 
 if t.TYPE_CHECKING:
-    from collections.abc import Callable, Mapping
+    from collections.abc import Callable, Mapping  # pragma: no cover
 
 
 def wrap_get_option_value(
     get_option_value: Callable[[str], t.Any],
     *,
-    overrides: Mapping[str, t.Any] | None = None,
+    overrides: Mapping[str, t.Any],
 ) -> Callable[[str], t.Any]:
-    if overrides is None:
-        overrides = {}
-
     def new_get_option_value(option: str) -> t.Any:
         if option in overrides:
             return overrides[option]
@@ -55,10 +52,11 @@ def wrap_get_option_value_plugin_path(
             candidate = candidate.replace("{{CWD}}", os.getcwd())
         basedir = sops_binary_origin if sops_binary_origin and os.path.isabs(sops_binary_origin) and os.path.exists(_to_bytes(sops_binary_origin)) else None
         candidate = _unfrackpath(candidate, follow=False, basedir=basedir)
-        # ...
+        # Check whether the candidate is a file:
         if os.path.isfile(candidate):
             sops_binary = candidate
         else:
+            # If not, fall back to what a module would do with the path
             sops_binary = os.path.expanduser(os.path.expandvars(sops_binary))
     overrides = {"sops_binary": sops_binary}
     return wrap_get_option_value(get_option_value, overrides=overrides)
@@ -77,7 +75,7 @@ def _ensure_type_impl(value: t.Any, *, option_type: str) -> t.Any:
         return _check_type_float(value)
     if option_type == "path":
         return _check_type_path(_check_type_str(value, allow_conversion=False))
-    raise RuntimeError(f"Unknown option type {option_type!r}")
+    raise AssertionError(f"Unknown option type {option_type!r}")  # pragma: no cover
 
 
 def _ensure_type(value: t.Any, *, option_type: str, elements_type: str | None, sensitive: bool) -> t.Any:
@@ -86,9 +84,9 @@ def _ensure_type(value: t.Any, *, option_type: str, elements_type: str | None, s
     if option_type != "list":
         return _ensure_type_impl(value, option_type=option_type)
     value = _check_type_list(value)
-    if elements_type is not None:
-        return [_ensure_type_impl(v, option_type=elements_type) for v in value]
-    return value
+    if elements_type is None:
+        return value
+    return [_ensure_type_impl(v, option_type=elements_type) for v in value]
 
 
 def wrap_get_option_value_check_types(

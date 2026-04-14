@@ -41,12 +41,14 @@
     - name: Test simple lookup
       set_fact:
         sops_success: "{{ lookup('community.sops.sops', 'simple.sops.yaml') }}"
+        sops_success_2: "{{ lookup('community.sops.sops', 'simple.sops.yaml', sops_binary='sops') }}"
       register: sops_lookup_simple
 
     - assert:
         that:
           - "sops_lookup_simple is success"
           - "sops_success == 'foo: bar'"
+          - "sops_success_2 == 'foo: bar'"
 
     - name: Test extract
       set_fact:

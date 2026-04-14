@@ -67,8 +67,8 @@ options:
     type: str
     version_added: 1.9.0
 extends_documentation_fragment:
+  - community.sops.sops.ansible_plugin  # must come before community.sops.sops!
   - community.sops.sops
-  - community.sops.sops.ansible_plugin
   - community.sops.sops.ansible_variables
   - community.sops.sops.ansible_env
   - community.sops.sops.ansible_ini

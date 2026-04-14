@@ -87,8 +87,8 @@ options:
       - name: ANSIBLE_VARS_SOPS_PLUGIN_HANDLE_UNENCRYPTED_FILES
 extends_documentation_fragment:
   - ansible.builtin.vars_plugin_staging
+  - community.sops.sops.ansible_plugin  # must come before community.sops.sops!
   - community.sops.sops
-  - community.sops.sops.ansible_plugin
   - community.sops.sops.ansible_env
   - community.sops.sops.ansible_ini
 seealso:
