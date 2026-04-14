@@ -117,8 +117,10 @@ _raw:
 import base64
 
 from ansible.errors import AnsibleLookupError
-from ansible.plugins.lookup import LookupBase
 from ansible.module_utils.common.text.converters import to_native
+from ansible.module_utils.compat.version import LooseVersion
+from ansible.plugins.lookup import LookupBase
+from ansible.release import __version__ as ansible_version
 from ansible_collections.community.sops.plugins.module_utils.sops import Sops, SopsError
 from ansible_collections.community.sops.plugins.plugin_utils._args import wrap_get_option_value_plugin_path
 
@@ -139,7 +141,20 @@ class LookupModule(LookupBase):
 
         ret = []
 
-        sops_binary, sops_binary_origin = self.get_option_and_origin("sops_binary")
+        try:
+            sops_binary, sops_binary_origin = self.get_option_and_origin("sops_binary")
+            if sops_binary is None and (
+                LooseVersion(ansible_version) < LooseVersion("2.18.8")
+                or
+                LooseVersion(ansible_version) == LooseVersion("2.19.0")
+            ):
+                # Ansible-core < 2.18.8 and 2.19.0 are broken: https://github.com/ansible/ansible/issues/85480
+                sops_binary = self.get_option("sops_binary")
+                sops_binary_origin = "Direct"
+        except AttributeError:
+            # Ansible-core 2.15 has no get_option_and_origin()!
+            sops_binary = self.get_option("sops_binary")
+            sops_binary_origin = "Direct"
         get_option_value = wrap_get_option_value_plugin_path(
             self.get_option,
             sops_binary=sops_binary,

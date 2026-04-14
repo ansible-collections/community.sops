@@ -151,7 +151,12 @@ class VarsModule(BaseVarsPlugin):
 
         super().get_vars(loader, path, entities)
 
-        sops_binary, sops_binary_origin = self.get_option_and_origin("sops_binary")
+        try:
+            sops_binary, sops_binary_origin = self.get_option_and_origin("sops_binary")
+        except AttributeError:
+            # Ansible-core 2.15 has no get_option_and_origin()!
+            sops_binary = self.get_option("sops_binary")
+            sops_binary_origin = "Direct"
         get_option_value = wrap_get_option_value_plugin_path(
             self.get_option,
             sops_binary=sops_binary,
