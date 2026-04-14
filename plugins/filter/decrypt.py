@@ -108,6 +108,7 @@ from ansible.module_utils.common.text.converters import to_bytes, to_native
 from ansible.utils.display import Display
 
 from ansible_collections.community.sops.plugins.module_utils.sops import Sops, SopsError
+from ansible_collections.community.sops.plugins.plugin_utils._args import wrap_get_option_value_check_types
 
 
 _VALID_TYPES = set(['binary', 'json', 'yaml', 'dotenv', 'ini'])
@@ -165,10 +166,19 @@ def decrypt_filter(data, input_type='yaml', output_type='yaml', sops_binary='sop
     data = to_bytes(data)
     try:
         output = Sops.decrypt(
-            None, content=data, display=Display(), rstrip=rstrip, decode_output=decode_output,
-            input_type=input_type, output_type=output_type, get_option_value=get_option_value)
+            None,
+            content=data,
+            display=Display(),
+            rstrip=rstrip,
+            decode_output=decode_output,
+            input_type=input_type,
+            output_type=output_type,
+            get_option_value=wrap_get_option_value_check_types(get_option_value, add_encrypt_specific=False),
+        )
     except SopsError as e:
         raise AnsibleFilterError(to_native(e))
+    except ValueError as e:
+        raise AnsibleFilterError(f"Error in community.sops.decrypt filter: {e}")
 
     return output
 

@@ -125,6 +125,12 @@ options:
     version_added: 1.0.0
 """
 
+    ANSIBLE_PLUGIN = r'''
+options:
+  sops_binary:
+    type: str
+'''
+
     ANSIBLE_VARIABLES = r'''
 options:
   sops_binary:

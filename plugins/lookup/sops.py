@@ -68,6 +68,7 @@ options:
     version_added: 1.9.0
 extends_documentation_fragment:
   - community.sops.sops
+  - community.sops.sops.ansible_plugin
   - community.sops.sops.ansible_variables
   - community.sops.sops.ansible_env
   - community.sops.sops.ansible_ini
@@ -119,6 +120,7 @@ from ansible.errors import AnsibleLookupError
 from ansible.plugins.lookup import LookupBase
 from ansible.module_utils.common.text.converters import to_native
 from ansible_collections.community.sops.plugins.module_utils.sops import Sops, SopsError
+from ansible_collections.community.sops.plugins.plugin_utils._args import wrap_get_option_value_plugin_path
 
 from ansible.utils.display import Display
 display = Display()
@@ -137,8 +139,12 @@ class LookupModule(LookupBase):
 
         ret = []
 
-        def get_option_value(argument_name):
-            return self.get_option(argument_name)
+        sops_binary, sops_binary_origin = self.get_option_and_origin("sops_binary")
+        get_option_value = wrap_get_option_value_plugin_path(
+            self.get_option,
+            sops_binary=sops_binary,
+            sops_binary_origin=sops_binary_origin,
+        )
 
         for term in terms:
             display.debug("Sops lookup term: %s" % term)

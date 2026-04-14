@@ -88,6 +88,7 @@ options:
 extends_documentation_fragment:
   - ansible.builtin.vars_plugin_staging
   - community.sops.sops
+  - community.sops.sops.ansible_plugin
   - community.sops.sops.ansible_env
   - community.sops.sops.ansible_ini
 seealso:
@@ -112,6 +113,7 @@ from ansible.plugins.vars import BaseVarsPlugin
 from ansible.utils.display import Display
 from ansible.utils.vars import combine_vars
 from ansible_collections.community.sops.plugins.module_utils.sops import Sops, SopsError
+from ansible_collections.community.sops.plugins.plugin_utils._args import wrap_get_option_value_plugin_path
 
 try:
     from ansible.template import trust_as_template as _trust_as_template
@@ -149,8 +151,12 @@ class VarsModule(BaseVarsPlugin):
 
         super().get_vars(loader, path, entities)
 
-        def get_option_value(argument_name):
-            return self.get_option(argument_name)
+        sops_binary, sops_binary_origin = self.get_option_and_origin("sops_binary")
+        get_option_value = wrap_get_option_value_plugin_path(
+            self.get_option,
+            sops_binary=sops_binary,
+            sops_binary_origin=sops_binary_origin,
+        )
 
         if cache is None:
             cache = self.get_option('cache')
