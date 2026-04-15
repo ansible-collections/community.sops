@@ -1,0 +1,12 @@
+release_summary: |-
+  This is a pre-release for community.sops 2.3.0.
+  The main new features of this release are ansible-core 2.21 support for ``community.sops.load_vars``
+  and improved argument checking for the ``community.sops.decrypt`` filter.
+  Also the handling of the ``sops_binary`` option for the lookup and vars plugin have been improved.
+
+  ansible-core 2.21 is the first version to explicitly allow action plugins to set variables,
+  which finally allows ``community.sops.load_vars`` to set variables the same way as
+  ``ansible.builtin.include_vars``.
+
+  Since this interface is brand-new and changes might still happen until the final ansible-core 2.21
+  release, this is a pre-release.
