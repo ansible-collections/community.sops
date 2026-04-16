@@ -1,0 +1,7 @@
+release_summary: |-
+  Feature release.
+
+  The main new feature of this release is ansible-core 2.21 support for ``community.sops.load_vars``.
+  ansible-core 2.21 is the first version to explicitly allow action plugins to set variables,
+  which finally allows ``community.sops.load_vars`` to set variables the same way as
+  ``ansible.builtin.include_vars``.
