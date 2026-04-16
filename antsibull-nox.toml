@@ -96,7 +96,7 @@ gha_container = "ubuntu-latest"
 [[sessions.ansible_test_integration.groups.sessions]]
 ansible_core = "devel"
 docker = ["ubuntu2204"]
-# Cannot install 3.5.0 on Fedora 43 (digest algorithm used for RPM isn't accepted anymore)
+# Cannot install 3.5.0 on Fedora 44 (digest algorithm used for RPM isn't accepted anymore)
 ansible_vars = { override_sops_version = "3.5.0" }
 
 [[sessions.ansible_test_integration.groups.sessions]]
@@ -107,7 +107,7 @@ ansible_vars = { override_sops_version = "3.6.1" }
 
 [[sessions.ansible_test_integration.groups.sessions]]
 ansible_core = "devel"
-docker = ["fedora43"]
+docker = ["fedora44"]
 ansible_vars = { override_sops_version = "3.7.3" }
 
 [[sessions.ansible_test_integration.groups.sessions]]
@@ -122,7 +122,7 @@ ansible_vars = { override_sops_version = "3.9.4" }
 
 [[sessions.ansible_test_integration.groups.sessions]]
 ansible_core = "devel"
-docker = ["fedora43"]
+docker = ["fedora44"]
 ansible_vars = { override_sops_version = "3.10.2" }
 
 [[sessions.ansible_test_integration.groups.sessions]]
@@ -132,7 +132,7 @@ ansible_vars = { override_sops_version = "3.11.0" }
 
 [[sessions.ansible_test_integration.groups.sessions]]
 ansible_core = "devel"
-docker = ["ubuntu2204", "ubuntu2404", "fedora43"]
+docker = ["ubuntu2204", "ubuntu2404", "fedora44"]
 ansible_vars = { override_sops_version = "3.12.1" }
 
 [[sessions.ansible_test_integration.groups.sessions]]
@@ -341,12 +341,12 @@ ansible_vars = { github_latest_detection = "auto" }
 
 [[sessions.ansible_test_integration.groups.sessions]]
 ansible_core = "2.21"
-docker = "ubuntu2404"
+docker = "fedora43"
 ansible_vars = { github_latest_detection = "auto" }
 
 [[sessions.ansible_test_integration.groups.sessions]]
 ansible_core = "devel"
-docker = "fedora43"
+docker = "fedora44"
 ansible_vars = { github_latest_detection = "auto" }
 
 [[sessions.ansible_test_integration.groups.sessions]]
