@@ -674,3 +674,20 @@ releases:
       - 2.3.0-b2.yml
       - 286-options.yml
     release_date: '2026-04-15'
+  2.3.0:
+    changes:
+      release_summary: 'Feature release.
+
+
+        The main new feature of this release is ansible-core 2.21 support for ``community.sops.load_vars``.
+
+        ansible-core 2.21 is the first version to explicitly allow action plugins
+        to set variables,
+
+        which finally allows ``community.sops.load_vars`` to set variables the same
+        way as
+
+        ``ansible.builtin.include_vars``.'
+    fragments:
+      - 2.3.0.yml
+    release_date: '2026-04-19'
