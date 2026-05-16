@@ -24,3 +24,9 @@ skip_list:
   - schema[tasks]
   - schema[vars]
   - var-naming
+
+exclude_paths:
+  # Ansible-lint uses "ansible-playbook --syntax-check" as its "syntax check",
+  # which bails out on roles it cannot find. The following playbooks are 100% valid,
+  # but we need to skip them due to ansible-lint's syntax check's deficiencies...
+  - tests/integration/targets/vars_sops/setup.yml
