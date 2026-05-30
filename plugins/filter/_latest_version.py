@@ -52,7 +52,7 @@ def pick_latest_version(version_list):
     version_list = [v for v in version_list if '-' not in v and '+' not in v]
     if not version_list:
         return ''
-    return sorted(version_list, key=LooseVersion, reverse=True)[0]
+    return max(version_list, key=LooseVersion)
 
 
 class FilterModule:
