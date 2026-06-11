@@ -17,6 +17,7 @@ argument_specs:
         Debian 10 (Buster) or newer,
         Fedora (new enough),
         RHEL 7 or newer,
+        OpenSuSE Tumbleweed (and probably also Leap),
         Ubuntu 16.04 or newer LTS versions
       - The Ansible facts C(ansible_facts.architecture), C(ansible_facts.distribution), C(ansible_facts.distribution_major_version),
         C(ansible_facts.distribution_version), and C(ansible_facts.os_family) are expected to be present if O(sops_install_on_localhost) is V(false).
@@ -101,3 +102,4 @@ argument_specs:
           - Fedora (new enough)
           - RHEL 7 or newer
           - Ubuntu 16.04 or newer LTS versions
+          - OpenSuSE Tumbleweed (and probably also Leap)

@@ -4,4 +4,4 @@ SPDX-License-Identifier: GPL-3.0-or-later
 SPDX-FileCopyrightText: 2022, Felix Fontein
 -->
 
-See [the documentation](https://docs.ansible.com/ansible/devel/collections/community/sops/).
+See [the documentation](https://docs.ansible.com/projects/ansible/devel/collections/community/sops/).
