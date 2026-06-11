@@ -86,6 +86,7 @@ include_devel = true
 "quay.io/ansible-community/test-image:debian-bookworm" = "Debian 12"
 "quay.io/ansible-community/test-image:debian-13-trixie" = "Debian 13"
 "quay.io/ansible-community/test-image:archlinux" = "Arch Linux"
+"quay.io/ansible-community/test-image:opensuse-tumbleweed" = "OpenSuSE Tumbleweed"
 
 [sessions.ansible_test_integration.ansible_vars]
 github_token = { type = "env", name = "GITHUB_TOKEN", unset_if_not_set = true }
@@ -252,6 +253,12 @@ ansible_vars = { override_sops_version = "latest" }
 
 [[sessions.ansible_test_integration.groups.sessions]]
 ansible_core = "devel"
+docker = "quay.io/ansible-community/test-image:opensuse-tumbleweed"
+python_version = "3.13"
+ansible_vars = { override_sops_version = "latest" }
+
+[[sessions.ansible_test_integration.groups.sessions]]
+ansible_core = "devel"
 docker = "ubuntu2404"
 gha_container = "ubuntu-24.04-arm"
 ansible_vars = { override_sops_version = "latest" }
@@ -319,6 +326,12 @@ gha_container = "ubuntu-latest"
 ansible_core = "devel"
 docker = "quay.io/ansible-community/test-image:archlinux"
 python_version = "3.14"
+ansible_vars = { github_latest_detection = "auto" }
+
+[[sessions.ansible_test_integration.groups.sessions]]
+ansible_core = "devel"
+docker = "quay.io/ansible-community/test-image:opensuse-tumbleweed"
+python_version = "3.13"
 ansible_vars = { github_latest_detection = "auto" }
 
 [[sessions.ansible_test_integration.groups.sessions]]
