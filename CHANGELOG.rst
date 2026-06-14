@@ -4,6 +4,19 @@ Community SOPS Release Notes
 
 .. contents:: Topics
 
+v2.4.0
+======
+
+Release Summary
+---------------
+
+Feature release.
+
+Minor Changes
+-------------
+
+- Support OpenSuSE Tumbleweed (and probably also Leap) in the community.sops.install role. Right now only Tumbleweed is tested in CI, so support for Leap has not been verified (https://github.com/ansible-collections/community.sops/pull/299).
+
 v2.3.0
 ======
 
