@@ -423,3 +423,61 @@
           - value_1.data == text_value_1
           - '"data" in value_2'
           - value_2.data.startswith('ENC[')
+
+    # Minimal diff via sops edit (unchanged keys preserve encrypted values)
+
+    - name: Define test values for sops edit minimal diff
+      set_fact:
+        edit_json_1:
+          key_a: value_a
+          key_b: value_b
+          key_c: value_c
+        edit_json_2:
+          key_a: value_a
+          key_b: changed_b
+          key_c: value_c
+
+    - name: Create JSON file for edit minimal diff test
+      community.sops.sops_encrypt:
+        path: "{{ remote_tmp_dir }}/test_edit_diff.json"
+        content_json: "{{ edit_json_1 }}"
+      register: result_edit_create
+
+    - slurp:
+        src: "{{ remote_tmp_dir }}/test_edit_diff.json"
+      register: slurp_edit_before
+    - set_fact:
+        enc_before: "{{ slurp_edit_before.content | b64decode | from_json }}"
+
+    - name: Update one key via sops edit path (minimal diff)
+      community.sops.sops_encrypt:
+        path: "{{ remote_tmp_dir }}/test_edit_diff.json"
+        content_json: "{{ edit_json_2 }}"
+      register: result_edit_update
+
+    - slurp:
+        src: "{{ remote_tmp_dir }}/test_edit_diff.json"
+      register: slurp_edit_after
+    - set_fact:
+        enc_after: "{{ slurp_edit_after.content | b64decode | from_json }}"
+        dec_after: "{{ slurp_edit_after.content | b64decode | community.sops.decrypt(output_type='json') | from_json }}"
+
+    - name: Verify sops edit idempotency (no change)
+      community.sops.sops_encrypt:
+        path: "{{ remote_tmp_dir }}/test_edit_diff.json"
+        content_json: "{{ edit_json_2 }}"
+      register: result_edit_idempotent
+
+    - name: Verify sops edit results
+      assert:
+        that:
+          - result_edit_create is changed
+          - result_edit_update is changed
+          - result_edit_idempotent is not changed
+          # Decrypted content should be correct
+          - dec_after == edit_json_2
+          # Unchanged keys should have identical encrypted values (minimal diff)
+          - enc_before.key_a == enc_after.key_a
+          - enc_before.key_c == enc_after.key_c
+          # Changed key should have a different encrypted value
+          - enc_before.key_b != enc_after.key_b
