@@ -81,7 +81,7 @@ EXAMPLES = r"""
 - name: Encrypt the contents of a file
   community.sops.sops_encrypt:
     path: binary-data.sops
-    content_binary: "{{ lookup('ansible.builtin.file', '/path/to/file', rstrip=false) | b64encode }}"
+    content_binary: "{{ lookup('community.general.binary_file', '/path/to/file') }}"
 
 - name: Encrypt some datastructure as YAML
   community.sops.sops_encrypt:
