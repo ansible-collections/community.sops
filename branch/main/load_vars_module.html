@@ -493,13 +493,13 @@ Return the results always as variables.</p>
 <section id="examples">
 <h2><a class="toc-backref" href="#id6" role="doc-backlink">Examples</a><a class="headerlink" href="#examples" title="Link to this heading"></a></h2>
 <div class="highlight-yaml+jinja notranslate"><div class="highlight"><pre><span></span><span class="nn">---</span>
-<span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Include variables of stuff.sops.yaml into the &#39;stuff&#39; variable</span>
+<span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Include variables of stuff.sops.yaml into the 'stuff' variable</span>
 <span class="w">  </span><span class="nt">community.sops.load_vars</span><span class="p">:</span>
 <span class="w">    </span><span class="nt">file</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">stuff.sops.yaml</span>
 <span class="w">    </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">stuff</span>
 <span class="w">    </span><span class="nt">expressions</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">evaluate-on-load</span><span class="w"> </span><span class="c1"># interpret Jinja2 expressions in stuf.sops.yaml on load-time!</span>
 
-<span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Conditionally decide to load in variables into &#39;plans&#39; when x is 0, otherwise do not</span>
+<span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Conditionally decide to load in variables into 'plans' when x is 0, otherwise do not</span>
 <span class="w">  </span><span class="nt">community.sops.load_vars</span><span class="p">:</span>
 <span class="w">    </span><span class="nt">file</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">contingency_plan.sops.yaml</span>
 <span class="w">    </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">plans</span>

@@ -211,7 +211,7 @@
 <p>From now on this guide assumes that you have installed SOPS.</p>
 <p>For simplicity, you can work with GPG keys. If you do not have one, or do not want to use yours, you can run <code class="docutils literal notranslate"><span class="pre">gpg</span> <span class="pre">--quick-generate-key</span> <span class="pre">me&#64;example.com</span></code> to create a GPG key for the user ID <code class="docutils literal notranslate"><span class="pre">me&#64;example.com</span></code>. You will need its 40 hex-digit key ID that is printed at the end. The first step is to create a <code class="docutils literal notranslate"><span class="pre">.sops.yaml</span></code> file in the directory tree you are working in:</p>
 <div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">creation_rules</span><span class="p">:</span>
-<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">pgp</span><span class="p">:</span><span class="w"> </span><span class="s">&#39;FBC7B9E2A4F9289AC0C1D4843D16CEE4A27381B4&#39;</span>
+<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">pgp</span><span class="p">:</span><span class="w"> </span><span class="s">'FBC7B9E2A4F9289AC0C1D4843D16CEE4A27381B4'</span>
 </pre></div>
 </div>
 <p>Here, <code class="docutils literal notranslate"><span class="pre">FBC7B9E2A4F9289AC0C1D4843D16CEE4A27381B4</span></code> is the 40 hex-digit key ID. With this file you can create a SOPS-encrypted file by running the following in the directory where <code class="docutils literal notranslate"><span class="pre">.sops.yaml</span></code> was placed, or a subdirectory of it:</p>
@@ -238,10 +238,10 @@
 <span class="w">    </span><span class="nt">azure_kv</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[]</span>
 <span class="w">    </span><span class="nt">hc_vault</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[]</span>
 <span class="w">    </span><span class="nt">age</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[]</span>
-<span class="w">    </span><span class="nt">lastmodified</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;2021-06-15T19:36:34Z&quot;</span>
+<span class="w">    </span><span class="nt">lastmodified</span><span class="p">:</span><span class="w"> </span><span class="s">"2021-06-15T19:36:34Z"</span>
 <span class="w">    </span><span class="nt">mac</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">ENC[AES256_GCM,data:HAvLeOvt7xWI7B5TCeDEsL6sOSzGGeTbgBSJaZkwadmoAm3Ny4IZPF8JAbFaPPLmN8FJVAt4D61aIWa6Xwi3xMj1g6DmxFfgK6JFJqWqW122UlMhqZ/WuMWFV6yVxpTLDXgemndgGDJqUTUi14FMh/MzPDg4f6kFP64kA9fpLrY=,iv:LdhswnMymZG8J9na/jnF3WYnX0DvzvoBlvjUCu4nI6c=,tag:Qt4d7L3FXsgfmg9iOs8P4A==,type:str]</span>
 <span class="w">    </span><span class="nt">pgp</span><span class="p">:</span>
-<span class="w">        </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">created_at</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;2021-06-15T19:36:01Z&quot;</span>
+<span class="w">        </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">created_at</span><span class="p">:</span><span class="w"> </span><span class="s">"2021-06-15T19:36:01Z"</span>
 <span class="w">          </span><span class="nt">enc</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">|-</span>
 <span class="w">            </span><span class="no">-----BEGIN PGP MESSAGE-----</span>
 
@@ -281,7 +281,7 @@
 <span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Create CSR with encrypted private key</span>
 <span class="w">      </span><span class="nt">community.crypto.openssl_csr</span><span class="p">:</span>
 <span class="w">        </span><span class="c1"># The private key is provided with SOPS:</span>
-<span class="w">        </span><span class="nt">privatekey_content</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;</span><span class="cp">{{</span> <span class="nv">lookup</span><span class="o">(</span><span class="s1">&#39;community.sops.sops&#39;</span><span class="o">,</span> <span class="s1">&#39;keys/private_key.pem.sops&#39;</span><span class="o">)</span> <span class="cp">}}</span><span class="s">&quot;</span>
+<span class="w">        </span><span class="nt">privatekey_content</span><span class="p">:</span><span class="w"> </span><span class="s">"</span><span class="cp">{{</span> <span class="nv">lookup</span><span class="o">(</span><span class="s1">'community.sops.sops'</span><span class="o">,</span> <span class="s1">'keys/private_key.pem.sops'</span><span class="o">)</span> <span class="cp">}}</span><span class="s">"</span>
 <span class="w">        </span><span class="c1"># Store the CSR on disk unencrypted:</span>
 <span class="w">        </span><span class="nt">path</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">ansible.com.csr</span>
 <span class="w">        </span><span class="c1"># This is going to be a CSR for ansible.com and www.ansible.com</span>
@@ -318,13 +318,13 @@
 <span class="w">        </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Write encrypted key to disk</span>
 <span class="w">          </span><span class="nt">community.sops.sops_encrypt</span><span class="p">:</span>
 <span class="w">            </span><span class="nt">path</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">keys/private_key.pem.sops</span>
-<span class="w">            </span><span class="nt">content_text</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;</span><span class="cp">{{</span> <span class="nv">private_key.privatekey</span> <span class="cp">}}</span><span class="s">&quot;</span>
+<span class="w">            </span><span class="nt">content_text</span><span class="p">:</span><span class="w"> </span><span class="s">"</span><span class="cp">{{</span> <span class="nv">private_key.privatekey</span> <span class="cp">}}</span><span class="s">"</span>
 
 <span class="w">      </span><span class="nt">always</span><span class="p">:</span>
-<span class="w">        </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Wipe private key from Ansible&#39;s facts</span>
-<span class="w">          </span><span class="c1"># This is particularly important if the playbook doesn&#39;t end here!</span>
+<span class="w">        </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Wipe private key from Ansible's facts</span>
+<span class="w">          </span><span class="c1"># This is particularly important if the playbook doesn't end here!</span>
 <span class="w">          </span><span class="nt">set_fact</span><span class="p">:</span>
-<span class="w">            </span><span class="nt">private_key</span><span class="p">:</span><span class="w"> </span><span class="s">&#39;&#39;</span>
+<span class="w">            </span><span class="nt">private_key</span><span class="p">:</span><span class="w"> </span><span class="s">''</span>
 </pre></div>
 </div>
 <p>This playbook creates a new key on every run. If you want the private key creation to be idempotent, you need to do a little more work:</p>
@@ -339,8 +339,8 @@
 <span class="w">            </span><span class="nt">size</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">2048</span>
 <span class="w">            </span><span class="nt">content</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">&gt;-</span>
 <span class="w">              </span><span class="cp">{{</span> <span class="nv">lookup</span><span class="o">(</span>
-                    <span class="s1">&#39;community.sops.sops&#39;</span><span class="o">,</span>
-                    <span class="s1">&#39;keys/private_key.pem.sops&#39;</span><span class="o">,</span>
+                    <span class="s1">'community.sops.sops'</span><span class="o">,</span>
+                    <span class="s1">'keys/private_key.pem.sops'</span><span class="o">,</span>
                     <span class="nv">empty_on_not_exist</span><span class="o">=</span><span class="kp">true</span>
                  <span class="o">)</span> <span class="cp">}}</span>
 <span class="w">          </span><span class="nt">no_log</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span><span class="w">  </span><span class="c1"># Always use this with openssl_privatekey_pipe!</span>
@@ -349,14 +349,14 @@
 <span class="w">        </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Write encrypted key to disk</span>
 <span class="w">          </span><span class="nt">community.sops.sops_encrypt</span><span class="p">:</span>
 <span class="w">            </span><span class="nt">path</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">keys/private_key.pem.sops</span>
-<span class="w">            </span><span class="nt">content_text</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;</span><span class="cp">{{</span> <span class="nv">private_key.privatekey</span> <span class="cp">}}</span><span class="s">&quot;</span>
+<span class="w">            </span><span class="nt">content_text</span><span class="p">:</span><span class="w"> </span><span class="s">"</span><span class="cp">{{</span> <span class="nv">private_key.privatekey</span> <span class="cp">}}</span><span class="s">"</span>
 <span class="w">          </span><span class="nt">when</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">private_key is changed</span>
 
 <span class="w">      </span><span class="nt">always</span><span class="p">:</span>
-<span class="w">        </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Wipe private key from Ansible&#39;s facts</span>
-<span class="w">          </span><span class="c1"># This is particularly important if the playbook doesn&#39;t end here!</span>
+<span class="w">        </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Wipe private key from Ansible's facts</span>
+<span class="w">          </span><span class="c1"># This is particularly important if the playbook doesn't end here!</span>
 <span class="w">          </span><span class="nt">set_fact</span><span class="p">:</span>
-<span class="w">            </span><span class="nt">private_key</span><span class="p">:</span><span class="w"> </span><span class="s">&#39;&#39;</span>
+<span class="w">            </span><span class="nt">private_key</span><span class="p">:</span><span class="w"> </span><span class="s">''</span>
 </pre></div>
 </div>
 <p>The <code class="ansible-option-value docutils literal notranslate"><a class="reference internal" href="../sops_lookup.html#ansible-collections-community-sops-sops-lookup-parameter-empty-on-not-exist"><span class="std std-ref"><span class="pre">empty_on_not_exist=true</span></span></a></code> flag is needed to avoid the lookup to fail when the key does not yet exist. When this playbook is run twice, the output will be:</p>
@@ -368,7 +368,7 @@
 <span class="k">TASK</span> <span class="p">[</span><span class="l">Write encrypted key to disk</span><span class="p">]</span> <span class="nv">*******************************************************************************</span>
 <span class="k">skipping</span><span class="p">:</span> <span class="p">[</span><span class="nv">localhost</span><span class="p">]</span>
 
-<span class="k">TASK</span> <span class="p">[</span><span class="l">Wipe private key from Ansible&#39;s facts</span><span class="p">]</span> <span class="nv">*********************************************************************</span>
+<span class="k">TASK</span> <span class="p">[</span><span class="l">Wipe private key from Ansible's facts</span><span class="p">]</span> <span class="nv">*********************************************************************</span>
 <span class="k">ok</span><span class="p">:</span> <span class="p">[</span><span class="nv">localhost</span><span class="p">]</span>
 
 <span class="k">PLAY RECAP</span> <span class="nv">*******************************************************************************************************</span>
@@ -393,15 +393,15 @@
 
 <span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Show encrypted data</span>
 <span class="w">      </span><span class="nt">debug</span><span class="p">:</span>
-<span class="w">        </span><span class="nt">msg</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;</span><span class="cp">{{</span> <span class="nv">encrypted_content.content</span> <span class="o">|</span> <span class="nf">ansible</span><span class="nv">.builtin.from_yaml</span> <span class="cp">}}</span><span class="s">&quot;</span>
+<span class="w">        </span><span class="nt">msg</span><span class="p">:</span><span class="w"> </span><span class="s">"</span><span class="cp">{{</span> <span class="nv">encrypted_content.content</span> <span class="o">|</span> <span class="nf">ansible</span><span class="nv">.builtin.from_yaml</span> <span class="cp">}}</span><span class="s">"</span>
 
 <span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Decrypt data and decode decrypted YAML</span>
 <span class="w">      </span><span class="nt">set_fact</span><span class="p">:</span>
-<span class="w">        </span><span class="nt">decrypted_data</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;</span><span class="cp">{{</span> <span class="nv">encrypted_content.content</span> <span class="o">|</span> <span class="nf">community</span><span class="nv">.sops.decrypt</span> <span class="o">|</span> <span class="nf">ansible</span><span class="nv">.builtin.from_yaml</span> <span class="cp">}}</span><span class="s">&quot;</span>
+<span class="w">        </span><span class="nt">decrypted_data</span><span class="p">:</span><span class="w"> </span><span class="s">"</span><span class="cp">{{</span> <span class="nv">encrypted_content.content</span> <span class="o">|</span> <span class="nf">community</span><span class="nv">.sops.decrypt</span> <span class="o">|</span> <span class="nf">ansible</span><span class="nv">.builtin.from_yaml</span> <span class="cp">}}</span><span class="s">"</span>
 
 <span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Show decrypted data</span>
 <span class="w">      </span><span class="nt">debug</span><span class="p">:</span>
-<span class="w">        </span><span class="nt">msg</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;</span><span class="cp">{{</span> <span class="nv">decrypted_data</span> <span class="cp">}}</span><span class="s">&quot;</span>
+<span class="w">        </span><span class="nt">msg</span><span class="p">:</span><span class="w"> </span><span class="s">"</span><span class="cp">{{</span> <span class="nv">decrypted_data</span> <span class="cp">}}</span><span class="s">"</span>
 </pre></div>
 </div>
 <p>The output will be:</p>
@@ -412,26 +412,26 @@
 
 <span class="k">TASK</span> <span class="p">[</span><span class="l">Show encrypted data</span><span class="p">]</span> <span class="nv">***************************************************************************************</span>
 <span class="k">ok</span><span class="p">:</span> <span class="p">[</span><span class="nv">localhost</span><span class="p">]</span> <span class="p">=&gt;</span> <span class="p">{</span>
-    <span class="nt">&quot;msg&quot;</span><span class="p">:</span> <span class="p">{</span>
-        <span class="nt">&quot;dolor&quot;</span><span class="p">:</span> <span class="s">&quot;ENC[AES256_GCM,data:IgvT,iv:wtPNYbDTARFE810PH6ldOLzCDcAjkB/dzPsZjpgHcko=,tag:zwE8P+AwO1hrHkgF6pTbZw==,type:str]&quot;</span><span class="p">,</span>
-        <span class="nt">&quot;lorem&quot;</span><span class="p">:</span> <span class="s">&quot;ENC[AES256_GCM,data:PhmSdTs=,iv:J5ugEWq6RfyNx+5zDXvcTdoQ18YYZkqesDED7LNzou4=,tag:0Qrom6J6aUnZMZzGz5XCxw==,type:str]&quot;</span><span class="p">,</span>
-        <span class="nt">&quot;sops&quot;</span><span class="p">:</span> <span class="p">{</span>
-            <span class="nt">&quot;age&quot;</span><span class="p">:</span> <span class="p">[],</span>
-            <span class="nt">&quot;azure_kv&quot;</span><span class="p">:</span> <span class="p">[],</span>
-            <span class="nt">&quot;gcp_kms&quot;</span><span class="p">:</span> <span class="p">[],</span>
-            <span class="nt">&quot;hc_vault&quot;</span><span class="p">:</span> <span class="p">[],</span>
-            <span class="nt">&quot;kms&quot;</span><span class="p">:</span> <span class="p">[],</span>
-            <span class="nt">&quot;lastmodified&quot;</span><span class="p">:</span> <span class="s">&quot;2020-10-07T15:49:13Z&quot;</span><span class="p">,</span>
-            <span class="nt">&quot;mac&quot;</span><span class="p">:</span> <span class="s">&quot;ENC[AES256_GCM,data:2dhyKdHYSynjXPwYrn9356wA7vRKw+T5qwBenI2vZrgthpQBOCQG4M6f7eeH3VLTxB4mN4CAchb25dsNRoGr6A38VruaSSAhPco3Rh4AlvKSvXuhgRnzZvNxE/bnHX1D4K5cdTb4FsJg/Ue1l7UcWrlrv1s3H3SwLHP/nf+suD0=,iv:6xBYURjjaQzlUOKOrs2NWOChiNFZVAGPJZQZ59MwX3o=,tag:uXD5VYme+c8eHcCc5TD2YA==,type:str]&quot;</span><span class="p">,</span>
-            <span class="nt">&quot;pgp&quot;</span><span class="p">:</span> <span class="p">[</span>
+    <span class="nt">"msg"</span><span class="p">:</span> <span class="p">{</span>
+        <span class="nt">"dolor"</span><span class="p">:</span> <span class="s">"ENC[AES256_GCM,data:IgvT,iv:wtPNYbDTARFE810PH6ldOLzCDcAjkB/dzPsZjpgHcko=,tag:zwE8P+AwO1hrHkgF6pTbZw==,type:str]"</span><span class="p">,</span>
+        <span class="nt">"lorem"</span><span class="p">:</span> <span class="s">"ENC[AES256_GCM,data:PhmSdTs=,iv:J5ugEWq6RfyNx+5zDXvcTdoQ18YYZkqesDED7LNzou4=,tag:0Qrom6J6aUnZMZzGz5XCxw==,type:str]"</span><span class="p">,</span>
+        <span class="nt">"sops"</span><span class="p">:</span> <span class="p">{</span>
+            <span class="nt">"age"</span><span class="p">:</span> <span class="p">[],</span>
+            <span class="nt">"azure_kv"</span><span class="p">:</span> <span class="p">[],</span>
+            <span class="nt">"gcp_kms"</span><span class="p">:</span> <span class="p">[],</span>
+            <span class="nt">"hc_vault"</span><span class="p">:</span> <span class="p">[],</span>
+            <span class="nt">"kms"</span><span class="p">:</span> <span class="p">[],</span>
+            <span class="nt">"lastmodified"</span><span class="p">:</span> <span class="s">"2020-10-07T15:49:13Z"</span><span class="p">,</span>
+            <span class="nt">"mac"</span><span class="p">:</span> <span class="s">"ENC[AES256_GCM,data:2dhyKdHYSynjXPwYrn9356wA7vRKw+T5qwBenI2vZrgthpQBOCQG4M6f7eeH3VLTxB4mN4CAchb25dsNRoGr6A38VruaSSAhPco3Rh4AlvKSvXuhgRnzZvNxE/bnHX1D4K5cdTb4FsJg/Ue1l7UcWrlrv1s3H3SwLHP/nf+suD0=,iv:6xBYURjjaQzlUOKOrs2NWOChiNFZVAGPJZQZ59MwX3o=,tag:uXD5VYme+c8eHcCc5TD2YA==,type:str]"</span><span class="p">,</span>
+            <span class="nt">"pgp"</span><span class="p">:</span> <span class="p">[</span>
                 <span class="p">{</span>
-                    <span class="nt">&quot;created_at&quot;</span><span class="p">:</span> <span class="s">&quot;2019-08-29T21:52:32Z&quot;</span><span class="p">,</span>
-                    <span class="nt">&quot;enc&quot;</span><span class="p">:</span> <span class="s">&quot;-----BEGIN PGP MESSAGE-----\n\nhQEMAyUpShfNkFB/AQgAlvpTj0NYqF4mQyIeM7wX2SHLb4U07/flpqDpp2W/30Pz\nAHA7sYrgP0l8BrjT2kwtgCN0cdfoIHJudezrNjANp2P5TbP2b9kYYNxpehzB9PFj\nFixnCS7Zp8WIt1yXr1TX+ANZoXLopVcRbMaQ5OdH7CN1pNQtMR+R3FR3X/IqKxiU\nDo1YLaooRJICUC8LJw2Tb4K+lYnTSqd/HalLGym++ivFvdDB1Ya1GhT1FswXidXK\nIRjsOVbxV0q5VeNOR0zxsheOvuHyCje16c7NXJtATJVWtTFABJB8u7CY5HhZSgq+\nrXJHyLHqVLzJ8E4WqHQkMNUlVcrqAz7glZ6xbAhfI9JeAYk5SuBOQOQ4yvASqH4K\nb0N3+/abluBY7YPqKuRZBiEtmcYlZ+zIHuOTP1rD/7L5VY8CwE5U8SFlEqwM7nQJ\n6/vtl6qngOFjwt34WrhZzUfLPB/wRV/m1Qv2kr0RNA==\n=Ykiw\n-----END PGP MESSAGE-----\n&quot;</span><span class="p">,</span>
-                    <span class="nt">&quot;fp&quot;</span><span class="p">:</span> <span class="s">&quot;FBC7B9E2A4F9289AC0C1D4843D16CEE4A27381B4&quot;</span>
+                    <span class="nt">"created_at"</span><span class="p">:</span> <span class="s">"2019-08-29T21:52:32Z"</span><span class="p">,</span>
+                    <span class="nt">"enc"</span><span class="p">:</span> <span class="s">"-----BEGIN PGP MESSAGE-----\n\nhQEMAyUpShfNkFB/AQgAlvpTj0NYqF4mQyIeM7wX2SHLb4U07/flpqDpp2W/30Pz\nAHA7sYrgP0l8BrjT2kwtgCN0cdfoIHJudezrNjANp2P5TbP2b9kYYNxpehzB9PFj\nFixnCS7Zp8WIt1yXr1TX+ANZoXLopVcRbMaQ5OdH7CN1pNQtMR+R3FR3X/IqKxiU\nDo1YLaooRJICUC8LJw2Tb4K+lYnTSqd/HalLGym++ivFvdDB1Ya1GhT1FswXidXK\nIRjsOVbxV0q5VeNOR0zxsheOvuHyCje16c7NXJtATJVWtTFABJB8u7CY5HhZSgq+\nrXJHyLHqVLzJ8E4WqHQkMNUlVcrqAz7glZ6xbAhfI9JeAYk5SuBOQOQ4yvASqH4K\nb0N3+/abluBY7YPqKuRZBiEtmcYlZ+zIHuOTP1rD/7L5VY8CwE5U8SFlEqwM7nQJ\n6/vtl6qngOFjwt34WrhZzUfLPB/wRV/m1Qv2kr0RNA==\n=Ykiw\n-----END PGP MESSAGE-----\n"</span><span class="p">,</span>
+                    <span class="nt">"fp"</span><span class="p">:</span> <span class="s">"FBC7B9E2A4F9289AC0C1D4843D16CEE4A27381B4"</span>
                 <span class="p">}</span>
             <span class="p">],</span>
-            <span class="nt">&quot;unencrypted_suffix&quot;</span><span class="p">:</span> <span class="s">&quot;_unencrypted&quot;</span><span class="p">,</span>
-            <span class="nt">&quot;version&quot;</span><span class="p">:</span> <span class="s">&quot;3.6.1&quot;</span>
+            <span class="nt">"unencrypted_suffix"</span><span class="p">:</span> <span class="s">"_unencrypted"</span><span class="p">,</span>
+            <span class="nt">"version"</span><span class="p">:</span> <span class="s">"3.6.1"</span>
         <span class="p">}</span>
     <span class="p">}</span>
 <span class="p">}</span>
@@ -441,9 +441,9 @@
 
 <span class="k">TASK</span> <span class="p">[</span><span class="l">Show decrypted data</span><span class="p">]</span> <span class="nv">***************************************************************************************</span>
 <span class="k">ok</span><span class="p">:</span> <span class="p">[</span><span class="nv">localhost</span><span class="p">]</span> <span class="p">=&gt;</span> <span class="p">{</span>
-    <span class="nt">&quot;msg&quot;</span><span class="p">:</span> <span class="p">{</span>
-        <span class="nt">&quot;dolor&quot;</span><span class="p">:</span> <span class="s">&quot;sit&quot;</span><span class="p">,</span>
-        <span class="nt">&quot;lorem&quot;</span><span class="p">:</span> <span class="s">&quot;ipsum&quot;</span>
+    <span class="nt">"msg"</span><span class="p">:</span> <span class="p">{</span>
+        <span class="nt">"dolor"</span><span class="p">:</span> <span class="s">"sit"</span><span class="p">,</span>
+        <span class="nt">"lorem"</span><span class="p">:</span> <span class="s">"ipsum"</span>
     <span class="p">}</span>
 <span class="p">}</span>
 
@@ -469,19 +469,19 @@
 <span class="w">      </span><span class="nt">include_role</span><span class="p">:</span>
 <span class="w">        </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">myrole</span>
 <span class="w">      </span><span class="nt">vars</span><span class="p">:</span>
-<span class="w">        </span><span class="nt">role_parameter</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;</span><span class="cp">{{</span> <span class="nv">encrypted_content.content</span> <span class="o">|</span> <span class="nf">community</span><span class="nv">.sops.decrypt</span> <span class="o">|</span> <span class="nf">ansible</span><span class="nv">.builtin.from_yaml</span> <span class="cp">}}</span><span class="s">&quot;</span>
+<span class="w">        </span><span class="nt">role_parameter</span><span class="p">:</span><span class="w"> </span><span class="s">"</span><span class="cp">{{</span> <span class="nv">encrypted_content.content</span> <span class="o">|</span> <span class="nf">community</span><span class="nv">.sops.decrypt</span> <span class="o">|</span> <span class="nf">ansible</span><span class="nv">.builtin.from_yaml</span> <span class="cp">}}</span><span class="s">"</span>
 
 <span class="w">    </span><span class="c1"># GOOD: the data is decrypted once before the role is called,</span>
 
 <span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Store decrypted data as fact</span>
 <span class="w">      </span><span class="nt">set_fact</span><span class="p">:</span>
-<span class="w">        </span><span class="nt">decrypted_data</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;</span><span class="cp">{{</span> <span class="nv">encrypted_content.content</span> <span class="o">|</span> <span class="nf">community</span><span class="nv">.sops.decrypt</span> <span class="o">|</span> <span class="nf">ansible</span><span class="nv">.builtin.from_yaml</span> <span class="cp">}}</span><span class="s">&quot;</span>
+<span class="w">        </span><span class="nt">decrypted_data</span><span class="p">:</span><span class="w"> </span><span class="s">"</span><span class="cp">{{</span> <span class="nv">encrypted_content.content</span> <span class="o">|</span> <span class="nf">community</span><span class="nv">.sops.decrypt</span> <span class="o">|</span> <span class="nf">ansible</span><span class="nv">.builtin.from_yaml</span> <span class="cp">}}</span><span class="s">"</span>
 
 <span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Call role with decrypted data</span>
 <span class="w">      </span><span class="nt">include_role</span><span class="p">:</span>
 <span class="w">        </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">myrole</span>
 <span class="w">      </span><span class="nt">vars</span><span class="p">:</span>
-<span class="w">        </span><span class="nt">role_parameter</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;</span><span class="cp">{{</span> <span class="nv">decrypted_data</span> <span class="cp">}}</span><span class="s">&quot;</span>
+<span class="w">        </span><span class="nt">role_parameter</span><span class="p">:</span><span class="w"> </span><span class="s">"</span><span class="cp">{{</span> <span class="nv">decrypted_data</span> <span class="cp">}}</span><span class="s">"</span>
 </pre></div>
 </div>
 </section>
@@ -504,7 +504,7 @@
 <p>This is mostly relevant if you use Jinja2 expressions in the encrypted variable file. When <a class="reference external" href="https://docs.ansible.com/projects/ansible/devel/collections/ansible/builtin/include_vars_module.html#ansible-collections-ansible-builtin-include-vars-module" title="(in Ansible devel)"><span>ansible.builtin.include_vars</span></a> loads a variable file with expressions, these expressions will only be evaluated when the variable that defines them needs to be evaluated (lazy evaluation). Since <a class="reference internal" href="../load_vars_module.html#ansible-collections-community-sops-load-vars-module"><span class="std std-ref">community.sops.load_vars</span></a> returns facts, it has to directly evaluate expressions at load time. (For this, set its <code class="ansible-option docutils literal notranslate"><strong><a class="reference internal" href="../load_vars_module.html#ansible-collections-community-sops-load-vars-module-parameter-expressions"><span class="std std-ref"><span class="pre">expressions</span></span></a></strong></code> option to <code class="ansible-value docutils literal notranslate"><span class="pre">evaluate-on-load</span></code>.) This is mostly relevant if you want to refer to other variables from the same file: this will not work, since Ansible does not know the other variable yet while evaluating the first. It will only “know” them as facts after all have been evaluated and the action finishes.</p>
 <p>For the following example, assume you have the encrypted file <code class="docutils literal notranslate"><span class="pre">keys/credentials.sops.yml</span></code> which decrypts to:</p>
 <div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">encrypted_password</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">foo</span>
-<span class="nt">expression</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;{{</span><span class="nv"> </span><span class="s">inventory_hostname</span><span class="nv"> </span><span class="s">}}&quot;</span>
+<span class="nt">expression</span><span class="p">:</span><span class="w"> </span><span class="s">"{{</span><span class="nv"> </span><span class="s">inventory_hostname</span><span class="nv"> </span><span class="s">}}"</span>
 </pre></div>
 </div>
 <p>Consider the following playbook:</p>
@@ -521,11 +521,11 @@
 
 <span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Show password</span>
 <span class="w">      </span><span class="nt">debug</span><span class="p">:</span>
-<span class="w">        </span><span class="nt">msg</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;The</span><span class="nv"> </span><span class="s">password</span><span class="nv"> </span><span class="s">is</span><span class="nv"> </span><span class="cp">{{</span> <span class="nv">encrypted_password</span> <span class="cp">}}</span><span class="s">&quot;</span>
+<span class="w">        </span><span class="nt">msg</span><span class="p">:</span><span class="w"> </span><span class="s">"The</span><span class="nv"> </span><span class="s">password</span><span class="nv"> </span><span class="s">is</span><span class="nv"> </span><span class="cp">{{</span> <span class="nv">encrypted_password</span> <span class="cp">}}</span><span class="s">"</span>
 
 <span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Show expression</span>
 <span class="w">      </span><span class="nt">debug</span><span class="p">:</span>
-<span class="w">        </span><span class="nt">msg</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;The</span><span class="nv"> </span><span class="s">expression</span><span class="nv"> </span><span class="s">is</span><span class="nv"> </span><span class="cp">{{</span> <span class="nv">expression</span> <span class="cp">}}</span><span class="s">&quot;</span>
+<span class="w">        </span><span class="nt">msg</span><span class="p">:</span><span class="w"> </span><span class="s">"The</span><span class="nv"> </span><span class="s">expression</span><span class="nv"> </span><span class="s">is</span><span class="nv"> </span><span class="cp">{{</span> <span class="nv">expression</span> <span class="cp">}}</span><span class="s">"</span>
 </pre></div>
 </div>
 <p>Running it produces:</p>
@@ -536,12 +536,12 @@
 
 <span class="k">TASK</span> <span class="p">[</span><span class="l">Show password</span><span class="p">]</span> <span class="nv">*********************************************************************************************</span>
 <span class="k">ok</span><span class="p">:</span> <span class="p">[</span><span class="nv">localhost</span><span class="p">]</span> <span class="p">=&gt;</span> <span class="p">{</span>
-    <span class="nt">&quot;msg&quot;</span><span class="p">:</span> <span class="s">&quot;The password is foo&quot;</span>
+    <span class="nt">"msg"</span><span class="p">:</span> <span class="s">"The password is foo"</span>
 <span class="p">}</span>
 
 <span class="k">TASK</span> <span class="p">[</span><span class="l">Show expression</span><span class="p">]</span> <span class="nv">*******************************************************************************************</span>
 <span class="k">ok</span><span class="p">:</span> <span class="p">[</span><span class="nv">localhost</span><span class="p">]</span> <span class="p">=&gt;</span> <span class="p">{</span>
-    <span class="nt">&quot;msg&quot;</span><span class="p">:</span> <span class="s">&quot;The expression is {{ inventory_hostname }}&quot;</span>
+    <span class="nt">"msg"</span><span class="p">:</span> <span class="s">"The expression is {{ inventory_hostname }}"</span>
 <span class="p">}</span>
 
 <span class="k">PLAY RECAP</span> <span class="nv">*******************************************************************************************************</span>
@@ -558,7 +558,7 @@
 <p>The last task will now show the evaluated expression:</p>
 <div class="highlight-ansible-output notranslate"><div class="highlight"><pre><span></span><span class="k">TASK</span> <span class="p">[</span><span class="l">Show expression</span><span class="p">]</span> <span class="nv">*******************************************************************************************</span>
 <span class="k">ok</span><span class="p">:</span> <span class="p">[</span><span class="nv">localhost</span><span class="p">]</span> <span class="p">=&gt;</span> <span class="p">{</span>
-    <span class="nt">&quot;msg&quot;</span><span class="p">:</span> <span class="s">&quot;The expression is localhost&quot;</span>
+    <span class="nt">"msg"</span><span class="p">:</span> <span class="s">"The expression is localhost"</span>
 <span class="p">}</span>
 </pre></div>
 </div>
