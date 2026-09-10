@@ -220,12 +220,23 @@ def main():
                 output_type = 'json'
             elif path.endswith(('.yml', '.yaml')):
                 output_type = 'yaml'
-            data = Sops.encrypt(
-                data=input_data, cwd=directory, input_type=input_type, output_type=output_type,
-                filename=os.path.relpath(path, directory) if directory is not None else path,
-                get_option_value=get_option_value, module=module,
-            )
-            write_file(module, data)
+            if os.path.exists(path) and not module.params['force']:
+                # Use 'sops edit' to only re-encrypt changed values (cleaner git diffs).
+                # Skip when force=true: we haven't verified the file is valid sops,
+                # and force semantically means "fully re-encrypt".
+                actually_changed = Sops.edit(
+                    path=path, data=input_data, cwd=directory,
+                    get_option_value=get_option_value, module=module,
+                )
+                if not actually_changed:
+                    changed = False
+            else:
+                data = Sops.encrypt(
+                    data=input_data, cwd=directory, input_type=input_type, output_type=output_type,
+                    filename=os.path.relpath(path, directory) if directory is not None else path,
+                    get_option_value=get_option_value, module=module,
+                )
+                write_file(module, data)
     except SopsError as e:
         module.fail_json(msg=to_text(e))
 

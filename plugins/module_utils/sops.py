@@ -10,6 +10,8 @@ import collections
 import json
 import os
 import re
+import shlex
+import tempfile
 
 from ansible.module_utils.common.text.converters import to_text, to_native
 
@@ -270,6 +272,47 @@ class SopsRunner(object):
 
         return output
 
+    def edit(self, path, data, cwd=None, get_option_value=None):
+        """Use 'sops edit' to update an existing encrypted file in place.
+
+        Only re-encrypts changed values, producing cleaner git diffs.
+        Returns True if the file was modified, False if content was unchanged.
+        """
+        tmp_fd, tmp_name = tempfile.mkstemp(prefix='.ansible_sops_edit_')
+        try:
+            os.write(tmp_fd, data)
+            os.close(tmp_fd)
+
+            command = [self.binary]
+            command_post = []
+            env = os.environ.copy()
+            self._add_options(command, command_post, env, get_option_value, GENERAL_OPTIONS)
+            if self.version >= (3, 9, 0):
+                command.append("edit")
+            command.extend(command_post)
+            command.append(path)
+
+            env['EDITOR'] = "cp {0}".format(shlex.quote(tmp_name))
+
+            exit_code, output, err = self._run_command(command, env=env, cwd=cwd)
+
+            if err:
+                self._debug(u'Unexpected stderr:\n' + to_text(err, errors='surrogate_or_strict'))
+
+            if exit_code == 200:
+                # FileHasNotBeenModified - content was unchanged
+                return False
+
+            if exit_code != 0:
+                raise SopsError(path, exit_code, err, decryption=False)
+
+            return True
+        finally:
+            try:
+                os.remove(tmp_name)
+            except Exception:
+                pass
+
     def has_filestatus(self):
         return self.version >= (3, 9, 0)
 
@@ -347,6 +390,14 @@ class Sops():
             output_type=output_type,
             get_option_value=get_option_value,
             filename=filename,
+        )
+
+    @staticmethod
+    def edit(path, data, display=None, cwd=None, get_option_value=None, module=None):
+        runner = Sops.get_sops_runner_from_options(get_option_value, module=module, display=display)
+        return runner.edit(
+            path, data, cwd=cwd,
+            get_option_value=get_option_value,
         )
 
 
