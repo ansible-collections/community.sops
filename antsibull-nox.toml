@@ -84,7 +84,6 @@ include_devel = true
 [sessions.ansible_test_integration]
 
 [sessions.ansible_test_integration.nice_docker_names]
-"quay.io/ansible-community/test-image:debian-bullseye" = "Debian 11"
 "quay.io/ansible-community/test-image:debian-bookworm" = "Debian 12"
 "quay.io/ansible-community/test-image:debian-13-trixie" = "Debian 13"
 "quay.io/ansible-community/test-image:archlinux" = "Arch Linux"
@@ -153,12 +152,6 @@ ansible_vars = { override_sops_version = "3.10.0" }
 ansible_core = "2.15"
 docker = "ubuntu2204"
 ansible_vars = { override_sops_version = "3.6.0" }
-
-[[sessions.ansible_test_integration.groups.sessions]]
-ansible_core = "2.15"
-docker = "quay.io/ansible-community/test-image:debian-bullseye"
-python_version = "3.9"
-ansible_vars = { override_sops_version = "latest" }
 
 [[sessions.ansible_test_integration.groups.sessions]]
 ansible_core = "2.16"
@@ -346,12 +339,6 @@ ansible_vars = { github_latest_detection = "auto" }
 ansible_core = "devel"
 docker = "quay.io/ansible-community/test-image:debian-bookworm"
 python_version = "3.11"
-ansible_vars = { github_latest_detection = "auto" }
-
-[[sessions.ansible_test_integration.groups.sessions]]
-ansible_core = "2.16"
-docker = "quay.io/ansible-community/test-image:debian-bullseye"
-python_version = "3.9"
 ansible_vars = { github_latest_detection = "auto" }
 
 [[sessions.ansible_test_integration.groups.sessions]]
