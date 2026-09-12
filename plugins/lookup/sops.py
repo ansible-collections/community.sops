@@ -66,6 +66,15 @@ options:
       - B(Note:) Escape quotes appropriately.
     type: str
     version_added: 1.9.0
+  register_result_as_secret:
+    description:
+      - Whether the decrypted result should be marked as a secret,
+        and thus will get redacted whenever its values appears in log or console output.
+      - This requires ansible-core 2.22+. See R(Masking secrets in Ansible output, secret_masking) for more information.
+      - B(Note) this is mainly recommended for binary files.
+    type: bool
+    default: true
+    version_added: 2.5.0
 extends_documentation_fragment:
   - community.sops.sops.ansible_plugin  # must come before community.sops.sops!
   - community.sops.sops
@@ -122,6 +131,7 @@ from ansible.module_utils.compat.version import LooseVersion
 from ansible.plugins.lookup import LookupBase
 from ansible.release import __version__ as ansible_version
 from ansible_collections.community.sops.plugins.module_utils.sops import Sops, SopsError
+from ansible_collections.community.sops.plugins.module_utils._secrets import mark_as_secret
 from ansible_collections.community.sops.plugins.plugin_utils._args import wrap_get_option_value_plugin_path
 
 from ansible.utils.display import Display
@@ -138,6 +148,7 @@ class LookupModule(LookupBase):
         output_type = self.get_option('output_type')
         empty_on_not_exist = self.get_option('empty_on_not_exist')
         extract = self.get_option('extract')
+        register_result_as_secret = self.get_option('register_result_as_secret')
 
         ret = []
 
@@ -181,6 +192,9 @@ class LookupModule(LookupBase):
 
             if use_base64:
                 output = to_native(base64.b64encode(output))
+
+            if register_result_as_secret:
+                output = mark_as_secret(output)
 
             ret.append(output)
 
