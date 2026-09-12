@@ -18,26 +18,33 @@ except ImportError:
 
 
 try:
-    from ansible.module_utils.secrets import register_secret  # type: ignore[import-not-found]
+    from ansible.module_utils.secrets import register_secret, register_secrets  # type: ignore[import-not-found]
+
     HAS_SECRETS_API = True
 except ImportError:
     HAS_SECRETS_API = False
 
 
-def _mark_recursively(value):
+def _collect_recursively(value, collected_values, int_to_string):
     if isinstance(value, Mapping):
-        return {k: _mark_recursively(v) for k, v in value.items()}
-    if isinstance(value, string_type):
-        return register_secret(value)
-    if isinstance(value, Sequence):
-        return [_mark_recursively(v) for v in value]
-    return value
+        for v in value.items():
+            _collect_recursively(v, collected_values, int_to_string=int_to_string)
+    elif isinstance(value, string_type):
+        collected_values.append(value)
+    elif isinstance(value, Sequence):
+        for v in value:
+            _collect_recursively(v, collected_values, int_to_string=int_to_string)
+    elif int_to_string and isinstance(value, int):
+        collected_values.append(string_type(value))
 
 
-def mark_values_as_secrets(value):
-    """Register all strings appearing in the (potentially nested) data structure value secrets."""
+def mark_values_as_secrets(value, int_to_string=False):
+    """Register all strings appearing in the (potentially nested) data structure ``value`` as secrets."""
     if HAS_SECRETS_API:
-        value = _mark_recursively(value)
+        collected_values = []
+        _collect_recursively(value, collected_values, int_to_string=int_to_string)
+        if collected_values:
+            register_secrets(collected_values)
     return value
 
 
