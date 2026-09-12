@@ -129,6 +129,14 @@ options:
 options:
   sops_binary:
     type: str
+  age_key:
+    secret: true
+  aws_secret_access_key:
+    secret: true
+  aws_session_token:
+    secret: true
+  gcp_oauth_access_token:
+    secret: true
 '''
 
     ANSIBLE_VARIABLES = r'''

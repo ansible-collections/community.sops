@@ -59,6 +59,16 @@ options:
         - Return the results always as variables.
         - Fails for ansible-core < 2.21.
     version_added: 2.3.0
+  register_values_as_secrets:
+    description:
+      - Whether the loaded values should marked as secrets,
+        and thus will get redacted whenever such values appear in log or console output.
+      - This requires ansible-core 2.22+. See R(Masking secrets in Ansible output, secret_masking) for more information.
+      - B(Note) that the plugin right now cannot distinguish between values that were encrypted and values that were not encrypted.
+        All values will be marked as secrets. This might change in the future.
+    type: bool
+    default: true
+    version_added: 2.5.0
 extends_documentation_fragment:
   - community.sops.sops
   - community.sops.attributes

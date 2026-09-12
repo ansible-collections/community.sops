@@ -85,6 +85,21 @@ options:
         section: community.sops
     env:
       - name: ANSIBLE_VARS_SOPS_PLUGIN_HANDLE_UNENCRYPTED_FILES
+  register_values_as_secrets:
+    description:
+      - Whether the loaded values should marked as secrets,
+        and thus will get redacted whenever such values appear in log or console output.
+      - This requires ansible-core 2.22+. See R(Masking secrets in Ansible output, secret_masking) for more information.
+      - B(Note) that the plugin right now cannot distinguish between values that were encrypted and values that were not encrypted.
+        All values will be marked as secrets. This might change in the future.
+    type: bool
+    default: true
+    version_added: 2.5.0
+    ini:
+      - key: register_values_as_secrets
+        section: community.sops
+    env:
+      - name: ANSIBLE_VARS_SOPS_PLUGIN_REGISTER_VALUES_AS_SECRETS
 extends_documentation_fragment:
   - ansible.builtin.vars_plugin_staging
   - community.sops.sops.ansible_plugin  # must come before community.sops.sops!
@@ -113,6 +128,7 @@ from ansible.plugins.vars import BaseVarsPlugin
 from ansible.utils.display import Display
 from ansible.utils.vars import combine_vars
 from ansible_collections.community.sops.plugins.module_utils.sops import Sops, SopsError
+from ansible_collections.community.sops.plugins.module_utils._secrets import mark_values_as_secrets
 from ansible_collections.community.sops.plugins.plugin_utils._args import wrap_get_option_value_plugin_path
 
 try:
@@ -171,6 +187,7 @@ class VarsModule(BaseVarsPlugin):
 
         valid_extensions = self.get_option('valid_extensions')
         handle_unencrypted_files = self.get_option('handle_unencrypted_files')
+        register_values_as_secrets = self.get_option('register_values_as_secrets')
 
         data = {}
         for entity in entities:
@@ -254,5 +271,8 @@ class VarsModule(BaseVarsPlugin):
                     raise AnsibleParserError(to_native(e))
                 except Exception as e:
                     raise AnsibleParserError('Unexpected error in the SOPS vars plugin: %s' % to_native(e))
+
+        if register_values_as_secrets:
+            data = mark_values_as_secrets(data)
 
         return data

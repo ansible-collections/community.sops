@@ -11,6 +11,7 @@ from ansible.module_utils.common.text.converters import to_native
 from ansible.utils.display import Display
 
 from ansible_collections.community.sops.plugins.module_utils.sops import Sops, get_sops_argument_spec
+from ansible_collections.community.sops.plugins.module_utils._secrets import mark_values_as_secrets
 
 from ansible_collections.community.sops.plugins.plugin_utils.action_module import ActionModuleBase, ArgumentSpec
 
@@ -82,6 +83,7 @@ class ActionModule(ActionModuleBase):
                 name=dict(type='str'),
                 expressions=dict(type='str', default='ignore', choices=['ignore', 'evaluate-on-load', 'lazy-evaluation']),
                 return_method=dict(type='str', default='auto', choices=['auto', 'facts-only', 'vars-only']),
+                register_values_as_secrets=dict(type='bool', default=True),
             ),
         )
         argument_spec.argument_spec.update(get_sops_argument_spec())
@@ -91,6 +93,8 @@ class ActionModule(ActionModuleBase):
         expressions = module.params['expressions']
         if expressions == 'lazy-evaluation' and not HAS_DATATAGGING:
             module.fail_json(msg='expressions=lazy-evaluation requires ansible-core 2.19+ with Data Tagging support.')
+
+        register_values_as_secrets = module.params['register_values_as_secrets']
 
         return_method_str = module.params['return_method']
         if return_method_str == 'auto':
@@ -125,6 +129,9 @@ class ActionModule(ActionModuleBase):
             'ansible_included_var_files': files,
             '_ansible_no_log': True,
         }
+
+        if register_values_as_secrets:
+            value = mark_values_as_secrets(value)
 
         if return_as_facts:
             result['ansible_facts'] = value
