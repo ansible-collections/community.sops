@@ -11,7 +11,7 @@ try:
     string_type = str
 except ImportError:
     # Python 2 compat
-    # pylint: disable-next=ansible-bad-import-from
+    # pylint: disable-next=ansible-bad-import-from,deprecated-class
     from collections import Sequence, Mapping  # type: ignore[attr-defined]
     # pylint: disable-next=undefined-variable
     string_type = unicode  # type: ignore[misc,name-defined]
