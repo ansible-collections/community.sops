@@ -219,7 +219,7 @@ docker = "ubuntu2404"
 ansible_vars = { override_sops_version = "3.12.1" }
 
 [[sessions.ansible_test_integration.groups.sessions]]
-ansible_core = "devel"
+ansible_core = "2.22"
 docker = "ubuntu2604"
 ansible_vars = { override_sops_version = "3.6.0" }
 
@@ -392,7 +392,7 @@ docker = "alpine323"
 ansible_vars = { github_latest_detection = "auto" }
 
 [[sessions.ansible_test_integration.groups.sessions]]
-ansible_core = "devel"
+ansible_core = "2.22"
 docker = "alpine324"
 ansible_vars = { github_latest_detection = "auto" }
 
