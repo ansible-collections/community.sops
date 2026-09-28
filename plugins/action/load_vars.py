@@ -83,7 +83,7 @@ class ActionModule(ActionModuleBase):
                 name=dict(type='str'),
                 expressions=dict(type='str', default='ignore', choices=['ignore', 'evaluate-on-load', 'lazy-evaluation']),
                 return_method=dict(type='str', default='auto', choices=['auto', 'facts-only', 'vars-only']),
-                register_values_as_secrets=dict(type='bool', default=True),
+                register_values_as_secrets=dict(type='bool', default=False),
             ),
         )
         argument_spec.argument_spec.update(get_sops_argument_spec())

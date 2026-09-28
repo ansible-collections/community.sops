@@ -93,7 +93,7 @@ options:
       - B(Note) that the plugin right now cannot distinguish between values that were encrypted and values that were not encrypted.
         All values will be marked as secrets. This might change in the future.
     type: bool
-    default: true
+    default: false
     version_added: 2.5.0
     ini:
       - key: register_values_as_secrets
