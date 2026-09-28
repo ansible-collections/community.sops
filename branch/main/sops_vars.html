@@ -547,6 +547,31 @@ Use REST client</p></li>
 </div></td>
 </tr>
 <tr class="row-odd"><td><div class="ansible-option-cell">
+<div class="ansibleOptionAnchor" id="parameter-register_values_as_secrets"></div><p class="ansible-option-title" id="ansible-collections-community-sops-sops-vars-parameter-register-values-as-secrets"><strong>register_values_as_secrets</strong></p>
+<a class="ansibleOptionLink" href="#parameter-register_values_as_secrets" title="Permalink to this option"></a><p class="ansible-option-type-line"><span class="ansible-option-type">boolean</span></p>
+<p><em class="ansible-option-versionadded">added in community.sops 2.5.0</em></p>
+</div></td>
+<td><div class="ansible-option-cell"><p>Whether the loaded values should marked as secrets, and thus will get redacted whenever such values appear in log or console output.</p>
+<p>This requires ansible-core 2.22+. See <a class="reference external" href="https://docs.ansible.com/projects/ansible/devel/playbook_guide/playbooks_secret_masking.html#secret-masking" title="(in Ansible devel)"><span class="xref std std-ref">Masking secrets in Ansible output</span></a> for more information.</p>
+<p><strong>Note</strong> that the plugin right now cannot distinguish between values that were encrypted and values that were not encrypted. All values will be marked as secrets. This might change in the future.</p>
+<p class="ansible-option-line"><strong class="ansible-option-choices">Choices:</strong></p>
+<ul class="simple">
+<li><p><code class="ansible-option-default-bold docutils literal notranslate"><strong><span class="pre">false</span></strong></code> <span class="ansible-option-choices-default-mark">← (default)</span></p></li>
+<li><p><code class="ansible-option-choices-entry docutils literal notranslate"><span class="pre">true</span></code></p></li>
+</ul>
+<p class="ansible-option-line"><strong class="ansible-option-configuration">Configuration:</strong></p>
+<ul>
+<li><p>INI entry:</p>
+<div class="highlight-ini notranslate"><div class="highlight"><pre><span></span><span class="k">[community.sops]</span>
+<span class="na">register_values_as_secrets</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">false</span>
+</pre></div>
+</div>
+</li>
+<li><p>Environment variable: <span class="target" id="index-17"></span><a class="reference internal" href="environment_variables.html#envvar-ANSIBLE_VARS_SOPS_PLUGIN_REGISTER_VALUES_AS_SECRETS"><code class="xref std std-envvar docutils literal notranslate"><span class="pre">ANSIBLE_VARS_SOPS_PLUGIN_REGISTER_VALUES_AS_SECRETS</span></code></a></p></li>
+</ul>
+</div></td>
+</tr>
+<tr class="row-even"><td><div class="ansible-option-cell">
 <div class="ansibleOptionAnchor" id="parameter-sops_binary"></div><p class="ansible-option-title" id="ansible-collections-community-sops-sops-vars-parameter-sops-binary"><strong>sops_binary</strong></p>
 <a class="ansibleOptionLink" href="#parameter-sops_binary" title="Permalink to this option"></a><p class="ansible-option-type-line"><span class="ansible-option-type">string</span></p>
 <p><em class="ansible-option-versionadded">added in community.sops 1.0.0</em></p>
@@ -562,13 +587,13 @@ Use REST client</p></li>
 </div>
 <p><em class="ansible-option-versionadded">added in community.sops 1.2.0</em></p>
 </li>
-<li><p>Environment variable: <span class="target" id="index-17"></span><a class="reference internal" href="environment_variables.html#envvar-ANSIBLE_SOPS_BINARY"><code class="xref std std-envvar docutils literal notranslate"><span class="pre">ANSIBLE_SOPS_BINARY</span></code></a></p>
+<li><p>Environment variable: <span class="target" id="index-18"></span><a class="reference internal" href="environment_variables.html#envvar-ANSIBLE_SOPS_BINARY"><code class="xref std std-envvar docutils literal notranslate"><span class="pre">ANSIBLE_SOPS_BINARY</span></code></a></p>
 <p><em class="ansible-option-versionadded">added in community.sops 1.2.0</em></p>
 </li>
 </ul>
 </div></td>
 </tr>
-<tr class="row-even"><td><div class="ansible-option-cell">
+<tr class="row-odd"><td><div class="ansible-option-cell">
 <div class="ansibleOptionAnchor" id="parameter-stage"></div><p class="ansible-option-title" id="ansible-collections-community-sops-sops-vars-parameter-stage"><strong>stage</strong></p>
 <a class="ansibleOptionLink" href="#parameter-stage" title="Permalink to this option"></a><p class="ansible-option-type-line"><span class="ansible-option-type">string</span></p>
 <p><em class="ansible-option-versionadded">added in community.sops 0.2.0</em></p>
@@ -592,11 +617,11 @@ Use REST client</p></li>
 </pre></div>
 </div>
 </li>
-<li><p>Environment variable: <span class="target" id="index-18"></span><a class="reference internal" href="environment_variables.html#envvar-ANSIBLE_VARS_SOPS_PLUGIN_STAGE"><code class="xref std std-envvar docutils literal notranslate"><span class="pre">ANSIBLE_VARS_SOPS_PLUGIN_STAGE</span></code></a></p></li>
+<li><p>Environment variable: <span class="target" id="index-19"></span><a class="reference internal" href="environment_variables.html#envvar-ANSIBLE_VARS_SOPS_PLUGIN_STAGE"><code class="xref std std-envvar docutils literal notranslate"><span class="pre">ANSIBLE_VARS_SOPS_PLUGIN_STAGE</span></code></a></p></li>
 </ul>
 </div></td>
 </tr>
-<tr class="row-odd"><td><div class="ansible-option-cell">
+<tr class="row-even"><td><div class="ansible-option-cell">
 <div class="ansibleOptionAnchor" id="parameter-valid_extensions"></div><p class="ansible-option-title" id="ansible-collections-community-sops-sops-vars-parameter-valid-extensions"><strong>valid_extensions</strong></p>
 <a class="ansibleOptionLink" href="#parameter-valid_extensions" title="Permalink to this option"></a><p class="ansible-option-type-line"><span class="ansible-option-type">list</span> / <span class="ansible-option-elements">elements=string</span></p>
 </div></td>
@@ -613,7 +638,7 @@ Use REST client</p></li>
 </div>
 <p><em class="ansible-option-versionadded">added in community.sops 1.7.0</em></p>
 </li>
-<li><p>Environment variable: <span class="target" id="index-19"></span><a class="reference internal" href="environment_variables.html#envvar-ANSIBLE_VARS_SOPS_PLUGIN_VALID_EXTENSIONS"><code class="xref std std-envvar docutils literal notranslate"><span class="pre">ANSIBLE_VARS_SOPS_PLUGIN_VALID_EXTENSIONS</span></code></a></p>
+<li><p>Environment variable: <span class="target" id="index-20"></span><a class="reference internal" href="environment_variables.html#envvar-ANSIBLE_VARS_SOPS_PLUGIN_VALID_EXTENSIONS"><code class="xref std std-envvar docutils literal notranslate"><span class="pre">ANSIBLE_VARS_SOPS_PLUGIN_VALID_EXTENSIONS</span></code></a></p>
 <p><em class="ansible-option-versionadded">added in community.sops 1.7.0</em></p>
 </li>
 </ul>

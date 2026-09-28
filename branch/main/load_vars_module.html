@@ -373,6 +373,21 @@ Use REST client</p></li>
 </div></td>
 </tr>
 <tr class="row-odd"><td><div class="ansible-option-cell">
+<div class="ansibleOptionAnchor" id="parameter-register_values_as_secrets"></div><p class="ansible-option-title" id="ansible-collections-community-sops-load-vars-module-parameter-register-values-as-secrets"><strong>register_values_as_secrets</strong></p>
+<a class="ansibleOptionLink" href="#parameter-register_values_as_secrets" title="Permalink to this option"></a><p class="ansible-option-type-line"><span class="ansible-option-type">boolean</span></p>
+<p><em class="ansible-option-versionadded">added in community.sops 2.5.0</em></p>
+</div></td>
+<td><div class="ansible-option-cell"><p>Whether the loaded values should marked as secrets, and thus will get redacted whenever such values appear in log or console output.</p>
+<p>This requires ansible-core 2.22+. See <a class="reference external" href="https://docs.ansible.com/projects/ansible/devel/playbook_guide/playbooks_secret_masking.html#secret-masking" title="(in Ansible devel)"><span class="xref std std-ref">Masking secrets in Ansible output</span></a> for more information.</p>
+<p><strong>Note</strong> that the plugin right now cannot distinguish between values that were encrypted and values that were not encrypted. All values will be marked as secrets. This might change in the future.</p>
+<p class="ansible-option-line"><strong class="ansible-option-choices">Choices:</strong></p>
+<ul class="simple">
+<li><p><code class="ansible-option-default-bold docutils literal notranslate"><strong><span class="pre">false</span></strong></code> <span class="ansible-option-choices-default-mark">← (default)</span></p></li>
+<li><p><code class="ansible-option-choices-entry docutils literal notranslate"><span class="pre">true</span></code></p></li>
+</ul>
+</div></td>
+</tr>
+<tr class="row-even"><td><div class="ansible-option-cell">
 <div class="ansibleOptionAnchor" id="parameter-return_method"></div><p class="ansible-option-title" id="ansible-collections-community-sops-load-vars-module-parameter-return-method"><strong>return_method</strong></p>
 <a class="ansibleOptionLink" href="#parameter-return_method" title="Permalink to this option"></a><p class="ansible-option-type-line"><span class="ansible-option-type">string</span></p>
 <p><em class="ansible-option-versionadded">added in community.sops 2.3.0</em></p>
@@ -392,7 +407,7 @@ Return the results always as variables.</p>
 </ul>
 </div></td>
 </tr>
-<tr class="row-even"><td><div class="ansible-option-cell">
+<tr class="row-odd"><td><div class="ansible-option-cell">
 <div class="ansibleOptionAnchor" id="parameter-sops_binary"></div><p class="ansible-option-title" id="ansible-collections-community-sops-load-vars-module-parameter-sops-binary"><strong>sops_binary</strong></p>
 <a class="ansibleOptionLink" href="#parameter-sops_binary" title="Permalink to this option"></a><p class="ansible-option-type-line"><span class="ansible-option-type">path</span></p>
 <p><em class="ansible-option-versionadded">added in community.sops 1.0.0</em></p>

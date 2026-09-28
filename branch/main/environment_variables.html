@@ -312,6 +312,16 @@ Environment variables used by the ansible-core configuration are documented in <
 </dd></dl>
 
 <dl class="std envvar">
+<dt class="sig sig-object std" id="envvar-ANSIBLE_VARS_SOPS_PLUGIN_REGISTER_VALUES_AS_SECRETS">
+<span class="sig-name descname"><span class="pre">ANSIBLE_VARS_SOPS_PLUGIN_REGISTER_VALUES_AS_SECRETS</span></span><a class="headerlink" href="#envvar-ANSIBLE_VARS_SOPS_PLUGIN_REGISTER_VALUES_AS_SECRETS" title="Link to this definition"></a></dt>
+<dd><p>Whether the loaded values should marked as secrets, and thus will get redacted whenever such values appear in log or console output.</p>
+<p>This requires ansible-core 2.22+. See <a class="reference external" href="https://docs.ansible.com/projects/ansible/devel/playbook_guide/playbooks_secret_masking.html#secret-masking" title="(in Ansible devel)"><span class="xref std std-ref">Masking secrets in Ansible output</span></a> for more information.</p>
+<p><strong>Note</strong> that the plugin right now cannot distinguish between values that were encrypted and values that were not encrypted. All values will be marked as secrets. This might change in the future.</p>
+<p><em>Used by:</em>
+<a class="reference internal" href="sops_vars.html#ansible-collections-community-sops-sops-vars"><span class="std std-ref">community.sops.sops vars plugin</span></a></p>
+</dd></dl>
+
+<dl class="std envvar">
 <dt class="sig sig-object std" id="envvar-ANSIBLE_VARS_SOPS_PLUGIN_STAGE">
 <span class="sig-name descname"><span class="pre">ANSIBLE_VARS_SOPS_PLUGIN_STAGE</span></span><a class="headerlink" href="#envvar-ANSIBLE_VARS_SOPS_PLUGIN_STAGE" title="Link to this definition"></a></dt>
 <dd><p>Control when this vars plugin may be executed.</p>

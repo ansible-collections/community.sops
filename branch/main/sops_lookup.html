@@ -588,6 +588,21 @@ Use REST client</p></li>
 </div></td>
 </tr>
 <tr class="row-odd"><td><div class="ansible-option-cell">
+<div class="ansibleOptionAnchor" id="parameter-register_result_as_secret"></div><p class="ansible-option-title" id="ansible-collections-community-sops-sops-lookup-parameter-register-result-as-secret"><strong>register_result_as_secret</strong></p>
+<a class="ansibleOptionLink" href="#parameter-register_result_as_secret" title="Permalink to this option"></a><p class="ansible-option-type-line"><span class="ansible-option-type">boolean</span></p>
+<p><em class="ansible-option-versionadded">added in community.sops 2.5.0</em></p>
+</div></td>
+<td><div class="ansible-option-cell"><p>Whether the decrypted result should be marked as a secret, and thus will get redacted whenever its values appears in log or console output.</p>
+<p>This requires ansible-core 2.22+. See <a class="reference external" href="https://docs.ansible.com/projects/ansible/devel/playbook_guide/playbooks_secret_masking.html#secret-masking" title="(in Ansible devel)"><span class="xref std std-ref">Masking secrets in Ansible output</span></a> for more information.</p>
+<p><strong>Note</strong> this is mainly recommended for binary files.</p>
+<p class="ansible-option-line"><strong class="ansible-option-choices">Choices:</strong></p>
+<ul class="simple">
+<li><p><code class="ansible-option-choices-entry docutils literal notranslate"><span class="pre">false</span></code></p></li>
+<li><p><code class="ansible-option-default-bold docutils literal notranslate"><strong><span class="pre">true</span></strong></code> <span class="ansible-option-choices-default-mark">← (default)</span></p></li>
+</ul>
+</div></td>
+</tr>
+<tr class="row-even"><td><div class="ansible-option-cell">
 <div class="ansibleOptionAnchor" id="parameter-rstrip"></div><p class="ansible-option-title" id="ansible-collections-community-sops-sops-lookup-parameter-rstrip"><strong>rstrip</strong></p>
 <a class="ansibleOptionLink" href="#parameter-rstrip" title="Permalink to this option"></a><p class="ansible-option-type-line"><span class="ansible-option-type">boolean</span></p>
 </div></td>
@@ -599,7 +614,7 @@ Use REST client</p></li>
 </ul>
 </div></td>
 </tr>
-<tr class="row-even"><td><div class="ansible-option-cell">
+<tr class="row-odd"><td><div class="ansible-option-cell">
 <div class="ansibleOptionAnchor" id="parameter-sops_binary"></div><p class="ansible-option-title" id="ansible-collections-community-sops-sops-lookup-parameter-sops-binary"><strong>sops_binary</strong></p>
 <a class="ansibleOptionLink" href="#parameter-sops_binary" title="Permalink to this option"></a><p class="ansible-option-type-line"><span class="ansible-option-type">string</span></p>
 <p><em class="ansible-option-versionadded">added in community.sops 1.0.0</em></p>
