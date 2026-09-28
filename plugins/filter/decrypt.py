@@ -61,6 +61,15 @@ options:
         V(false) to prevent mangling the data with UTF-8 decoding.
     type: bool
     default: true
+  register_result_as_secret:
+    description:
+      - Whether the decrypted result should be marked as a secret,
+        and thus will get redacted whenever its values appears in log or console output.
+      - This requires ansible-core 2.22+. See R(Masking secrets in Ansible output, secret_masking) for more information.
+      - B(Note) this is mainly recommended for binary files.
+    type: bool
+    default: true
+    version_added: 2.5.0
 extends_documentation_fragment:
   - community.sops.sops
 seealso:
@@ -108,6 +117,7 @@ from ansible.module_utils.common.text.converters import to_bytes, to_native
 from ansible.utils.display import Display
 
 from ansible_collections.community.sops.plugins.module_utils.sops import Sops, SopsError
+from ansible_collections.community.sops.plugins.module_utils._secrets import mark_as_secret
 from ansible_collections.community.sops.plugins.plugin_utils._args import wrap_get_option_value_check_types
 
 
@@ -117,7 +127,8 @@ _VALID_TYPES = set(['binary', 'json', 'yaml', 'dotenv', 'ini'])
 def decrypt_filter(data, input_type='yaml', output_type='yaml', sops_binary='sops', rstrip=True, decode_output=True,
                    aws_profile=None, aws_access_key_id=None, aws_secret_access_key=None, aws_session_token=None,
                    config_path=None, enable_local_keyservice=True, keyservice=None, age_key=None, age_keyfile=None, age_ssh_private_keyfile=None,
-                   age_key_cmd=None, age_ssh_private_key_cmd=None, gcp_oauth_access_token=None, gcp_kms_client_type=None):
+                   age_key_cmd=None, age_ssh_private_key_cmd=None, gcp_oauth_access_token=None, gcp_kms_client_type=None,
+                   register_result_as_secret=True):
     '''Decrypt sops-encrypted data.'''
 
     # Check parameters
@@ -179,6 +190,9 @@ def decrypt_filter(data, input_type='yaml', output_type='yaml', sops_binary='sop
         raise AnsibleFilterError(to_native(e))
     except ValueError as e:
         raise AnsibleFilterError(f"Error in community.sops.decrypt filter: {e}")
+
+    if register_result_as_secret:
+        mark_as_secret(to_native(output))
 
     return output
 
