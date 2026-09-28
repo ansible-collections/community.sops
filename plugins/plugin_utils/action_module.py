@@ -19,12 +19,18 @@ import traceback
 import typing as t
 
 from ansible.errors import AnsibleError
-from ansible.module_utils.basic import SEQUENCETYPE, remove_values
+from ansible.module_utils.basic import SEQUENCETYPE
 from collections.abc import Mapping
 from ansible.plugins.action import ActionBase
 
 from ansible.module_utils.common.arg_spec import ArgumentSpecValidator
 from ansible.module_utils.errors import UnsupportedError
+
+from ansible_collections.community.sops.plugins.module_utils._secrets import HAS_SECRETS_API as _HAS_SECRETS_API
+from ansible_collections.community.sops.plugins.module_utils._secrets import mark_values_as_secrets as _mark_values_as_secrets
+
+if not _HAS_SECRETS_API:
+    from ansible.module_utils.basic import remove_values
 
 if t.TYPE_CHECKING:
     from collections.abc import Callable
@@ -89,6 +95,7 @@ class AnsibleActionModule:
         self._validation_result = self._validator.validate(self.params)
         self.params.update(self._validation_result.validated_parameters)
         self.no_log_values.update(self._validation_result._no_log_values)
+        _mark_values_as_secrets(self.no_log_values)
 
         try:
             error = self._validation_result.errors[0]
@@ -176,7 +183,10 @@ class AnsibleActionModule:
         if self.__deprecations:
             kwargs['deprecations'] = self.__deprecations
 
-        kwargs = remove_values(kwargs, self.no_log_values)
+        if _HAS_SECRETS_API:
+            _mark_values_as_secrets(self.no_log_values)
+        else:
+            kwargs = remove_values(kwargs, self.no_log_values)
         raise _ModuleExitException(kwargs)
 
     def exit_json(self, **kwargs):
