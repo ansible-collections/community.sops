@@ -1,0 +1,27 @@
+---
+# Copyright (c) Ansible Project
+# GNU General Public License v3.0+ (see LICENSES/GPL-3.0-or-later.txt or https://www.gnu.org/licenses/gpl-3.0.txt)
+# SPDX-License-Identifier: GPL-3.0-or-later
+
+ending_newline_variable: ENC[AES256_GCM,data:Bb2lnr7Ezkrp4Y77bpc=,iv:Ec6T7h9tJ6ntaYQ6srQ+LFyb1ddVFJ6GXdFEqtZGD2w=,tag:7jYNd1FSZJkl6MtvAKPKoA==,type:str]
+sops:
+    lastmodified: "2026-11-05T06:53:17Z"
+    mac: ENC[AES256_GCM,data:ceukaGHrEwcmrBGE1fPR/LcHzagm8ZO8kc709xzoZpmOmAwK+uEkt7JSi7bGRJHt21VaPNP4/74AbuJX8a/hfaERpaEkOD/zcmEM1mXxUQNQAOPraXWNFPeig8OmvaScXYr4k6R+GLBO748Hu9zN21q68/trYBWxF0PKqKYeSiM=,iv:jhPDoGvEAZ5YmnR35ez+VUn2u5LzK8MT7lB5LRZrZR8=,tag:6AaCmycLqh0gemkR8qGumg==,type:str]
+    pgp:
+        - created_at: "2026-11-05T06:51:45Z"
+          enc: |-
+            -----BEGIN PGP MESSAGE-----
+
+            wcBMAyUpShfNkFB/AQf9EkfI7aE/2tk5ikYN4vGRHOcyf8faP+1UN3YBVH9S5nfI
+            dCavATCQs1H1VbTN+CiwJCDQ4VoM93CF6Iwm5v+fpo6u75QHfSxsLW2CA60KfSQT
+            Prl1e08vgcqb1elycYe1LbgyRN6E3BCCHANgPtb8jWYNmlO8ZnZGOzK2aXaRs/dF
+            Zy17Up/VnaVmso0YIyYiLc7ZpZ/PbMnkUE9GG8pafgYkz3tsChI6+twwaAzuB9uL
+            jn4pB0NdrsXVo4vSMdp3ewADm9Oa16EN/UTiCUlWtXFINGzDb4KzcGyJN2YBXcrj
+            NLgRBmwbmyDG7BgQDzTynw/B1+W0lVN1oSCbIAXFSdJRAZJ764nFO4DDAMorhFgP
+            AgVU3hNIOaa+dUrStzUNyBaNEp8jwtuDgw83jTOMZ1G45ePUX66iLEQRHBHo4o2C
+            X40Kc3mvqyEuUXrlTb9/fEk6
+            =qcxR
+            -----END PGP MESSAGE-----
+          fp: FBC7B9E2A4F9289AC0C1D4843D16CEE4A27381B4
+    unencrypted_suffix: _unencrypted
+    version: 3.13.3

@@ -236,7 +236,7 @@ class VarsModule(BaseVarsPlugin):
                                     'Cannot use handle_unencrypted_files=%s with SOPS %s' % (handle_unencrypted_files, sops_runner.version_string)
                                 )
                             try:
-                                file_content = sops_runner.decrypt(found, get_option_value=get_option_value)
+                                file_content = sops_runner.decrypt(found, get_option_value=get_option_value, rstrip=False)
                             except SopsError as exc:
                                 skip = False
                                 if sops_runner.has_filestatus():

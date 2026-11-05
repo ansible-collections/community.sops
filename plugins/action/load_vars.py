@@ -45,7 +45,7 @@ class ActionModule(ActionModuleBase):
         def get_option_value(argument_name):
             return module.params.get(argument_name)
 
-        output = Sops.decrypt(filename, display=display, get_option_value=get_option_value)
+        output = Sops.decrypt(filename, display=display, get_option_value=get_option_value, rstrip=False)
 
         data = self._loader.load(output, file_name=filename, show_content=False)
         if not data:

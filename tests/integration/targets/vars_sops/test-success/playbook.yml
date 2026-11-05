@@ -19,3 +19,7 @@
       assert:
         that:
           - (var_with_template | int) == 2
+    - name: Ensure that templates host_vars/localhost/ending-newline.sops.yml was evaluated
+      assert:
+        that:
+          - ending_newline_variable == "line 1\nline 2\n"
