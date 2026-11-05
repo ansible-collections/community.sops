@@ -215,3 +215,13 @@
               - test2_2 == 'something_else'
               - test3_2[0] == 'buzz'
               - test4_2.test_4_2_1 == 'buzzbuzz'
+
+    - name: Test that load_vars does not rstrip
+      community.sops.load_vars:
+        file: ending-newline.sops.yml
+      register: ending_newline
+
+    - assert:
+        that:
+          - ending_newline is success
+          - ending_newline_variable == "line 1\nline 2\n"
