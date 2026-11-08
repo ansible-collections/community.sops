@@ -2,167 +2,184 @@
 
 **Topics**
 
-- <a href="#v2-5-0">v2\.5\.0</a>
+- <a href="#v2-5-1">v2\.5\.1</a>
     - <a href="#release-summary">Release Summary</a>
-    - <a href="#minor-changes">Minor Changes</a>
     - <a href="#bugfixes">Bugfixes</a>
-- <a href="#v2-4-0">v2\.4\.0</a>
+- <a href="#v2-5-0">v2\.5\.0</a>
     - <a href="#release-summary-1">Release Summary</a>
+    - <a href="#minor-changes">Minor Changes</a>
+    - <a href="#bugfixes-1">Bugfixes</a>
+- <a href="#v2-4-0">v2\.4\.0</a>
+    - <a href="#release-summary-2">Release Summary</a>
     - <a href="#minor-changes-1">Minor Changes</a>
 - <a href="#v2-3-0">v2\.3\.0</a>
-    - <a href="#release-summary-2">Release Summary</a>
+    - <a href="#release-summary-3">Release Summary</a>
     - <a href="#minor-changes-2">Minor Changes</a>
 - <a href="#v2-2-7">v2\.2\.7</a>
-    - <a href="#release-summary-3">Release Summary</a>
+    - <a href="#release-summary-4">Release Summary</a>
     - <a href="#known-issues">Known Issues</a>
 - <a href="#v2-2-6">v2\.2\.6</a>
-    - <a href="#release-summary-4">Release Summary</a>
-    - <a href="#bugfixes-1">Bugfixes</a>
-- <a href="#v2-2-5">v2\.2\.5</a>
     - <a href="#release-summary-5">Release Summary</a>
     - <a href="#bugfixes-2">Bugfixes</a>
-- <a href="#v2-2-4">v2\.2\.4</a>
+- <a href="#v2-2-5">v2\.2\.5</a>
     - <a href="#release-summary-6">Release Summary</a>
     - <a href="#bugfixes-3">Bugfixes</a>
-- <a href="#v2-2-3">v2\.2\.3</a>
+- <a href="#v2-2-4">v2\.2\.4</a>
     - <a href="#release-summary-7">Release Summary</a>
-    - <a href="#minor-changes-3">Minor Changes</a>
     - <a href="#bugfixes-4">Bugfixes</a>
-- <a href="#v2-2-2">v2\.2\.2</a>
+- <a href="#v2-2-3">v2\.2\.3</a>
     - <a href="#release-summary-8">Release Summary</a>
+    - <a href="#minor-changes-3">Minor Changes</a>
     - <a href="#bugfixes-5">Bugfixes</a>
-- <a href="#v2-2-1">v2\.2\.1</a>
+- <a href="#v2-2-2">v2\.2\.2</a>
     - <a href="#release-summary-9">Release Summary</a>
     - <a href="#bugfixes-6">Bugfixes</a>
-- <a href="#v2-2-0">v2\.2\.0</a>
+- <a href="#v2-2-1">v2\.2\.1</a>
     - <a href="#release-summary-10">Release Summary</a>
+    - <a href="#bugfixes-7">Bugfixes</a>
+- <a href="#v2-2-0">v2\.2\.0</a>
+    - <a href="#release-summary-11">Release Summary</a>
     - <a href="#minor-changes-4">Minor Changes</a>
 - <a href="#v2-1-0">v2\.1\.0</a>
-    - <a href="#release-summary-11">Release Summary</a>
+    - <a href="#release-summary-12">Release Summary</a>
     - <a href="#minor-changes-5">Minor Changes</a>
 - <a href="#v2-0-5">v2\.0\.5</a>
-    - <a href="#release-summary-12">Release Summary</a>
-- <a href="#v2-0-4">v2\.0\.4</a>
     - <a href="#release-summary-13">Release Summary</a>
-    - <a href="#bugfixes-7">Bugfixes</a>
-- <a href="#v2-0-3">v2\.0\.3</a>
+- <a href="#v2-0-4">v2\.0\.4</a>
     - <a href="#release-summary-14">Release Summary</a>
     - <a href="#bugfixes-8">Bugfixes</a>
-- <a href="#v2-0-2">v2\.0\.2</a>
+- <a href="#v2-0-3">v2\.0\.3</a>
     - <a href="#release-summary-15">Release Summary</a>
     - <a href="#bugfixes-9">Bugfixes</a>
-- <a href="#v2-0-1">v2\.0\.1</a>
+- <a href="#v2-0-2">v2\.0\.2</a>
     - <a href="#release-summary-16">Release Summary</a>
-- <a href="#v2-0-0">v2\.0\.0</a>
+    - <a href="#bugfixes-10">Bugfixes</a>
+- <a href="#v2-0-1">v2\.0\.1</a>
     - <a href="#release-summary-17">Release Summary</a>
+- <a href="#v2-0-0">v2\.0\.0</a>
+    - <a href="#release-summary-18">Release Summary</a>
     - <a href="#removed-features-previously-deprecated">Removed Features \(previously deprecated\)</a>
 - <a href="#v1-9-1">v1\.9\.1</a>
-    - <a href="#release-summary-18">Release Summary</a>
-    - <a href="#bugfixes-10">Bugfixes</a>
-- <a href="#v1-9-0">v1\.9\.0</a>
     - <a href="#release-summary-19">Release Summary</a>
+    - <a href="#bugfixes-11">Bugfixes</a>
+- <a href="#v1-9-0">v1\.9\.0</a>
+    - <a href="#release-summary-20">Release Summary</a>
     - <a href="#minor-changes-6">Minor Changes</a>
 - <a href="#v1-8-2">v1\.8\.2</a>
-    - <a href="#release-summary-20">Release Summary</a>
+    - <a href="#release-summary-21">Release Summary</a>
     - <a href="#deprecated-features">Deprecated Features</a>
 - <a href="#v1-8-1">v1\.8\.1</a>
-    - <a href="#release-summary-21">Release Summary</a>
-    - <a href="#bugfixes-11">Bugfixes</a>
-- <a href="#v1-8-0">v1\.8\.0</a>
     - <a href="#release-summary-22">Release Summary</a>
-    - <a href="#minor-changes-7">Minor Changes</a>
     - <a href="#bugfixes-12">Bugfixes</a>
-- <a href="#v1-7-0">v1\.7\.0</a>
+- <a href="#v1-8-0">v1\.8\.0</a>
     - <a href="#release-summary-23">Release Summary</a>
-    - <a href="#minor-changes-8">Minor Changes</a>
+    - <a href="#minor-changes-7">Minor Changes</a>
     - <a href="#bugfixes-13">Bugfixes</a>
-- <a href="#v1-6-7">v1\.6\.7</a>
+- <a href="#v1-7-0">v1\.7\.0</a>
     - <a href="#release-summary-24">Release Summary</a>
+    - <a href="#minor-changes-8">Minor Changes</a>
     - <a href="#bugfixes-14">Bugfixes</a>
-- <a href="#v1-6-6">v1\.6\.6</a>
+- <a href="#v1-6-7">v1\.6\.7</a>
     - <a href="#release-summary-25">Release Summary</a>
     - <a href="#bugfixes-15">Bugfixes</a>
-- <a href="#v1-6-5">v1\.6\.5</a>
+- <a href="#v1-6-6">v1\.6\.6</a>
     - <a href="#release-summary-26">Release Summary</a>
     - <a href="#bugfixes-16">Bugfixes</a>
-- <a href="#v1-6-4">v1\.6\.4</a>
+- <a href="#v1-6-5">v1\.6\.5</a>
     - <a href="#release-summary-27">Release Summary</a>
     - <a href="#bugfixes-17">Bugfixes</a>
-- <a href="#v1-6-3">v1\.6\.3</a>
+- <a href="#v1-6-4">v1\.6\.4</a>
     - <a href="#release-summary-28">Release Summary</a>
+    - <a href="#bugfixes-18">Bugfixes</a>
+- <a href="#v1-6-3">v1\.6\.3</a>
+    - <a href="#release-summary-29">Release Summary</a>
     - <a href="#known-issues-1">Known Issues</a>
 - <a href="#v1-6-2">v1\.6\.2</a>
-    - <a href="#release-summary-29">Release Summary</a>
-    - <a href="#bugfixes-18">Bugfixes</a>
-- <a href="#v1-6-1">v1\.6\.1</a>
     - <a href="#release-summary-30">Release Summary</a>
     - <a href="#bugfixes-19">Bugfixes</a>
-- <a href="#v1-6-0">v1\.6\.0</a>
+- <a href="#v1-6-1">v1\.6\.1</a>
     - <a href="#release-summary-31">Release Summary</a>
+    - <a href="#bugfixes-20">Bugfixes</a>
+- <a href="#v1-6-0">v1\.6\.0</a>
+    - <a href="#release-summary-32">Release Summary</a>
     - <a href="#minor-changes-9">Minor Changes</a>
 - <a href="#v1-5-0">v1\.5\.0</a>
-    - <a href="#release-summary-32">Release Summary</a>
+    - <a href="#release-summary-33">Release Summary</a>
     - <a href="#minor-changes-10">Minor Changes</a>
     - <a href="#new-playbooks">New Playbooks</a>
     - <a href="#new-roles">New Roles</a>
 - <a href="#v1-4-1">v1\.4\.1</a>
-    - <a href="#release-summary-33">Release Summary</a>
-    - <a href="#bugfixes-20">Bugfixes</a>
-- <a href="#v1-4-0">v1\.4\.0</a>
     - <a href="#release-summary-34">Release Summary</a>
+    - <a href="#bugfixes-21">Bugfixes</a>
+- <a href="#v1-4-0">v1\.4\.0</a>
+    - <a href="#release-summary-35">Release Summary</a>
     - <a href="#minor-changes-11">Minor Changes</a>
 - <a href="#v1-3-0">v1\.3\.0</a>
-    - <a href="#release-summary-35">Release Summary</a>
+    - <a href="#release-summary-36">Release Summary</a>
     - <a href="#minor-changes-12">Minor Changes</a>
 - <a href="#v1-2-3">v1\.2\.3</a>
-    - <a href="#release-summary-36">Release Summary</a>
-- <a href="#v1-2-2">v1\.2\.2</a>
     - <a href="#release-summary-37">Release Summary</a>
-    - <a href="#bugfixes-21">Bugfixes</a>
-- <a href="#v1-2-1">v1\.2\.1</a>
+- <a href="#v1-2-2">v1\.2\.2</a>
     - <a href="#release-summary-38">Release Summary</a>
-- <a href="#v1-2-0">v1\.2\.0</a>
-    - <a href="#release-summary-39">Release Summary</a>
-    - <a href="#minor-changes-13">Minor Changes</a>
     - <a href="#bugfixes-22">Bugfixes</a>
-- <a href="#v1-1-0">v1\.1\.0</a>
+- <a href="#v1-2-1">v1\.2\.1</a>
+    - <a href="#release-summary-39">Release Summary</a>
+- <a href="#v1-2-0">v1\.2\.0</a>
     - <a href="#release-summary-40">Release Summary</a>
+    - <a href="#minor-changes-13">Minor Changes</a>
+    - <a href="#bugfixes-23">Bugfixes</a>
+- <a href="#v1-1-0">v1\.1\.0</a>
+    - <a href="#release-summary-41">Release Summary</a>
     - <a href="#minor-changes-14">Minor Changes</a>
     - <a href="#new-plugins">New Plugins</a>
         - <a href="#filter">Filter</a>
 - <a href="#v1-0-6">v1\.0\.6</a>
-    - <a href="#release-summary-41">Release Summary</a>
-    - <a href="#bugfixes-23">Bugfixes</a>
-- <a href="#v1-0-5">v1\.0\.5</a>
     - <a href="#release-summary-42">Release Summary</a>
     - <a href="#bugfixes-24">Bugfixes</a>
-- <a href="#v1-0-4">v1\.0\.4</a>
+- <a href="#v1-0-5">v1\.0\.5</a>
     - <a href="#release-summary-43">Release Summary</a>
+    - <a href="#bugfixes-25">Bugfixes</a>
+- <a href="#v1-0-4">v1\.0\.4</a>
+    - <a href="#release-summary-44">Release Summary</a>
     - <a href="#security-fixes">Security Fixes</a>
 - <a href="#v1-0-3">v1\.0\.3</a>
-    - <a href="#release-summary-44">Release Summary</a>
-    - <a href="#bugfixes-25">Bugfixes</a>
-- <a href="#v1-0-2">v1\.0\.2</a>
     - <a href="#release-summary-45">Release Summary</a>
-- <a href="#v1-0-1">v1\.0\.1</a>
+    - <a href="#bugfixes-26">Bugfixes</a>
+- <a href="#v1-0-2">v1\.0\.2</a>
     - <a href="#release-summary-46">Release Summary</a>
-- <a href="#v1-0-0">v1\.0\.0</a>
+- <a href="#v1-0-1">v1\.0\.1</a>
     - <a href="#release-summary-47">Release Summary</a>
+- <a href="#v1-0-0">v1\.0\.0</a>
+    - <a href="#release-summary-48">Release Summary</a>
     - <a href="#minor-changes-15">Minor Changes</a>
 - <a href="#v0-2-0">v0\.2\.0</a>
-    - <a href="#release-summary-48">Release Summary</a>
+    - <a href="#release-summary-49">Release Summary</a>
     - <a href="#minor-changes-16">Minor Changes</a>
 - <a href="#v0-1-0">v0\.1\.0</a>
-    - <a href="#release-summary-49">Release Summary</a>
+    - <a href="#release-summary-50">Release Summary</a>
     - <a href="#new-plugins-1">New Plugins</a>
         - <a href="#lookup">Lookup</a>
         - <a href="#vars">Vars</a>
     - <a href="#new-modules">New Modules</a>
 
+<a id="v2-5-1"></a>
+## v2\.5\.1
+
+<a id="release-summary"></a>
+### Release Summary
+
+Bugfix release\.
+
+<a id="bugfixes"></a>
+### Bugfixes
+
+* load\_vars \- load variable files without stripping trailing whitespace\. This could accidentally modify content of YAML files which end with a block scalar \([https\://github\.com/ansible\-collections/community\.sops/issues/309](https\://github\.com/ansible\-collections/community\.sops/issues/309)\, [https\://github\.com/ansible\-collections/community\.sops/pull/310](https\://github\.com/ansible\-collections/community\.sops/pull/310)\)\.
+* sops vars plugin \- load variable files without stripping trailing whitespace\. This could accidentally modify content of YAML files which end with a block scalar \([https\://github\.com/ansible\-collections/community\.sops/issues/309](https\://github\.com/ansible\-collections/community\.sops/issues/309)\, [https\://github\.com/ansible\-collections/community\.sops/pull/310](https\://github\.com/ansible\-collections/community\.sops/pull/310)\)\.
+
 <a id="v2-5-0"></a>
 ## v2\.5\.0
 
-<a id="release-summary"></a>
+<a id="release-summary-1"></a>
 ### Release Summary
 
 Feature release\.
@@ -176,7 +193,7 @@ Feature release\.
 * sops lookup plugin \- the result of the lookup is marked as a secret on ansible\-core 2\.22\+ unless the new option <code>register\_result\_as\_secret</code> is set to <code>false</code>\. Note that the lookup does not parse structured output\, so invidiual values appearing in it are not registered \([https\://github\.com/ansible\-collections/community\.sops/pull/304](https\://github\.com/ansible\-collections/community\.sops/pull/304)\)\.
 * sops vars plugin \- a new option <code>register\_values\_as\_secrets</code> allows to register all loaded values as secrets on ansible\-core 2\.22\+\. Note that this is not enabled by default since it can easily happen that non\-sensitive\, common words or phrases appear as values in encrypted files \([https\://github\.com/ansible\-collections/community\.sops/pull/304](https\://github\.com/ansible\-collections/community\.sops/pull/304)\)\.
 
-<a id="bugfixes"></a>
+<a id="bugfixes-1"></a>
 ### Bugfixes
 
 * load\_vars \- on ansible\-core 2\.22\+\, avoid deprecated function \([https\://github\.com/ansible\-collections/community\.sops/pull/307](https\://github\.com/ansible\-collections/community\.sops/pull/307)\)\.
@@ -184,7 +201,7 @@ Feature release\.
 <a id="v2-4-0"></a>
 ## v2\.4\.0
 
-<a id="release-summary-1"></a>
+<a id="release-summary-2"></a>
 ### Release Summary
 
 Feature release\.
@@ -197,7 +214,7 @@ Feature release\.
 <a id="v2-3-0"></a>
 ## v2\.3\.0
 
-<a id="release-summary-2"></a>
+<a id="release-summary-3"></a>
 ### Release Summary
 
 Feature release\.
@@ -218,7 +235,7 @@ which finally allows <code>community\.sops\.load\_vars</code> to set variables t
 <a id="v2-2-7"></a>
 ## v2\.2\.7
 
-<a id="release-summary-3"></a>
+<a id="release-summary-4"></a>
 ### Release Summary
 
 Maintenance release\.
@@ -231,12 +248,12 @@ Maintenance release\.
 <a id="v2-2-6"></a>
 ## v2\.2\.6
 
-<a id="release-summary-4"></a>
+<a id="release-summary-5"></a>
 ### Release Summary
 
 Bugfix and maintenance release\.
 
-<a id="bugfixes-1"></a>
+<a id="bugfixes-2"></a>
 ### Bugfixes
 
 * Clean up plugin code that does not run on the target \([https\://github\.com/ansible\-collections/community\.sops/pull/275](https\://github\.com/ansible\-collections/community\.sops/pull/275)\)\.
@@ -246,20 +263,6 @@ Bugfix and maintenance release\.
 <a id="v2-2-5"></a>
 ## v2\.2\.5
 
-<a id="release-summary-5"></a>
-### Release Summary
-
-Maintenance release\.
-
-<a id="bugfixes-2"></a>
-### Bugfixes
-
-* load\_vars action \- avoid another deprecated module utils from ansible\-core \([https\://github\.com/ansible\-collections/community\.sops/pull/270](https\://github\.com/ansible\-collections/community\.sops/pull/270)\)\.
-* load\_vars action \- avoid deprecated import from ansible\-core that will be removed in ansible\-core 2\.21 \([https\://github\.com/ansible\-collections/community\.sops/pull/272](https\://github\.com/ansible\-collections/community\.sops/pull/272)\)\.
-
-<a id="v2-2-4"></a>
-## v2\.2\.4
-
 <a id="release-summary-6"></a>
 ### Release Summary
 
@@ -268,12 +271,26 @@ Maintenance release\.
 <a id="bugfixes-3"></a>
 ### Bugfixes
 
+* load\_vars action \- avoid another deprecated module utils from ansible\-core \([https\://github\.com/ansible\-collections/community\.sops/pull/270](https\://github\.com/ansible\-collections/community\.sops/pull/270)\)\.
+* load\_vars action \- avoid deprecated import from ansible\-core that will be removed in ansible\-core 2\.21 \([https\://github\.com/ansible\-collections/community\.sops/pull/272](https\://github\.com/ansible\-collections/community\.sops/pull/272)\)\.
+
+<a id="v2-2-4"></a>
+## v2\.2\.4
+
+<a id="release-summary-7"></a>
+### Release Summary
+
+Maintenance release\.
+
+<a id="bugfixes-4"></a>
+### Bugfixes
+
 * Fix accidental type extensions \([https\://github\.com/ansible\-collections/community\.sops/pull/269](https\://github\.com/ansible\-collections/community\.sops/pull/269)\)\.
 
 <a id="v2-2-3"></a>
 ## v2\.2\.3
 
-<a id="release-summary-7"></a>
+<a id="release-summary-8"></a>
 ### Release Summary
 
 Maintenance release\.
@@ -283,27 +300,13 @@ Maintenance release\.
 
 * Note that some new code in <code>plugins/module\_utils/\_six\.py</code> is MIT licensed \([https\://github\.com/ansible\-collections/community\.sops/pull/268](https\://github\.com/ansible\-collections/community\.sops/pull/268)\)\.
 
-<a id="bugfixes-4"></a>
+<a id="bugfixes-5"></a>
 ### Bugfixes
 
 * Avoid using <code>ansible\.module\_utils\.six</code> to avoid deprecation warnings with ansible\-core 2\.20 \([https\://github\.com/ansible\-collections/community\.sops/pull/268](https\://github\.com/ansible\-collections/community\.sops/pull/268)\)\.
 
 <a id="v2-2-2"></a>
 ## v2\.2\.2
-
-<a id="release-summary-8"></a>
-### Release Summary
-
-Bugfix release\.
-
-<a id="bugfixes-5"></a>
-### Bugfixes
-
-* Avoid deprecated functionality in ansible\-core 2\.20 \([https\://github\.com/ansible\-collections/community\.sops/pull/260](https\://github\.com/ansible\-collections/community\.sops/pull/260)\)\.
-* all modules and plugins \- the default of <code>enable\_local\_keyservice</code> changed from <code>false</code> to <code>true</code>\, and explicitly setting it to <code>false</code> now passes <code>\-\-enable\-local\-keyservice\=false</code>\. SOPS\' default has always been <code>true</code>\, and when setting this option to <code>true</code> so far it resulted in passing <code>\-\-enable\-local\-keyservice</code>\, which is equivalent to <code>\-\-enable\-local\-keyservice\=true</code> and had no effect\. This means that from now on\, setting <code>enable\_local\_keyservice</code> explicitly to <code>false</code> has an effect\. If <code>enable\_local\_keyservice</code> was not set before\, or was set to <code>true</code>\, nothing will change \([https\://github\.com/ansible\-collections/community\.sops/issues/261](https\://github\.com/ansible\-collections/community\.sops/issues/261)\, [https\://github\.com/ansible\-collections/community\.sops/pull/262](https\://github\.com/ansible\-collections/community\.sops/pull/262)\)\.
-
-<a id="v2-2-1"></a>
-## v2\.2\.1
 
 <a id="release-summary-9"></a>
 ### Release Summary
@@ -313,12 +316,26 @@ Bugfix release\.
 <a id="bugfixes-6"></a>
 ### Bugfixes
 
+* Avoid deprecated functionality in ansible\-core 2\.20 \([https\://github\.com/ansible\-collections/community\.sops/pull/260](https\://github\.com/ansible\-collections/community\.sops/pull/260)\)\.
+* all modules and plugins \- the default of <code>enable\_local\_keyservice</code> changed from <code>false</code> to <code>true</code>\, and explicitly setting it to <code>false</code> now passes <code>\-\-enable\-local\-keyservice\=false</code>\. SOPS\' default has always been <code>true</code>\, and when setting this option to <code>true</code> so far it resulted in passing <code>\-\-enable\-local\-keyservice</code>\, which is equivalent to <code>\-\-enable\-local\-keyservice\=true</code> and had no effect\. This means that from now on\, setting <code>enable\_local\_keyservice</code> explicitly to <code>false</code> has an effect\. If <code>enable\_local\_keyservice</code> was not set before\, or was set to <code>true</code>\, nothing will change \([https\://github\.com/ansible\-collections/community\.sops/issues/261](https\://github\.com/ansible\-collections/community\.sops/issues/261)\, [https\://github\.com/ansible\-collections/community\.sops/pull/262](https\://github\.com/ansible\-collections/community\.sops/pull/262)\)\.
+
+<a id="v2-2-1"></a>
+## v2\.2\.1
+
+<a id="release-summary-10"></a>
+### Release Summary
+
+Bugfix release\.
+
+<a id="bugfixes-7"></a>
+### Bugfixes
+
 * install role \- avoid deprecated parameter value for the <code>ansible\.builtin\.uri</code> module \([https\://github\.com/ansible\-collections/community\.sops/pull/255](https\://github\.com/ansible\-collections/community\.sops/pull/255)\)\.
 
 <a id="v2-2-0"></a>
 ## v2\.2\.0
 
-<a id="release-summary-10"></a>
+<a id="release-summary-11"></a>
 ### Release Summary
 
 Feature release\.
@@ -331,7 +348,7 @@ Feature release\.
 <a id="v2-1-0"></a>
 ## v2\.1\.0
 
-<a id="release-summary-11"></a>
+<a id="release-summary-12"></a>
 ### Release Summary
 
 Feature release\.
@@ -344,7 +361,7 @@ Feature release\.
 <a id="v2-0-5"></a>
 ## v2\.0\.5
 
-<a id="release-summary-12"></a>
+<a id="release-summary-13"></a>
 ### Release Summary
 
 Maintenance release with updated SOPS version test coverage\.
@@ -352,31 +369,18 @@ Maintenance release with updated SOPS version test coverage\.
 <a id="v2-0-4"></a>
 ## v2\.0\.4
 
-<a id="release-summary-13"></a>
+<a id="release-summary-14"></a>
 ### Release Summary
 
 Maintenance release with Data Tagging support\.
 
-<a id="bugfixes-7"></a>
+<a id="bugfixes-8"></a>
 ### Bugfixes
 
 * load\_vars \- make evaluation compatible with Data Tagging in upcoming ansible\-core release \([https\://github\.com/ansible\-collections/community\.sops/pull/225](https\://github\.com/ansible\-collections/community\.sops/pull/225)\)\.
 
 <a id="v2-0-3"></a>
 ## v2\.0\.3
-
-<a id="release-summary-14"></a>
-### Release Summary
-
-Bugfix release\.
-
-<a id="bugfixes-8"></a>
-### Bugfixes
-
-* install role \- <code>sops\_install\_on\_localhost\=false</code> was not working properly if the role was running on more than one host due to a bug in ansible\-core \([https\://github\.com/ansible\-collections/community\.sops/issues/223](https\://github\.com/ansible\-collections/community\.sops/issues/223)\, [https\://github\.com/ansible\-collections/community\.sops/pull/224](https\://github\.com/ansible\-collections/community\.sops/pull/224)\)\.
-
-<a id="v2-0-2"></a>
-## v2\.0\.2
 
 <a id="release-summary-15"></a>
 ### Release Summary
@@ -386,12 +390,25 @@ Bugfix release\.
 <a id="bugfixes-9"></a>
 ### Bugfixes
 
+* install role \- <code>sops\_install\_on\_localhost\=false</code> was not working properly if the role was running on more than one host due to a bug in ansible\-core \([https\://github\.com/ansible\-collections/community\.sops/issues/223](https\://github\.com/ansible\-collections/community\.sops/issues/223)\, [https\://github\.com/ansible\-collections/community\.sops/pull/224](https\://github\.com/ansible\-collections/community\.sops/pull/224)\)\.
+
+<a id="v2-0-2"></a>
+## v2\.0\.2
+
+<a id="release-summary-16"></a>
+### Release Summary
+
+Bugfix release\.
+
+<a id="bugfixes-10"></a>
+### Bugfixes
+
 * install role \- when used with Debian on ARM architecture\, the architecture name is now correctly translated from <code>aarch64</code> to <code>arm64</code> \([https\://github\.com/ansible\-collections/community\.sops/issues/220](https\://github\.com/ansible\-collections/community\.sops/issues/220)\, [https\://github\.com/ansible\-collections/community\.sops/pull/221](https\://github\.com/ansible\-collections/community\.sops/pull/221)\)\.
 
 <a id="v2-0-1"></a>
 ## v2\.0\.1
 
-<a id="release-summary-16"></a>
+<a id="release-summary-17"></a>
 ### Release Summary
 
 Maintenance release with updated documentation\.
@@ -399,7 +416,7 @@ Maintenance release with updated documentation\.
 <a id="v2-0-0"></a>
 ## v2\.0\.0
 
-<a id="release-summary-17"></a>
+<a id="release-summary-18"></a>
 ### Release Summary
 
 Major verison that drops support for End of Life Ansible/ansible\-base/ansible\-core versions\.
@@ -412,12 +429,12 @@ Major verison that drops support for End of Life Ansible/ansible\-base/ansible\-
 <a id="v1-9-1"></a>
 ## v1\.9\.1
 
-<a id="release-summary-18"></a>
+<a id="release-summary-19"></a>
 ### Release Summary
 
 Bugfix release\.
 
-<a id="bugfixes-10"></a>
+<a id="bugfixes-11"></a>
 ### Bugfixes
 
 * sops\_encrypt \- pass absolute paths to <code>module\.atomic\_move\(\)</code> \([https\://github\.com/ansible/ansible/issues/83950](https\://github\.com/ansible/ansible/issues/83950)\, [https\://github\.com/ansible\-collections/community\.sops/pull/208](https\://github\.com/ansible\-collections/community\.sops/pull/208)\)\.
@@ -425,7 +442,7 @@ Bugfix release\.
 <a id="v1-9-0"></a>
 ## v1\.9\.0
 
-<a id="release-summary-19"></a>
+<a id="release-summary-20"></a>
 ### Release Summary
 
 Feature release\.
@@ -440,7 +457,7 @@ Feature release\.
 <a id="v1-8-2"></a>
 ## v1\.8\.2
 
-<a id="release-summary-20"></a>
+<a id="release-summary-21"></a>
 ### Release Summary
 
 Maintenance release with updated documentation and changelog\.
@@ -453,12 +470,12 @@ Maintenance release with updated documentation and changelog\.
 <a id="v1-8-1"></a>
 ## v1\.8\.1
 
-<a id="release-summary-21"></a>
+<a id="release-summary-22"></a>
 ### Release Summary
 
 Bugfix release\.
 
-<a id="bugfixes-11"></a>
+<a id="bugfixes-12"></a>
 ### Bugfixes
 
 * Pass <code>config\_path</code> on SOPS 3\.9\.0 before the subcommand instead of after it \([https\://github\.com/ansible\-collections/community\.sops/issues/195](https\://github\.com/ansible\-collections/community\.sops/issues/195)\, [https\://github\.com/ansible\-collections/community\.sops/pull/197](https\://github\.com/ansible\-collections/community\.sops/pull/197)\)\.
@@ -466,7 +483,7 @@ Bugfix release\.
 <a id="v1-8-0"></a>
 ## v1\.8\.0
 
-<a id="release-summary-22"></a>
+<a id="release-summary-23"></a>
 ### Release Summary
 
 Feature release for supporting improvements coming with SOPS 3\.9\.0\.
@@ -477,7 +494,7 @@ Feature release for supporting improvements coming with SOPS 3\.9\.0\.
 * Detect SOPS 3\.9\.0 and use new <code>decrypt</code> and <code>encrypt</code> subcommands \([https\://github\.com/ansible\-collections/community\.sops/pull/190](https\://github\.com/ansible\-collections/community\.sops/pull/190)\)\.
 * sops vars plugin \- new option <code>handle\_unencrypted\_files</code> allows to control behavior when encountering unencrypted files with SOPS 3\.9\.0\+ \([https\://github\.com/ansible\-collections/community\.sops/pull/190](https\://github\.com/ansible\-collections/community\.sops/pull/190)\)\.
 
-<a id="bugfixes-12"></a>
+<a id="bugfixes-13"></a>
 ### Bugfixes
 
 * sops\_encrypt \- properly support <code>path\_regex</code> in <code>\.sops\.yaml</code> when SOPS 3\.9\.0 or later is used \([https\://github\.com/ansible\-collections/community\.sops/issues/153](https\://github\.com/ansible\-collections/community\.sops/issues/153)\, [https\://github\.com/ansible\-collections/community\.sops/pull/190](https\://github\.com/ansible\-collections/community\.sops/pull/190)\)\.
@@ -485,7 +502,7 @@ Feature release for supporting improvements coming with SOPS 3\.9\.0\.
 <a id="v1-7-0"></a>
 ## v1\.7\.0
 
-<a id="release-summary-23"></a>
+<a id="release-summary-24"></a>
 ### Release Summary
 
 Bugfix and feature release to fix installation issues with SOPS 3\.9\.0\.
@@ -495,7 +512,7 @@ Bugfix and feature release to fix installation issues with SOPS 3\.9\.0\.
 
 * sops vars plugin \- allow to configure the valid extensions with an <code>ansible\.cfg</code> entry or with an environment variable \([https\://github\.com/ansible\-collections/community\.sops/pull/185](https\://github\.com/ansible\-collections/community\.sops/pull/185)\)\.
 
-<a id="bugfixes-13"></a>
+<a id="bugfixes-14"></a>
 ### Bugfixes
 
 * Fix RPM URL for the 3\.9\.0 release \([https\://github\.com/ansible\-collections/community\.sops/pull/188](https\://github\.com/ansible\-collections/community\.sops/pull/188)\)\.
@@ -503,12 +520,12 @@ Bugfix and feature release to fix installation issues with SOPS 3\.9\.0\.
 <a id="v1-6-7"></a>
 ## v1\.6\.7
 
-<a id="release-summary-24"></a>
+<a id="release-summary-25"></a>
 ### Release Summary
 
 Bugfix release\.
 
-<a id="bugfixes-14"></a>
+<a id="bugfixes-15"></a>
 ### Bugfixes
 
 * sops\_encrypt \- ensure that output\-type is set to <code>yaml</code> when the file extension <code>\.yml</code> is used\. Now both <code>\.yaml</code> and <code>\.yml</code> files use the SOPS <code>\-\-output\-type\=yaml</code> formatting \([https\://github\.com/ansible\-collections/community\.sops/issues/164](https\://github\.com/ansible\-collections/community\.sops/issues/164)\)\.
@@ -516,12 +533,12 @@ Bugfix release\.
 <a id="v1-6-6"></a>
 ## v1\.6\.6
 
-<a id="release-summary-25"></a>
+<a id="release-summary-26"></a>
 ### Release Summary
 
 Make fully compatible with and test against sops 3\.8\.0\.
 
-<a id="bugfixes-15"></a>
+<a id="bugfixes-16"></a>
 ### Bugfixes
 
 * Fix RPM URL for the 3\.8\.0 release \([https\://github\.com/ansible\-collections/community\.sops/pull/161](https\://github\.com/ansible\-collections/community\.sops/pull/161)\)\.
@@ -529,12 +546,12 @@ Make fully compatible with and test against sops 3\.8\.0\.
 <a id="v1-6-5"></a>
 ## v1\.6\.5
 
-<a id="release-summary-26"></a>
+<a id="release-summary-27"></a>
 ### Release Summary
 
 Make compatible with and test against sops 3\.8\.0\-rc\.1\.
 
-<a id="bugfixes-16"></a>
+<a id="bugfixes-17"></a>
 ### Bugfixes
 
 * Avoid pre\-releases when picking the latest version when using the GitHub API method \([https\://github\.com/ansible\-collections/community\.sops/pull/159](https\://github\.com/ansible\-collections/community\.sops/pull/159)\)\.
@@ -543,12 +560,12 @@ Make compatible with and test against sops 3\.8\.0\-rc\.1\.
 <a id="v1-6-4"></a>
 ## v1\.6\.4
 
-<a id="release-summary-27"></a>
+<a id="release-summary-28"></a>
 ### Release Summary
 
 Maintenance/bugfix release for the move of sops to the new [getsops GitHub organization](https\://github\.com/getsops)\.
 
-<a id="bugfixes-17"></a>
+<a id="bugfixes-18"></a>
 ### Bugfixes
 
 * install role \- fix <code>sops\_github\_latest\_detection\=latest\-release</code>\, which broke due to sops moving to another GitHub organization \([https\://github\.com/ansible\-collections/community\.sops/pull/151](https\://github\.com/ansible\-collections/community\.sops/pull/151)\)\.
@@ -556,7 +573,7 @@ Maintenance/bugfix release for the move of sops to the new [getsops GitHub organ
 <a id="v1-6-3"></a>
 ## v1\.6\.3
 
-<a id="release-summary-28"></a>
+<a id="release-summary-29"></a>
 ### Release Summary
 
 Maintenance release with updated documentation\.
@@ -577,19 +594,6 @@ for the rendered HTML version of the documentation of the latest release\.
 <a id="v1-6-2"></a>
 ## v1\.6\.2
 
-<a id="release-summary-29"></a>
-### Release Summary
-
-Maintenance release\.
-
-<a id="bugfixes-18"></a>
-### Bugfixes
-
-* install role \- make sure that the <code>pkg\_mgr</code> fact is definitely available when installing on <code>localhost</code>\. This can improve error messages in some cases \([https\://github\.com/ansible\-collections/community\.sops/issues/145](https\://github\.com/ansible\-collections/community\.sops/issues/145)\, [https\://github\.com/ansible\-collections/community\.sops/pull/146](https\://github\.com/ansible\-collections/community\.sops/pull/146)\)\.
-
-<a id="v1-6-1"></a>
-## v1\.6\.1
-
 <a id="release-summary-30"></a>
 ### Release Summary
 
@@ -598,13 +602,26 @@ Maintenance release\.
 <a id="bugfixes-19"></a>
 ### Bugfixes
 
+* install role \- make sure that the <code>pkg\_mgr</code> fact is definitely available when installing on <code>localhost</code>\. This can improve error messages in some cases \([https\://github\.com/ansible\-collections/community\.sops/issues/145](https\://github\.com/ansible\-collections/community\.sops/issues/145)\, [https\://github\.com/ansible\-collections/community\.sops/pull/146](https\://github\.com/ansible\-collections/community\.sops/pull/146)\)\.
+
+<a id="v1-6-1"></a>
+## v1\.6\.1
+
+<a id="release-summary-31"></a>
+### Release Summary
+
+Maintenance release\.
+
+<a id="bugfixes-20"></a>
+### Bugfixes
+
 * action plugin helper \- fix handling of deprecations for ansible\-core 2\.14\.2 \([https\://github\.com/ansible\-collections/community\.sops/pull/136](https\://github\.com/ansible\-collections/community\.sops/pull/136)\)\.
 * various plugins \- remove unnecessary imports \([https\://github\.com/ansible\-collections/community\.sops/pull/133](https\://github\.com/ansible\-collections/community\.sops/pull/133)\)\.
 
 <a id="v1-6-0"></a>
 ## v1\.6\.0
 
-<a id="release-summary-31"></a>
+<a id="release-summary-32"></a>
 ### Release Summary
 
 Feature release improving the installation role\.
@@ -619,7 +636,7 @@ Feature release improving the installation role\.
 <a id="v1-5-0"></a>
 ## v1\.5\.0
 
-<a id="release-summary-32"></a>
+<a id="release-summary-33"></a>
 ### Release Summary
 
 Feature release\.
@@ -643,12 +660,12 @@ Feature release\.
 <a id="v1-4-1"></a>
 ## v1\.4\.1
 
-<a id="release-summary-33"></a>
+<a id="release-summary-34"></a>
 ### Release Summary
 
 Maintenance release to improve compatibility with future ansible\-core releases\.
 
-<a id="bugfixes-20"></a>
+<a id="bugfixes-21"></a>
 ### Bugfixes
 
 * load\_vars \- ensure compatibility with newer versions of ansible\-core \([https\://github\.com/ansible\-collections/community\.sops/pull/121](https\://github\.com/ansible\-collections/community\.sops/pull/121)\)\.
@@ -656,7 +673,7 @@ Maintenance release to improve compatibility with future ansible\-core releases\
 <a id="v1-4-0"></a>
 ## v1\.4\.0
 
-<a id="release-summary-34"></a>
+<a id="release-summary-35"></a>
 ### Release Summary
 
 Feature release\.
@@ -670,7 +687,7 @@ Feature release\.
 <a id="v1-3-0"></a>
 ## v1\.3\.0
 
-<a id="release-summary-35"></a>
+<a id="release-summary-36"></a>
 ### Release Summary
 
 Feature release\.
@@ -684,7 +701,7 @@ Feature release\.
 <a id="v1-2-3"></a>
 ## v1\.2\.3
 
-<a id="release-summary-36"></a>
+<a id="release-summary-37"></a>
 ### Release Summary
 
 Fix formatting bug in documentation\. No code changes\.
@@ -692,12 +709,12 @@ Fix formatting bug in documentation\. No code changes\.
 <a id="v1-2-2"></a>
 ## v1\.2\.2
 
-<a id="release-summary-37"></a>
+<a id="release-summary-38"></a>
 ### Release Summary
 
 Maintenance release\.
 
-<a id="bugfixes-21"></a>
+<a id="bugfixes-22"></a>
 ### Bugfixes
 
 * Include <code>simplified\_bsd\.txt</code> license file for the <code>sops</code> module utils\.
@@ -705,7 +722,7 @@ Maintenance release\.
 <a id="v1-2-1"></a>
 ## v1\.2\.1
 
-<a id="release-summary-38"></a>
+<a id="release-summary-39"></a>
 ### Release Summary
 
 Maintenance release with updated documentation\.
@@ -713,7 +730,7 @@ Maintenance release with updated documentation\.
 <a id="v1-2-0"></a>
 ## v1\.2\.0
 
-<a id="release-summary-39"></a>
+<a id="release-summary-40"></a>
 ### Release Summary
 
 Collection release for inclusion in Ansible 4\.9\.0 and 5\.1\.0\.
@@ -725,7 +742,7 @@ This release contains a change allowing to configure generic plugin options with
 
 * sops lookup and vars plugin \- allow to configure almost all generic options by ansible\.cfg entries and environment variables \([https\://github\.com/ansible\-collections/community\.sops/pull/81](https\://github\.com/ansible\-collections/community\.sops/pull/81)\)\.
 
-<a id="bugfixes-22"></a>
+<a id="bugfixes-23"></a>
 ### Bugfixes
 
 * Fix error handling in calls of the <code>sops</code> binary when negative errors are returned \([https\://github\.com/ansible\-collections/community\.sops/issues/82](https\://github\.com/ansible\-collections/community\.sops/issues/82)\, [https\://github\.com/ansible\-collections/community\.sops/pull/83](https\://github\.com/ansible\-collections/community\.sops/pull/83)\)\.
@@ -733,7 +750,7 @@ This release contains a change allowing to configure generic plugin options with
 <a id="v1-1-0"></a>
 ## v1\.1\.0
 
-<a id="release-summary-40"></a>
+<a id="release-summary-41"></a>
 ### Release Summary
 
 A minor release for inclusion in Ansible 4\.2\.0\.
@@ -754,12 +771,12 @@ A minor release for inclusion in Ansible 4\.2\.0\.
 <a id="v1-0-6"></a>
 ## v1\.0\.6
 
-<a id="release-summary-41"></a>
+<a id="release-summary-42"></a>
 ### Release Summary
 
 This release makes the collection compatible to the latest beta release of ansible\-core 2\.11\.
 
-<a id="bugfixes-23"></a>
+<a id="bugfixes-24"></a>
 ### Bugfixes
 
 * action\_module plugin helper \- make compatible with latest changes in ansible\-core 2\.11\.0b3 \([https\://github\.com/ansible\-collections/community\.sops/pull/58](https\://github\.com/ansible\-collections/community\.sops/pull/58)\)\.
@@ -768,12 +785,12 @@ This release makes the collection compatible to the latest beta release of ansib
 <a id="v1-0-5"></a>
 ## v1\.0\.5
 
-<a id="release-summary-42"></a>
+<a id="release-summary-43"></a>
 ### Release Summary
 
 This release fixes a bug that prevented correct YAML file to be created when the output was ending in <code>\.yaml</code>\.
 
-<a id="bugfixes-24"></a>
+<a id="bugfixes-25"></a>
 ### Bugfixes
 
 * community\.sops\.sops\_encrypt \- use output type <code>yaml</code> when path ends with <code>\.yaml</code> \([https\://github\.com/ansible\-collections/community\.sops/pull/56](https\://github\.com/ansible\-collections/community\.sops/pull/56)\)\.
@@ -781,7 +798,7 @@ This release fixes a bug that prevented correct YAML file to be created when the
 <a id="v1-0-4"></a>
 ## v1\.0\.4
 
-<a id="release-summary-43"></a>
+<a id="release-summary-44"></a>
 ### Release Summary
 
 This is a security release\, fixing a potential information leak in the <code>community\.sops\.sops\_encrypt</code> module\.
@@ -794,12 +811,12 @@ This is a security release\, fixing a potential information leak in the <code>co
 <a id="v1-0-3"></a>
 ## v1\.0\.3
 
-<a id="release-summary-44"></a>
+<a id="release-summary-45"></a>
 ### Release Summary
 
 This release include some fixes to Ansible docs and required changes for inclusion in Ansible\.
 
-<a id="bugfixes-25"></a>
+<a id="bugfixes-26"></a>
 ### Bugfixes
 
 * community\.sops\.sops lookup plugins \- fix wrong format of Ansible variables so that these are actually used \([https\://github\.com/ansible\-collections/community\.sops/pull/51](https\://github\.com/ansible\-collections/community\.sops/pull/51)\)\.
@@ -808,7 +825,7 @@ This release include some fixes to Ansible docs and required changes for inclusi
 <a id="v1-0-2"></a>
 ## v1\.0\.2
 
-<a id="release-summary-45"></a>
+<a id="release-summary-46"></a>
 ### Release Summary
 
 Fix of 1\.0\.1 release which had no changelog entry\.
@@ -816,7 +833,7 @@ Fix of 1\.0\.1 release which had no changelog entry\.
 <a id="v1-0-1"></a>
 ## v1\.0\.1
 
-<a id="release-summary-46"></a>
+<a id="release-summary-47"></a>
 ### Release Summary
 
 Re\-release of 1\.0\.0 to counteract error during release\.
@@ -824,7 +841,7 @@ Re\-release of 1\.0\.0 to counteract error during release\.
 <a id="v1-0-0"></a>
 ## v1\.0\.0
 
-<a id="release-summary-47"></a>
+<a id="release-summary-48"></a>
 ### Release Summary
 
 First stable release\. This release is expected to be included in Ansible 3\.0\.0\.
@@ -838,7 +855,7 @@ First stable release\. This release is expected to be included in Ansible 3\.0\.
 <a id="v0-2-0"></a>
 ## v0\.2\.0
 
-<a id="release-summary-48"></a>
+<a id="release-summary-49"></a>
 ### Release Summary
 
 This release adds features for the lookup and vars plugins\.
@@ -853,7 +870,7 @@ This release adds features for the lookup and vars plugins\.
 <a id="v0-1-0"></a>
 ## v0\.1\.0
 
-<a id="release-summary-49"></a>
+<a id="release-summary-50"></a>
 ### Release Summary
 
 First release of the <code>community\.sops</code> collection\!

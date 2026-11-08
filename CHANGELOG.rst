@@ -4,6 +4,20 @@ Community SOPS Release Notes
 
 .. contents:: Topics
 
+v2.5.1
+======
+
+Release Summary
+---------------
+
+Bugfix release.
+
+Bugfixes
+--------
+
+- load_vars - load variable files without stripping trailing whitespace. This could accidentally modify content of YAML files which end with a block scalar (https://github.com/ansible-collections/community.sops/issues/309, https://github.com/ansible-collections/community.sops/pull/310).
+- sops vars plugin - load variable files without stripping trailing whitespace. This could accidentally modify content of YAML files which end with a block scalar (https://github.com/ansible-collections/community.sops/issues/309, https://github.com/ansible-collections/community.sops/pull/310).
+
 v2.5.0
 ======
 
